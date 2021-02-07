@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WP.NetCore.IServices\WP.NetCore.IServices.csproj" />
+    <ProjectReference Include="..\WP.NetCore.Repository.EFCore\WP.NetCore.Repository.EFCore.csproj" />
+  </ItemGroup>
+
+</Project>

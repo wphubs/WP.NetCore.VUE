@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WP.NetCore.Model</name>
+    </assembly>
+    <members>
+        <member name="P:WP.NetCore.Model.Dto.AddUserDto.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Dto.AddUserDto.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Dto.AddUserDto.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Dto.AddUserDto.IsEnable">
+            <summary>
+            是否启用
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Dto.AddUserDto.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Dto.AddUserDto.Avatar">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Dto.UpdateUserDto.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Dto.UpdateUserDto.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Dto.UpdateUserDto.IsEnable">
+            <summary>
+            是否启用
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Dto.UpdateUserDto.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Dto.UpdateUserDto.Avatar">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="T:WP.NetCore.Model.Entity">
+            <summary>
+            实现接口IEntity,所有实体继承该这个基类
+            </summary>
+        </member>
+        <member name="T:WP.NetCore.Model.ResponseResult">
+            <summary>
+            通用返回信息类
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ResponseResult.Result">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ResponseResult.Msg">
+            <summary>
+            返回信息
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ResponseResult.Data">
+            <summary>
+            返回数据集合
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Model.User.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Model.User.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Model.User.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Model.User.IsEnable">
+            <summary>
+            是否启用
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Model.User.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Model.User.Avatar">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Model.UserRole.UserId">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Model.UserRole.RoleId">
+            <summary>
+            角色id
+            </summary>
+        </member>
+        <member name="T:WP.NetCore.Model.PageModel`1">
+            <summary>
+            通用分页信息类
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.PageModel`1.PageIndex">
+            <summary>
+            当前页标
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.PageModel`1.Total">
+            <summary>
+            数据总数
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.PageModel`1.PageSize">
+            <summary>
+            每页大小
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.PageModel`1.Data">
+            <summary>
+            返回数据
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.UserViewModel.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.UserViewModel.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.UserViewModel.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.UserViewModel.IsEnable">
+            <summary>
+            是否启用
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.UserViewModel.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.UserViewModel.Avatar">
+            <summary>
+            头像
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WP.NetCore.API</name>
+    </assembly>
+    <members>
+        <member name="M:WP.NetCore.API.AOP.APILogAOP.Intercept(Castle.DynamicProxy.IInvocation)">
+            <summary>
+            实例化IInterceptor唯一方法 
+            </summary>
+            <param name="invocation">包含被拦截方法的信息</param>
+        </member>
+        <member name="T:WP.NetCore.API.AOP.APITranAOP">
+            <summary>
+            事务拦截器BlogTranAOP 继承IInterceptor接口
+            </summary>
+        </member>
+        <member name="M:WP.NetCore.API.AOP.APITranAOP.Intercept(Castle.DynamicProxy.IInvocation)">
+            <summary>
+            实例化IInterceptor唯一方法 
+            </summary>
+            <param name="invocation">包含被拦截方法的信息</param>
+        </member>
+        <member name="M:WP.NetCore.API.AOP.CacheAOPbase.Intercept(Castle.DynamicProxy.IInvocation)">
+            <summary>
+            AOP的拦截方法
+            </summary>
+            <param name="invocation"></param>
+        </member>
+        <member name="M:WP.NetCore.API.AOP.CacheAOPbase.CustomCacheKey(Castle.DynamicProxy.IInvocation)">
+            <summary>
+            自定义缓存的key
+            </summary>
+            <param name="invocation"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WP.NetCore.API.AOP.CacheAOPbase.GetArgumentValue(System.Object)">
+            <summary>
+            object 转 string
+            </summary>
+            <param name="arg"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WP.NetCore.API.AuthHelper.JwtHelper.IssueJwt(WP.NetCore.API.AuthHelper.TokenModelJwt)">
+            <summary>
+            颁发JWT字符串
+            </summary>
+            <param name="tokenModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WP.NetCore.API.AuthHelper.JwtHelper.SerializeJwt(System.String)">
+            <summary>
+            解析
+            </summary>
+            <param name="jwtStr"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WP.NetCore.API.AuthHelper.TokenModelJwt">
+            <summary>
+            令牌
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.API.AuthHelper.TokenModelJwt.Role">
+            <summary>
+            角色
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.API.AuthHelper.TokenModelJwt.UserName">
+            <summary>
+            职能
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.API.AuthHelper.TokenModelJwt.Avatar">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="M:WP.NetCore.API.AutoMapper.CustomProfile.#ctor">
+            <summary>
+            配置构造函数，用来创建关系映射
+            </summary>
+        </member>
+        <member name="M:WP.NetCore.API.Controllers.UserController.GetUserInfo">
+            <summary>
+            获取用户信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WP.NetCore.API.Controllers.UserController.Get(System.Int32,System.Int32)">
+            <summary>
+            获取用户列表
+            </summary>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WP.NetCore.API.Controllers.UserController.Post(WP.NetCore.Model.Dto.AddUserDto)">
+            <summary>
+            新增用户
+            </summary>
+            <param name="userDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WP.NetCore.API.Controllers.UserController.Put(WP.NetCore.Model.Dto.UpdateUserDto)">
+            <summary>
+            修改用户
+            </summary>
+            <param name="userDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WP.NetCore.API.Controllers.UserController.Delete(System.Guid)">
+            <summary>
+            删除用户
+            </summary>
+            <param name="Id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WP.NetCore.API.Filter.GlobalExceptionsFilter.WriteLog(System.String,System.Exception)">
+            <summary>
+            自定义返回格式
+            </summary>
+            <param name="throwMsg"></param>
+            <param name="ex"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WP.NetCore.API.SwaggerHelper.ApiVersions">
+            <summary>
+            Api接口版本 自定义
+            </summary>
+        </member>
+        <member name="F:WP.NetCore.API.SwaggerHelper.ApiVersions.v1">
+            <summary>
+            v1 版本
+            </summary>
+        </member>
+        <member name="F:WP.NetCore.API.SwaggerHelper.ApiVersions.v2">
+            <summary>
+            v2 版本
+            </summary>
+        </member>
+        <member name="M:WP.NetCore.API.SwaggerHelper.CustomRouteAttribute.#ctor(System.String)">
+            <summary>
+            自定义路由构造函数，继承基类路由
+            </summary>
+            <param name="actionName"></param>
+        </member>
+        <member name="P:WP.NetCore.API.SwaggerHelper.CustomRouteAttribute.GroupName">
+            <summary>
+            分组名称
+            </summary>
+        </member>
+        <member name="M:WP.NetCore.API.SwaggerHelper.CustomRouteAttribute.#ctor(WP.NetCore.API.SwaggerHelper.ApiVersions,System.String)">
+            <summary>
+            自定义版本+路由构造函数，继承基类路由
+            </summary>
+            <param name="actionName"></param>
+            <param name="version"></param>
+        </member>
+    </members>
+</doc>
