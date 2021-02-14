@@ -9,17 +9,17 @@ namespace WP.NetCore.Model
 {
     public interface IEntity
     {
-        Guid Id { get; set; }
+        long Id { get; set; }
         DateTime? CreateTime { get; set; }
 
         DateTime? DeleteTime { get; set; }
 
         bool IsDelete { get; set; }
 
-        Guid? CreateBy { get; set; }
+        long? CreateBy { get; set; }
 
         DateTime? ModifyTime { get; set; }
-        Guid? ModifyBy { get; set; }
+        long? ModifyBy { get; set; }
 
 
     }
@@ -36,13 +36,13 @@ namespace WP.NetCore.Model
             IsDelete = false;
         }
      
-        public Guid Id { get; set; }
+        public long Id { get; set; }
         public DateTime? CreateTime { get; set; }
-        public Guid? CreateBy { get; set; }
+        public long? CreateBy { get; set; }
 
         public DateTime? ModifyTime { get; set; }
 
-        public Guid? ModifyBy { get; set; }
+        public long? ModifyBy { get; set; }
 
         public DateTime? DeleteTime { get; set; }
 

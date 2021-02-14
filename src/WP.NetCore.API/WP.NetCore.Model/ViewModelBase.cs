@@ -8,13 +8,13 @@ namespace WP.NetCore.Model
 {
     public class ViewModelBase
     {
-        public Guid Id { get; set; }
+        public long Id { get; set; }
         public DateTime? CreateTime { get; set; }
-        public Guid? CreateBy { get; set; }
+        public long? CreateBy { get; set; }
 
         public DateTime? ModifyTime { get; set; }
 
-        public Guid? ModifyBy { get; set; }
+        public long? ModifyBy { get; set; }
 
         public DateTime? DeleteTime { get; set; }
 

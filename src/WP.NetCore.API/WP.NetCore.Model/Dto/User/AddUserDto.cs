@@ -41,6 +41,6 @@ namespace WP.NetCore.Model.Dto
         /// </summary>
         public string Avatar { get; set; }
 
-        public List<Guid> Roles { get; set; }
+        public List<long> Roles { get; set; }
     }
 }

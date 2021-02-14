@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using MySql.Data.EntityFrameworkCore.Metadata;
 
 namespace WP.NetCore.Repository.EFCore.Migrations
 {
@@ -11,11 +12,12 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                 name: "Role",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     CreateTime = table.Column<DateTime>(nullable: true),
-                    CreateBy = table.Column<Guid>(nullable: true),
+                    CreateBy = table.Column<long>(nullable: true),
                     ModifyTime = table.Column<DateTime>(nullable: true),
-                    ModifyBy = table.Column<Guid>(nullable: true),
+                    ModifyBy = table.Column<long>(nullable: true),
                     DeleteTime = table.Column<DateTime>(nullable: true),
                     IsDelete = table.Column<bool>(nullable: false),
                     RoleName = table.Column<string>(nullable: true)
@@ -29,11 +31,12 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                 name: "User",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     CreateTime = table.Column<DateTime>(nullable: true),
-                    CreateBy = table.Column<Guid>(nullable: true),
+                    CreateBy = table.Column<long>(nullable: true),
                     ModifyTime = table.Column<DateTime>(nullable: true),
-                    ModifyBy = table.Column<Guid>(nullable: true),
+                    ModifyBy = table.Column<long>(nullable: true),
                     DeleteTime = table.Column<DateTime>(nullable: true),
                     IsDelete = table.Column<bool>(nullable: false),
                     UserName = table.Column<string>(nullable: true),
@@ -52,15 +55,16 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                 name: "UserRole",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     CreateTime = table.Column<DateTime>(nullable: true),
-                    CreateBy = table.Column<Guid>(nullable: true),
+                    CreateBy = table.Column<long>(nullable: true),
                     ModifyTime = table.Column<DateTime>(nullable: true),
-                    ModifyBy = table.Column<Guid>(nullable: true),
+                    ModifyBy = table.Column<long>(nullable: true),
                     DeleteTime = table.Column<DateTime>(nullable: true),
                     IsDelete = table.Column<bool>(nullable: false),
-                    UserId = table.Column<Guid>(nullable: false),
-                    RoleId = table.Column<Guid>(nullable: false)
+                    UserId = table.Column<long>(nullable: false),
+                    RoleId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -82,7 +86,7 @@ namespace WP.NetCore.Repository.EFCore.Migrations
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "Avatar", "CreateBy", "CreateTime", "DeleteTime", "IsDelete", "IsEnable", "ModifyBy", "ModifyTime", "Name", "Password", "Sex", "UserName" },
-                values: new object[] { new Guid("06f40035-198b-4169-99ef-af08ee955633"), null, null, new DateTime(2020, 12, 30, 21, 53, 42, 52, DateTimeKind.Local).AddTicks(3148), null, false, true, null, null, "系统管理员", "670b14728ad9902aecba32e22fa4f6bd", 1, "admin" });
+                values: new object[] { 15161719090512896L, null, null, new DateTime(2021, 2, 14, 14, 58, 14, 726, DateTimeKind.Local).AddTicks(6838), null, false, true, null, null, "系统管理员", "670b14728ad9902aecba32e22fa4f6bd", 1, "admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserRole_RoleId",

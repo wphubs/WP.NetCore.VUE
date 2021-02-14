@@ -28,7 +28,7 @@ namespace WP.NetCore.Services
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public async Task DeleteAsync(Guid Id)
+        public async Task DeleteAsync(long Id)
         {
             await baseDal.DeleteAsync(Id);
         }

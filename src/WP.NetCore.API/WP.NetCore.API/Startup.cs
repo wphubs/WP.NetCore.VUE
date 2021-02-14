@@ -62,7 +62,7 @@ namespace WP.NetCore.API
 
             #region EFCORE
             var connection = Appsettings.app(new string[] { "DBConnection" });
-            services.AddDbContext<WPDbContext>(options => options.UseSqlServer(connection));
+            services.AddDbContext<WPDbContext>(options => options.UseMySQL(connection));
             //services.AddDbContext<WPDbContext>(options =>
             //{
             //    options.UseMySQL(connection);

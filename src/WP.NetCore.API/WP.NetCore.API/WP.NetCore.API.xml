@@ -108,7 +108,7 @@
             <param name="userDto"></param>
             <returns></returns>
         </member>
-        <member name="M:WP.NetCore.API.Controllers.UserController.Delete(System.Guid)">
+        <member name="M:WP.NetCore.API.Controllers.UserController.Delete(System.long)">
             <summary>
             删除用户
             </summary>

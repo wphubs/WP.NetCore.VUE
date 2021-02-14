@@ -93,9 +93,9 @@ namespace WP.NetCore.API.Controllers
         /// <param name="Id"></param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<ResponseResult> Delete(Guid Id)
+        public async Task<ResponseResult> Delete(long Id)
         {
-            if (default(Guid)==Id)
+            if (default(long)==Id)
             {
                 return new ResponseResult().Error("ID不能为空");
             }

@@ -12,12 +12,12 @@ namespace WP.NetCore.Model.Model
         /// <summary>
         /// 用户id
         /// </summary>
-        public Guid UserId { get; set; }
+        public long UserId { get; set; }
 
         /// <summary>
         /// 角色id
         /// </summary>
-        public Guid RoleId { get; set; }
+        public long RoleId { get; set; }
 
         public User User { get; set; }
 

@@ -12,6 +12,7 @@ using AutoMapper;
 using WP.NetCore.Model;
 using Microsoft.EntityFrameworkCore;
 using WP.NetCore.Model.ViewModel;
+using WP.NetCore.Common.Helper;
 
 namespace WP.NetCore.Services
 {
@@ -67,19 +68,19 @@ namespace WP.NetCore.Services
         /// <param name="userId"></param>
         /// <param name="listRoles"></param>
         /// <returns></returns>
-        public async Task AddUserAsync(User objUser, List<Guid> listRoles)
+        public async Task AddUserAsync(User objUser, List<long> listRoles)
         {
             try
             {
 
                 var listUser = await baseRepository.GetPageAsync(x => x.IsDelete == false, x => x.CreateTime, 1, 11);
-           
+
                 await uow.BeginAsync();
-                objUser.Id = Guid.NewGuid();
+                objUser.Id = new Snowflake().GetId();
                 List<UserRole> listAdd = new List<UserRole>();
                 listRoles.ForEach(item =>
                 {
-                    listAdd.Add(new UserRole() {Id=Guid.NewGuid(), RoleId = item, UserId = objUser.Id });
+                    listAdd.Add(new UserRole() { Id = new Snowflake().GetId(), RoleId = item, UserId = objUser.Id });
                 });
                 await uow.DbContext.AddAsync(objUser);
                 await uow.DbContext.AddRangeAsync(listAdd.AsEnumerable());
@@ -98,7 +99,7 @@ namespace WP.NetCore.Services
         /// <param name="userId"></param>
         /// <param name="listRoles"></param>
         /// <returns></returns>
-        public async Task EditUserAsync(User objUser, List<Guid> listRoles)
+        public async Task EditUserAsync(User objUser, List<long> listRoles)
         {
             try
             {
@@ -106,7 +107,7 @@ namespace WP.NetCore.Services
                 List<UserRole> listAdd = new List<UserRole>();
                 listRoles.ForEach(item =>
                 {
-                    listAdd.Add(new UserRole() { Id = Guid.NewGuid(), RoleId = item, UserId = objUser.Id });
+                    listAdd.Add(new UserRole() { Id = new Snowflake().GetId(), RoleId = item, UserId = objUser.Id });
                 });
                 await baseRepository.UpdateAsync(objUser);
                 var listUserRole = await userRoleRepository.GetAllAsync(x => x.UserId == objUser.Id);

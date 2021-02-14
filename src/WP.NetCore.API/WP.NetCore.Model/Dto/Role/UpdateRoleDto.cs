@@ -10,7 +10,7 @@ namespace WP.NetCore.Model.Dto.Role
     public class UpdateRoleDto
     {
         [Required(ErrorMessage = "ID不能为空")]
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
         [Required(ErrorMessage = "角色名称不能为空")]
         public string RoleName { get; set; }

@@ -54,7 +54,7 @@ namespace WP.NetCore.Repository.EFCore
         /// </summary>
         /// <param name="id">主键id</param>
         /// <returns>返回实体或空</returns>
-        Task<TEntity> FirstAsync(Guid id);
+        Task<TEntity> FirstAsync(long id);
         /// <summary>
         /// 根据查询条件获取实体数据
         /// </summary>
@@ -97,7 +97,7 @@ namespace WP.NetCore.Repository.EFCore
         /// </summary>
         /// <param name="id">主键id</param>
         /// <returns></returns>
-        Task DeleteAsync(Guid id);
+        Task DeleteAsync(long id);
         /// <summary>
         /// 根据实体删除数据
         /// </summary>

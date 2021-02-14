@@ -12,7 +12,7 @@ namespace WP.NetCore.IServices
 
         Task UpdateAsync(TEntity entity);
 
-        Task DeleteAsync(Guid Id);
+        Task DeleteAsync(long Id);
 
         Task<TEntity> AddAsync(TEntity entity);
 

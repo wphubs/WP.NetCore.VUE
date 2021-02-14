@@ -54,32 +54,7 @@ export const constantRoutes = [
       meta: { title: '首页', icon: 'dashboard' }
     }]
   },
-
-  {
-    path: '/user',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'User',
-        component: () => import('@/views/user/index'),
-        meta: { title: '用户管理', icon: 'el-icon-lightning' }
-      }
-    ]
-  },
-
-  {
-    path: '/role',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Role',
-        component: () => import('@/views/role/index'),
-        meta: { title: '角色管理', icon: 'el-icon-heavy-rain' }
-      }
-    ]
-  },
+  
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]

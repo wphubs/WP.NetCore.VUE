@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WP.NetCore.Repository.EFCore;
@@ -10,7 +9,7 @@ using WP.NetCore.Repository.EFCore;
 namespace WP.NetCore.Repository.EFCore.Migrations
 {
     [DbContext(typeof(WPDbContext))]
-    [Migration("20201230135342_Init")]
+    [Migration("20210214065815_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,35 +17,34 @@ namespace WP.NetCore.Repository.EFCore.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.10")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("WP.NetCore.Model.Model.Role", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint");
 
-                    b.Property<Guid?>("CreateBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long?>("CreateBy")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("CreateTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<DateTime?>("DeleteTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<Guid?>("ModifyBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long?>("ModifyBy")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("ModifyTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("RoleName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -55,45 +53,45 @@ namespace WP.NetCore.Repository.EFCore.Migrations
 
             modelBuilder.Entity("WP.NetCore.Model.Model.User", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Avatar")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
-                    b.Property<Guid?>("CreateBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long?>("CreateBy")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("CreateTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<DateTime?>("DeleteTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("IsEnable")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<Guid?>("ModifyBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long?>("ModifyBy")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("ModifyTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.Property<int>("Sex")
                         .HasColumnType("int");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -102,8 +100,8 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("06f40035-198b-4169-99ef-af08ee955633"),
-                            CreateTime = new DateTime(2020, 12, 30, 21, 53, 42, 52, DateTimeKind.Local).AddTicks(3148),
+                            Id = 15161719090512896L,
+                            CreateTime = new DateTime(2021, 2, 14, 14, 58, 14, 726, DateTimeKind.Local).AddTicks(6838),
                             IsDelete = false,
                             IsEnable = true,
                             Name = "系统管理员",
@@ -115,33 +113,33 @@ namespace WP.NetCore.Repository.EFCore.Migrations
 
             modelBuilder.Entity("WP.NetCore.Model.Model.UserRole", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("bigint");
 
-                    b.Property<Guid?>("CreateBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long?>("CreateBy")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("CreateTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<DateTime?>("DeleteTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
-                    b.Property<Guid?>("ModifyBy")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long?>("ModifyBy")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime?>("ModifyTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long>("RoleId")
+                        .HasColumnType("bigint");
 
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 

@@ -106,10 +106,6 @@ namespace WP.NetCore.API.AuthHelper
                             int _val = int.Parse(claim.Value == "" ? "0" : claim.Value);
                             info.SetValue(userBasicInfo, _val);
                         }
-                        else if (info.PropertyType == typeof(Guid))
-                        {
-                            info.SetValue(userBasicInfo, new Guid(claim.Value));
-                        }
                         else
                         {
                             info.SetValue(userBasicInfo, claim.Value);
@@ -128,7 +124,7 @@ namespace WP.NetCore.API.AuthHelper
     /// </summary>
     public class TokenModelJwt
     {
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
         public string  Name { get; set; }
         /// <summary>

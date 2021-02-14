@@ -12,10 +12,10 @@ namespace WP.NetCore.IServices
     public interface IUserService:IBaseService<User>
     {
 
-        Task AddUserAsync(User objUser, List<Guid> listRoles);
+        Task AddUserAsync(User objUser, List<long> listRoles);
 
         Task<PageModel<UserViewModel>> GetUserListAsync(int pageIndex, int pageSize);
-        Task EditUserAsync(User objUser, List<Guid> listRoles);
+        Task EditUserAsync(User objUser, List<long> listRoles);
         Task<User> CheckUserAsync(string userName, string passWord);
 
     }

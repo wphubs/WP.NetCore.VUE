@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using WP.NetCore.Common.Helper;
 using WP.NetCore.Model.Model;
 
 namespace WP.NetCore.Repository.EFCore
@@ -33,8 +34,8 @@ namespace WP.NetCore.Repository.EFCore
             modelBuilder.ApplyConfigurationsFromAssembly(assembly);
 
             modelBuilder.Entity<User>().HasData(new User() { 
-                Id=Guid.NewGuid(),
-                UserName="admin",
+                Id= new Snowflake().GetId(),
+                UserName ="admin",
                 Name="系统管理员",
                 Password= "670b14728ad9902aecba32e22fa4f6bd",
                 Sex=1,

@@ -70,7 +70,7 @@ namespace WP.NetCore.Repository.EFCore
         //    //return new Tuple<int, List<TEntity>>(count, pageList);
         //}
 
-        public async Task<TEntity> FirstAsync(Guid id)
+        public async Task<TEntity> FirstAsync(long id)
         {
             //return await _dbContext.Set<TEntity>().FindAsync(id);
             return await Query().Where(w => w.Id == id).FirstOrDefaultAsync();
@@ -197,7 +197,7 @@ namespace WP.NetCore.Repository.EFCore
             await SaveAsync();
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(long id)
         {
             var info = await _dbContext.FindAsync<TEntity>(id);
             if (info != null)

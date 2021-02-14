@@ -10,9 +10,9 @@ namespace WP.NetCore.Model.Dto.User
     public class SetUserRoleDto
     {
         [Required(ErrorMessage = "用户名不能为空")]
-        public Guid UserId { get; set; }
+        public long UserId { get; set; }
 
         [MinLength(1, ErrorMessage = "用户角色不能为空")]
-        public List<Guid> RoleId { get; set; }
+        public List<long> RoleId { get; set; }
     }
 }

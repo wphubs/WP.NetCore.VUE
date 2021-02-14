@@ -10,7 +10,7 @@ namespace WP.NetCore.Model.Dto
     public class UpdateUserDto
     {
         [Required(ErrorMessage = "ID不能为空")]
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
         [Required(ErrorMessage = "用户名不能为空")]
         public string UserName { get; set; }
@@ -41,6 +41,6 @@ namespace WP.NetCore.Model.Dto
         public string Avatar { get; set; }
 
 
-        public List<Guid> Roles { get; set; }
+        public List<long> Roles { get; set; }
     }
 }
