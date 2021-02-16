@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using WP.NetCore.Repository.EFCore;
 using WP.NetCore.IServices;
 using WP.NetCore.Model;
-using WP.NetCore.Model.Model;
+using WP.NetCore.Model.EntityModel;
 using System.Linq;
+using WP.NetCore.Common.Helper;
+
 namespace WP.NetCore.Services
 {
-    public class BaseService<TEntity>: IBaseService<TEntity> where TEntity : class, IEntity, new()
+    public class BaseService<TEntity>: IBaseService<TEntity> where TEntity : EntityBase, new()
     {
         public IBaseRepository<TEntity> baseDal;
 
@@ -20,6 +22,7 @@ namespace WP.NetCore.Services
         /// <returns></returns>
         public async Task<TEntity> AddAsync(TEntity entity)
         {
+            entity.Id = new Snowflake().GetId();
             return await baseDal.AddAsync(entity);
         }
 
@@ -41,8 +44,8 @@ namespace WP.NetCore.Services
         /// <returns></returns>
         public async Task<PageModel<TEntity>> GetPageListAsync(int pageIndex, int pageSize)
         {
-            return null;
-            //return await baseDal.GetPageAsync(x => x.IsDelete == false, x => x.CreateTime, pageIndex, pageSize);
+            var list = await baseDal.GetPageAsync(x => x.IsDelete == false, x => x.CreateTime, pageIndex, pageSize);
+            return new PageModel<TEntity>() {Data= list.Data.ToList(),PageIndex=pageIndex,PageSize=pageSize,Total=list.Total};
         }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()

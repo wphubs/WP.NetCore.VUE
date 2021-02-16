@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WP.NetCore.Repository.EFCore;
 using WP.NetCore.IServices;
-using WP.NetCore.Model.Model;
+using WP.NetCore.Model.EntityModel;
 using System.Linq;
 using System.Linq.Expressions;
 using WP.NetCore.Model.Dto;

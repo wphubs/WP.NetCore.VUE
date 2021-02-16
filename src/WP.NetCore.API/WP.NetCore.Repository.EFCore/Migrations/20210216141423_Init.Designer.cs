@@ -2,112 +2,22 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WP.NetCore.Repository.EFCore;
 
 namespace WP.NetCore.Repository.EFCore.Migrations
 {
     [DbContext(typeof(WPDbContext))]
-    partial class WPDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210216141423_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
-
-            modelBuilder.Entity("WP.NetCore.Model.EntityModel.Menu", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Component")
-                        .HasColumnType("text");
-
-                    b.Property<long?>("CreateBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("CreateTime")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime?>("DeleteTime")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("Icon")
-                        .HasColumnType("text");
-
-                    b.Property<bool>("IsButton")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("IsHidden")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<long?>("ModifyBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("ModifyTime")
-                        .HasColumnType("datetime");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<long?>("ParentId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Path")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Sort")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Menu");
-                });
-
-            modelBuilder.Entity("WP.NetCore.Model.EntityModel.MenuRole", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("CreateBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("CreateTime")
-                        .HasColumnType("datetime");
-
-                    b.Property<DateTime?>("DeleteTime")
-                        .HasColumnType("datetime");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<long>("MenuId")
-                        .HasColumnType("bigint");
-
-                    b.Property<long?>("ModifyBy")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime?>("ModifyTime")
-                        .HasColumnType("datetime");
-
-                    b.Property<long>("RoleId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MenuId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("MenuRole");
-                });
 
             modelBuilder.Entity("WP.NetCore.Model.EntityModel.Role", b =>
                 {
@@ -190,8 +100,8 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 15165006624818176L,
-                            CreateTime = new DateTime(2021, 2, 16, 22, 42, 29, 897, DateTimeKind.Local).AddTicks(235),
+                            Id = 15164978983175168L,
+                            CreateTime = new DateTime(2021, 2, 16, 22, 14, 22, 784, DateTimeKind.Local).AddTicks(7114),
                             IsDelete = false,
                             IsEnable = true,
                             Name = "系统管理员",
@@ -238,21 +148,6 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserRole");
-                });
-
-            modelBuilder.Entity("WP.NetCore.Model.EntityModel.MenuRole", b =>
-                {
-                    b.HasOne("WP.NetCore.Model.EntityModel.Menu", "Menu")
-                        .WithMany()
-                        .HasForeignKey("MenuId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WP.NetCore.Model.EntityModel.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("WP.NetCore.Model.EntityModel.UserRole", b =>

@@ -106,6 +106,11 @@ namespace WP.NetCore.API.AuthHelper
                             int _val = int.Parse(claim.Value == "" ? "0" : claim.Value);
                             info.SetValue(userBasicInfo, _val);
                         }
+                        else if (info.PropertyType == typeof(long))
+                        {
+                            var _val = Convert.ToInt64(claim.Value == "" ? "0" : claim.Value);
+                            info.SetValue(userBasicInfo, _val);
+                        }
                         else
                         {
                             info.SetValue(userBasicInfo, claim.Value);

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
-namespace WP.NetCore.Model.Model
+namespace WP.NetCore.Model.EntityModel
 {
-    public class User: Entity
+    public class User: EntityBase
     {
         /// <summary>
         /// 用户名

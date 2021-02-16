@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WP.NetCore.Model.Model
+namespace WP.NetCore.Model.EntityModel
 {
-    public class Role: Entity
+    public class Role: EntityBase
     {
         public string RoleName { get; set; }
 

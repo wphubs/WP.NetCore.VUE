@@ -50,8 +50,8 @@ const routerTest=[  {
   component: Layout,
   children: [
     {
-      path: 'index',
-      name: 'User',
+      path: '/user',
+      name: 'user',
       component: () => import('@/views/user/index'),
       meta: { title: '用户管理', icon: 'el-icon-lightning' }
     }
@@ -63,8 +63,8 @@ const routerTest=[  {
   component: Layout,
   children: [
     {
-      path: 'index',
-      name: 'Role',
+      path: '/role',
+      name: 'role',
       component: () => import('@/views/role/index'),
       meta: { title: '角色管理', icon: 'el-icon-heavy-rain' }
     }
@@ -76,7 +76,7 @@ const actions = {
     return new Promise(resolve => {
 
       let accessedRoutes=routerTest;
-      console.log('generateRoutes'+JSON.stringify(accessedRoutes))
+      //console.log('generateRoutes'+JSON.stringify(accessedRoutes))
       // if (roles.includes('admin')) {
         // accessedRoutes = asyncRoutes || []
       // } else {

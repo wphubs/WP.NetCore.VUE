@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WP.NetCore.Repository.EFCore;
 using WP.NetCore.IServices;
-using WP.NetCore.Model.Model;
+using WP.NetCore.Model.EntityModel;
 
 namespace WP.NetCore.Services
 {

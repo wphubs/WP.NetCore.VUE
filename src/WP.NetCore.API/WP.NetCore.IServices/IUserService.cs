@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WP.NetCore.Model;
 using WP.NetCore.Model.Dto;
-using WP.NetCore.Model.Model;
+using WP.NetCore.Model.EntityModel;
 using WP.NetCore.Model.ViewModel;
 
 namespace WP.NetCore.IServices

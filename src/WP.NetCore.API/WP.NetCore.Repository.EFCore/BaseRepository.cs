@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using WP.NetCore.Model.Model;
+using WP.NetCore.Model.EntityModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
@@ -10,7 +10,7 @@ using WP.NetCore.Model;
 
 namespace WP.NetCore.Repository.EFCore
 {
-    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : class, IEntity, new()
+    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : EntityBase, new()
     {
         private readonly WPDbContext _dbContext;
 

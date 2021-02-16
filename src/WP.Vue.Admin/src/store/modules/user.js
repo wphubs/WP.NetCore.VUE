@@ -33,7 +33,7 @@ const actions = {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ UserName: username.trim(), PassWord: password }).then(response => {
-        console.log('response:' + JSON.stringify(response))
+        // console.log('response:' + JSON.stringify(response))
         const { token } = response
         console.log('token:' + token)
         commit('SET_TOKEN', token)

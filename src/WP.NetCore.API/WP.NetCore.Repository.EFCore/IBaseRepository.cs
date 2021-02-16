@@ -5,11 +5,11 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using WP.NetCore.Model;
-using WP.NetCore.Model.Model;
+using WP.NetCore.Model.EntityModel;
 
 namespace WP.NetCore.Repository.EFCore
 {
-    public interface IBaseRepository<TEntity> where TEntity : class, IEntity, new()
+    public interface IBaseRepository<TEntity> where TEntity : EntityBase, new()
     {
         /// <summary>
         /// IQueryable to Entity

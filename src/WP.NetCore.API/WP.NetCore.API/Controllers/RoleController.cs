@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using WP.NetCore.IServices;
 using WP.NetCore.Model;
 using WP.NetCore.Model.Dto.Role;
-using WP.NetCore.Model.Model;
+using WP.NetCore.Model.EntityModel;
 
 namespace WP.NetCore.API.Controllers
 {
@@ -38,7 +38,8 @@ namespace WP.NetCore.API.Controllers
         public async Task<ResponseResult> GetPage(int pageIndex, int pageSize)
         {
             var listUser = await roleService.GetPageListAsync(pageIndex, pageSize);
-            return new ResponseResult().Success(listUser);
+            var res= new ResponseResult().Success(listUser);
+            return res;
         }
 
         [HttpGet]
@@ -59,6 +60,7 @@ namespace WP.NetCore.API.Controllers
         {
             var objUser = mapper.Map<Role>(userDto);
             objUser.CreateBy = GetToken().Id;
+          
             await roleService.AddAsync(objUser);
             return new ResponseResult().Success();
         }

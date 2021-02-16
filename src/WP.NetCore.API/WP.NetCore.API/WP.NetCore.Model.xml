@@ -59,9 +59,99 @@
             头像
             </summary>
         </member>
-        <member name="T:WP.NetCore.Model.Entity">
+        <member name="T:WP.NetCore.Model.EntityBase">
             <summary>
             实现接口IEntity,所有实体继承该这个基类
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.EntityModel.Menu.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.EntityModel.Menu.Path">
+            <summary>
+            链接
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.EntityModel.Menu.Component">
+            <summary>
+            组件地址
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.EntityModel.Menu.ParentId">
+            <summary>
+            父ID
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.EntityModel.Menu.IsHidden">
+            <summary>
+            是否隐藏
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.EntityModel.Menu.Icon">
+            <summary>
+            图标
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.EntityModel.Menu.IsButton">
+            <summary>
+            是否为按钮
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.EntityModel.Menu.Sort">
+            <summary>
+            排序
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.EntityModel.MenuRole.MenuId">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.EntityModel.MenuRole.RoleId">
+            <summary>
+            角色id
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.EntityModel.User.UserName">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.EntityModel.User.Name">
+            <summary>
+            姓名
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.EntityModel.User.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.EntityModel.User.IsEnable">
+            <summary>
+            是否启用
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.EntityModel.User.Sex">
+            <summary>
+            性别
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.EntityModel.User.Avatar">
+            <summary>
+            头像
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.EntityModel.UserRole.UserId">
+            <summary>
+            用户id
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.EntityModel.UserRole.RoleId">
+            <summary>
+            角色id
             </summary>
         </member>
         <member name="T:WP.NetCore.Model.ResponseResult">
@@ -82,46 +172,6 @@
         <member name="P:WP.NetCore.Model.ResponseResult.Data">
             <summary>
             返回数据集合
-            </summary>
-        </member>
-        <member name="P:WP.NetCore.Model.Model.User.UserName">
-            <summary>
-            用户名
-            </summary>
-        </member>
-        <member name="P:WP.NetCore.Model.Model.User.Name">
-            <summary>
-            姓名
-            </summary>
-        </member>
-        <member name="P:WP.NetCore.Model.Model.User.Password">
-            <summary>
-            密码
-            </summary>
-        </member>
-        <member name="P:WP.NetCore.Model.Model.User.IsEnable">
-            <summary>
-            是否启用
-            </summary>
-        </member>
-        <member name="P:WP.NetCore.Model.Model.User.Sex">
-            <summary>
-            性别
-            </summary>
-        </member>
-        <member name="P:WP.NetCore.Model.Model.User.Avatar">
-            <summary>
-            头像
-            </summary>
-        </member>
-        <member name="P:WP.NetCore.Model.Model.UserRole.UserId">
-            <summary>
-            用户id
-            </summary>
-        </member>
-        <member name="P:WP.NetCore.Model.Model.UserRole.RoleId">
-            <summary>
-            角色id
             </summary>
         </member>
         <member name="T:WP.NetCore.Model.PageModel`1">

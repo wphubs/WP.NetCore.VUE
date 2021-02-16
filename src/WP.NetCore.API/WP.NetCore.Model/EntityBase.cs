@@ -7,30 +7,13 @@ using System.Threading.Tasks;
 
 namespace WP.NetCore.Model
 {
-    public interface IEntity
-    {
-        long Id { get; set; }
-        DateTime? CreateTime { get; set; }
-
-        DateTime? DeleteTime { get; set; }
-
-        bool IsDelete { get; set; }
-
-        long? CreateBy { get; set; }
-
-        DateTime? ModifyTime { get; set; }
-        long? ModifyBy { get; set; }
-
-
-    }
-
     /// <summary>
     /// 实现接口IEntity,所有实体继承该这个基类
     /// </summary>
-    public abstract class Entity : IEntity
+    public abstract class EntityBase 
     {
 
-        public Entity()
+        public EntityBase()
         {
             CreateTime = DateTime.Now;
             IsDelete = false;

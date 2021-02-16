@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using WP.NetCore.Common.Helper;
-using WP.NetCore.Model.Model;
+using WP.NetCore.Model.EntityModel;
 
 namespace WP.NetCore.Repository.EFCore
 {
@@ -26,6 +26,9 @@ namespace WP.NetCore.Repository.EFCore
 
         public DbSet<UserRole> UserRole { get; set; }
 
+        public DbSet<Menu> Menu { get; set; }
+
+        public DbSet<MenuRole> MenuRole { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

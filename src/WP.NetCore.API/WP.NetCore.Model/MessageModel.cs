@@ -22,7 +22,7 @@
 
         public ResponseResult Success(object data=null)
         {
-            return new ResponseResult() { Result=true,Data= data };
+            return new ResponseResult() { Result=true,Data= data,Msg="成功" };
         }
 
         public ResponseResult Error(string msg)

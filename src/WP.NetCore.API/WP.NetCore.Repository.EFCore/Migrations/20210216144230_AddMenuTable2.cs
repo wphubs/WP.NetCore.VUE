@@ -4,31 +4,17 @@ using MySql.Data.EntityFrameworkCore.Metadata;
 
 namespace WP.NetCore.Repository.EFCore.Migrations
 {
-    public partial class Init : Migration
+    public partial class AddMenuTable2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Role",
-                columns: table => new
-                {
-                    Id = table.Column<long>(nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    CreateTime = table.Column<DateTime>(nullable: true),
-                    CreateBy = table.Column<long>(nullable: true),
-                    ModifyTime = table.Column<DateTime>(nullable: true),
-                    ModifyBy = table.Column<long>(nullable: true),
-                    DeleteTime = table.Column<DateTime>(nullable: true),
-                    IsDelete = table.Column<bool>(nullable: false),
-                    RoleName = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Role", x => x.Id);
-                });
+            migrationBuilder.DeleteData(
+                table: "User",
+                keyColumn: "Id",
+                keyValue: 15165005619512320L);
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "Menu",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
@@ -39,20 +25,22 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                     ModifyBy = table.Column<long>(nullable: true),
                     DeleteTime = table.Column<DateTime>(nullable: true),
                     IsDelete = table.Column<bool>(nullable: false),
-                    UserName = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true),
-                    IsEnable = table.Column<bool>(nullable: false),
-                    Sex = table.Column<int>(nullable: false),
-                    Avatar = table.Column<string>(nullable: true)
+                    Path = table.Column<string>(nullable: true),
+                    Component = table.Column<string>(nullable: true),
+                    ParentId = table.Column<long>(nullable: true),
+                    IsHidden = table.Column<bool>(nullable: false),
+                    Icon = table.Column<string>(nullable: true),
+                    IsButton = table.Column<bool>(nullable: false),
+                    Sort = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.Id);
+                    table.PrimaryKey("PK_Menu", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserRole",
+                name: "MenuRole",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
@@ -63,22 +51,22 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                     ModifyBy = table.Column<long>(nullable: true),
                     DeleteTime = table.Column<DateTime>(nullable: true),
                     IsDelete = table.Column<bool>(nullable: false),
-                    UserId = table.Column<long>(nullable: false),
+                    MenuId = table.Column<long>(nullable: false),
                     RoleId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserRole", x => x.Id);
+                    table.PrimaryKey("PK_MenuRole", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserRole_Role_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "Role",
+                        name: "FK_MenuRole_Menu_MenuId",
+                        column: x => x.MenuId,
+                        principalTable: "Menu",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserRole_User_UserId",
-                        column: x => x.UserId,
-                        principalTable: "User",
+                        name: "FK_MenuRole_Role_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Role",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -86,29 +74,36 @@ namespace WP.NetCore.Repository.EFCore.Migrations
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "Avatar", "CreateBy", "CreateTime", "DeleteTime", "IsDelete", "IsEnable", "ModifyBy", "ModifyTime", "Name", "Password", "Sex", "UserName" },
-                values: new object[] { 15161719090512896L, null, null, new DateTime(2021, 2, 14, 14, 58, 14, 726, DateTimeKind.Local).AddTicks(6838), null, false, true, null, null, "系统管理员", "670b14728ad9902aecba32e22fa4f6bd", 1, "admin" });
+                values: new object[] { 15165006624818176L, null, null, new DateTime(2021, 2, 16, 22, 42, 29, 897, DateTimeKind.Local).AddTicks(235), null, false, true, null, null, "系统管理员", "670b14728ad9902aecba32e22fa4f6bd", 1, "admin" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserRole_RoleId",
-                table: "UserRole",
+                name: "IX_MenuRole_MenuId",
+                table: "MenuRole",
+                column: "MenuId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MenuRole_RoleId",
+                table: "MenuRole",
                 column: "RoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserRole_UserId",
-                table: "UserRole",
-                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "UserRole");
+                name: "MenuRole");
 
             migrationBuilder.DropTable(
-                name: "Role");
+                name: "Menu");
 
-            migrationBuilder.DropTable(
-                name: "User");
+            migrationBuilder.DeleteData(
+                table: "User",
+                keyColumn: "Id",
+                keyValue: 15165006624818176L);
+
+            migrationBuilder.InsertData(
+                table: "User",
+                columns: new[] { "Id", "Avatar", "CreateBy", "CreateTime", "DeleteTime", "IsDelete", "IsEnable", "ModifyBy", "ModifyTime", "Name", "Password", "Sex", "UserName" },
+                values: new object[] { 15165005619512320L, null, null, new DateTime(2021, 2, 16, 22, 41, 28, 537, DateTimeKind.Local).AddTicks(2837), null, false, true, null, null, "系统管理员", "670b14728ad9902aecba32e22fa4f6bd", 1, "admin" });
         }
     }
 }
