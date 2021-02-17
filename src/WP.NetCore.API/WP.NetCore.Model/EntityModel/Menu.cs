@@ -9,18 +9,23 @@ namespace WP.NetCore.Model.EntityModel
     public class Menu : EntityBase
     {
         /// <summary>
-        /// 名称
+        /// 标题
+        /// </summary>
+        public string Title { get; set; }
+
+        /// <summary>
+        /// 路由名称
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// 链接
+        /// 路由地址
         /// </summary>
         public string Path { get; set; }
 
 
         /// <summary>
-        /// 组件地址
+        /// 页面路径
         /// </summary>
         public string Component { get; set; }
 

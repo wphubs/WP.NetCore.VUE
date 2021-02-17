@@ -64,19 +64,24 @@
             实现接口IEntity,所有实体继承该这个基类
             </summary>
         </member>
+        <member name="P:WP.NetCore.Model.EntityModel.Menu.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
         <member name="P:WP.NetCore.Model.EntityModel.Menu.Name">
             <summary>
-            名称
+            路由名称
             </summary>
         </member>
         <member name="P:WP.NetCore.Model.EntityModel.Menu.Path">
             <summary>
-            链接
+            路由地址
             </summary>
         </member>
         <member name="P:WP.NetCore.Model.EntityModel.Menu.Component">
             <summary>
-            组件地址
+            页面路径
             </summary>
         </member>
         <member name="P:WP.NetCore.Model.EntityModel.Menu.ParentId">
@@ -197,6 +202,36 @@
         <member name="P:WP.NetCore.Model.PageModel`1.Data">
             <summary>
             返回数据
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.Name">
+            <summary>
+            路由名称
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.Path">
+            <summary>
+            路由地址
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.Component">
+            <summary>
+            页面路径
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.MetaData.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.MetaData.Icon">
+            <summary>
+            图标
             </summary>
         </member>
         <member name="P:WP.NetCore.Model.ViewModel.UserViewModel.UserName">

@@ -45,7 +45,31 @@ const mutations = {
     state.routes = constantRoutes.concat(routes)
   }
 }
-const routerTest=[  {
+const routerTest=[  
+  {
+    path: '/nested',
+    component: Layout,
+    name: 'Nested',
+    meta: {
+      title: 'Nested',
+      icon: 'nested'
+    },
+    children: [
+      {
+        path: 'menu1',
+        component: () => import('@/views/nested/menu1/index'), 
+        name: 'Menu1',
+        meta: { title: 'Menu1', icon: 'el-icon-lightning'  },
+      },
+      {
+        path: 'menu2',
+        component: () => import('@/views/nested/menu2/index'),
+        name: 'Menu2',
+        meta: { title: 'menu2', icon: 'el-icon-lightning'  }
+      }
+    ]
+  },
+  {
   path: '/user',
   component: Layout,
   children: [

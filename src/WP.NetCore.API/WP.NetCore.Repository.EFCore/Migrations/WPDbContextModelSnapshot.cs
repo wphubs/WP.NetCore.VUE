@@ -65,6 +65,9 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                     b.Property<int>("Sort")
                         .HasColumnType("int");
 
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.ToTable("Menu");
@@ -190,8 +193,8 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 15165006624818176L,
-                            CreateTime = new DateTime(2021, 2, 16, 22, 42, 29, 897, DateTimeKind.Local).AddTicks(235),
+                            Id = 15166231695148032L,
+                            CreateTime = new DateTime(2021, 2, 17, 19, 28, 42, 255, DateTimeKind.Local).AddTicks(2752),
                             IsDelete = false,
                             IsEnable = true,
                             Name = "系统管理员",
