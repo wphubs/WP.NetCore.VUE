@@ -43,7 +43,10 @@ namespace WP.NetCore.Services
         /// <returns></returns>
         public async Task<User> CheckUserAsync(string userName, string passWord)
         {
-            return await baseRepository.FirstAsync(x => x.UserName == userName && x.Password == passWord);
+            var objUser=await baseRepository.LoadAsync(x => x.UserName == userName && x.Password == passWord);
+            objUser = objUser.Include(x => x.UserRoles);
+            return await objUser.FirstOrDefaultAsync();
+            //return await baseRepository.FirstAsync(x => x.UserName == userName && x.Password == passWord);
         }
 
 

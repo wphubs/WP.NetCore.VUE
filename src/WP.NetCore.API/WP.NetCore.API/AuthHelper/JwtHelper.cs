@@ -81,7 +81,7 @@ namespace WP.NetCore.API.AuthHelper
             var tm = new TokenModelJwt
             {
                 //Id = jwtToken.Id,
-                Role = role != null ? role.ObjToString() : "",
+                //Role = role != null ? role.ObjToString() : "",
              
             };
             return tm;
@@ -111,6 +111,7 @@ namespace WP.NetCore.API.AuthHelper
                             var _val = Convert.ToInt64(claim.Value == "" ? "0" : claim.Value);
                             info.SetValue(userBasicInfo, _val);
                         }
+     
                         else
                         {
                             info.SetValue(userBasicInfo, claim.Value);

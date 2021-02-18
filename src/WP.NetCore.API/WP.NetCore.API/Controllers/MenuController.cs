@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WP.NetCore.API.AuthHelper;
 using WP.NetCore.IServices;
 using WP.NetCore.Model;
 
@@ -30,6 +31,7 @@ namespace WP.NetCore.API.Controllers
         [HttpGet]
         public async Task<ResponseResult> Get()
         {
+            var tokenInfo = JwtHelper.TokenInfo(User);
             var listMenu = await menuService.GetRoleMenuList();
             return new ResponseResult().Success(listMenu);
         }

@@ -33,7 +33,7 @@ namespace WP.NetCore.Model.EntityModel
         /// <summary>
         /// 父ID
         /// </summary>
-        public long? ParentId { get; set; }
+        public long? ParentId { get; set; } = 0;
 
         /// <summary>
         /// 是否隐藏

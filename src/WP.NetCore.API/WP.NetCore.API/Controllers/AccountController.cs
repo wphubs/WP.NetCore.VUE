@@ -14,11 +14,11 @@ namespace WP.NetCore.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LoginController : ControllerBase
+    public class AccountController : ControllerBase
     {
         private readonly IUserService userService;
 
-        public LoginController(IUserService userService)
+        public AccountController(IUserService userService)
         {
             this.userService = userService;
         }
@@ -32,7 +32,7 @@ namespace WP.NetCore.API.Controllers
                 TokenModelJwt tokenModel = new TokenModelJwt
                 {
                     Id = objUserInfo.Id,
-                    Role = "系统管理员",
+                    Role = String.Join(',', objUserInfo.UserRoles.Select(x => x.RoleId).ToList()),
                     UserName = objUserInfo.UserName,
                     Name = objUserInfo.Name,
                     Avatar = "https://github.githubassets.com/pinned-octocat.svg"

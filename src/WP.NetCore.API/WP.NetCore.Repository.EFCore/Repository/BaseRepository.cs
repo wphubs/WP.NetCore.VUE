@@ -37,6 +37,24 @@ namespace WP.NetCore.Repository.EFCore
             return await list.Where(predicate).ToListAsync();
         }
 
+        public async Task<IQueryable<TEntity>> LoadAsync(Expression<Func<TEntity, bool>> predicate = null)
+        {
+            if (predicate == null)
+            {
+                predicate = c => true;
+            }
+            return await Task.Run(() =>  Query().Where(predicate));
+        }
+        public IQueryable<TEntity> Load(Expression<Func<TEntity, bool>> predicate = null)
+        {
+            if (predicate == null)
+            {
+                predicate = c => true;
+            }
+            return Query().Where(predicate);
+        }
+
+
         public async Task<(int Total,IQueryable<TEntity> Data)> GetPageAsync<TProperty>(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, TProperty>> order, int pageIndex, int pageSize, bool isAsc = false)
         {
             var list = Query().Where(predicate);
@@ -53,22 +71,6 @@ namespace WP.NetCore.Repository.EFCore
         }
 
 
-        //public async Task<PageModel<TEntity>> GetPageAsync<TProperty>(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, TProperty>> order, int pageIndex, int pageSize, bool isAsc = false)
-        //{
-        //    var list = Query().Where(predicate);
-      
-        //    int count = await list.CountAsync();
-        //    var orderList = isAsc == true ? list.OrderBy(order) : list.OrderByDescending(order);
-           
-        //    var pageList =  orderList
-        //        .Skip((pageIndex - 1) * pageSize)
-        //        .Take(pageSize);
-        
-        //    var aa= new PageModel<TEntity>() { Data = pageList, Total = count, PageIndex = pageIndex, PageSize = pageSize };
-           
-        //    return new PageModel<TEntity>() { Data = pageList, Total = count, PageIndex = pageIndex, PageSize = pageSize };
-        //    //return new Tuple<int, List<TEntity>>(count, pageList);
-        //}
 
         public async Task<TEntity> FirstAsync(long id)
         {

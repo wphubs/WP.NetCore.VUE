@@ -38,6 +38,11 @@ namespace WP.NetCore.Repository.EFCore
         /// <returns>返回所有数据</returns>
         Task<List<TEntity>> GetAllAsync<TProperty>(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, TProperty>> order, bool isAsc = false);
 
+
+        IQueryable<TEntity> Load(Expression<Func<TEntity, bool>> predicate);
+        Task<IQueryable<TEntity>> LoadAsync(Expression<Func<TEntity, bool>> predicate);
+
+
         /// <summary>
         /// 分页获取数据
         /// </summary>

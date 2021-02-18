@@ -31,12 +31,10 @@ namespace WP.NetCore.API.AuthHelper
             {
                 if (tokenHeader.Length >= 128)
                 {
-                    TokenModelJwt tm = JwtHelper.SerializeJwt(tokenHeader);
-
-                    //授权 Claim 关键
+                    //TokenModelJwt tm = JwtHelper.SerializeJwt(tokenHeader);
                     var claimList = new List<Claim>();
-                    var claim = new Claim(ClaimTypes.Role, tm.Role);
-                    claimList.Add(claim);
+                    //var claim = new Claim(ClaimTypes.Role, tm.Role);
+                    //claimList.Add(claim);
                     var identity = new ClaimsIdentity(claimList);
                     var principal = new ClaimsPrincipal(identity);
                     httpContext.User = principal;

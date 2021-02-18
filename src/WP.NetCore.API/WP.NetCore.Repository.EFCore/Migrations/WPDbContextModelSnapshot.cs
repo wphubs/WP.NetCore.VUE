@@ -71,6 +71,82 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Menu");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            Component = "user/index",
+                            CreateTime = new DateTime(2021, 2, 18, 22, 57, 32, 565, DateTimeKind.Local).AddTicks(5732),
+                            Icon = "el-icon-lightning",
+                            IsButton = false,
+                            IsDelete = false,
+                            IsHidden = false,
+                            Name = "user",
+                            ParentId = 0L,
+                            Path = "/user",
+                            Sort = 1,
+                            Title = "用户管理"
+                        },
+                        new
+                        {
+                            Id = 2L,
+                            Component = "role/index",
+                            CreateTime = new DateTime(2021, 2, 18, 22, 57, 32, 565, DateTimeKind.Local).AddTicks(9087),
+                            Icon = "el-icon-heavy-rain",
+                            IsButton = false,
+                            IsDelete = false,
+                            IsHidden = false,
+                            Name = "role",
+                            ParentId = 0L,
+                            Path = "/role",
+                            Sort = 2,
+                            Title = "角色管理"
+                        },
+                        new
+                        {
+                            Id = 3L,
+                            CreateTime = new DateTime(2021, 2, 18, 22, 57, 32, 565, DateTimeKind.Local).AddTicks(9103),
+                            Icon = "nested",
+                            IsButton = false,
+                            IsDelete = false,
+                            IsHidden = false,
+                            Name = "nested",
+                            ParentId = 0L,
+                            Path = "/nested",
+                            Sort = 3,
+                            Title = "多级"
+                        },
+                        new
+                        {
+                            Id = 4L,
+                            Component = "nested/menu1/index",
+                            CreateTime = new DateTime(2021, 2, 18, 22, 57, 32, 565, DateTimeKind.Local).AddTicks(9636),
+                            Icon = "lightning",
+                            IsButton = false,
+                            IsDelete = false,
+                            IsHidden = false,
+                            Name = "menu1",
+                            ParentId = 3L,
+                            Path = "/menu1",
+                            Sort = 1,
+                            Title = "子级11"
+                        },
+                        new
+                        {
+                            Id = 5L,
+                            Component = "nested/menu2/index",
+                            CreateTime = new DateTime(2021, 2, 18, 22, 57, 32, 565, DateTimeKind.Local).AddTicks(9642),
+                            Icon = "lightning",
+                            IsButton = false,
+                            IsDelete = false,
+                            IsHidden = false,
+                            Name = "menu2",
+                            ParentId = 3L,
+                            Path = "/menu2",
+                            Sort = 2,
+                            Title = "子级22"
+                        });
                 });
 
             modelBuilder.Entity("WP.NetCore.Model.EntityModel.MenuRole", b =>
@@ -193,8 +269,8 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 15166231695148032L,
-                            CreateTime = new DateTime(2021, 2, 17, 19, 28, 42, 255, DateTimeKind.Local).AddTicks(2752),
+                            Id = 15167852569281536L,
+                            CreateTime = new DateTime(2021, 2, 18, 22, 57, 32, 561, DateTimeKind.Local).AddTicks(9876),
                             IsDelete = false,
                             IsEnable = true,
                             Name = "系统管理员",

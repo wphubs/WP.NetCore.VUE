@@ -26,7 +26,7 @@ namespace WP.NetCore.Services
         public async Task<List<MenuViewModel>> GetRoleMenuList()
         {
             var listMenu = await baseRepository.GetAllAsync(x => x.IsDelete == false);
-            var list = GetRootMenu(listMenu, 0);//获取菜单
+            var list = GetRootMenu(listMenu, 0);
             return list;
         }
 
