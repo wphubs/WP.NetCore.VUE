@@ -1,5 +1,7 @@
 import { constantRoutes } from '@/router'
 import Layout from '@/layout'
+const _import = require('../../router/_import_' + process.env.NODE_ENV) //获取组件的方法
+import { getMenuList } from "@/api/menu";
 /**
  * Use meta.role to determine if the current user has permission
  * @param roles
@@ -13,26 +15,22 @@ function hasPermission(roles, route) {
   }
 }
 
-/**
- * Filter asynchronous routing tables by recursion
- * @param routes asyncRoutes
- * @param roles
- */
-export function filterAsyncRoutes(routes, roles) {
-  const res = []
 
-  routes.forEach(route => {
-    const tmp = { ...route }
-    if (hasPermission(roles, tmp)) {
-      if (tmp.children) {
-        tmp.children = filterAsyncRoutes(tmp.children, roles)
-      }
-      res.push(tmp)
-    }
-  })
+// export function filterAsyncRoutes(routes, roles) {
+//   const res = []
 
-  return res
-}
+//   routes.forEach(route => {
+//     const tmp = { ...route }
+//     if (hasPermission(roles, tmp)) {
+//       if (tmp.children) {
+//         tmp.children = filterAsyncRoutes(tmp.children, roles)
+//       }
+//       res.push(tmp)
+//     }
+//   })
+
+//   return res
+// }
 
 const state = {
   routes: [],
@@ -95,22 +93,52 @@ const routerTest=[
   ]
 }];
 
+function filterAsyncRouter(asyncRouterMap) { //遍历后台传来的路由字符串，转换为组件对象
+  const accessedRouters = asyncRouterMap.filter(route => {
+    if (route.component) {
+      // 
+      if (route.component === 'Layout') { //Layout组件特殊处理
+        route.component = Layout
+      } else {
+        route.component = _import(route.component)
+      }
+    }
+    if (route.children && route.children.length) {
+      console.log('1');
+      route.children = filterAsyncRouter(route.children)
+    }
+    return true
+  })
+
+  return accessedRouters
+}
+
 const actions = {
   generateRoutes({ commit }) {
     return new Promise(resolve => {
-
-      let accessedRoutes=routerTest;
+      //let accessedRoutes=routerTest;
       //console.log('generateRoutes'+JSON.stringify(accessedRoutes))
       // if (roles.includes('admin')) {
         // accessedRoutes = asyncRoutes || []
       // } else {
       //   accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
       // }
-      commit('SET_ROUTES', accessedRoutes)
-      resolve(accessedRoutes)
+      // commit('SET_ROUTES', accessedRoutes)
+      // resolve(accessedRoutes)
+      getMenuList().then((res) => {
+      
+          console.log("getMenuList:" + JSON.stringify(res));
+          var accessedRoutes=res;
+          accessedRoutes = filterAsyncRouter(accessedRoutes)
+          console.log("filterAsyncRouter:" + JSON.stringify(accessedRoutes));
+          commit('SET_ROUTES', accessedRoutes)
+          resolve(accessedRoutes)
+        }
+      );
     })
   }
 }
+
 
 export default {
   namespaced: true,

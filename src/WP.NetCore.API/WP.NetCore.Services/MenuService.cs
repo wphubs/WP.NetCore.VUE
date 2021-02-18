@@ -45,25 +45,25 @@ namespace WP.NetCore.Services
                 objMenu.ForEach(item =>
                 {
                     MenuViewModel model = new MenuViewModel();
-                    model.Path = item.Path;
-                    model.Component = "Layout";
+                    model.path = item.Path;
+                    model.component = "Layout";
                     var objSelect = GetChildrenMenu(listMenu, item.Id);
                     if (objSelect.Count == 0)
                     {
-                        model.Children = new List<MenuViewModel>()
+                        model.children = new List<MenuViewModel>()
                         {
                             new MenuViewModel()
                             {
-                                Name= item.Name,Path = item.Path,Component=item.Component,
-                                Meta= new MetaData(){Icon = item.Icon, Title = item.Title}
+                                name= item.Name,path = item.Path,component=item.Component,
+                                meta= new MetaData(){icon = item.Icon, title = item.Title}
                             }
                         };
                     }
                     else
                     {
-                        model.Name = item.Name;
-                        model.Meta = new MetaData() { Icon = item.Icon, Title = item.Title };
-                        model.Children = objSelect;
+                        model.name = item.Name;
+                        model.meta = new MetaData() { icon = item.Icon, title = item.Title };
+                        model.children = objSelect;
                     }
                     listModel.Add(model);
                 });
@@ -84,10 +84,10 @@ namespace WP.NetCore.Services
             objMenu.ForEach(item =>
             {
                 MenuViewModel model = new MenuViewModel();
-                model.Path = item.Path;
-                model.Component = item.Component;
-                model.Name = item.Name;
-                model.Meta = new MetaData() { Icon = item.Icon, Title = item.Title };
+                model.path = item.Path;
+                model.component = item.Component;
+                model.name = item.Name;
+                model.meta = new MetaData() { icon = item.Icon, title = item.Title };
                 var objSelect = GetChildrenMenu(listMenu, item.Id);
                 listModel.Add(model);
             });

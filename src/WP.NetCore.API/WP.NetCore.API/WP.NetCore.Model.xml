@@ -204,32 +204,32 @@
             返回数据
             </summary>
         </member>
-        <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.Title">
+        <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.title">
             <summary>
             标题
             </summary>
         </member>
-        <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.Name">
+        <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.name">
             <summary>
             路由名称
             </summary>
         </member>
-        <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.Path">
+        <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.path">
             <summary>
             路由地址
             </summary>
         </member>
-        <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.Component">
+        <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.component">
             <summary>
             页面路径
             </summary>
         </member>
-        <member name="P:WP.NetCore.Model.ViewModel.MetaData.Title">
+        <member name="P:WP.NetCore.Model.ViewModel.MetaData.title">
             <summary>
             标题
             </summary>
         </member>
-        <member name="P:WP.NetCore.Model.ViewModel.MetaData.Icon">
+        <member name="P:WP.NetCore.Model.ViewModel.MetaData.icon">
             <summary>
             图标
             </summary>

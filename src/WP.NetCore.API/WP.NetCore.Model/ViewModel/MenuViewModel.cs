@@ -14,33 +14,33 @@ namespace WP.NetCore.Model.ViewModel
         /// 标题
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string Title { get; set; }
+        public string title { get; set; }
 
         /// <summary>
         /// 路由名称
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string Name { get; set; }
+        public string name { get; set; }
 
         /// <summary>
         /// 路由地址
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string Path { get; set; }
+        public string path { get; set; }
 
 
         /// <summary>
         /// 页面路径
         /// </summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string Component { get; set; }
+        public string component { get; set; }
 
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public MetaData Meta { get; set; }
+        public MetaData meta { get; set; }
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public List<MenuViewModel> Children { get; set; }
+        public List<MenuViewModel> children { get; set; }
 
 
     }
@@ -50,11 +50,11 @@ namespace WP.NetCore.Model.ViewModel
         /// <summary>
         /// 标题
         /// </summary>
-        public string Title { get; set; }
+        public string title { get; set; }
 
         /// <summary>
         /// 图标
         /// </summary>
-        public string Icon { get; set; }
+        public string icon { get; set; }
     }
 }
