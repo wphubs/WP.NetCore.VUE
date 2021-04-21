@@ -56,5 +56,10 @@ namespace WP.NetCore.Model.ViewModel
         /// 图标
         /// </summary>
         public string icon { get; set; }
+
+        /// <summary>
+        /// 按钮
+        /// </summary>
+        public List<string> permission { get; set; }
     }
 }

@@ -16,6 +16,7 @@ namespace WP.NetCore.Services
 
         public MenuService(IBaseRepository<Menu> baseRepository)
         {
+            this.baseDal = baseRepository;
             this.baseRepository = baseRepository;
         }
         
@@ -25,7 +26,7 @@ namespace WP.NetCore.Services
         /// <returns></returns>
         public async Task<List<MenuViewModel>> GetRoleMenuList()
         {
-            var listMenu = await baseRepository.GetAllAsync(x => x.IsDelete == false);
+            var listMenu = await baseRepository.GetAllAsync(x => x.IsDelete == false,x=>x.Sort,true);
             var list = GetRootMenu(listMenu, 0);
             return list;
         }
@@ -50,19 +51,22 @@ namespace WP.NetCore.Services
                     var objSelect = GetChildrenMenu(listMenu, item.Id);
                     if (objSelect.Count == 0)
                     {
+                        model.meta = null;
                         model.children = new List<MenuViewModel>()
                         {
                             new MenuViewModel()
                             {
-                                name= item.Name,path = item.Path,component=item.Component,
-                                meta= new MetaData(){icon = item.Icon, title = item.Title}
+                                name= item.Name,
+                                path = item.Path,
+                                component=item.Component,
+                                meta= new MetaData(){icon = item.Icon, title = item.Title,permission= GetMenuPermission(item.Id,listMenu)}
                             }
                         };
                     }
                     else
                     {
                         model.name = item.Name;
-                        model.meta = new MetaData() { icon = item.Icon, title = item.Title };
+                        model.meta = new MetaData() { icon = item.Icon, title = item.Title, permission = GetMenuPermission(item.Id, listMenu) };
                         model.children = objSelect;
                     }
                     listModel.Add(model);
@@ -80,20 +84,27 @@ namespace WP.NetCore.Services
         private List<MenuViewModel> GetChildrenMenu(List<Menu> listMenu, long parentId)
         {
             List<MenuViewModel> listModel = new List<MenuViewModel>();
-            var objMenu = listMenu.FindAll(x => x.ParentId == parentId);
+            var objMenu = listMenu.FindAll(x => x.ParentId == parentId&&!x.IsButton);
             objMenu.ForEach(item =>
             {
                 MenuViewModel model = new MenuViewModel();
                 model.path = item.Path;
                 model.component = item.Component;
                 model.name = item.Name;
-                model.meta = new MetaData() { icon = item.Icon, title = item.Title };
+                model.meta = new MetaData() { icon = item.Icon, title = item.Title ,permission= GetMenuPermission(parentId,listMenu) };
                 var objSelect = GetChildrenMenu(listMenu, item.Id);
                 listModel.Add(model);
             });
             return listModel;
         }
 
+        private List<string> GetMenuPermission(long parentId, List<Menu> listRouter)
+        {
+            var listButton = listRouter.FindAll(p => p.ParentId == parentId && p.IsButton);
+            List<string> buttonInfo = new List<string>();
+            listButton.ForEach(it => buttonInfo.Add(it.Name));
+            return buttonInfo;
+        }
 
 
     }

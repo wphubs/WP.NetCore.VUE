@@ -135,6 +135,7 @@ export default {
   created() {
     this.refreshData();
     this.getRoleList();
+    console.log(JSON.stringify(this.$route.meta))
   },
   methods: {
     getRoleList() {

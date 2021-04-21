@@ -234,6 +234,11 @@
             图标
             </summary>
         </member>
+        <member name="P:WP.NetCore.Model.ViewModel.MetaData.permission">
+            <summary>
+            按钮
+            </summary>
+        </member>
         <member name="P:WP.NetCore.Model.ViewModel.UserViewModel.UserName">
             <summary>
             用户名

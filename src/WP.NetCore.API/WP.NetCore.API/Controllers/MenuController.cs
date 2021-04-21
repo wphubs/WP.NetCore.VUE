@@ -25,11 +25,25 @@ namespace WP.NetCore.API.Controllers
         }
 
         /// <summary>
-        /// 根据角色获取菜单
+        /// 获取菜单信息
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         public async Task<ResponseResult> Get()
+        {
+            var list =await menuService.GetAllAsync();
+            return new ResponseResult().Success(list); ;
+        }
+
+
+
+        /// <summary>
+        /// 根据角色获取菜单
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("GetRoleRouter")]
+        public async Task<ResponseResult> GetRoleRouter()
         {
             var tokenInfo = JwtHelper.TokenInfo(User);
             var listMenu = await menuService.GetRoleMenuList();
