@@ -9,57 +9,45 @@ namespace WP.NetCore.Model.ViewModel
 {
     public class MenuViewModel
     {
+        public long Id { get; set; }
 
         /// <summary>
         /// 标题
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string title { get; set; }
+        public string Title { get; set; }
 
         /// <summary>
         /// 路由名称
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string name { get; set; }
-
-        /// <summary>
-        /// 路由地址
-        /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string path { get; set; }
+        public string Name { get; set; }
 
 
         /// <summary>
         /// 页面路径
         /// </summary>
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public string component { get; set; }
+        public string Component { get; set; }
 
 
-        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        public MetaData meta { get; set; }
+        /// <summary>
+        /// 是否隐藏
+        /// </summary>
+        public bool IsHidden { get; set; } = false;
+
+        /// <summary>
+        /// 图标
+        /// </summary>
+        public string Icon { get; set; }
+
+        /// <summary>
+        /// 是否为按钮
+        /// </summary>
+        public bool IsButton { get; set; } = false;
+
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public List<MenuViewModel> children { get; set; }
 
 
-    }
-
-    public class MetaData
-    {
-        /// <summary>
-        /// 标题
-        /// </summary>
-        public string title { get; set; }
-
-        /// <summary>
-        /// 图标
-        /// </summary>
-        public string icon { get; set; }
-
-        /// <summary>
-        /// 按钮
-        /// </summary>
-        public List<string> permission { get; set; }
+        public long? ParentId { get; set; } = 0;
     }
 }

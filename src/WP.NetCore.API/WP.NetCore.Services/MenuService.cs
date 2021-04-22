@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,20 +14,61 @@ namespace WP.NetCore.Services
     public class MenuService : BaseService<Menu>, IMenuService
     {
         private readonly IBaseRepository<Menu> baseRepository;
+        private readonly IMapper mapper;
 
-        public MenuService(IBaseRepository<Menu> baseRepository)
+        public MenuService(IBaseRepository<Menu> baseRepository, IMapper mapper)
         {
             this.baseDal = baseRepository;
             this.baseRepository = baseRepository;
+            this.mapper = mapper;
         }
-        
+
+        /// <summary>
+        /// 获取菜单列表
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<MenuViewModel>> GetMenuListAsync()
+        {
+            var list = await baseRepository.GetAllAsync(x => x.IsDelete == false, x => x.Sort, true);
+            var menu = mapper.Map<List<MenuViewModel>>(list);
+            List<MenuViewModel> listMenu = new List<MenuViewModel>();
+            list.ForEach(item =>
+            {
+                if (item.ParentId == 0)
+                {
+                    var objMenu = mapper.Map<MenuViewModel>(item);
+                    objMenu.children= GetMenuChildren(menu, item.Id);
+                    listMenu.Add(objMenu);
+                } 
+                   
+            });
+            return listMenu;
+
+        }
+
+        private List<MenuViewModel> GetMenuChildren(List<MenuViewModel> listMenu, long parentId)
+        {
+            List<MenuViewModel> listModel = new List<MenuViewModel>();
+            var listSelect = listMenu.FindAll(x => x.ParentId == parentId);
+            if (listSelect.Count != 0)
+            {
+                listSelect.ForEach(item =>
+                {
+                    item.children = GetMenuChildren(listMenu, item.Id);
+                });
+            }
+            return listSelect;
+        }
+
+
+
         /// <summary>
         /// 根据角色获取菜单
         /// </summary>
         /// <returns></returns>
-        public async Task<List<MenuViewModel>> GetRoleMenuList()
+        public async Task<List<RouterViewModel>> GetRoleMenuListAsync()
         {
-            var listMenu = await baseRepository.GetAllAsync(x => x.IsDelete == false,x=>x.Sort,true);
+            var listMenu = await baseRepository.GetAllAsync(x => x.IsDelete == false, x => x.Sort, true);
             var list = GetRootMenu(listMenu, 0);
             return list;
         }
@@ -37,27 +79,27 @@ namespace WP.NetCore.Services
         /// <param name="listMenu"></param>
         /// <param name="parentId"></param>
         /// <returns></returns>
-        private List<MenuViewModel> GetRootMenu(List<Menu> listMenu, long parentId)
+        private List<RouterViewModel> GetRootMenu(List<Menu> listMenu, long parentId)
         {
-            List<MenuViewModel> listModel = new List<MenuViewModel>();
+            List<RouterViewModel> listModel = new List<RouterViewModel>();
             var objMenu = listMenu.FindAll(x => x.ParentId == parentId);
             if (objMenu.Count != 0)
             {
                 objMenu.ForEach(item =>
                 {
-                    MenuViewModel model = new MenuViewModel();
-                    model.path = item.Path;
+                    RouterViewModel model = new RouterViewModel();
+                    model.path = $"/{item.Name}";
                     model.component = "Layout";
                     var objSelect = GetChildrenMenu(listMenu, item.Id);
                     if (objSelect.Count == 0)
                     {
                         model.meta = null;
-                        model.children = new List<MenuViewModel>()
+                        model.children = new List<RouterViewModel>()
                         {
-                            new MenuViewModel()
+                            new RouterViewModel()
                             {
                                 name= item.Name,
-                                path = item.Path,
+                                path =  $"/{item.Name}",
                                 component=item.Component,
                                 meta= new MetaData(){icon = item.Icon, title = item.Title,permission= GetMenuPermission(item.Id,listMenu)}
                             }
@@ -76,28 +118,34 @@ namespace WP.NetCore.Services
         }
 
         /// <summary>
-        /// 递归获取子菜单
+        /// 获取子菜单
         /// </summary>
         /// <param name="listMenu"></param>
         /// <param name="parentId"></param>
         /// <returns></returns>
-        private List<MenuViewModel> GetChildrenMenu(List<Menu> listMenu, long parentId)
+        private List<RouterViewModel> GetChildrenMenu(List<Menu> listMenu, long parentId)
         {
-            List<MenuViewModel> listModel = new List<MenuViewModel>();
-            var objMenu = listMenu.FindAll(x => x.ParentId == parentId&&!x.IsButton);
+            List<RouterViewModel> listModel = new List<RouterViewModel>();
+            var objMenu = listMenu.FindAll(x => x.ParentId == parentId && !x.IsButton);
             objMenu.ForEach(item =>
             {
-                MenuViewModel model = new MenuViewModel();
-                model.path = item.Path;
+                RouterViewModel model = new RouterViewModel();
+                model.path = $"/{item.Name}";
                 model.component = item.Component;
                 model.name = item.Name;
-                model.meta = new MetaData() { icon = item.Icon, title = item.Title ,permission= GetMenuPermission(parentId,listMenu) };
+                model.meta = new MetaData() { icon = item.Icon, title = item.Title, permission = GetMenuPermission(parentId, listMenu) };
                 var objSelect = GetChildrenMenu(listMenu, item.Id);
                 listModel.Add(model);
             });
             return listModel;
         }
 
+        /// <summary>
+        /// 获取菜单按钮
+        /// </summary>
+        /// <param name="parentId"></param>
+        /// <param name="listRouter"></param>
+        /// <returns></returns>
         private List<string> GetMenuPermission(long parentId, List<Menu> listRouter)
         {
             var listButton = listRouter.FindAll(p => p.ParentId == parentId && p.IsButton);

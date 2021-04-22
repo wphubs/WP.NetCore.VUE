@@ -31,7 +31,7 @@ namespace WP.NetCore.API.Controllers
         [HttpGet]
         public async Task<ResponseResult> Get()
         {
-            var list =await menuService.GetAllAsync();
+            var list =await menuService.GetMenuListAsync();
             return new ResponseResult().Success(list); ;
         }
 
@@ -46,7 +46,7 @@ namespace WP.NetCore.API.Controllers
         public async Task<ResponseResult> GetRoleRouter()
         {
             var tokenInfo = JwtHelper.TokenInfo(User);
-            var listMenu = await menuService.GetRoleMenuList();
+            var listMenu = await menuService.GetRoleMenuListAsync();
             return new ResponseResult().Success(listMenu);
         }
 

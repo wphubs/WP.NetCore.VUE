@@ -11,6 +11,16 @@ namespace WP.NetCore.IServices
     public interface IMenuService : IBaseService<Menu>
     {
 
-        Task<List<MenuViewModel>> GetRoleMenuList();
+        /// <summary>
+        /// 获取菜单列表
+        /// </summary>
+        /// <returns></returns>
+        Task<List<MenuViewModel>> GetMenuListAsync();
+
+        /// <summary>
+        /// 根据角色获取菜单
+        /// </summary>
+        /// <returns></returns>
+        Task<List<RouterViewModel>> GetRoleMenuListAsync();
     }
 }

@@ -74,11 +74,6 @@
             路由名称
             </summary>
         </member>
-        <member name="P:WP.NetCore.Model.EntityModel.Menu.Path">
-            <summary>
-            路由地址
-            </summary>
-        </member>
         <member name="P:WP.NetCore.Model.EntityModel.Menu.Component">
             <summary>
             页面路径
@@ -204,22 +199,52 @@
             返回数据
             </summary>
         </member>
-        <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.title">
+        <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.Title">
             <summary>
             标题
             </summary>
         </member>
-        <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.name">
+        <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.Name">
             <summary>
             路由名称
             </summary>
         </member>
-        <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.path">
+        <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.Component">
+            <summary>
+            页面路径
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.IsHidden">
+            <summary>
+            是否隐藏
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.Icon">
+            <summary>
+            图标
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.IsButton">
+            <summary>
+            是否为按钮
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.RouterViewModel.title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.RouterViewModel.name">
+            <summary>
+            路由名称
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.RouterViewModel.path">
             <summary>
             路由地址
             </summary>
         </member>
-        <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.component">
+        <member name="P:WP.NetCore.Model.ViewModel.RouterViewModel.component">
             <summary>
             页面路径
             </summary>

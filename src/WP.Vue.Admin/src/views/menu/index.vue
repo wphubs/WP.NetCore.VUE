@@ -13,25 +13,18 @@
     </el-card>
     <el-table
       :data="dataList"
-      style="width: 100%; margin-bottom: 20px;margin-top: 10px;"
-      row-key="id"
+      style="width: 100%; margin-bottom: 20px; margin-top: 10px"
+      row-key="Id"
       border
       default-expand-all
-      :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
+      :tree-props="{ children: 'children' }"
     >
-      <el-table-column prop="Title" label="页面标题">
-      </el-table-column>
-      <el-table-column prop="Name" label="路由名称"  >
-      </el-table-column>
-            <el-table-column prop="Path" label="路由地址"  >
-      </el-table-column>
-            <el-table-column prop="Component" label="组件地址" >
-      </el-table-column>
-            <el-table-column prop="IsHidden" label="是否显示" >
-      </el-table-column>
-            <el-table-column prop="CreateTime" label="创建时间" >
-      </el-table-column>
-
+      <el-table-column prop="Title" label="名称"> </el-table-column>
+      <el-table-column prop="Name" label="路由/"> </el-table-column>
+      <el-table-column prop="Component" label="组件地址"> </el-table-column>
+      <el-table-column prop="IsButton" label="页面/按钮"> </el-table-column>
+      <el-table-column prop="IsHidden" label="是否显示"> </el-table-column>
+      <el-table-column prop="CreateTime" label="创建时间"> </el-table-column>
     </el-table>
   </div>
 </template>

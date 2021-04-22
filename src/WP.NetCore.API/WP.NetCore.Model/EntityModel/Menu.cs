@@ -18,11 +18,6 @@ namespace WP.NetCore.Model.EntityModel
         /// </summary>
         public string Name { get; set; }
 
-        /// <summary>
-        /// 路由地址
-        /// </summary>
-        public string Path { get; set; }
-
 
         /// <summary>
         /// 页面路径
