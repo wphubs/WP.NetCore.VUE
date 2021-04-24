@@ -4,16 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WP.NetCore.Model.EntityModel
+namespace WP.NetCore.Model.Dto.Menu
 {
-    public class Menu : EntityBase
+    public class AddMenuDto
     {
-        /// <summary>
-        /// 标题
-        /// </summary>
         public string Title { get; set; }
 
- 
+
         /// <summary>
         /// 页面路径
         /// </summary>

@@ -4,6 +4,36 @@
         <name>WP.NetCore.Model</name>
     </assembly>
     <members>
+        <member name="P:WP.NetCore.Model.Dto.Menu.AddMenuDto.Component">
+            <summary>
+            页面路径
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Dto.Menu.AddMenuDto.ParentId">
+            <summary>
+            父ID
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Dto.Menu.AddMenuDto.IsHidden">
+            <summary>
+            是否隐藏
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Dto.Menu.AddMenuDto.Icon">
+            <summary>
+            图标
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Dto.Menu.AddMenuDto.IsButton">
+            <summary>
+            是否为按钮
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Dto.Menu.AddMenuDto.Sort">
+            <summary>
+            排序
+            </summary>
+        </member>
         <member name="P:WP.NetCore.Model.Dto.AddUserDto.UserName">
             <summary>
             用户名
@@ -67,11 +97,6 @@
         <member name="P:WP.NetCore.Model.EntityModel.Menu.Title">
             <summary>
             标题
-            </summary>
-        </member>
-        <member name="P:WP.NetCore.Model.EntityModel.Menu.Name">
-            <summary>
-            路由名称
             </summary>
         </member>
         <member name="P:WP.NetCore.Model.EntityModel.Menu.Component">
@@ -202,11 +227,6 @@
         <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.Title">
             <summary>
             标题
-            </summary>
-        </member>
-        <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.Name">
-            <summary>
-            路由名称
             </summary>
         </member>
         <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.Component">

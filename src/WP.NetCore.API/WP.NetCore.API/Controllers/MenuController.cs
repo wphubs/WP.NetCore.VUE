@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using WP.NetCore.API.AuthHelper;
 using WP.NetCore.IServices;
 using WP.NetCore.Model;
+using WP.NetCore.Model.Dto.Menu;
+using WP.NetCore.Model.EntityModel;
 
 namespace WP.NetCore.API.Controllers
 {
@@ -23,6 +25,23 @@ namespace WP.NetCore.API.Controllers
             this.mapper = mapper;
             this.menuService = menuService;
         }
+
+        /// <summary>
+        /// 新增菜单/页面
+        /// </summary>
+        /// <param name="menuDto"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<ResponseResult> Post([FromBody] AddMenuDto menuDto)
+        {
+            var objMenu = mapper.Map<Menu>(menuDto);
+            objMenu.CreateBy = GetToken().Id;
+
+            await menuService.AddAsync(objMenu);
+            return new ResponseResult().Success();
+        }
+
+
 
         /// <summary>
         /// 获取菜单信息

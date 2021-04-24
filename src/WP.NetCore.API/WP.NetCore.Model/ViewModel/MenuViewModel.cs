@@ -16,11 +16,6 @@ namespace WP.NetCore.Model.ViewModel
         /// </summary>
         public string Title { get; set; }
 
-        /// <summary>
-        /// 路由名称
-        /// </summary>
-        public string Name { get; set; }
-
 
         /// <summary>
         /// 页面路径
@@ -49,5 +44,7 @@ namespace WP.NetCore.Model.ViewModel
 
 
         public long? ParentId { get; set; } = 0;
+
+        public DateTime? CreateTime { get; set; }
     }
 }

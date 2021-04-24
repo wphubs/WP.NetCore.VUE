@@ -88,7 +88,7 @@ namespace WP.NetCore.Services
                 objMenu.ForEach(item =>
                 {
                     RouterViewModel model = new RouterViewModel();
-                    model.path = $"/{item.Name}";
+                    model.path = $"/{item.Component}";
                     model.component = "Layout";
                     var objSelect = GetChildrenMenu(listMenu, item.Id);
                     if (objSelect.Count == 0)
@@ -98,8 +98,8 @@ namespace WP.NetCore.Services
                         {
                             new RouterViewModel()
                             {
-                                name= item.Name,
-                                path =  $"/{item.Name}",
+                                name= item.Component,
+                                path =  $"/{item.Component}",
                                 component=item.Component,
                                 meta= new MetaData(){icon = item.Icon, title = item.Title,permission= GetMenuPermission(item.Id,listMenu)}
                             }
@@ -107,7 +107,7 @@ namespace WP.NetCore.Services
                     }
                     else
                     {
-                        model.name = item.Name;
+                        model.name = item.Component;
                         model.meta = new MetaData() { icon = item.Icon, title = item.Title, permission = GetMenuPermission(item.Id, listMenu) };
                         model.children = objSelect;
                     }
@@ -130,9 +130,9 @@ namespace WP.NetCore.Services
             objMenu.ForEach(item =>
             {
                 RouterViewModel model = new RouterViewModel();
-                model.path = $"/{item.Name}";
+                model.path = $"/{item.Component}";
                 model.component = item.Component;
-                model.name = item.Name;
+                model.name = item.Component;
                 model.meta = new MetaData() { icon = item.Icon, title = item.Title, permission = GetMenuPermission(parentId, listMenu) };
                 var objSelect = GetChildrenMenu(listMenu, item.Id);
                 listModel.Add(model);
@@ -150,7 +150,7 @@ namespace WP.NetCore.Services
         {
             var listButton = listRouter.FindAll(p => p.ParentId == parentId && p.IsButton);
             List<string> buttonInfo = new List<string>();
-            listButton.ForEach(it => buttonInfo.Add(it.Name));
+            listButton.ForEach(it => buttonInfo.Add(it.Component));
             return buttonInfo;
         }
 

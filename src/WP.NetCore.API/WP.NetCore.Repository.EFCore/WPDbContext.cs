@@ -87,23 +87,23 @@ namespace WP.NetCore.Repository.EFCore
             {
                 new Menu()
                 {
-                    Id=1,Title="用户管理",Name="user",Component="user/index",Icon="el-icon-lightning",Sort=1,
+                    Id=1,Title="用户管理",Component="user/index",Icon="el-icon-lightning",Sort=1,
                 },
                 new Menu()
                 {
-                    Id=2,Title="角色管理",Name="role",Component="role/index",Icon="el-icon-heavy-rain",Sort=2,
+                    Id=2,Title="角色管理",Component="role/index",Icon="el-icon-heavy-rain",Sort=2,
                 },
                 new Menu()
                 {
-                    Id=3,Title="多级",Name="nested",ParentId=0,Icon="nested",Sort=3,
+                    Id=3,Title="多级",ParentId=0,Icon="nested",Sort=3,
                 },
                 new Menu()
                 {
-                    Id=4,Title="子级11",Name="menu1",Component="nested/menu1/index",Icon="lightning",ParentId=3,Sort=1,
+                    Id=4,Title="子级11",Component="nested/menu1/index",Icon="lightning",ParentId=3,Sort=1,
                 },
                 new Menu()
                 {
-                    Id=5,Title="子级22",Name="menu2",Component="nested/menu2/index",Icon="lightning",ParentId=3,Sort=2,
+                    Id=5,Title="子级22",Component="nested/menu2/index",Icon="lightning",ParentId=3,Sort=2,
                 }
             });
         }

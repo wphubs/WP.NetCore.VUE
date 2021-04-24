@@ -15,3 +15,12 @@ export function getAll(params) {
     params
   })
 }
+
+
+export function addMenu(data) {
+  return request({
+    url: 'menu',
+    method: 'post',
+    data
+  })
+}
