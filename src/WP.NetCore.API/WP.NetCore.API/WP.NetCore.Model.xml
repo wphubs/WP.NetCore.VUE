@@ -34,6 +34,36 @@
             排序
             </summary>
         </member>
+        <member name="P:WP.NetCore.Model.Dto.Menu.UpdateMenuDto.Component">
+            <summary>
+            页面路径
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Dto.Menu.UpdateMenuDto.ParentId">
+            <summary>
+            父ID
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Dto.Menu.UpdateMenuDto.IsHidden">
+            <summary>
+            是否隐藏
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Dto.Menu.UpdateMenuDto.Icon">
+            <summary>
+            图标
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Dto.Menu.UpdateMenuDto.IsButton">
+            <summary>
+            是否为按钮
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Dto.Menu.UpdateMenuDto.Sort">
+            <summary>
+            排序
+            </summary>
+        </member>
         <member name="P:WP.NetCore.Model.Dto.AddUserDto.UserName">
             <summary>
             用户名
@@ -247,6 +277,16 @@
         <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.IsButton">
             <summary>
             是否为按钮
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.PageMenuViewModel.Title">
+            <summary>
+            标题
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.PageMenuViewModel.Component">
+            <summary>
+            页面路径
             </summary>
         </member>
         <member name="P:WP.NetCore.Model.ViewModel.RouterViewModel.title">

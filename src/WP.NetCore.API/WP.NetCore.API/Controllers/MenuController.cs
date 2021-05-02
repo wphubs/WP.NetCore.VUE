@@ -27,7 +27,7 @@ namespace WP.NetCore.API.Controllers
         }
 
         /// <summary>
-        /// 新增菜单/页面
+        /// 新增菜单
         /// </summary>
         /// <param name="menuDto"></param>
         /// <returns></returns>
@@ -41,6 +41,48 @@ namespace WP.NetCore.API.Controllers
             return new ResponseResult().Success();
         }
 
+        /// <summary>
+        /// 修改菜单
+        /// </summary>
+        /// <param name="menuDto"></param>
+        /// <returns></returns>
+        [HttpPut]
+        public async Task<ResponseResult> Put([FromBody] UpdateMenuDto menuDto)
+        {
+            var objMenu = mapper.Map<Menu>(menuDto);
+            objMenu.ModifyBy = GetToken().Id;
+
+            await menuService.UpdateAsync(objMenu);
+            return new ResponseResult().Success();
+        }
+
+        /// <summary>
+        /// 删除菜单
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        public async Task<ResponseResult> Delete(long Id)
+        {
+            if (default(long) == Id)
+            {
+                return new ResponseResult().Error("ID不能为空");
+            }
+            await menuService.DeleteAsync(Id);
+            return new ResponseResult().Success();
+        }
+
+
+        /// <summary>
+        /// 获取所有页面菜单
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetPageMenuList")]
+        public async Task<ResponseResult> GetPageMenuList()
+        {
+            var list = await menuService.GetPageMenuListAsync();
+            return new ResponseResult().Success(list); ;
+        }
 
 
         /// <summary>

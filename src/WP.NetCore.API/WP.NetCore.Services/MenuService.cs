@@ -23,6 +23,18 @@ namespace WP.NetCore.Services
             this.mapper = mapper;
         }
 
+
+        /// <summary>
+        /// 获取所有页面菜单
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<PageMenuViewModel>> GetPageMenuListAsync()
+        {
+            var list = await baseRepository.GetAllAsync(x => !x.IsButton,x=>x.Sort, true);
+            return mapper.Map<List<PageMenuViewModel>>(list);
+        }
+
+
         /// <summary>
         /// 获取菜单列表
         /// </summary>
@@ -46,6 +58,12 @@ namespace WP.NetCore.Services
 
         }
 
+        /// <summary>
+        /// 获取子级菜单
+        /// </summary>
+        /// <param name="listMenu"></param>
+        /// <param name="parentId"></param>
+        /// <returns></returns>
         private List<MenuViewModel> GetMenuChildren(List<MenuViewModel> listMenu, long parentId)
         {
             List<MenuViewModel> listModel = new List<MenuViewModel>();

@@ -7,7 +7,7 @@
       </span>
     </el-card>
     <el-table :data="dataList" style="width: 100%; margin-top: 10px">
-      <el-table-column prop="Id" label="Id"></el-table-column>
+      <!-- <el-table-column prop="Id" label="Id"></el-table-column> -->
       <!-- <el-table-column prop="Avatar" label="头像"></el-table-column> -->
       <el-table-column prop="UserName" label="用户名"></el-table-column>
       <el-table-column prop="Name" label="名称"></el-table-column>

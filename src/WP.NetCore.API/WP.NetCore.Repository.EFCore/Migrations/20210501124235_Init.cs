@@ -21,8 +21,6 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                     DeleteTime = table.Column<DateTime>(nullable: true),
                     IsDelete = table.Column<bool>(nullable: false),
                     Title = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Path = table.Column<string>(nullable: true),
                     Component = table.Column<string>(nullable: true),
                     ParentId = table.Column<long>(nullable: true),
                     IsHidden = table.Column<bool>(nullable: false),
@@ -144,20 +142,21 @@ namespace WP.NetCore.Repository.EFCore.Migrations
 
             migrationBuilder.InsertData(
                 table: "Menu",
-                columns: new[] { "Id", "Component", "CreateBy", "CreateTime", "DeleteTime", "Icon", "IsButton", "IsDelete", "IsHidden", "ModifyBy", "ModifyTime", "Name", "ParentId", "Path", "Sort", "Title" },
+                columns: new[] { "Id", "Component", "CreateBy", "CreateTime", "DeleteTime", "Icon", "IsButton", "IsDelete", "IsHidden", "ModifyBy", "ModifyTime", "ParentId", "Sort", "Title" },
                 values: new object[,]
                 {
-                    { 1L, "user/index", null, new DateTime(2021, 2, 18, 22, 57, 32, 565, DateTimeKind.Local).AddTicks(5732), null, "el-icon-lightning", false, false, false, null, null, "user", 0L, "/user", 1, "用户管理" },
-                    { 2L, "role/index", null, new DateTime(2021, 2, 18, 22, 57, 32, 565, DateTimeKind.Local).AddTicks(9087), null, "el-icon-heavy-rain", false, false, false, null, null, "role", 0L, "/role", 2, "角色管理" },
-                    { 3L, null, null, new DateTime(2021, 2, 18, 22, 57, 32, 565, DateTimeKind.Local).AddTicks(9103), null, "nested", false, false, false, null, null, "nested", 0L, "/nested", 3, "多级" },
-                    { 4L, "nested/menu1/index", null, new DateTime(2021, 2, 18, 22, 57, 32, 565, DateTimeKind.Local).AddTicks(9636), null, "lightning", false, false, false, null, null, "menu1", 3L, "/menu1", 1, "子级11" },
-                    { 5L, "nested/menu2/index", null, new DateTime(2021, 2, 18, 22, 57, 32, 565, DateTimeKind.Local).AddTicks(9642), null, "lightning", false, false, false, null, null, "menu2", 3L, "/menu2", 2, "子级22" }
+                    { 1L, "user/index", null, new DateTime(2021, 5, 1, 20, 42, 34, 477, DateTimeKind.Local).AddTicks(311), null, "el-icon-lightning", false, false, false, null, null, 0L, 1, "用户管理" },
+                    { 2L, "role/index", null, new DateTime(2021, 5, 1, 20, 42, 34, 477, DateTimeKind.Local).AddTicks(1988), null, "el-icon-heavy-rain", false, false, false, null, null, 0L, 2, "角色管理" },
+                    { 6L, "menu/index", null, new DateTime(2021, 5, 1, 20, 42, 34, 477, DateTimeKind.Local).AddTicks(1997), null, "el-icon-heavy-rain", false, false, false, null, null, 0L, 2, "菜单管理" },
+                    { 3L, null, null, new DateTime(2021, 5, 1, 20, 42, 34, 477, DateTimeKind.Local).AddTicks(1999), null, "nested", false, false, false, null, null, 0L, 3, "多级" },
+                    { 4L, "nested/menu1/index", null, new DateTime(2021, 5, 1, 20, 42, 34, 477, DateTimeKind.Local).AddTicks(2448), null, "lightning", false, false, false, null, null, 3L, 1, "子级11" },
+                    { 5L, "nested/menu2/index", null, new DateTime(2021, 5, 1, 20, 42, 34, 477, DateTimeKind.Local).AddTicks(2464), null, "lightning", false, false, false, null, null, 3L, 2, "子级22" }
                 });
 
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "Avatar", "CreateBy", "CreateTime", "DeleteTime", "IsDelete", "IsEnable", "ModifyBy", "ModifyTime", "Name", "Password", "Sex", "UserName" },
-                values: new object[] { 15167852569281536L, null, null, new DateTime(2021, 2, 18, 22, 57, 32, 561, DateTimeKind.Local).AddTicks(9876), null, false, true, null, null, "系统管理员", "670b14728ad9902aecba32e22fa4f6bd", 1, "admin" });
+                values: new object[] { 15269641477407744L, null, null, new DateTime(2021, 5, 1, 20, 42, 34, 473, DateTimeKind.Local).AddTicks(7573), null, false, true, null, null, "系统管理员", "670b14728ad9902aecba32e22fa4f6bd", 1, "admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_MenuRole_MenuId",

@@ -74,7 +74,7 @@ namespace WP.NetCore.API.Controllers
         public async Task<ResponseResult> Put([FromBody] UpdateRoleDto userDto)
         {
             var objUser = mapper.Map<Role>(userDto);
-            objUser.CreateBy = GetToken().Id;
+            objUser.ModifyBy = GetToken().Id;
             await roleService.UpdateAsync(objUser);
             return new ResponseResult().Success();
         }

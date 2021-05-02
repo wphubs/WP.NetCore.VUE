@@ -16,6 +16,9 @@ namespace WP.NetCore.API.AutoMapper
         {
             CreateMap<Menu, MenuViewModel>();
             CreateMap<AddMenuDto, Menu>();
+            CreateMap<UpdateMenuDto, Menu>();
+            CreateMap<Menu, PageMenuViewModel>();
+            
         }
     }
 }

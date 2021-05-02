@@ -93,6 +93,10 @@ namespace WP.NetCore.Repository.EFCore
                 {
                     Id=2,Title="角色管理",Component="role/index",Icon="el-icon-heavy-rain",Sort=2,
                 },
+                  new Menu()
+                {
+                    Id=6,Title="菜单管理",Component="menu/index",Icon="el-icon-heavy-rain",Sort=2,
+                },
                 new Menu()
                 {
                     Id=3,Title="多级",ParentId=0,Icon="nested",Sort=3,

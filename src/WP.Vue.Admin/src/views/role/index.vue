@@ -11,7 +11,7 @@
       </span>
     </el-card>
     <el-table :data="dataList" style="width: 100%;margin-top: 10px;">
-      <el-table-column prop="Id" label="Id"></el-table-column>
+      <!-- <el-table-column prop="Id" label="Id"></el-table-column> -->
       <!-- <el-table-column prop="Avatar" label="头像"></el-table-column> -->
       <el-table-column prop="RoleName" label="角色"></el-table-column>
       <el-table-column prop="CreateTime" label="创建时间"></el-table-column>
