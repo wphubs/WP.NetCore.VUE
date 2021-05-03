@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,14 +10,22 @@ namespace WP.NetCore.Model.Dto.Menu
     public class UpdateMenuDto
     {
 
+        [Required(ErrorMessage = "ID不能为空")]
         public long Id { get; set; }
 
+        [Required(ErrorMessage = "名称不能为空")]
         public string Title { get; set; }
 
 
         /// <summary>
+        /// 接口地址
+        /// </summary>
+        public string Url { get; set; }
+
+        /// <summary>
         /// 页面路径
         /// </summary>
+        [Required(ErrorMessage = "组件/事件不能为空")]
         public string Component { get; set; }
 
 

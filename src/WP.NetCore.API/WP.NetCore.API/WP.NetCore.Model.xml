@@ -9,6 +9,11 @@
             页面路径
             </summary>
         </member>
+        <member name="P:WP.NetCore.Model.Dto.Menu.AddMenuDto.Url">
+            <summary>
+            接口地址
+            </summary>
+        </member>
         <member name="P:WP.NetCore.Model.Dto.Menu.AddMenuDto.ParentId">
             <summary>
             父ID
@@ -32,6 +37,11 @@
         <member name="P:WP.NetCore.Model.Dto.Menu.AddMenuDto.Sort">
             <summary>
             排序
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Dto.Menu.UpdateMenuDto.Url">
+            <summary>
+            接口地址
             </summary>
         </member>
         <member name="P:WP.NetCore.Model.Dto.Menu.UpdateMenuDto.Component">
@@ -132,6 +142,11 @@
         <member name="P:WP.NetCore.Model.EntityModel.Menu.Component">
             <summary>
             页面路径
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.EntityModel.Menu.Url">
+            <summary>
+            接口地址
             </summary>
         </member>
         <member name="P:WP.NetCore.Model.EntityModel.Menu.ParentId">
@@ -262,6 +277,11 @@
         <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.Component">
             <summary>
             页面路径
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.Url">
+            <summary>
+            接口地址
             </summary>
         </member>
         <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.IsHidden">

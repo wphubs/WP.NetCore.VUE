@@ -83,23 +83,41 @@ namespace WP.NetCore.Repository.EFCore
                 Sex = 1,
             });
 
+            modelBuilder.Entity<Role>().HasData(new Role() 
+            {
+                RoleName="系统管理员",
+                Id = new Snowflake().GetId(),
+            });
+
             modelBuilder.Entity<Menu>().HasData(new List<Menu>()
             {
                 new Menu()
                 {
                     Id=1,Title="用户管理",Component="user/index",Icon="el-icon-lightning",Sort=1,
                 },
+                 new Menu()
+                {
+                    Id=9,Title="新增",Component="addUser",ParentId=1,IsButton=true,
+                },
+                     new Menu()
+                {
+                    Id=7,Title="修改",Component="editUser",ParentId=1,IsButton=true,
+                },
+                         new Menu()
+                {
+                    Id=8,Title="删除",Component="deleteUser",ParentId=1,IsButton=true,
+                },
                 new Menu()
                 {
                     Id=2,Title="角色管理",Component="role/index",Icon="el-icon-heavy-rain",Sort=2,
                 },
-                  new Menu()
+                new Menu()
                 {
                     Id=6,Title="菜单管理",Component="menu/index",Icon="el-icon-heavy-rain",Sort=2,
                 },
                 new Menu()
                 {
-                    Id=3,Title="多级",ParentId=0,Icon="nested",Sort=3,
+                    Id=3,Title="多级",Component="nested",ParentId=0,Icon="nested",Sort=3,
                 },
                 new Menu()
                 {

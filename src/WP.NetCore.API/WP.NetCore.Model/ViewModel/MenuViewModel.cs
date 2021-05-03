@@ -24,6 +24,11 @@ namespace WP.NetCore.Model.ViewModel
 
 
         /// <summary>
+        /// 接口地址
+        /// </summary>
+        public string Url { get; set; }
+
+        /// <summary>
         /// 是否隐藏
         /// </summary>
         public bool IsHidden { get; set; } = false;

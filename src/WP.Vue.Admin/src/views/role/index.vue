@@ -15,8 +15,10 @@
       <!-- <el-table-column prop="Avatar" label="头像"></el-table-column> -->
       <el-table-column prop="RoleName" label="角色"></el-table-column>
       <el-table-column prop="CreateTime" label="创建时间"></el-table-column>
-      <el-table-column label="操作" width="150">
+      <el-table-column label="操作" width="250">
         <template slot-scope="scope">
+          <el-button @click="clickSetRole(scope.row)" icon="el-icon-setting" size="small" type="primary"
+          >权限</el-button>
           <el-button @click="clickEdit(scope.row)" size="small" type="warning"
             >编辑</el-button>
           <el-button  size="small" type="danger"  @click="clickDelete(scope.row)">删除</el-button>
@@ -53,10 +55,34 @@
         </el-form-item>
       </el-form>
     </el-dialog>
+
+    <el-dialog title="权限设置" :visible.sync="dialogRoleVisible" width="500px">
+      <el-tree
+      :data="dataTree"
+      show-checkbox
+      node-key="Id"  ref="tree"
+      default-expand-all   :props="props"
+      :expand-on-click-node="false">
+      <span class="custom-tree-node" slot-scope="{ node, data }">
+        <span >{{ node.label }}</span>
+        <span style="padding: 20px;">
+          <el-tag v-if="data.IsButton" type="warning">按钮</el-tag>
+          <el-tag v-else   type="success">页面</el-tag>
+        </span>
+      </span>
+    </el-tree>
+    <span slot="footer" class="dialog-footer" style="padding-right: 30px;">
+      <el-button @click="dialogVisible = false">取 消</el-button>
+      <el-button type="primary" @click="clickSaveRole()">确 定</el-button>
+    </span>
+    </el-dialog>
+
+
   </div>
 </template>
 <script>
 import { getPage, addRole, updateRole,deleteRole } from "@/api/role";
+import { getAll} from "@/api/menu";
 import md5 from 'js-md5'
 export default {
   components: {},
@@ -71,18 +97,31 @@ export default {
           { required: true, message: "请输入角色名", trigger: "blur" },
         ],
       },
+      props: {
+          label: 'Title',
+          children: 'children'
+      },
+      dataTree:[],
       dataList: [],
       currentPage: 1,
       pageSize: 10,
       total: 0,
       dialogVisible: false,
+      dialogRoleVisible:false
     };
   },
   computed: {},
   created() {
     this.refreshData();
+    this.getRoleTreeData();
   },
   methods: {
+    clickSaveRole(){
+      console.log(this.$refs.tree.getCheckedKeys());
+    },
+    clickSetRole(row){
+      this.dialogRoleVisible=true;
+    },
     clickDelete(row){
           deleteRole({Id:row.Id}).then((res) => {
               this.$message({
@@ -95,6 +134,7 @@ export default {
     clickAdd() {
       this.roleForm = { Id: "",RoleName: ""};
       this.dialogVisible = true;
+
     },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
@@ -139,10 +179,15 @@ export default {
       this.currentPage = val;
       this.refreshData();
     },
+    getRoleTreeData() {
+        getAll().then((res) => {
+          console.log("getAll:" + JSON.stringify(res));
+          this.dataTree = res;
+        });
+      },
     refreshData() {
       getPage({ pageIndex: this.currentPage, pageSize: this.pageSize }).then(
         (res) => {
-          console.log("getList:" + JSON.stringify(res));
           this.dataList = [];
           this.dataList = res.Data;
           this.total = res.Total;
@@ -155,5 +200,22 @@ export default {
 };
 </script>
 <style>
-
+ .custom-tree-node {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 15px;
+    padding-right: 8px;
+  }
+  .el-tree-node__content {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 35px;
+    cursor: pointer;
+}
 </style>

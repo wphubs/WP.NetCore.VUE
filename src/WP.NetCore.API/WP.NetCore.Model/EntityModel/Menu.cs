@@ -19,6 +19,10 @@ namespace WP.NetCore.Model.EntityModel
         /// </summary>
         public string Component { get; set; }
 
+        /// <summary>
+        /// 接口地址
+        /// </summary>
+        public string Url { get; set; }
 
         /// <summary>
         /// 父ID

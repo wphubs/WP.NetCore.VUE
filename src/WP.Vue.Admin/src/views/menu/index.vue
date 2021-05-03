@@ -15,7 +15,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="Component" label="组件/事件"> </el-table-column>
-      <el-table-column label="API地址"> </el-table-column>
+      <el-table-column prop="Url" label="API地址"> </el-table-column>
       <el-table-column prop="IsButton" label="页面/按钮">
         <template slot-scope="scope">
           <el-tag v-if="scope.row.IsButton" type="warning">按钮</el-tag>
