@@ -9,5 +9,7 @@ namespace WP.NetCore.Model.EntityModel
         public string RoleName { get; set; }
 
         public ICollection<UserRole> UserRoles { get; set; }
+
+        public ICollection<MenuRole> MenuRoles { get; set; }
     }
 }

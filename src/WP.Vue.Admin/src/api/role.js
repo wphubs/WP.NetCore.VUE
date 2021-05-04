@@ -9,6 +9,14 @@ export function addRole(data) {
   })
 }
 
+export function setRoleMenu(data) {
+  return request({
+    url: 'role/SetRoleMenu',
+    method: 'post',
+    data
+  })
+}
+
 export function updateRole(data) {
   return request({
     url: 'role',

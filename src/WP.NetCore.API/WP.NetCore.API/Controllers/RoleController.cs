@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WP.NetCore.IServices;
 using WP.NetCore.Model;
+using WP.NetCore.Model.Dto.Menu;
 using WP.NetCore.Model.Dto.Role;
 using WP.NetCore.Model.EntityModel;
 
@@ -64,6 +65,21 @@ namespace WP.NetCore.API.Controllers
             await roleService.AddAsync(objUser);
             return new ResponseResult().Success();
         }
+
+        /// <summary>
+        /// 设置角色菜单
+        /// </summary>
+        /// <param name="userDto"></param>
+        /// <returns></returns>
+        [HttpPost("SetRoleMenu")]
+        public async Task<ResponseResult> SetRoleMenu([FromBody] AddRoleMenuDto userDto)
+        {
+            userDto.CreateBy = GetToken().Id;
+            await roleService.SetRoleMenu(userDto);
+            return new ResponseResult().Success();
+        }
+
+
 
         /// <summary>
         /// 修改角色

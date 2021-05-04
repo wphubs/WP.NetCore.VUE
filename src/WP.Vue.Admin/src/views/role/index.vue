@@ -81,7 +81,7 @@
   </div>
 </template>
 <script>
-import { getPage, addRole, updateRole,deleteRole } from "@/api/role";
+import { getPage, addRole, updateRole,deleteRole,setRoleMenu } from "@/api/role";
 import { getAll} from "@/api/menu";
 import md5 from 'js-md5'
 export default {
@@ -107,7 +107,8 @@ export default {
       pageSize: 10,
       total: 0,
       dialogVisible: false,
-      dialogRoleVisible:false
+      dialogRoleVisible:false,
+      currentData:{},
     };
   },
   computed: {},
@@ -117,9 +118,18 @@ export default {
   },
   methods: {
     clickSaveRole(){
-      console.log(this.$refs.tree.getCheckedKeys());
+      var params={RoleId:this.currentData.Id,MenuId:this.$refs.tree.getCheckedKeys()};
+      console.log(JSON.stringify(params));
+      setRoleMenu(params).then((res) => {
+              this.$message({
+                message: "保存成功",
+                type: "success",
+              });
+              this.refreshData();
+            });
     },
     clickSetRole(row){
+      this.currentData=row;
       this.dialogRoleVisible=true;
     },
     clickDelete(row){

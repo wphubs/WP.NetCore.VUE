@@ -92,6 +92,7 @@ namespace WP.NetCore.Services
             catch (Exception ex)
             {
                 await uow.RollbackAsync();
+                throw;
             }
         }
 

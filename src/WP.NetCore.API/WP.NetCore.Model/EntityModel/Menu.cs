@@ -48,5 +48,7 @@ namespace WP.NetCore.Model.EntityModel
         /// 排序
         /// </summary>
         public int Sort { get; set; } = 0;
+
+        public ICollection<MenuRole> UserRoles { get; set; }
     }
 }

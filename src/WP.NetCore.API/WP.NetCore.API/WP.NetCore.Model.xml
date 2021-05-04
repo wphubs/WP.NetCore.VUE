@@ -39,6 +39,11 @@
             排序
             </summary>
         </member>
+        <member name="P:WP.NetCore.Model.Dto.Menu.AddRoleMenuDto.RoleId">
+            <summary>
+            角色id
+            </summary>
+        </member>
         <member name="P:WP.NetCore.Model.Dto.Menu.UpdateMenuDto.Url">
             <summary>
             接口地址
