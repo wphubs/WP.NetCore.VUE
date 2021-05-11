@@ -22,7 +22,7 @@ namespace WP.NetCore.Services
         /// <returns></returns>
         public async Task<TEntity> AddAsync(TEntity entity)
         {
-            entity.Id = new Snowflake().GetId();
+            entity.Id = new Snowflake().NextId();
             return await baseDal.AddAsync(entity);
         }
 

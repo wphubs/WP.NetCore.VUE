@@ -37,11 +37,11 @@ namespace WP.NetCore.Services
                 await uow.BeginAsync();
                 var role = await baseRepository.FirstAsync(dto.RoleId);
                 List<MenuRole> listAdd = new List<MenuRole>();
-
+                var idwork = new Snowflake();
                 dto.MenuId.ForEach(async item =>
                 {
                     var menu = await menuRepository.FirstAsync(item);
-                    listAdd.Add(new MenuRole() { RoleId= dto.RoleId, MenuId= item, Id = new Snowflake().GetId(),CreateBy=dto.CreateBy });
+                    listAdd.Add(new MenuRole() { RoleId= dto.RoleId, MenuId= item, Id = idwork.NextId(),CreateBy=dto.CreateBy });
                     //.Add(new MenuRole() { Menu=menu});
                 });
                 await uow.DbContext.AddRangeAsync(listAdd.AsEnumerable());

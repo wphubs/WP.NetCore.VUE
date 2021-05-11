@@ -77,13 +77,13 @@ namespace WP.NetCore.Services
             {
 
                 var listUser = await baseRepository.GetPageAsync(x => x.IsDelete == false, x => x.CreateTime, 1, 11);
-
+                var idWork = new Snowflake();
                 await uow.BeginAsync();
-                objUser.Id = new Snowflake().GetId();
+                objUser.Id = idWork.NextId();
                 List<UserRole> listAdd = new List<UserRole>();
                 listRoles.ForEach(item =>
                 {
-                    listAdd.Add(new UserRole() { Id = new Snowflake().GetId(), RoleId = item, UserId = objUser.Id });
+                    listAdd.Add(new UserRole() { Id = idWork.NextId(), RoleId = item, UserId = objUser.Id });
                 });
                 await uow.DbContext.AddAsync(objUser);
                 await uow.DbContext.AddRangeAsync(listAdd.AsEnumerable());
@@ -111,7 +111,7 @@ namespace WP.NetCore.Services
                 List<UserRole> listAdd = new List<UserRole>();
                 listRoles.ForEach(item =>
                 {
-                    listAdd.Add(new UserRole() { Id = new Snowflake().GetId(), RoleId = item, UserId = objUser.Id });
+                    listAdd.Add(new UserRole() { Id = new Snowflake().NextId(), RoleId = item, UserId = objUser.Id });
                 });
                 await baseRepository.UpdateAsync(objUser);
                 var listUserRole = await userRoleRepository.GetAllAsync(x => x.UserId == objUser.Id);

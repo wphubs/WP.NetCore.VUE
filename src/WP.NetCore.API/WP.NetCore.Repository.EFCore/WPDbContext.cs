@@ -73,10 +73,10 @@ namespace WP.NetCore.Repository.EFCore
             //    new Role(){Id= new Snowflake().GetId(),RoleName="系统管理员" },
             //    new Role(){Id= new Snowflake().GetId(),RoleName="测试测试" }
             //});
-
+            var idWork=new Snowflake();
             modelBuilder.Entity<User>().HasData(new User()
             {
-                Id = new Snowflake().GetId(),
+                Id = idWork.NextId(),
                 UserName = "admin",
                 Name = "系统管理员",
                 Password = "670b14728ad9902aecba32e22fa4f6bd",
@@ -86,7 +86,7 @@ namespace WP.NetCore.Repository.EFCore
             modelBuilder.Entity<Role>().HasData(new Role() 
             {
                 RoleName="系统管理员",
-                Id = new Snowflake().GetId(),
+                Id = idWork.NextId(),
             });
 
             modelBuilder.Entity<Menu>().HasData(new List<Menu>()

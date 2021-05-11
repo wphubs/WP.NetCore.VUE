@@ -31,7 +31,7 @@ namespace WP.NetCore.Common.Helper
             Snowflake.workerId = workerId;
         }
 
-        public long GetId()
+        public long NextId()
         {
             lock (this)
             {
