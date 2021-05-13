@@ -17,6 +17,16 @@ export function setRoleMenu(data) {
   })
 }
 
+
+export function getRoleMenu(params) {
+  return request({
+    url: 'role/GetRoleMenu',
+    method: 'get',
+    params
+  })
+}
+
+
 export function updateRole(data) {
   return request({
     url: 'role',

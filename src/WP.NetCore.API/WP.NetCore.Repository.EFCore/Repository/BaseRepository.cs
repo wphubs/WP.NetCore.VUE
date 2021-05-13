@@ -209,6 +209,8 @@ namespace WP.NetCore.Repository.EFCore
                 await SaveAsync();
             }
         }
+
+
         public async Task DeleteAsync(TEntity entity)
         {
             await DeleteAsync(entity.Id);

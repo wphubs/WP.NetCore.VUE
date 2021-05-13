@@ -79,6 +79,19 @@ namespace WP.NetCore.API.Controllers
             return new ResponseResult().Success();
         }
 
+        /// <summary>
+        /// 获取角色菜单
+        /// </summary>
+        /// <param name="roleId"></param>
+        /// <returns></returns>
+        [HttpGet("GetRoleMenu")]
+        public async Task<ResponseResult> GetRoleMenu(long roleId)
+        {
+            var listMenu = await roleService.GetRoleMenu(roleId);
+            return new ResponseResult().Success(listMenu);
+        }
+
+
 
 
         /// <summary>
