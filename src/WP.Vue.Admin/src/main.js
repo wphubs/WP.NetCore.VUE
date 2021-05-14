@@ -15,27 +15,15 @@ import router from './router'
 // import '@/icons' // icon
 // import '@/permission' // permission control
 import './icons' // icon
-import './permission' // permission control
+import './permission'
 import './utils/error-log' // error log
+import has from './utils/directive.js'
 
-/**
- * If you don't want to use mock-server
- * you want to use MockJs for mock api
- * you can execute: mockXHR()
- *
- * Currently MockJs will be used in the production environment,
- * please remove it before going online ! ! !
- */
 if (process.env.NODE_ENV === 'production') {
   const { mockXHR } = require('../mock')
   mockXHR()
 }
-
-// set ElementUI lang to EN
 Vue.use(ElementUI)
-// 如果想要中文版 element-ui，按如下方式声明
-// Vue.use(ElementUI)
-
 Vue.config.productionTip = false
 
 new Vue({
