@@ -29,6 +29,9 @@ using WP.NetCore.Common;
 using WP.NetCore.Repository.EFCore;
 using WP.NetCore.IServices;
 using WP.NetCore.Services;
+using WP.NetCore.API.AuthHelper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 //using WP.NetCore.IServices;
 //using WP.NetCore.Services;
 
@@ -55,7 +58,6 @@ namespace WP.NetCore.API
             services.AddSingleton(new Appsettings(Env.ContentRootPath));
             #endregion
 
-    
             #region Redis
             services.AddSingleton<IRedisCacheManager, RedisCacheManager>();
             #endregion
@@ -147,6 +149,12 @@ namespace WP.NetCore.API
                 ClockSkew = TimeSpan.FromSeconds(30),
                 RequireExpirationTime = true,
             };
+            PermissionRequirement permissionRequirement = new PermissionRequirement();
+
+            //listPermission.Add(n);
+            services.AddAuthorization(option => {
+                option.AddPolicy("Permission", policy => policy.AddRequirements(permissionRequirement));
+            });
 
             services.AddAuthentication(o =>
             {
@@ -170,6 +178,11 @@ namespace WP.NetCore.API
                      }
                  };
              });
+
+    
+            services.AddSingleton<IAuthorizationHandler, PermissionHandler>();
+            services.AddSingleton(permissionRequirement);
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             #endregion
 
             #region AddControllers
