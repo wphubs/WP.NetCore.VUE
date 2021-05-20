@@ -32,6 +32,7 @@ namespace WP.NetCore.API.AuthHelper
              //过期时间，目前是过期1000秒，可自定义
              new Claim (JwtRegisteredClaimNames.Exp,$"{new DateTimeOffset(DateTime.Now.AddHours(24)).ToUnixTimeSeconds()}"),
              new Claim(ClaimTypes.Expiration, DateTime.Now.AddHours(24).ToString()),
+             new Claim(ClaimTypes.Role,tokenModel.Role),
              new Claim(JwtRegisteredClaimNames.Iss,iss),
              new Claim(JwtRegisteredClaimNames.Aud,aud),
             };
@@ -48,6 +49,7 @@ namespace WP.NetCore.API.AuthHelper
             var jwt = new JwtSecurityToken(
                 issuer: iss,
                 claims: claims,
+                
                 signingCredentials: creds);
 
             var jwtHandler = new JwtSecurityTokenHandler();

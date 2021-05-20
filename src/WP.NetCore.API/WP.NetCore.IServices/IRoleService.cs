@@ -24,5 +24,8 @@ namespace WP.NetCore.IServices
         /// <param name="dto"></param>
         /// <returns></returns>
         Task SetRoleMenu(AddRoleMenuDto dto);
+
+
+        Task<List<string>> GetRolePermission(long roleId);
     }
 }

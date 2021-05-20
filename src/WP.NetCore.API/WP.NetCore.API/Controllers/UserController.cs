@@ -33,7 +33,7 @@ namespace WP.NetCore.API.Controllers
 
 
         /// <summary>
-        /// 获取用户信息
+        /// 获取用户信息  
         /// </summary>
         /// <returns></returns>
         [Route("GetUserInfo")]
@@ -50,7 +50,7 @@ namespace WP.NetCore.API.Controllers
         /// </summary>
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
-        /// <returns></returns>
+        /// <returns></returns>        [Authorize("Permission")]
         [HttpGet]
         [Authorize("Permission")]
         public async Task<ResponseResult> Get(int pageIndex,int pageSize) 

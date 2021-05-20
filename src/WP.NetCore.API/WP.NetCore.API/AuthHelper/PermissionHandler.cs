@@ -5,16 +5,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using WP.NetCore.IServices;
 
 namespace WP.NetCore.API.AuthHelper
 {
     public class PermissionHandler : AuthorizationHandler<PermissionRequirement>
     {
         private readonly IHttpContextAccessor contextAccessor;
+        private readonly IRoleService roleService;
 
-        public PermissionHandler(IHttpContextAccessor contextAccessor)
+        public PermissionHandler(IHttpContextAccessor contextAccessor, IRoleService roleService)
         {
             this.contextAccessor = contextAccessor;
+            this.roleService = roleService;
         }
 
         protected override async Task HandleRequirementAsync(AuthorizationHandlerContext context, PermissionRequirement requirement)
@@ -22,19 +25,22 @@ namespace WP.NetCore.API.AuthHelper
 
             var questUrl = contextAccessor.HttpContext.Request.Path.Value.ToLower();
             var quertType=contextAccessor.HttpContext.Request.Method.ToLower();
+            var currentUserRoles = (from item in contextAccessor.HttpContext.User.Claims select item.Value).ToList();
             foreach (var t in context.User.Identities)
             {
                 foreach (var claim in t.Claims)
                 {
-                    //通过Type可以判断声明的类型，这里处理role的声明获取角色信息
-                    if (claim.Type == ClaimTypes.Role)
+                    if (claim.Type == "Role")
                     {
                         var role = claim.Value;
-                        //if (roles.Exists(x => x.Urls.Exists(role => role == claim.Value) && x.Url == resource.RawText.ToLower()))
-                        //{
-                          context.Succeed(requirement);
+                        ///api/user/get
+                        ///
+                        var listPermission = await roleService.GetRolePermission(Convert.ToInt64(role));
+                        if (listPermission.Contains($"{questUrl}/{quertType}"))
+                        {
+                            context.Succeed(requirement);
                            return;
-                        //}
+                        }
                     }
                 }
             }

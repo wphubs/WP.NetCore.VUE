@@ -16,16 +16,18 @@ namespace WP.NetCore.Services
     public class RoleService:BaseService<Role>,IRoleService
     {
         private readonly IBaseRepository<Role> baseRepository;
+        private readonly WPDbContext dbContext;
         private readonly IBaseRepository<Menu> menuRepository;
         private readonly IBaseRepository<MenuRole> menuRoleRepository;
         private readonly IMapper mapper;
         private readonly IUnitOfWork uow;
 
-        public RoleService(IBaseRepository<Role> baseRepository, IBaseRepository<Menu> menuRepository, IBaseRepository<MenuRole> menuRoleRepository, IMapper mapper, IUnitOfWork uow)
+        public RoleService(IBaseRepository<Role> baseRepository, WPDbContext dbContext, IBaseRepository<Menu> menuRepository, IBaseRepository<MenuRole> menuRoleRepository, IMapper mapper, IUnitOfWork uow)
         {
 
             this.baseDal = baseRepository;
             this.baseRepository = baseRepository;
+            this.dbContext = dbContext;
             this.menuRepository = menuRepository;
             this.menuRoleRepository = menuRoleRepository;
             this.mapper = mapper;
@@ -75,6 +77,17 @@ namespace WP.NetCore.Services
                 await uow.RollbackAsync();
                 throw;
             }
+        }
+
+
+        public async Task<List<string>> GetRolePermission(long roleId)
+        {
+            var objList = await dbContext.MenuRole.Join(dbContext.Menu, menuRole => menuRole.MenuId,
+                menu => menu.Id, (menuRole, menu) => new {Url = menu.Url,Role=menuRole.RoleId,IsDelete=menuRole.IsDelete })
+                .Where(x=>x.Role==roleId&&x.IsDelete==false).ToListAsync();
+            var list = from menu in objList select menu.Url;
+            return list.ToList(); 
+
         }
     }
 }
