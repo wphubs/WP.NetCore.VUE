@@ -9,9 +9,9 @@ export function addRole(data) {
   })
 }
 
-export function setRoleMenu(data) {
+export function setPermission(data) {
   return request({
-    url: 'role/SetRoleMenu',
+    url: 'role/setPermission',
     method: 'post',
     data
   })
@@ -46,14 +46,23 @@ export function deleteRole(params) {
 
 export function getPage(params) {
   return request({
-    url: 'role/GetPage',
+    url: 'role',
     method: 'get',
     params
   })
 }
-export function getAll(params) {
+
+
+export function getAll() {
   return request({
-    url: 'role',
+    url: 'role/getAll',
+    method: 'get',
+  })
+}
+
+export function getPermission(params) {
+  return request({
+    url: 'role/GetPermission',
     method: 'get',
     params
   })

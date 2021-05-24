@@ -97,11 +97,10 @@ import {
   addRole,
   updateRole,
   deleteRole,
-  setRoleMenu,
+  setPermission,
   getRoleMenu,
+  getPermission
 } from "@/api/role";
-import { getAll } from "@/api/menu";
-import md5 from "js-md5";
 export default {
   components: {},
   data() {
@@ -142,7 +141,7 @@ export default {
         MenuId: this.$refs.tree.getCheckedKeys(),
       };
       console.log(JSON.stringify(params));
-      setRoleMenu(params).then((res) => {
+      setPermission(params).then((res) => {
         this.$message({
           message: "保存成功",
           type: "success",
@@ -153,9 +152,10 @@ export default {
     },
     clickSetRole(row) {
       this.currentData = row;
-      getRoleMenu({roleId:row.Id}).then((res) => {
+      getPermission({roleId:row.Id}).then((res) => {
         console.log(JSON.stringify(res));
-        this.currentRoleMenu=res;
+        this.dataTree = res[0];
+        this.currentRoleMenu=res[1];
         this.dialogRoleVisible = true;
       });
     },
@@ -216,10 +216,10 @@ export default {
       this.refreshData();
     },
     getRoleTreeData() {
-      getAll().then((res) => {
-        console.log("getAll:" + JSON.stringify(res));
-        this.dataTree = res;
-      });
+      // getPermission().then((res) => {
+      //   console.log("getPermission:" + JSON.stringify(res));
+      //   this.dataTree = res;
+      // });
     },
     refreshData() {
       getPage({ pageIndex: this.currentPage, pageSize: this.pageSize }).then(

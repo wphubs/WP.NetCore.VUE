@@ -33,8 +33,6 @@ namespace WP.NetCore.API.AuthHelper
                     if (claim.Type == "Role")
                     {
                         var role = claim.Value;
-                        ///api/user/get
-                        ///
                         var listPermission = await roleService.GetRolePermission(Convert.ToInt64(role));
                         if (listPermission.Contains($"{questUrl}/{quertType}"))
                         {

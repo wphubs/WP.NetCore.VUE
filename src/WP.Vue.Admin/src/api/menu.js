@@ -25,22 +25,17 @@ export function updateMenu(data) {
   })
 }
 
-
-export function getAll(params) {
+export function getMenuTree(params) {
   return request({
-    url: 'menu',
+    url: 'menu/getMenuTree',
     method: 'get',
     params
   })
 }
 
-
-
-
-
-export function getPageMenuList(params) {
+export function getList(params) {
   return request({
-    url: 'menu/GetPageMenuList',
+    url: 'menu',
     method: 'get',
     params
   })

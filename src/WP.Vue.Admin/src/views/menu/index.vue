@@ -82,7 +82,7 @@
 </template>
 
 <script>
-  import { getAll, addMenu, getPageMenuList,updateMenu,deleteMenu } from "@/api/menu";
+  import { getMenuTree, addMenu, getList,updateMenu,deleteMenu } from "@/api/menu";
   export default {
     //注入组件
     components: {},
@@ -192,13 +192,13 @@
         this.dialogVisible = true;
       },
       refreshData() {
-        getAll().then((res) => {
+        getMenuTree().then((res) => {
           console.log("getList:" + JSON.stringify(res));
           this.dataList = res;
         });
       },
       getPageMenuList() {
-        getPageMenuList().then((res) => {
+        getList().then((res) => {
           console.log("pageMenu:" + JSON.stringify(res));
           this.pageMenu = res;
         });

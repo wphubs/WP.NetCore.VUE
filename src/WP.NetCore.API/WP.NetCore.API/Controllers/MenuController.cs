@@ -77,8 +77,8 @@ namespace WP.NetCore.API.Controllers
         /// 获取所有页面菜单
         /// </summary>
         /// <returns></returns>
-        [HttpGet("GetPageMenuList")]
-        public async Task<ResponseResult> GetPageMenuList()
+        [HttpGet]
+        public async Task<ResponseResult> Get()
         {
             var list = await menuService.GetPageMenuListAsync();
             return new ResponseResult().Success(list); ;
@@ -89,8 +89,8 @@ namespace WP.NetCore.API.Controllers
         /// 获取菜单信息
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
-        public async Task<ResponseResult> Get()
+        [HttpGet("GetMenuTree")]
+        public async Task<ResponseResult> GetMenuTree()
         {
             var list =await menuService.GetMenuListAsync();
             return new ResponseResult().Success(list); ;

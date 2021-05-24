@@ -73,7 +73,7 @@ namespace WP.NetCore.Repository.EFCore
             //    new Role(){Id= new Snowflake().GetId(),RoleName="系统管理员" },
             //    new Role(){Id= new Snowflake().GetId(),RoleName="测试测试" }
             //});
-            var idWork=new Snowflake();
+            var idWork = new Snowflake();
             modelBuilder.Entity<User>().HasData(new User()
             {
                 Id = idWork.NextId(),
@@ -83,38 +83,93 @@ namespace WP.NetCore.Repository.EFCore
                 Sex = 1,
             });
 
-            modelBuilder.Entity<Role>().HasData(new Role() 
+            modelBuilder.Entity<Role>().HasData(new Role()
             {
-                RoleName="系统管理员",
+                RoleName = "系统管理员",
                 Id = idWork.NextId(),
             });
 
+            ///api/user/get
             modelBuilder.Entity<Menu>().HasData(new List<Menu>()
             {
                 new Menu()
                 {
                     Id=1,Title="用户管理",Component="user/index",Icon="el-icon-lightning",Sort=1,
                 },
+                new Menu()
+                {
+                    Id=idWork.NextId(),Title="查看",Url="user/get",Component="getUser",ParentId=1,IsButton=true,
+                },
                  new Menu()
                 {
-                    Id=9,Title="新增",Component="addUser",ParentId=1,IsButton=true,
+                    Id=idWork.NextId(),Title="新增",Url="user/post",Component="addUser",ParentId=1,IsButton=true,
                 },
-                     new Menu()
+                 new Menu()
                 {
-                    Id=7,Title="修改",Component="editUser",ParentId=1,IsButton=true,
+                    Id=idWork.NextId(),Title="编辑",Url="user/put",Component="editUser",ParentId=1,IsButton=true,
                 },
-                         new Menu()
+                new Menu()
                 {
-                    Id=8,Title="删除",Component="deleteUser",ParentId=1,IsButton=true,
+                    Id=idWork.NextId(),Title="删除",Url="user/delete",Component="deleteUser",ParentId=1,IsButton=true,
                 },
+
                 new Menu()
                 {
                     Id=2,Title="角色管理",Component="role/index",Icon="el-icon-heavy-rain",Sort=2,
                 },
+                  new Menu()
+                {
+                    Id=idWork.NextId(),Title="查看",Url="role/get",Component="getRole",ParentId=2,IsButton=true,
+                },
+                 new Menu()
+                {
+                    Id=idWork.NextId(),Title="新增",Url="role/post",Component="addRole",ParentId=2,IsButton=true,
+                },
+                 new Menu()
+                {
+                    Id=idWork.NextId(),Title="编辑",Url="role/put",Component="editRole",ParentId=2,IsButton=true,
+                },
+                new Menu()
+                {
+                    Id=idWork.NextId(),Title="删除",Url="role/delete",Component="deleteRole",ParentId=2,IsButton=true,
+                },
+                new Menu()
+                {
+                    Id=idWork.NextId(),Title="设置权限",Url="role/setPermission/post",Component="setPermission",ParentId=2,IsButton=true,
+                },
+                 new Menu()
+                {
+                    Id=idWork.NextId(),Title="查看权限",Url="role/getPermission/get",Component="getPermission",ParentId=2,IsButton=true,
+                },
+
+
                 new Menu()
                 {
                     Id=6,Title="菜单管理",Component="menu/index",Icon="el-icon-heavy-rain",Sort=2,
                 },
+
+                new Menu()
+                {
+                    Id=idWork.NextId(),Title="查看菜单树",Url="menu/getMenuTree/get",Component="getMenu",ParentId=6,IsButton=true,
+                },
+                 new Menu()
+                {
+                    Id=idWork.NextId(),Title="新增",Url="menu/post",Component="addMenu",ParentId=6,IsButton=true,
+                },
+                new Menu()
+                {
+                    Id=idWork.NextId(),Title="查看所有",Url="menu/get",Component="getMenu",ParentId=6,IsButton=true,
+                },
+                 new Menu()
+                {
+                    Id=idWork.NextId(),Title="编辑",Url="menu/put",Component="editMenu",ParentId=6,IsButton=true,
+                },
+                new Menu()
+                {
+                    Id=idWork.NextId(),Title="删除",Url="menu/delete",Component="deleteMenu",ParentId=6,IsButton=true,
+                },
+
+
                 new Menu()
                 {
                     Id=3,Title="多级",Component="nested",ParentId=0,Icon="nested",Sort=3,

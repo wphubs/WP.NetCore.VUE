@@ -16,16 +16,18 @@ namespace WP.NetCore.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class RoleController : BaseController
     {
         private readonly IRoleService roleService;
         private readonly IMapper mapper;
+        private readonly IMenuService menuService;
 
-        public RoleController(IRoleService roleService,IMapper mapper) 
+        public RoleController(IRoleService roleService,IMapper mapper, IMenuService menuService) 
         {
             this.roleService = roleService;
             this.mapper = mapper;
+            this.menuService = menuService;
         }
 
         /// <summary>
@@ -35,19 +37,35 @@ namespace WP.NetCore.API.Controllers
         /// <param name="pageSize"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("GetPage")]
-        public async Task<ResponseResult> GetPage(int pageIndex, int pageSize)
+        public async Task<ResponseResult> Get(int pageIndex, int pageSize)
         {
             var listUser = await roleService.GetPageListAsync(pageIndex, pageSize);
             var res= new ResponseResult().Success(listUser);
             return res;
         }
 
+
+
         [HttpGet]
-        public async Task<ResponseResult> Get()
+        [Route("GetAll")]
+        public async Task<ResponseResult> GetAll()
         {
             var listUser = await roleService.GetAllAsync();
             return new ResponseResult().Success(listUser);
+        }
+
+
+
+        [HttpGet]
+        [Route("GetPermission")]
+        public async Task<ResponseResult> GetPermission(long roleId)
+        {
+            var listMenu = await menuService.GetMenuListAsync();
+            var listRoleMenu = await roleService.GetRoleMenu(roleId);
+            List<object> list = new List<object>();
+            list.Add(listMenu);
+            list.Add(listRoleMenu);
+            return new ResponseResult().Success(list);
         }
 
 
@@ -71,28 +89,13 @@ namespace WP.NetCore.API.Controllers
         /// </summary>
         /// <param name="userDto"></param>
         /// <returns></returns>
-        [HttpPost("SetRoleMenu")]
-        public async Task<ResponseResult> SetRoleMenu([FromBody] AddRoleMenuDto userDto)
+        [HttpPost("SetPermission")]
+        public async Task<ResponseResult> SetPermission([FromBody] AddRoleMenuDto userDto)
         {
             userDto.CreateBy = GetToken().Id;
             await roleService.SetRoleMenu(userDto);
             return new ResponseResult().Success();
         }
-
-        /// <summary>
-        /// 获取角色菜单
-        /// </summary>
-        /// <param name="roleId"></param>
-        /// <returns></returns>
-        [HttpGet("GetRoleMenu")]
-        public async Task<ResponseResult> GetRoleMenu(long roleId)
-        {
-            var listMenu = await roleService.GetRoleMenu(roleId);
-            return new ResponseResult().Success(listMenu);
-        }
-
-
-
 
         /// <summary>
         /// 修改角色
