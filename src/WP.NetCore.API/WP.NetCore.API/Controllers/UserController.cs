@@ -19,7 +19,7 @@ namespace WP.NetCore.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize("Permission")]
     public class UserController : BaseController
     {
         private readonly IUserService userService;
@@ -38,7 +38,6 @@ namespace WP.NetCore.API.Controllers
         /// <returns></returns>
         [Route("GetUserInfo")]
         [HttpGet]
-        [Authorize("Permission")]
         public ResponseResult GetUserInfo() 
         {
             var tokenInfo = JwtHelper.TokenInfo(User);
@@ -52,7 +51,6 @@ namespace WP.NetCore.API.Controllers
         /// <param name="pageSize"></param>
         /// <returns></returns>        [Authorize("Permission")]
         [HttpGet]
-        [Authorize("Permission")]
         public async Task<ResponseResult> Get(int pageIndex,int pageSize) 
         {
             //var listUser = await userService.GetPageListAsync(pageIndex,pageSize);

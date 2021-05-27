@@ -37,35 +37,24 @@ namespace WP.NetCore.Repository.EFCore
             modelBuilder.ApplyConfigurationsFromAssembly(assembly);
 
 
+            var idWork = new Snowflake();
+
             //modelBuilder.Entity<UserRole>().HasData(new List<UserRole>()
             //{
             //    new UserRole()
             //    {
-            //        Id= new Snowflake().GetId(),
+            //        Id= idWork.NextId(),
+
             //        User=new User()
             //        {
-            //            Id = new Snowflake().GetId(),
+            //            Id = userId,
             //            UserName = "admin",
             //            Name = "系统管理员",
             //            Password = "670b14728ad9902aecba32e22fa4f6bd",
             //            Sex = 1,
             //        },
-            //        Role = new Role() { Id = new Snowflake().GetId(), RoleName = "系统管理员" },
+            //        Role = new Role() { Id =roleId, RoleName = "系统管理员" },
             //    },
-
-            //    new UserRole()
-            //    {
-            //              Id= new Snowflake().GetId(),
-            //          User=new User()
-            //        {
-            //            Id = new Snowflake().GetId(),
-            //            UserName = "admin",
-            //            Name = "系统管理员",
-            //            Password = "670b14728ad9902aecba32e22fa4f6bd",
-            //            Sex = 1,
-            //        },
-            //        Role = new Role() { Id = new Snowflake().GetId(), RoleName = "系统管理员" },
-            //    }
             //});
 
             //modelBuilder.Entity<Role>().HasData(new List<Role>()
@@ -73,23 +62,35 @@ namespace WP.NetCore.Repository.EFCore
             //    new Role(){Id= new Snowflake().GetId(),RoleName="系统管理员" },
             //    new Role(){Id= new Snowflake().GetId(),RoleName="测试测试" }
             //});
-            var idWork = new Snowflake();
+
+
+            var roleId = 999999999;
+            var userId = 999999999;
             modelBuilder.Entity<User>().HasData(new User()
             {
-                Id = idWork.NextId(),
+                Id = userId,
                 UserName = "admin",
                 Name = "系统管理员",
                 Password = "670b14728ad9902aecba32e22fa4f6bd",
                 Sex = 1,
+                 
             });
 
             modelBuilder.Entity<Role>().HasData(new Role()
             {
                 RoleName = "系统管理员",
-                Id = idWork.NextId(),
+                Id = roleId,
             });
 
-            ///api/user/get
+            modelBuilder.Entity<UserRole>().HasData(new UserRole()
+            {
+                Id = idWork.NextId(),
+                UserId= userId,
+                RoleId= roleId
+
+            });
+
+
             modelBuilder.Entity<Menu>().HasData(new List<Menu>()
             {
                 new Menu()

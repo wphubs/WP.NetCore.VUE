@@ -9,7 +9,7 @@ using WP.NetCore.Repository.EFCore;
 namespace WP.NetCore.Repository.EFCore.Migrations
 {
     [DbContext(typeof(WPDbContext))]
-    [Migration("20210504150147_Init")]
+    [Migration("20210527152232_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -76,7 +76,7 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         {
                             Id = 1L,
                             Component = "user/index",
-                            CreateTime = new DateTime(2021, 5, 4, 23, 1, 46, 657, DateTimeKind.Local).AddTicks(6089),
+                            CreateTime = new DateTime(2021, 5, 27, 23, 22, 32, 34, DateTimeKind.Local).AddTicks(6411),
                             Icon = "el-icon-lightning",
                             IsButton = false,
                             IsDelete = false,
@@ -87,45 +87,61 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         },
                         new
                         {
-                            Id = 9L,
+                            Id = 15306603741414401L,
+                            Component = "getUser",
+                            CreateTime = new DateTime(2021, 5, 27, 23, 22, 32, 34, DateTimeKind.Local).AddTicks(8162),
+                            IsButton = true,
+                            IsDelete = false,
+                            IsHidden = false,
+                            ParentId = 1L,
+                            Sort = 0,
+                            Title = "查看",
+                            Url = "user/get"
+                        },
+                        new
+                        {
+                            Id = 15306603741414402L,
                             Component = "addUser",
-                            CreateTime = new DateTime(2021, 5, 4, 23, 1, 46, 657, DateTimeKind.Local).AddTicks(7487),
+                            CreateTime = new DateTime(2021, 5, 27, 23, 22, 32, 34, DateTimeKind.Local).AddTicks(9483),
                             IsButton = true,
                             IsDelete = false,
                             IsHidden = false,
                             ParentId = 1L,
                             Sort = 0,
-                            Title = "新增"
+                            Title = "新增",
+                            Url = "user/post"
                         },
                         new
                         {
-                            Id = 7L,
+                            Id = 15306603741414403L,
                             Component = "editUser",
-                            CreateTime = new DateTime(2021, 5, 4, 23, 1, 46, 657, DateTimeKind.Local).AddTicks(8227),
+                            CreateTime = new DateTime(2021, 5, 27, 23, 22, 32, 34, DateTimeKind.Local).AddTicks(9495),
                             IsButton = true,
                             IsDelete = false,
                             IsHidden = false,
                             ParentId = 1L,
                             Sort = 0,
-                            Title = "修改"
+                            Title = "编辑",
+                            Url = "user/put"
                         },
                         new
                         {
-                            Id = 8L,
+                            Id = 15306603741414404L,
                             Component = "deleteUser",
-                            CreateTime = new DateTime(2021, 5, 4, 23, 1, 46, 657, DateTimeKind.Local).AddTicks(8234),
+                            CreateTime = new DateTime(2021, 5, 27, 23, 22, 32, 34, DateTimeKind.Local).AddTicks(9499),
                             IsButton = true,
                             IsDelete = false,
                             IsHidden = false,
                             ParentId = 1L,
                             Sort = 0,
-                            Title = "删除"
+                            Title = "删除",
+                            Url = "user/delete"
                         },
                         new
                         {
                             Id = 2L,
                             Component = "role/index",
-                            CreateTime = new DateTime(2021, 5, 4, 23, 1, 46, 657, DateTimeKind.Local).AddTicks(8235),
+                            CreateTime = new DateTime(2021, 5, 27, 23, 22, 32, 34, DateTimeKind.Local).AddTicks(9508),
                             Icon = "el-icon-heavy-rain",
                             IsButton = false,
                             IsDelete = false,
@@ -136,9 +152,87 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         },
                         new
                         {
+                            Id = 15306603741414405L,
+                            Component = "getRole",
+                            CreateTime = new DateTime(2021, 5, 27, 23, 22, 32, 34, DateTimeKind.Local).AddTicks(9510),
+                            IsButton = true,
+                            IsDelete = false,
+                            IsHidden = false,
+                            ParentId = 2L,
+                            Sort = 0,
+                            Title = "查看",
+                            Url = "role/get"
+                        },
+                        new
+                        {
+                            Id = 15306603741414406L,
+                            Component = "addRole",
+                            CreateTime = new DateTime(2021, 5, 27, 23, 22, 32, 34, DateTimeKind.Local).AddTicks(9513),
+                            IsButton = true,
+                            IsDelete = false,
+                            IsHidden = false,
+                            ParentId = 2L,
+                            Sort = 0,
+                            Title = "新增",
+                            Url = "role/post"
+                        },
+                        new
+                        {
+                            Id = 15306603741414407L,
+                            Component = "editRole",
+                            CreateTime = new DateTime(2021, 5, 27, 23, 22, 32, 34, DateTimeKind.Local).AddTicks(9516),
+                            IsButton = true,
+                            IsDelete = false,
+                            IsHidden = false,
+                            ParentId = 2L,
+                            Sort = 0,
+                            Title = "编辑",
+                            Url = "role/put"
+                        },
+                        new
+                        {
+                            Id = 15306603741414408L,
+                            Component = "deleteRole",
+                            CreateTime = new DateTime(2021, 5, 27, 23, 22, 32, 34, DateTimeKind.Local).AddTicks(9521),
+                            IsButton = true,
+                            IsDelete = false,
+                            IsHidden = false,
+                            ParentId = 2L,
+                            Sort = 0,
+                            Title = "删除",
+                            Url = "role/delete"
+                        },
+                        new
+                        {
+                            Id = 15306603741414409L,
+                            Component = "setPermission",
+                            CreateTime = new DateTime(2021, 5, 27, 23, 22, 32, 34, DateTimeKind.Local).AddTicks(9525),
+                            IsButton = true,
+                            IsDelete = false,
+                            IsHidden = false,
+                            ParentId = 2L,
+                            Sort = 0,
+                            Title = "设置权限",
+                            Url = "role/setPermission/post"
+                        },
+                        new
+                        {
+                            Id = 15306603741414410L,
+                            Component = "getPermission",
+                            CreateTime = new DateTime(2021, 5, 27, 23, 22, 32, 34, DateTimeKind.Local).AddTicks(9528),
+                            IsButton = true,
+                            IsDelete = false,
+                            IsHidden = false,
+                            ParentId = 2L,
+                            Sort = 0,
+                            Title = "查看权限",
+                            Url = "role/getPermission/get"
+                        },
+                        new
+                        {
                             Id = 6L,
                             Component = "menu/index",
-                            CreateTime = new DateTime(2021, 5, 4, 23, 1, 46, 657, DateTimeKind.Local).AddTicks(8245),
+                            CreateTime = new DateTime(2021, 5, 27, 23, 22, 32, 34, DateTimeKind.Local).AddTicks(9531),
                             Icon = "el-icon-heavy-rain",
                             IsButton = false,
                             IsDelete = false,
@@ -149,9 +243,74 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         },
                         new
                         {
+                            Id = 15306603741414411L,
+                            Component = "getMenu",
+                            CreateTime = new DateTime(2021, 5, 27, 23, 22, 32, 34, DateTimeKind.Local).AddTicks(9533),
+                            IsButton = true,
+                            IsDelete = false,
+                            IsHidden = false,
+                            ParentId = 6L,
+                            Sort = 0,
+                            Title = "查看菜单树",
+                            Url = "menu/getMenuTree/get"
+                        },
+                        new
+                        {
+                            Id = 15306603741414412L,
+                            Component = "addMenu",
+                            CreateTime = new DateTime(2021, 5, 27, 23, 22, 32, 34, DateTimeKind.Local).AddTicks(9536),
+                            IsButton = true,
+                            IsDelete = false,
+                            IsHidden = false,
+                            ParentId = 6L,
+                            Sort = 0,
+                            Title = "新增",
+                            Url = "menu/post"
+                        },
+                        new
+                        {
+                            Id = 15306603741414413L,
+                            Component = "getMenu",
+                            CreateTime = new DateTime(2021, 5, 27, 23, 22, 32, 34, DateTimeKind.Local).AddTicks(9539),
+                            IsButton = true,
+                            IsDelete = false,
+                            IsHidden = false,
+                            ParentId = 6L,
+                            Sort = 0,
+                            Title = "查看所有",
+                            Url = "menu/get"
+                        },
+                        new
+                        {
+                            Id = 15306603741414414L,
+                            Component = "editMenu",
+                            CreateTime = new DateTime(2021, 5, 27, 23, 22, 32, 34, DateTimeKind.Local).AddTicks(9543),
+                            IsButton = true,
+                            IsDelete = false,
+                            IsHidden = false,
+                            ParentId = 6L,
+                            Sort = 0,
+                            Title = "编辑",
+                            Url = "menu/put"
+                        },
+                        new
+                        {
+                            Id = 15306603741414415L,
+                            Component = "deleteMenu",
+                            CreateTime = new DateTime(2021, 5, 27, 23, 22, 32, 34, DateTimeKind.Local).AddTicks(9548),
+                            IsButton = true,
+                            IsDelete = false,
+                            IsHidden = false,
+                            ParentId = 6L,
+                            Sort = 0,
+                            Title = "删除",
+                            Url = "menu/delete"
+                        },
+                        new
+                        {
                             Id = 3L,
                             Component = "nested",
-                            CreateTime = new DateTime(2021, 5, 4, 23, 1, 46, 657, DateTimeKind.Local).AddTicks(8247),
+                            CreateTime = new DateTime(2021, 5, 27, 23, 22, 32, 34, DateTimeKind.Local).AddTicks(9551),
                             Icon = "nested",
                             IsButton = false,
                             IsDelete = false,
@@ -164,7 +323,7 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         {
                             Id = 4L,
                             Component = "nested/menu1/index",
-                            CreateTime = new DateTime(2021, 5, 4, 23, 1, 46, 657, DateTimeKind.Local).AddTicks(8249),
+                            CreateTime = new DateTime(2021, 5, 27, 23, 22, 32, 34, DateTimeKind.Local).AddTicks(9553),
                             Icon = "lightning",
                             IsButton = false,
                             IsDelete = false,
@@ -177,7 +336,7 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         {
                             Id = 5L,
                             Component = "nested/menu2/index",
-                            CreateTime = new DateTime(2021, 5, 4, 23, 1, 46, 657, DateTimeKind.Local).AddTicks(8250),
+                            CreateTime = new DateTime(2021, 5, 27, 23, 22, 32, 34, DateTimeKind.Local).AddTicks(9555),
                             Icon = "lightning",
                             IsButton = false,
                             IsDelete = false,
@@ -261,8 +420,8 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 15274025052357632L,
-                            CreateTime = new DateTime(2021, 5, 4, 23, 1, 46, 657, DateTimeKind.Local).AddTicks(4420),
+                            Id = 999999999L,
+                            CreateTime = new DateTime(2021, 5, 27, 23, 22, 32, 33, DateTimeKind.Local).AddTicks(9001),
                             IsDelete = false,
                             RoleName = "系统管理员"
                         });
@@ -317,8 +476,8 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 15274025052341248L,
-                            CreateTime = new DateTime(2021, 5, 4, 23, 1, 46, 654, DateTimeKind.Local).AddTicks(4828),
+                            Id = 999999999L,
+                            CreateTime = new DateTime(2021, 5, 27, 23, 22, 32, 31, DateTimeKind.Local).AddTicks(857),
                             IsDelete = false,
                             IsEnable = true,
                             Name = "系统管理员",
@@ -365,6 +524,16 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserRole");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 15306603741414400L,
+                            CreateTime = new DateTime(2021, 5, 27, 23, 22, 32, 34, DateTimeKind.Local).AddTicks(269),
+                            IsDelete = false,
+                            RoleId = 999999999L,
+                            UserId = 999999999L
+                        });
                 });
 
             modelBuilder.Entity("WP.NetCore.Model.EntityModel.MenuRole", b =>
@@ -376,7 +545,7 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         .IsRequired();
 
                     b.HasOne("WP.NetCore.Model.EntityModel.Role", "Role")
-                        .WithMany()
+                        .WithMany("MenuRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

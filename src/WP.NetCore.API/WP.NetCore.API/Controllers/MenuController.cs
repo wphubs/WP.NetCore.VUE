@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,6 +16,7 @@ namespace WP.NetCore.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class MenuController : BaseController
     {
         private readonly IMapper mapper;
@@ -32,6 +34,7 @@ namespace WP.NetCore.API.Controllers
         /// <param name="menuDto"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize("Permission")]
         public async Task<ResponseResult> Post([FromBody] AddMenuDto menuDto)
         {
             var objMenu = mapper.Map<Menu>(menuDto);
@@ -47,6 +50,7 @@ namespace WP.NetCore.API.Controllers
         /// <param name="menuDto"></param>
         /// <returns></returns>
         [HttpPut]
+        [Authorize("Permission")]
         public async Task<ResponseResult> Put([FromBody] UpdateMenuDto menuDto)
         {
             var objMenu = mapper.Map<Menu>(menuDto);
@@ -62,6 +66,7 @@ namespace WP.NetCore.API.Controllers
         /// <param name="Id"></param>
         /// <returns></returns>
         [HttpDelete]
+        [Authorize("Permission")]
         public async Task<ResponseResult> Delete(long Id)
         {
             if (default(long) == Id)
@@ -78,6 +83,7 @@ namespace WP.NetCore.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Authorize("Permission")]
         public async Task<ResponseResult> Get()
         {
             var list = await menuService.GetPageMenuListAsync();
@@ -90,6 +96,7 @@ namespace WP.NetCore.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("GetMenuTree")]
+        [Authorize("Permission")]
         public async Task<ResponseResult> GetMenuTree()
         {
             var list =await menuService.GetMenuListAsync();
@@ -104,6 +111,7 @@ namespace WP.NetCore.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("GetRoleRouter")]
+        [Authorize]
         public async Task<ResponseResult> GetRoleRouter()
         {
             var tokenInfo = JwtHelper.TokenInfo(User);

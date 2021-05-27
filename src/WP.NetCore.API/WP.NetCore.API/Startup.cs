@@ -180,7 +180,7 @@ namespace WP.NetCore.API
              });
 
     
-            services.AddSingleton<IAuthorizationHandler, PermissionHandler>();
+            services.AddScoped<IAuthorizationHandler, PermissionHandler>();
             services.AddSingleton(permissionRequirement);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             #endregion
