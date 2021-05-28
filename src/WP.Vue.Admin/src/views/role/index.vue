@@ -11,8 +11,6 @@
       </span>
     </el-card>
     <el-table :data="dataList" style="width: 100%; margin-top: 10px">
-      <!-- <el-table-column prop="Id" label="Id"></el-table-column> -->
-      <!-- <el-table-column prop="Avatar" label="头像"></el-table-column> -->
       <el-table-column prop="RoleName" label="角色"></el-table-column>
       <el-table-column prop="CreateTime" label="创建时间"></el-table-column>
       <el-table-column label="操作" width="250">
@@ -33,18 +31,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <div class="el-page">
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="currentPage"
-        :page-sizes="[10, 20, 30, 40]"
-        :page-size="pageSize"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total"
-      >
-      </el-pagination>
-    </div>
+   
 
     <el-dialog title="提示" :visible.sync="dialogVisible" width="500px">
       <el-form
@@ -93,7 +80,7 @@
 </template>
 <script>
 import {
-  getPage,
+  getRoleList,
   addRole,
   updateRole,
   deleteRole,
@@ -120,9 +107,6 @@ export default {
       },
       dataTree: [],
       dataList: [],
-      currentPage: 1,
-      pageSize: 10,
-      total: 0,
       dialogVisible: false,
       dialogRoleVisible: false,
       currentData: {},
@@ -222,11 +206,9 @@ export default {
       // });
     },
     refreshData() {
-      getPage({ pageIndex: this.currentPage, pageSize: this.pageSize }).then(
-        (res) => {
-          this.dataList = [];
-          this.dataList = res.Data;
-          this.total = res.Total;
+      getRoleList().then((res) => {
+          console.log(JSON.stringify(res));
+          this.dataList = res;
         }
       );
     },

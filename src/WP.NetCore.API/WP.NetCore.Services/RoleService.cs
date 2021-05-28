@@ -86,7 +86,7 @@ namespace WP.NetCore.Services
             if (roleId == 999999999)
             {
                 var objList = await menuRepository.GetAllAsync(x=>x.Url!=null);
-                var list = from menu in objList select "/api/"+menu.Url;
+                var list = from menu in objList select "/api/"+menu.Url.ToLower();
                 return list.ToList();
             }
             else

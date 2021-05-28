@@ -98,7 +98,7 @@
 </template>
 <script>
 import { getList, addUser, updateUser, deleteUser } from "@/api/user";
-import { getAll } from "@/api/role";
+import { getRoleList } from "@/api/role";
 import md5 from "js-md5";
 export default {
   components: {},
@@ -139,7 +139,7 @@ export default {
   },
   methods: {
     getRoleList() {
-      getAll().then((res) => {
+      getRoleList().then((res) => {
         this.roleList = res;
         console.log('role:'+JSON.stringify(this.roleList));
       });

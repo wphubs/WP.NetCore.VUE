@@ -36,19 +36,18 @@ namespace WP.NetCore.API.Controllers
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        [HttpGet]
-        public async Task<ResponseResult> Get(int pageIndex, int pageSize)
-        {
-            var listUser = await roleService.GetPageListAsync(pageIndex, pageSize);
-            var res= new ResponseResult().Success(listUser);
-            return res;
-        }
+        //[HttpGet]
+        //public async Task<ResponseResult> Get(int pageIndex, int pageSize)
+        //{
+        //    var listUser = await roleService.GetPageListAsync(pageIndex, pageSize);
+        //    var res= new ResponseResult().Success(listUser);
+        //    return res;
+        //}
 
 
 
         [HttpGet]
-        [Route("GetAll")]
-        public async Task<ResponseResult> GetAll()
+        public async Task<ResponseResult> Get()
         {
             var listUser = await roleService.GetAllAsync();
             return new ResponseResult().Success(listUser);

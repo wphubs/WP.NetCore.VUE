@@ -44,21 +44,16 @@ export function deleteRole(params) {
 }
 
 
-export function getPage(params) {
+export function getRoleList() {
   return request({
     url: 'role',
     method: 'get',
-    params
+    
   })
 }
 
 
-export function getAll() {
-  return request({
-    url: 'role/getAll',
-    method: 'get',
-  })
-}
+
 
 export function getPermission(params) {
   return request({
