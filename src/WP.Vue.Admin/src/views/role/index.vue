@@ -7,7 +7,7 @@
       </span> -->
       <span style="margin-left: 20px">
         <el-button type="primary">查询</el-button>
-        <el-button type="primary" @click="clickAdd()">新增</el-button>
+        <el-button type="primary"  v-has="'addRole'" @click="clickAdd()">新增</el-button>
       </span>
     </el-card>
     <el-table :data="dataList" style="width: 100%; margin-top: 10px">
@@ -19,13 +19,13 @@
             @click="clickSetRole(scope.row)"
             icon="el-icon-setting"
             size="small"
-            type="primary"
+            type="primary" v-has="'getPermission'"
             >权限</el-button
           >
-          <el-button @click="clickEdit(scope.row)" size="small" type="warning"
+          <el-button @click="clickEdit(scope.row)" v-has="'editRole'" size="small" type="warning"
             >编辑</el-button
           >
-          <el-button size="small" type="danger" @click="clickDelete(scope.row)"
+          <el-button size="small" type="danger" v-has="'deleteRole'" @click="clickDelete(scope.row)"
             >删除</el-button
           >
         </template>
@@ -44,7 +44,7 @@
           <el-input style="width: 300px" v-model="roleForm.RoleName"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('roleForm')"
+          <el-button type="primary" @click="submitForm('roleForm')"  v-has="'setPermission'"
             >保存</el-button
           >
           <el-button @click="dialogVisible = false">取消</el-button>
@@ -52,8 +52,9 @@
       </el-form>
     </el-dialog>
 
-    <el-dialog title="权限设置" :visible.sync="dialogRoleVisible" width="500px">
-      <el-tree
+    <el-dialog title="权限设置" :visible.sync="dialogRoleVisible" width="500px" >
+      <div style="height: 500px; overflow-y:scroll">
+        <el-tree
         :data="dataTree"
         show-checkbox
         node-key="Id"
@@ -71,6 +72,7 @@
           </span>
         </span>
       </el-tree>
+      </div>
       <span slot="footer" class="dialog-footer" style="padding-right: 30px">
         <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="clickSaveRole()">确 定</el-button>
@@ -137,8 +139,9 @@ export default {
     clickSetRole(row) {
       this.currentData = row;
       getPermission({roleId:row.Id}).then((res) => {
-        console.log(JSON.stringify(res));
+        
         this.dataTree = res[0];
+        console.log(JSON.stringify(this.dataTree));
         this.currentRoleMenu=res[1];
         this.dialogRoleVisible = true;
       });

@@ -9,7 +9,7 @@ namespace WP.NetCore.Model.ViewModel
 {
     public class MenuViewModel
     {
-        public long Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// 标题

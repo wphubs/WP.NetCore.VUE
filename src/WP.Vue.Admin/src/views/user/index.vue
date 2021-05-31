@@ -2,8 +2,8 @@
   <div class="app-container">
     <el-card style="width: 100%; text-align: right">
       <span style="margin-left: 20px">
-        <el-button type="primary">查询</el-button>
-        <el-button type="primary" @click="clickAddUser()">新增</el-button>
+        <!-- <el-button type="primary">查询</el-button> -->
+        <el-button type="primary" @click="clickAddUser()" v-has="'addUser'">新增</el-button>
       </span>
     </el-card>
     <el-table :data="dataList" style="width: 100%; margin-top: 10px">
@@ -26,10 +26,10 @@
       <el-table-column prop="CreateTime" label="创建时间"></el-table-column>
       <el-table-column label="操作" width="150">
         <template slot-scope="scope">
-          <el-button @click="clickEdit(scope.row)" size="small" type="warning"
+          <el-button @click="clickEdit(scope.row)"  v-has="'editUser'" size="small" type="warning"
             >编辑</el-button
           >
-          <el-button size="small" type="danger" @click="clickDelete(scope.row)"
+          <el-button size="small" type="danger"  v-has="'deleteUser'" @click="clickDelete(scope.row)"
             >删除</el-button
           >
         </template>

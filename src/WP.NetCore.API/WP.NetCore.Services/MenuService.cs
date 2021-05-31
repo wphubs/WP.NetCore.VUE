@@ -72,7 +72,7 @@ namespace WP.NetCore.Services
             {
                 listSelect.ForEach(item =>
                 {
-                    item.children = GetMenuChildren(listMenu, item.Id);
+                    item.children = GetMenuChildren(listMenu, Convert.ToInt64(item.Id));
                 });
             }
             return listSelect;

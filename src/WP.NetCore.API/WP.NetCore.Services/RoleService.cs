@@ -85,7 +85,7 @@ namespace WP.NetCore.Services
 
             if (roleId == 999999999)
             {
-                var objList = await menuRepository.GetAllAsync(x=>x.Url!=null);
+                var objList = await menuRepository.GetAllAsync(x=>x.Url!=null && x.IsDelete == false);
                 var list = from menu in objList select "/api/"+menu.Url.ToLower();
                 return list.ToList();
             }
@@ -93,8 +93,8 @@ namespace WP.NetCore.Services
             {
                 var objList = await dbContext.MenuRole.Join(dbContext.Menu, menuRole => menuRole.MenuId,
                           menu => menu.Id, (menuRole, menu) => new { Url = menu.Url, Role = menuRole.RoleId, IsDelete = menuRole.IsDelete })
-                          .Where(x => x.Role == roleId && x.IsDelete == false).ToListAsync();
-                var list = from menu in objList select menu.Url;
+                          .Where(x => x.Role == roleId && x.IsDelete == false&&x.Url != null).ToListAsync();
+                var list = from menu in objList select "/api/" + menu.Url.ToLower();
                 return list.ToList();
             }
 

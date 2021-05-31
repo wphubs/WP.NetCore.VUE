@@ -3,8 +3,8 @@
   <div class="app-container">
     <el-card style="width: 100%; text-align: right">
       <span style="margin-left: 20px">
-        <el-button type="primary">查询</el-button>
-        <el-button type="primary" @click="clickAdd()">新增</el-button>
+        <!-- <el-button type="primary">查询</el-button> -->
+        <el-button type="primary"  v-has="'addMenu'" @click="clickAdd()">新增</el-button>
       </span>
     </el-card>
     <el-table :data="dataList" style="width: 100%; margin-bottom: 20px; margin-top: 10px" row-key="Id" border
@@ -31,8 +31,8 @@
       <el-table-column prop="CreateTime" label="创建时间"> </el-table-column>
       <el-table-column label="操作">
         <template slot-scope="scope">
-          <el-button size="mini" @click="clickEdit(scope.row)" type="warning">编辑</el-button>
-          <el-button size="mini" type="danger" @click="clickDelete(scope.row)">删除</el-button>
+          <el-button size="mini" @click="clickEdit(scope.row)"  v-has="'editMenu'" type="warning">编辑</el-button>
+          <el-button size="mini" type="danger" @click="clickDelete(scope.row)"  v-has="'deleteMenu'">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
