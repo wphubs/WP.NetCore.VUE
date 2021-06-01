@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +16,14 @@ namespace WP.NetCore.Services
     {
         private readonly IBaseRepository<Menu> baseRepository;
         private readonly IMapper mapper;
+        private readonly WPDbContext dbContext;
 
-        public MenuService(IBaseRepository<Menu> baseRepository, IMapper mapper)
+        public MenuService(IBaseRepository<Menu> baseRepository, IMapper mapper, WPDbContext dbContext)
         {
             this.baseDal = baseRepository;
             this.baseRepository = baseRepository;
             this.mapper = mapper;
+            this.dbContext = dbContext;
         }
 
 
@@ -84,10 +87,18 @@ namespace WP.NetCore.Services
         /// 根据角色获取菜单
         /// </summary>
         /// <returns></returns>
-        public async Task<List<RouterViewModel>> GetRoleMenuListAsync()
+        public async Task<List<RouterViewModel>> GetRoleMenuListAsync(List<long> roleId)
         {
+
+            var objList = await dbContext.MenuRole.Join(dbContext.Menu, menuRole => menuRole.MenuId,
+           menu => menu.Id, (menuRole, menu) => new { menuRole, menu })
+           .Where(x =>x.menuRole.IsDelete == false&&x.menu.IsDelete==false&&x.menuRole.RoleId==15312195587736576)
+           .Select(x=>x.menu)
+           .ToListAsync();
+
+
             var listMenu = await baseRepository.GetAllAsync(x => x.IsDelete == false, x => x.Sort, true);
-            var list = GetRootMenu(listMenu, 0);
+            var list = GetRootMenu(objList, 0);
             return list;
         }
 

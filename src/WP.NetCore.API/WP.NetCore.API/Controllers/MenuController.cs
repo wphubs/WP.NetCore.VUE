@@ -115,7 +115,7 @@ namespace WP.NetCore.API.Controllers
         public async Task<ResponseResult> GetRoleRouter()
         {
             var tokenInfo = JwtHelper.TokenInfo(User);
-            var listMenu = await menuService.GetRoleMenuListAsync();
+            var listMenu = await menuService.GetRoleMenuListAsync(tokenInfo.Role.Split(',').Select(x => Convert.ToInt64(x)).ToList());
             return new ResponseResult().Success(listMenu);
         }
 

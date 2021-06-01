@@ -23,6 +23,13 @@ namespace WP.NetCore.API.Controllers
             this.userService = userService;
         }
 
+        [HttpGet]
+        public long Get()
+        {
+            var a = Convert.ToInt64("15312195587736576");
+            return a;
+        }
+
         [HttpPost]
         public async Task<ResponseResult> Post(LoginDto objLogin)
         {
