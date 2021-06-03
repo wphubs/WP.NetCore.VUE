@@ -33,6 +33,7 @@ using WP.NetCore.API.AuthHelper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using WP.NetCore.Common.Helper;
+using Microsoft.AspNetCore.Authentication;
 //using WP.NetCore.IServices;
 //using WP.NetCore.Services;
 
@@ -161,7 +162,8 @@ namespace WP.NetCore.API
             services.AddAuthentication(o =>
             {
                 o.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                o.DefaultChallengeScheme = nameof(ResponseResultHandler);
+                o.DefaultForbidScheme = nameof(ResponseResultHandler);
             })
              // Ìí¼ÓJwtBearer·þÎñ
              .AddJwtBearer(o =>
@@ -179,7 +181,8 @@ namespace WP.NetCore.API
                          return Task.CompletedTask;
                      }
                  };
-             });
+             })
+             .AddScheme<AuthenticationSchemeOptions, ResponseResultHandler>(nameof(ResponseResultHandler), o => { }); ;
 
 
             services.AddScoped<IAuthorizationHandler, PermissionHandler>();
