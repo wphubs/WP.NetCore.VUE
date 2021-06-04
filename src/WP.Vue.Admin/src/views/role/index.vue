@@ -6,7 +6,7 @@
         <el-input style="width: 200px" placeholder="请输入内容"></el-input>
       </span> -->
       <span style="margin-left: 20px">
-        <el-button type="primary">查询</el-button>
+        <!-- <el-button type="primary">查询</el-button> -->
         <el-button type="primary"  v-has="'addRole'" @click="clickAdd()">新增</el-button>
       </span>
     </el-card>
@@ -61,6 +61,7 @@
         ref="tree"
          :default-checked-keys="currentRoleMenu"
         default-expand-all
+        check-strictly
         :props="props"
         :expand-on-click-node="false"
       >
@@ -122,9 +123,10 @@ export default {
   },
   methods: {
     clickSaveRole() {
+      // console.log(JSON.stringify(this.$refs.tree.getHalfCheckedKeys()))
       var params = {
         RoleId: this.currentData.Id,
-        MenuId: this.$refs.tree.getCheckedKeys(),
+        MenuId: [...this.$refs.tree.getCheckedKeys(),...this.$refs.tree.getHalfCheckedKeys()],
       };
       console.log(JSON.stringify(params));
       setPermission(params).then((res) => {

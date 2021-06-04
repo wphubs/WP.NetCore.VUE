@@ -28,6 +28,6 @@ namespace WP.NetCore.IServices
         /// 根据角色获取菜单
         /// </summary>
         /// <returns></returns>
-        Task<List<RouterViewModel>> GetRoleMenuListAsync();
+        Task<List<RouterViewModel>> GetRoleMenuListAsync(List<long> roleId);
     }
 }

@@ -4,8 +4,8 @@ Vue.directive('has', {
       let btnPermissions = vnode.context.$route.meta.permission
 
       if (!permissionJudge(binding.value,btnPermissions)) {
-              el.parentNode.removeChild(el);
-        
+//                el.parentNode.removeChild(el);
+    
       }
   
       function permissionJudge(value,listPermissions) {

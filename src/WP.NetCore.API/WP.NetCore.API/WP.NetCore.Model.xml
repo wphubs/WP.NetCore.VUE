@@ -229,26 +229,6 @@
             角色id
             </summary>
         </member>
-        <member name="T:WP.NetCore.Model.ResponseResult">
-            <summary>
-            通用返回信息类
-            </summary>
-        </member>
-        <member name="P:WP.NetCore.Model.ResponseResult.Result">
-            <summary>
-            状态码
-            </summary>
-        </member>
-        <member name="P:WP.NetCore.Model.ResponseResult.Msg">
-            <summary>
-            返回信息
-            </summary>
-        </member>
-        <member name="P:WP.NetCore.Model.ResponseResult.Data">
-            <summary>
-            返回数据集合
-            </summary>
-        </member>
         <member name="T:WP.NetCore.Model.PageModel`1">
             <summary>
             通用分页信息类
@@ -272,6 +252,26 @@
         <member name="P:WP.NetCore.Model.PageModel`1.Data">
             <summary>
             返回数据
+            </summary>
+        </member>
+        <member name="T:WP.NetCore.Model.ResponseResult">
+            <summary>
+            通用返回信息类
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ResponseResult.Result">
+            <summary>
+            状态码
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ResponseResult.Msg">
+            <summary>
+            返回信息
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ResponseResult.Data">
+            <summary>
+            返回数据集合
             </summary>
         </member>
         <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.Title">

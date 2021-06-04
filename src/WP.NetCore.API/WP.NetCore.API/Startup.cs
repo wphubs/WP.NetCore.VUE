@@ -32,6 +32,8 @@ using WP.NetCore.Services;
 using WP.NetCore.API.AuthHelper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using WP.NetCore.Common.Helper;
+using Microsoft.AspNetCore.Authentication;
 //using WP.NetCore.IServices;
 //using WP.NetCore.Services;
 
@@ -89,9 +91,9 @@ namespace WP.NetCore.API
                     });
                     c.OrderActionsBy(o => o.RelativePath);
                 });
-              
+
                 var xmlPath = Path.Combine(basePath, "WP.NetCore.API.xml");
-                c.IncludeXmlComments(xmlPath,true);
+                c.IncludeXmlComments(xmlPath, true);
 
                 var xmlModelPath = Path.Combine(basePath, "WP.NetCore.Model.xml");
                 c.IncludeXmlComments(xmlModelPath);
@@ -152,14 +154,16 @@ namespace WP.NetCore.API
             PermissionRequirement permissionRequirement = new PermissionRequirement();
 
             //listPermission.Add(n);
-            services.AddAuthorization(option => {
+            services.AddAuthorization(option =>
+            {
                 option.AddPolicy("Permission", policy => policy.AddRequirements(permissionRequirement));
             });
 
             services.AddAuthentication(o =>
             {
                 o.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                o.DefaultChallengeScheme = nameof(ResponseResultHandler);
+                o.DefaultForbidScheme = nameof(ResponseResultHandler);
             })
              // 添加JwtBearer服务
              .AddJwtBearer(o =>
@@ -177,9 +181,10 @@ namespace WP.NetCore.API
                          return Task.CompletedTask;
                      }
                  };
-             });
+             })
+             .AddScheme<AuthenticationSchemeOptions, ResponseResultHandler>(nameof(ResponseResultHandler), o => { }); ;
 
-    
+
             services.AddScoped<IAuthorizationHandler, PermissionHandler>();
             services.AddSingleton(permissionRequirement);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -188,24 +193,29 @@ namespace WP.NetCore.API
             #region AddControllers
             services.AddControllers(o =>
             {
-               // 全局异常过滤
-               o.Filters.Add(typeof(GlobalExceptionsFilter));
+                // 全局异常过滤
+                o.Filters.Add(typeof(GlobalExceptionsFilter));
             })
             //全局配置Json序列化处理
             .AddNewtonsoftJson(options =>
               {
-               //忽略循环引用
-               options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-               //不使用驼峰样式的key
-               options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+
+                  //忽略循环引用
+                  options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                  //不使用驼峰样式的key
+                  //options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+
+                  options.SerializerSettings.ContractResolver = new CustomContractResolver();
                   //设置时间格式
-               options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+                  options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
               });
             #endregion
+
+
         }
 
 
-        public void ConfigureContainer(ContainerBuilder builder) 
+        public void ConfigureContainer(ContainerBuilder builder)
         {
             //builder.RegisterType(typeof(UnitOfWork)).As(typeof(IUnitOfWork)).InstancePerLifetimeScope();
 
@@ -226,7 +236,7 @@ namespace WP.NetCore.API
             builder.RegisterAssemblyTypes(assemblyRepository).AsImplementedInterfaces()
                       .InstancePerDependency()
                       .EnableInterfaceInterceptors();
-         
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -236,7 +246,7 @@ namespace WP.NetCore.API
                 app.UseDeveloperExceptionPage();
             }
             app.UseSwagger();
-            app.UseSwaggerUI(c => 
+            app.UseSwaggerUI(c =>
             {
                 typeof(ApiVersions).GetEnumNames().OrderByDescending(e => e).ToList().ForEach(version =>
                 {
