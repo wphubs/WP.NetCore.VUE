@@ -1,0 +1,16 @@
+{
+  "id": "2590385",
+  "name": "wp.nuxt.blog",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "11770432",
+      "name": "GitHub",
+      "font_class": "GitHub1",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    }
+  ]
+}
