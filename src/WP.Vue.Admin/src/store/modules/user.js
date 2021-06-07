@@ -1,5 +1,5 @@
 import { login, getInfo } from '@/api/user'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import { getToken, setToken, removeToken,setExpTime } from '@/utils/auth'
 import { resetRouter } from '@/router'
 
 const getDefaultState = () => {
@@ -19,6 +19,9 @@ const mutations = {
   SET_TOKEN: (state, token) => {
     state.token = token
   },
+  EXP_Time: (state, exp) => {
+    state.exp = exp
+  },
   SET_NAME: (state, name) => {
     state.name = name
   },
@@ -33,10 +36,10 @@ const actions = {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ UserName: username.trim(), PassWord: password }).then(response => {
-        // console.log('response:' + JSON.stringify(response))
-        const { token } = response
-        console.log('token:' + token)
+        const { token,exp } = response
+        console.log('token:' + exp)
         commit('SET_TOKEN', token)
+        setExpTime(exp);
         setToken(token)
         resolve()
       }).catch(error => {
@@ -50,7 +53,6 @@ const actions = {
     return new Promise((resolve, reject) => {
       getInfo(state.token).then(response => {
         const { Name, Avatar } = response
-        // const { name, avatar } = data
         commit('SET_NAME', Name)
         commit('SET_AVATAR', Avatar)
         resolve(response)
@@ -63,15 +65,13 @@ const actions = {
   // user logout
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
-      // logout(state.token).then(() => {
+      
       removeToken() // must remove  token  first
       resetRouter()
       commit('RESET_STATE')
       commit('SET_TOKEN', '')
       resolve()
-      // }).catch(error => {
-      //   reject(error)
-      // })
+     
     })
   },
 

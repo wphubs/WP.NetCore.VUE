@@ -1,6 +1,7 @@
 import Cookies from 'js-cookie'
 
-const TokenKey = 'Admin-Token'
+const TokenKey = 'WP-NetCore-Vue-Token'
+const ExpKey = 'WP-NetCore-Vue-Exp'
 
 export function getToken() {
   return Cookies.get(TokenKey)
@@ -9,7 +10,17 @@ export function getToken() {
 export function setToken(token) {
   return Cookies.set(TokenKey, token)
 }
-
 export function removeToken() {
-  return Cookies.remove(TokenKey)
+  Cookies.remove(TokenKey)
+  Cookies.remove(ExpKey)
 }
+
+
+export function setExpTime(token) {
+  return Cookies.set(ExpKey, token)
+}
+
+export function getExpTime() {
+  return Cookies.get(ExpKey)
+}
+

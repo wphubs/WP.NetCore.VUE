@@ -18,31 +18,28 @@ namespace WP.NetCore.API.AuthHelper
         /// </summary>
         /// <param name="tokenModel"></param>
         /// <returns></returns>
-        public static string IssueJwt(TokenModelJwt tokenModel)
+        public static (string token,string expTime) IssueJwt(TokenModelJwt tokenModel)
         {
             string iss = Appsettings.app(new string[] { "Audience", "Issuer" });
             string aud = Appsettings.app(new string[] { "Audience", "Audience" });
             string secret = AppSecretConfig.Audience_Secret_String;
-            //var claims = new Claim[] //old
+            var exp = DateTime.Now.AddHours(24);
             var claims = new List<Claim>
             {
              new Claim(JwtRegisteredClaimNames.Jti, tokenModel.Id.ToString()),
              new Claim(JwtRegisteredClaimNames.Iat, $"{new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds()}"),
              new Claim(JwtRegisteredClaimNames.Nbf,$"{new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds()}") ,
-             //过期时间，目前是过期1000秒，可自定义
-             new Claim (JwtRegisteredClaimNames.Exp,$"{new DateTimeOffset(DateTime.Now.AddHours(24)).ToUnixTimeSeconds()}"),
-             new Claim(ClaimTypes.Expiration, DateTime.Now.AddHours(24).ToString()),
+             new Claim (JwtRegisteredClaimNames.Exp,$"{new DateTimeOffset(exp).ToUnixTimeSeconds()}"),
+             new Claim(ClaimTypes.Expiration, exp.ToString()),
              new Claim(ClaimTypes.Role,tokenModel.Role),
              new Claim(JwtRegisteredClaimNames.Iss,iss),
              new Claim(JwtRegisteredClaimNames.Aud,aud),
             };
-            //claims.AddRange(tokenModel.Role.Split(',').Select(s => new Claim(ClaimTypes.Role, s)));
             PropertyInfo[] infos = tokenModel.GetType().GetProperties();
             foreach (var info in infos)
             {
                 claims.Add(new Claim(info.Name, info.GetValue(tokenModel) + ""));
             }
-            //秘钥 (SymmetricSecurityKey 对安全性的要求，密钥的长度太短会报出异常)
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
@@ -55,12 +52,8 @@ namespace WP.NetCore.API.AuthHelper
             var jwtHandler = new JwtSecurityTokenHandler();
             var encodedJwt = jwtHandler.WriteToken(jwt);
 
-            return encodedJwt;
+            return (encodedJwt, exp.ToString());
         }
-
-
-
-
         /// <summary>
         /// 解析
         /// </summary>

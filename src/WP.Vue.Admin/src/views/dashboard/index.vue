@@ -2,13 +2,15 @@
   <div class="app-container">
     <el-card style="width: 100%">
       <div style="font-size: large; font-weight: 600">Workplace</div>
-      <div        style="
+      <div
+        style="
           display: flex;
           width: 100%;
           margin-top: 20px;
           align-items: center;
-          position: relative;display: flex;
-          ">
+          position: relative;
+          display: flex;        "
+      >
         <div>
           <pan-thumb
             image="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
@@ -16,18 +18,16 @@
           />
           <!-- <el-avatar :size="80" src=""></el-avatar> -->
         </div>
-        <div style="padding-left: 100px; line-height: 40px;flex:1">
+        <div style="padding-left: 100px; line-height: 40px; flex: 1">
           <div style="font-size: 20px">
-            {{getTimeFix()}}，米拉娜，{{getWelcomeText()}}
+            {{ getTimeFix() }}，米拉娜，{{ getWelcomeText() }}
           </div>
           <div style="color: #8d8d8d; font-size: 15px">
-            前端工程师  <el-divider direction="vertical"></el-divider>某某某公司   <el-divider direction="vertical"></el-divider> 某某某事业部
+            前端工程师 <el-divider direction="vertical"></el-divider>某某某公司
+            <el-divider direction="vertical"></el-divider> 某某某事业部
           </div>
         </div>
-        <div style="width: 200px;">
-     
-        </div>
-
+        <div style="width: 200px"></div>
       </div>
     </el-card>
     <el-row :gutter="40" class="panel-group">
@@ -96,21 +96,39 @@
         </div>
       </el-col>
     </el-row>
-    <el-card style="width: 100%">
-      <div id="main" style="width: 100%; height: 300px"></div>
-   
-    </el-card>
- 
 
-    <div style="display: flex; margin-top: 30px;">
-      <div style="width: 450px;">
+    <div style="display: flex">
+      <div style="width: 450px">
         <el-card class="box-card-component">
           <div slot="header" class="box-card-header">
-            <img src="https://wpimg.wallstcn.com/e7d23d71-cf19-4b90-a1cc-f56af8c0903d.png">
+            <!-- <img src="https://wpimg.wallstcn.com/e7d23d71-cf19-4b90-a1cc-f56af8c0903d.png"> -->
+            <mallki class-name="mallki-text" text="WP.NetCore.VUE" />
+            <div class="server-info" >
+                 <div>
+                <span class="title">.NETCore版本：</span
+                ><span>{{ serverInfo.FrameworkDescription }}</span>
+              </div>
+              <div><span class="title">服务器：</span><span>{{ serverInfo.Platform }}</span></div>
+              <div>
+                <span class="title">环境变量：</span
+                ><span>{{ serverInfo.EnvironmentName }}</span>
+              </div>
+              <div>
+                <span class="title">系统架构：</span
+                ><span>{{ serverInfo.OSArchitecture }}</span>
+              </div>
+           
+              <div>
+                <span class="title">内存占用：</span
+                ><span>{{ serverInfo.MemoryFootprint }}</span>
+              </div>
+              <div>
+                <span class="title">运行时长：</span><span>{{ serverInfo.WorkingTime }}</span>
+              </div>
+            </div>
           </div>
           <div>
-            <mallki class-name="mallki-text" text="WP.NetCore.VUE" />
-            <div style="padding-top:35px;" class="progress-item">
+            <div style="padding-top: 10px" class="progress-item">
               <span>C#</span>
               <el-progress :percentage="55" />
             </div>
@@ -129,8 +147,11 @@
           </div>
         </el-card>
       </div>
+       <el-card style=" flex: 1;margin-left:20px">
+      <div id="main" style="width: 100%; height: 300px"></div>
+    </el-card>
     </div>
-  
+   
   </div>
 </template>
 
@@ -139,15 +160,21 @@ import { mapGetters } from "vuex";
 import CountTo from "vue-count-to";
 import * as echarts from "echarts";
 import PanThumb from "@/components/PanThumb";
-import Mallki from '@/components/TextHoverEffect/Mallki'
+import Mallki from "@/components/TextHoverEffect/Mallki";
+import { getServerInfo } from "@/api/home";
 export default {
-
   components: {
     CountTo,
     PanThumb,
-    Mallki
+    Mallki,
+  },
+  data() {
+    return {
+      serverInfo: {},
+    };
   },
   mounted() {
+    this.getServer();
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById("main"));
     var option = {
@@ -215,12 +242,13 @@ export default {
     myChart.setOption(option);
   },
   methods: {
+    getServer() {
+      getServerInfo().then((res) => {
+        this.serverInfo = res;
+      });
+    },
     getWelcomeText() {
-      const arr = [
-        "休息一会儿吧",
-        "准备吃什么呢?",
-        "要不要打一把 DOTA",
-      ];
+      const arr = ["休息一会儿吧", "准备吃什么呢?", "要不要打一把 DOTA"];
       const index = Math.floor(Math.random() * arr.length);
       return arr[index];
     },
@@ -242,6 +270,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.server-info{
+  padding-top: 20px;line-height:30px;
+  .title{
+    font-weight: 700;
+    width: 150px;
+    margin-right: 15px;
+  }
+}
 .panThumb {
   z-index: 100;
   height: 90px !important;

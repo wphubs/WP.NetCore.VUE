@@ -33,7 +33,7 @@ namespace WP.NetCore.Services
         /// <returns></returns>
         public async Task<List<PageMenuViewModel>> GetPageMenuListAsync()
         {
-            var list = await baseRepository.GetAllAsync(x => !x.IsButton,x=>x.Sort, true);
+            var list = await baseRepository.GetAllAsync(x => !x.IsButton, x => x.Sort, true);
             return mapper.Map<List<PageMenuViewModel>>(list);
         }
 
@@ -52,10 +52,10 @@ namespace WP.NetCore.Services
                 if (item.ParentId == 0)
                 {
                     var objMenu = mapper.Map<MenuViewModel>(item);
-                    objMenu.children= GetMenuChildren(menu, item.Id);
+                    objMenu.children = GetMenuChildren(menu, item.Id);
                     listMenu.Add(objMenu);
-                } 
-                   
+                }
+
             });
             return listMenu;
 
@@ -87,18 +87,22 @@ namespace WP.NetCore.Services
         /// 根据角色获取菜单
         /// </summary>
         /// <returns></returns>
-        public async Task<List<RouterViewModel>> GetRoleMenuListAsync(List<long> roleId)
+        public async Task<List<RouterViewModel>> GetRoleMenuListAsync(List<long> listRole)
         {
-
-            var objList = await dbContext.MenuRole.Join(dbContext.Menu, menuRole => menuRole.MenuId,
-           menu => menu.Id, (menuRole, menu) => new { menuRole, menu })
-           .Where(x =>x.menuRole.IsDelete == false&&x.menu.IsDelete==false&&x.menuRole.RoleId==15312195587736576)
-           .Select(x=>x.menu)
-           .ToListAsync();
-
-
-            var listMenu = await baseRepository.GetAllAsync(x => x.IsDelete == false, x => x.Sort, true);
-            var list = GetRootMenu(objList, 0);
+            List<Menu> listMenu = new List<Menu>();
+            if (listRole.Contains(999999999))
+            {
+                listMenu = await baseRepository.GetAllAsync(x => x.IsDelete == false, x => x.Sort, true);
+            }
+            else
+            {
+                listMenu = await dbContext.MenuRole.Join(dbContext.Menu, menuRole => menuRole.MenuId,
+                menu => menu.Id, (menuRole, menu) => new { menuRole, menu })
+               .Where(x => x.menuRole.IsDelete == false && x.menu.IsDelete == false && listRole.Contains(x.menuRole.RoleId))
+               .Select(x => x.menu)
+               .ToListAsync();
+            }
+            var list = GetRootMenu(listMenu, 0);
             return list;
         }
 
@@ -163,7 +167,8 @@ namespace WP.NetCore.Services
                 model.component = item.Component;
                 model.name = item.Component;
                 model.meta = new MetaData() { icon = item.Icon, title = item.Title, permission = GetMenuPermission(parentId, listMenu) };
-                var objSelect = GetChildrenMenu(listMenu, item.Id);
+                //var objSelect = GetChildrenMenu(listMenu, item.Id);
+                model.children = GetChildrenMenu(listMenu, item.Id);
                 listModel.Add(model);
             });
             return listModel;
