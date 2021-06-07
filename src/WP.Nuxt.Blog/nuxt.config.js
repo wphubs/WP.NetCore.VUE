@@ -10,6 +10,9 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' }
     ],
+    script: [
+      { src: 'https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js' },
+    ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
@@ -17,12 +20,14 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    'element-ui/lib/theme-chalk/index.css'
+    'element-ui/lib/theme-chalk/index.css', 'animate.css/animate.css','bulma/css/bulma.css','hover.css/css/hover.css',
+    '@/assets/iconfont.css',
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '@/plugins/element-ui'
+    '@/plugins/element-ui','@/plugins/vue-headroom','@/plugins/vue-scrollactive', '@/plugins/vue-markdown.js',
+    { src: '@/assets/iconfont.js', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
