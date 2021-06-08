@@ -1,33 +1,42 @@
 <template>
   <div>
-    <div style="position:absolute;top: 20px;right:  50px;z-index: 999;color: #fff; font-size: 16px;  ">
-      <span class="span-tag  hvr-bounce-in"><a href="/">首页</a></span>
-      <span class="span-tag  hvr-bounce-in"><a href="/article">文章</a></span>
-      <span class="span-tag  hvr-bounce-in">进入后台</span>
-      <span class="span-tag  hvr-bounce-in">关于</span>
-      <span class="span-tag nav-item">
-        <a class="button is-inverted hvr-grow-rotate" href="https://github.com/wphubs/WP.NetCore.VUE" target="_blank">
-          <span class="icon">
-            <!-- <img src="../static/images/github.png" height="30" width="50" alt=""> -->
-            <i class="iconfont  icon-GitHub1" ></i>
-            
-            <!-- <i class="fab fa-github"></i> -->
-          </span>
-          <span>Github</span>
-        </a>
-      </span>
+    <div style="z-index: 999; font-size: 16px;padding-right: 10px;background: #000;display: flex; justify-content: flex-end;height: 70px;align-items: center;">
+      <PageHeader />
     </div>
-    <Nuxt />
+    <Nuxt style="padding-bottom: 30px;" />
+    <PageFooter />
   </div>
 </template>
-<style scoped>
-  .span-tag {
-    margin-left: 20px;
+<script>
+  import PageHeader from '~/components/PageHeader.vue'
+  import PageFooter from '~/components/PageFooter.vue'
+  export default {
+      //注入组件
+      components: {
+        PageHeader,
+        PageFooter
+      },
+      data() {
+          return {
+
+          };
+      },
+      //监听属性
+      computed: {},
+      watch: {},
+      methods: {
+
+      },
+      //生命周期 - 创建完成（可以访问当前this实例）
+      created() {
+
+      },
+      //生命周期 - 挂载完成（可以访问DOM元素）
+      mounted() {
+
+      },
   }
-  a:hover{
-    color: #FFF;
-  }
-</style>
+</script>
 <style>
   html {
     font-family:

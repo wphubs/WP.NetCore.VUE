@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div style="position:absolute;top: 20px;right:  10px;z-index: 999;color: #fff; font-size: 16px;   ">
+            <PageHeader />
+          </div>
         <section id="home" class="hero  is-fullheight bg">
             <client-only>
                 <div class="containerbox ">
@@ -57,69 +60,67 @@
             </div>
         </section>
         <section id="examples" class="hero is-light  is-fullheight " style="background-color: #ededed;">
-            <div class="hero-body"  style="width: 100%;padding: 0px !important;">
-                <div  style="width: 100%;">
+            <div class="hero-body" style="width: 100%;padding: 0px !important;">
+                <div style="width: 100%;">
                     <el-row justify="center" :gutter="20">
-                        <el-col :xs="{span: 22, offset: 1}" :sm="{span: 22, offset:1}" :md="{span: 6, offset:2}" :lg="{span: 6, offset:2}" :xl="{span: 6, offset:2}" >
-                          <div><strong style="font-weight: bold; color: black; ">SSR网站</strong>
-                        </p>
-                            <span
-                              style="display: block;  height: 30px; width: 100%; background-size: 40px;  background-color: #1E1E1E; margin-bottom: -7px; border-radius: 5px; background-position: 10px 10px;"></span><code
-                              class="hljs"
-                              style="overflow-x: auto; padding: 16px; color: #DCDCDC; display: -webkit-box; font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; font-size: 15px; -webkit-overflow-scrolling: touch; padding-top: 10px; background: #1E1E1E; border-radius: 5px;">1.克隆代码<br>&nbsp;&nbsp;https://github.com/wphubs/WP.NetCore.VUE.git<br>&nbsp;&nbsp;<br>2.进到目录<br>&nbsp;&nbsp;<span class="hljs-built_in" style="color: #4EC9B0; line-height: 26px;">cd</span>&nbsp;WP.Vue.Blog<br>&nbsp;&nbsp;<br>3.安装依赖<br>&nbsp;&nbsp;yarn&nbsp;install<br>&nbsp;&nbsp;<br>4.开发模式运行<br>&nbsp;&nbsp;yarn&nbsp;run&nbsp;dev<br></code>
-                          </div>
+                        <el-col :xs="{span: 22, offset: 1}" :sm="{span: 22, offset:1}" :md="{span: 6, offset:2}"
+                            :lg="{span: 6, offset:2}" :xl="{span: 6, offset:2}">
+                            <div><strong style="font-weight: bold; color: black; ">SSR网站</strong>
+                                </p>
+                                <span
+                                    style="display: block;  height: 30px; width: 100%; background-size: 40px;  background-color: #1E1E1E; margin-bottom: -7px; border-radius: 5px; background-position: 10px 10px;"></span><code
+                                    class="hljs"
+                                    style="overflow-x: auto; padding: 16px; color: #DCDCDC; display: -webkit-box; font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; font-size: 15px; -webkit-overflow-scrolling: touch; padding-top: 10px; background: #1E1E1E; border-radius: 5px;">1.克隆代码<br>&nbsp;&nbsp;https://github.com/wphubs/WP.NetCore.VUE.git<br>&nbsp;&nbsp;<br>2.进到目录<br>&nbsp;&nbsp;<span class="hljs-built_in" style="color: #4EC9B0; line-height: 26px;">cd</span>&nbsp;WP.Vue.Blog<br>&nbsp;&nbsp;<br>3.安装依赖<br>&nbsp;&nbsp;yarn&nbsp;install<br>&nbsp;&nbsp;<br>4.开发模式运行<br>&nbsp;&nbsp;yarn&nbsp;run&nbsp;dev<br></code>
+                            </div>
                         </el-col>
-                        <el-col :xs="{span: 22, offset: 1}" :sm="{span: 22, offset:1}" :md="{span: 6, offset:1}" :lg="{span: 6, offset:1}" :xl="{span: 6, offset:1}" >
+                        <el-col :xs="{span: 22, offset: 1}" :sm="{span: 22, offset:1}" :md="{span: 6, offset:1}"
+                            :lg="{span: 6, offset:1}" :xl="{span: 6, offset:1}">
                             <div><strong style="font-weight: bold; color: black;">SSR网站</strong></p>
-                              <span
-                                style="display: block;  height: 30px; width: 100%; background-size: 40px;  background-color: #1E1E1E; margin-bottom: -7px; border-radius: 5px; background-position: 10px 10px;"></span><code
-                                class="hljs"
-                                style="overflow-x: auto; padding: 16px; color: #DCDCDC; display: -webkit-box; font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; font-size: 15px; -webkit-overflow-scrolling: touch; padding-top: 10px; background: #1E1E1E; border-radius: 5px;">1.克隆代码<br>&nbsp;&nbsp;https://github.com/wphubs/WP.NetCore.VUE.git<br>&nbsp;&nbsp;<br>2.进到目录<br>&nbsp;&nbsp;<span class="hljs-built_in" style="color: #4EC9B0; line-height: 26px;">cd</span>&nbsp;WP.Vue.Blog<br>&nbsp;&nbsp;<br>3.安装依赖<br>&nbsp;&nbsp;yarn&nbsp;install<br>&nbsp;&nbsp;<br>4.开发模式运行<br>&nbsp;&nbsp;yarn&nbsp;run&nbsp;dev<br></code>
+                                <span
+                                    style="display: block;  height: 30px; width: 100%; background-size: 40px;  background-color: #1E1E1E; margin-bottom: -7px; border-radius: 5px; background-position: 10px 10px;"></span><code
+                                    class="hljs"
+                                    style="overflow-x: auto; padding: 16px; color: #DCDCDC; display: -webkit-box; font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; font-size: 15px; -webkit-overflow-scrolling: touch; padding-top: 10px; background: #1E1E1E; border-radius: 5px;">1.克隆代码<br>&nbsp;&nbsp;https://github.com/wphubs/WP.NetCore.VUE.git<br>&nbsp;&nbsp;<br>2.进到目录<br>&nbsp;&nbsp;<span class="hljs-built_in" style="color: #4EC9B0; line-height: 26px;">cd</span>&nbsp;WP.Vue.Blog<br>&nbsp;&nbsp;<br>3.安装依赖<br>&nbsp;&nbsp;yarn&nbsp;install<br>&nbsp;&nbsp;<br>4.开发模式运行<br>&nbsp;&nbsp;yarn&nbsp;run&nbsp;dev<br></code>
                             </div>
-                          </el-col>
-                          <el-col :xs="{span: 22, offset: 1}" :sm="{span: 22, offset:1}" :md="{span: 6, offset:1}" :lg="{span: 6, offset:1}" :xl="{span: 6, offset:1}" >
+                        </el-col>
+                        <el-col :xs="{span: 22, offset: 1}" :sm="{span: 22, offset:1}" :md="{span: 6, offset:1}"
+                            :lg="{span: 6, offset:1}" :xl="{span: 6, offset:1}">
                             <div><strong style="font-weight: bold; color: black;">SSR网站</strong></p>
-                              <span
-                                style="display: block;  height: 30px; width: 100%; background-size: 40px;  background-color: #1E1E1E; margin-bottom: -7px; border-radius: 5px; background-position: 10px 10px;"></span><code
-                                class="hljs"
-                                style="overflow-x: auto; padding: 16px; color: #DCDCDC; display: -webkit-box; font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; font-size: 15px; -webkit-overflow-scrolling: touch; padding-top: 10px; background: #1E1E1E; border-radius: 5px;">1.克隆代码<br>&nbsp;&nbsp;https://github.com/wphubs/WP.NetCore.VUE.git<br>&nbsp;&nbsp;<br>2.进到目录<br>&nbsp;&nbsp;<span class="hljs-built_in" style="color: #4EC9B0; line-height: 26px;">cd</span>&nbsp;WP.Vue.Blog<br>&nbsp;&nbsp;<br>3.安装依赖<br>&nbsp;&nbsp;yarn&nbsp;install<br>&nbsp;&nbsp;<br>4.开发模式运行<br>&nbsp;&nbsp;yarn&nbsp;run&nbsp;dev<br></code>
+                                <span
+                                    style="display: block;  height: 30px; width: 100%; background-size: 40px;  background-color: #1E1E1E; margin-bottom: -7px; border-radius: 5px; background-position: 10px 10px;"></span><code
+                                    class="hljs"
+                                    style="overflow-x: auto; padding: 16px; color: #DCDCDC; display: -webkit-box; font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; font-size: 15px; -webkit-overflow-scrolling: touch; padding-top: 10px; background: #1E1E1E; border-radius: 5px;">1.克隆代码<br>&nbsp;&nbsp;https://github.com/wphubs/WP.NetCore.VUE.git<br>&nbsp;&nbsp;<br>2.进到目录<br>&nbsp;&nbsp;<span class="hljs-built_in" style="color: #4EC9B0; line-height: 26px;">cd</span>&nbsp;WP.Vue.Blog<br>&nbsp;&nbsp;<br>3.安装依赖<br>&nbsp;&nbsp;yarn&nbsp;install<br>&nbsp;&nbsp;<br>4.开发模式运行<br>&nbsp;&nbsp;yarn&nbsp;run&nbsp;dev<br></code>
                             </div>
-                          </el-col>
-                     
-                      </el-row>  
+                        </el-col>
+
+                    </el-row>
                 </div>
             </div>
         </section>
-        <footer class="footer">
-            <div class="container">
-                <div class="content has-text-centered">
-
-                    <p>The MIT License (MIT) Copyright 2021 ALL Rights Reserved</p>
-                    <a target="_blank" href="http:
-                        //www.beian.gov.cn/portal/registerSystemInfo?recordcode=11011502004518"
-                                    style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img
-                                          src="../static/images/beian.png"  style="float:left;"   />
-                                    <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px;">
-                            京公网安备11011502004518号</p></a>
-
-                         <div style="padding: 20px 0px;">
-                                    京ICP备2020044177号
-                                </div>
-                </div>
-            </div>
+        <footer >
+            <PageFooter />
         </footer>
 
     </div>
 </template>
 
 <script>
-
+    import PageHeader from '~/components/PageHeader.vue'
+    import PageFooter from '~/components/PageFooter.vue'
     export default {
-        mounted() {
-        
-        
-     
+        //注入组件
+        components: {
+            PageHeader,
+            PageFooter
         },
+        mounted() {
+            // this.$nextTick(() => {
+            //     this.$nuxt.$loading.start()
+            //     setTimeout(() => this.$nuxt.$loading.finish(), 2500)
+            // })
+
+
+        },
+        layout: 'custom_layout',
     }
 </script>
 
@@ -128,16 +129,7 @@
         background-color: #2d3236;
     }
 
-    .footer {
-        background-color: #2d3236;
-        padding: 20px;
-        color: #FFF;
 
-        a {
-            color: #FFFFFF;
-        }
-
-    }
 
     .text {
         text-align: center;
@@ -172,7 +164,8 @@
         right: 0px;
 
     }
-/* https://images.pexels.com/photos/1038916/pexels-photo-1038916.jpeg?cs=srgb&dl=pexels-fox-1038916.jpg&fm=jpg' */
+
+    /* https://images.pexels.com/photos/1038916/pexels-photo-1038916.jpeg?cs=srgb&dl=pexels-fox-1038916.jpg&fm=jpg' */
     .bg {
         height: 100vh;
         width: 100%;
