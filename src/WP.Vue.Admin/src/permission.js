@@ -44,6 +44,7 @@ router.beforeEach(async(to, from, next) => {
             next()
           }
         } catch (error) {
+          console.log('error')
           await store.dispatch('user/resetToken')
           Message.error(error || 'Has Error')
           next(`/login`)
@@ -53,6 +54,13 @@ router.beforeEach(async(to, from, next) => {
     }
   } else {
     /* has no token*/
+
+    if (whiteList.indexOf(to.path) !== -1) {
+      next() // in the free login whitelist, go directly
+    } else {
+      next(`/login`)
+      NProgress.done()
+    }
 
     //if (whiteList.indexOf(to.path) !== -1) {
       // in the free login whitelist, go directly

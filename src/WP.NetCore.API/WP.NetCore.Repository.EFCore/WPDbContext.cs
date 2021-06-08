@@ -35,37 +35,9 @@ namespace WP.NetCore.Repository.EFCore
             base.OnModelCreating(modelBuilder);
             var assembly = this.GetType().Assembly;
             modelBuilder.ApplyConfigurationsFromAssembly(assembly);
-
-
             var idWork = new Snowflake();
-
-            //modelBuilder.Entity<UserRole>().HasData(new List<UserRole>()
-            //{
-            //    new UserRole()
-            //    {
-            //        Id= idWork.NextId(),
-
-            //        User=new User()
-            //        {
-            //            Id = userId,
-            //            UserName = "admin",
-            //            Name = "系统管理员",
-            //            Password = "670b14728ad9902aecba32e22fa4f6bd",
-            //            Sex = 1,
-            //        },
-            //        Role = new Role() { Id =roleId, RoleName = "系统管理员" },
-            //    },
-            //});
-
-            //modelBuilder.Entity<Role>().HasData(new List<Role>()
-            //{
-            //    new Role(){Id= new Snowflake().GetId(),RoleName="系统管理员" },
-            //    new Role(){Id= new Snowflake().GetId(),RoleName="测试测试" }
-            //});
-
-
-            var roleId = 999999999;
-            var userId = 999999999;
+            var roleId = 999999999;//系统管理员
+            var userId = 999999999;//系统管理员
             modelBuilder.Entity<User>().HasData(new User()
             {
                 Id = userId,
@@ -75,7 +47,6 @@ namespace WP.NetCore.Repository.EFCore
                 Sex = 1,
                  
             });
-
             modelBuilder.Entity<Role>().HasData(new Role()
             {
                 RoleName = "系统管理员",
@@ -113,7 +84,6 @@ namespace WP.NetCore.Repository.EFCore
                 {
                     Id=idWork.NextId(),Title="删除",Url="user/delete",Component="deleteUser",ParentId=1,IsButton=true,
                 },
-
                 new Menu()
                 {
                     Id=2,Title="角色管理",Component="role/index",Icon="el-icon-heavy-rain",Sort=2,
@@ -143,7 +113,6 @@ namespace WP.NetCore.Repository.EFCore
                     Id=idWork.NextId(),Title="查看权限",Url="role/getPermission/get",Component="getPermission",ParentId=2,IsButton=true,
                 },
 
-
                 new Menu()
                 {
                     Id=6,Title="菜单管理",Component="menu/index",Icon="el-icon-heavy-rain",Sort=2,
@@ -169,19 +138,26 @@ namespace WP.NetCore.Repository.EFCore
                 {
                     Id=idWork.NextId(),Title="删除",Url="menu/delete",Component="deleteMenu",ParentId=6,IsButton=true,
                 },
-
-
                 new Menu()
                 {
-                    Id=3,Title="多级",Component="nested",ParentId=0,Icon="nested",Sort=3,
+                    Id=1001,Title="多级",Component="nested",ParentId=0,Icon="nested",Sort=3,
                 },
                 new Menu()
                 {
-                    Id=4,Title="子级11",Component="nested/menu1/index",Icon="lightning",ParentId=3,Sort=1,
+                    Id=1002,Title="子级11",Component="nested/menu1/index",Icon="lightning",ParentId=1001,Sort=1,
                 },
                 new Menu()
                 {
-                    Id=5,Title="子级22",Component="nested/menu2/index",Icon="lightning",ParentId=3,Sort=2,
+                    Id=1003,Title="子级22",Component="nested/menu2/index",Icon="lightning",ParentId=1001,Sort=2,
+                }
+                ,
+                new Menu()
+                {
+                    Id=1004,Title="子级22",Component="nested/menu1/menu1-2/index",Icon="lightning",ParentId=1002,Sort=2,
+                },
+                new Menu()
+                {
+                    Id=1005,Title="子级22",Component="nested/menu1/menu1-2/menu1-2-1/index",Icon="lightning",ParentId=1004,Sort=2,
                 }
             });
         }
