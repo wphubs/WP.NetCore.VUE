@@ -250,6 +250,7 @@ namespace WP.NetCore.API
             {
                 typeof(ApiVersions).GetEnumNames().OrderByDescending(e => e).ToList().ForEach(version =>
                 {
+                    //c.SwaggerEndpoint($"/netcore/swagger/{version}/swagger.json", $"{APIName} {version}");
                     c.SwaggerEndpoint($"/swagger/{version}/swagger.json", $"{APIName} {version}");
                 });
                 c.RoutePrefix = "";
