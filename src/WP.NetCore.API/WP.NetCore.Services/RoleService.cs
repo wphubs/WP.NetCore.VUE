@@ -65,7 +65,7 @@ namespace WP.NetCore.Services
                 var idwork = new Snowflake();
                 dto.MenuId.ForEach(async item =>
                 {
-                    var menu = await menuRepository.FirstAsync(item);
+                    var menu = await menuRepository.FirstNoTrackingAsync(item);
                     listAdd.Add(new MenuRole() { RoleId = dto.RoleId, MenuId = item, Id = idwork.NextId(), CreateBy = dto.CreateBy });
                 });
                 await menuRoleRepository.DeleteRangeAsync(role.MenuRoles);
@@ -80,6 +80,11 @@ namespace WP.NetCore.Services
         }
 
 
+        /// <summary>
+        /// 获取角色菜单
+        /// </summary>
+        /// <param name="roleId"></param>
+        /// <returns></returns>
         public async Task<List<string>> GetRolePermission(long roleId)
         {
 

@@ -30,6 +30,10 @@ namespace WP.NetCore.Repository.EFCore
 
         public DbSet<MenuRole> MenuRole { get; set; }
 
+        public DbSet<Article> Article { get; set; }
+
+        public DbSet<ArticleClass> ArticleClass { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -60,8 +64,6 @@ namespace WP.NetCore.Repository.EFCore
                 RoleId= roleId
 
             });
-
-
             modelBuilder.Entity<Menu>().HasData(new List<Menu>()
             {
                 new Menu()
@@ -159,6 +161,13 @@ namespace WP.NetCore.Repository.EFCore
                 {
                     Id=1005,Title="子级22",Component="nested/menu1/menu1-2/menu1-2-1/index",Icon="lightning",ParentId=1004,Sort=2,
                 }
+            });
+
+
+            modelBuilder.Entity<ArticleClass>().HasData(new ArticleClass()
+            {
+                Id = idWork.NextId(),
+                ClassName = ".NetCore",
             });
         }
 

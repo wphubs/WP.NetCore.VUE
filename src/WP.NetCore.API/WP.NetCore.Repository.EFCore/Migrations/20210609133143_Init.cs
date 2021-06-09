@@ -9,6 +9,25 @@ namespace WP.NetCore.Repository.EFCore.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "ArticleClass",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    CreateTime = table.Column<DateTime>(nullable: true),
+                    CreateBy = table.Column<long>(nullable: true),
+                    ModifyTime = table.Column<DateTime>(nullable: true),
+                    ModifyBy = table.Column<long>(nullable: true),
+                    DeleteTime = table.Column<DateTime>(nullable: true),
+                    IsDelete = table.Column<bool>(nullable: false),
+                    ClassName = table.Column<string>(maxLength: 50, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ArticleClass", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Menu",
                 columns: table => new
                 {
@@ -78,6 +97,33 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Article",
+                columns: table => new
+                {
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    CreateTime = table.Column<DateTime>(nullable: true),
+                    CreateBy = table.Column<long>(nullable: true),
+                    ModifyTime = table.Column<DateTime>(nullable: true),
+                    ModifyBy = table.Column<long>(nullable: true),
+                    DeleteTime = table.Column<DateTime>(nullable: true),
+                    IsDelete = table.Column<bool>(nullable: false),
+                    ClassId = table.Column<long>(nullable: true),
+                    Title = table.Column<string>(nullable: true),
+                    Content = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Article", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Article_ArticleClass_ClassId",
+                        column: x => x.ClassId,
+                        principalTable: "ArticleClass",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "MenuRole",
                 columns: table => new
                 {
@@ -142,49 +188,59 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "ArticleClass",
+                columns: new[] { "Id", "ClassName", "CreateBy", "CreateTime", "DeleteTime", "IsDelete", "ModifyBy", "ModifyTime" },
+                values: new object[] { 15324897318372352L, ".NetCore", null, new DateTime(2021, 6, 9, 21, 31, 43, 362, DateTimeKind.Local).AddTicks(1244), null, false, null, null });
+
+            migrationBuilder.InsertData(
                 table: "Menu",
                 columns: new[] { "Id", "Component", "CreateBy", "CreateTime", "DeleteTime", "Icon", "IsButton", "IsDelete", "IsHidden", "ModifyBy", "ModifyTime", "ParentId", "Sort", "Title", "Url" },
                 values: new object[,]
                 {
-                    { 1L, "user/index", null, new DateTime(2021, 6, 7, 21, 20, 37, 895, DateTimeKind.Local).AddTicks(1534), null, "el-icon-lightning", false, false, false, null, null, 0L, 1, "用户管理", null },
-                    { 1005L, "nested/menu1/menu1-2/menu1-2-1/index", null, new DateTime(2021, 6, 7, 21, 20, 37, 895, DateTimeKind.Local).AddTicks(5420), null, "lightning", false, false, false, null, null, 1004L, 2, "子级22", null },
-                    { 1004L, "nested/menu1/menu1-2/index", null, new DateTime(2021, 6, 7, 21, 20, 37, 895, DateTimeKind.Local).AddTicks(5418), null, "lightning", false, false, false, null, null, 1002L, 2, "子级22", null },
-                    { 1003L, "nested/menu2/index", null, new DateTime(2021, 6, 7, 21, 20, 37, 895, DateTimeKind.Local).AddTicks(5417), null, "lightning", false, false, false, null, null, 1001L, 2, "子级22", null },
-                    { 1002L, "nested/menu1/index", null, new DateTime(2021, 6, 7, 21, 20, 37, 895, DateTimeKind.Local).AddTicks(5415), null, "lightning", false, false, false, null, null, 1001L, 1, "子级11", null },
-                    { 1001L, "nested", null, new DateTime(2021, 6, 7, 21, 20, 37, 895, DateTimeKind.Local).AddTicks(5413), null, "nested", false, false, false, null, null, 0L, 3, "多级", null },
-                    { 15322055260161038L, "deleteMenu", null, new DateTime(2021, 6, 7, 21, 20, 37, 895, DateTimeKind.Local).AddTicks(5409), null, null, true, false, false, null, null, 6L, 0, "删除", "menu/delete" },
-                    { 15322055260161037L, "editMenu", null, new DateTime(2021, 6, 7, 21, 20, 37, 895, DateTimeKind.Local).AddTicks(5405), null, null, true, false, false, null, null, 6L, 0, "编辑", "menu/put" },
-                    { 15322055260161036L, "getMenu", null, new DateTime(2021, 6, 7, 21, 20, 37, 895, DateTimeKind.Local).AddTicks(5402), null, null, true, false, false, null, null, 6L, 0, "查看所有", "menu/get" },
-                    { 15322055260161035L, "addMenu", null, new DateTime(2021, 6, 7, 21, 20, 37, 895, DateTimeKind.Local).AddTicks(5399), null, null, true, false, false, null, null, 6L, 0, "新增", "menu/post" },
-                    { 15322055260161034L, "getMenu", null, new DateTime(2021, 6, 7, 21, 20, 37, 895, DateTimeKind.Local).AddTicks(5396), null, null, true, false, false, null, null, 6L, 0, "查看菜单树", "menu/getMenuTree/get" },
-                    { 6L, "menu/index", null, new DateTime(2021, 6, 7, 21, 20, 37, 895, DateTimeKind.Local).AddTicks(5394), null, "el-icon-heavy-rain", false, false, false, null, null, 0L, 2, "菜单管理", null },
-                    { 15322055260161032L, "setPermission", null, new DateTime(2021, 6, 7, 21, 20, 37, 895, DateTimeKind.Local).AddTicks(5388), null, null, true, false, false, null, null, 2L, 0, "设置权限", "role/setPermission/post" },
-                    { 15322055260161031L, "deleteRole", null, new DateTime(2021, 6, 7, 21, 20, 37, 895, DateTimeKind.Local).AddTicks(5384), null, null, true, false, false, null, null, 2L, 0, "删除", "role/delete" },
-                    { 15322055260161030L, "editRole", null, new DateTime(2021, 6, 7, 21, 20, 37, 895, DateTimeKind.Local).AddTicks(5380), null, null, true, false, false, null, null, 2L, 0, "编辑", "role/put" },
-                    { 15322055260161029L, "addRole", null, new DateTime(2021, 6, 7, 21, 20, 37, 895, DateTimeKind.Local).AddTicks(5373), null, null, true, false, false, null, null, 2L, 0, "新增", "role/post" },
-                    { 15322055260161028L, "getRole", null, new DateTime(2021, 6, 7, 21, 20, 37, 895, DateTimeKind.Local).AddTicks(5370), null, null, true, false, false, null, null, 2L, 0, "查看", "role/get" },
-                    { 2L, "role/index", null, new DateTime(2021, 6, 7, 21, 20, 37, 895, DateTimeKind.Local).AddTicks(5368), null, "el-icon-heavy-rain", false, false, false, null, null, 0L, 2, "角色管理", null },
-                    { 15322055260161027L, "deleteUser", null, new DateTime(2021, 6, 7, 21, 20, 37, 895, DateTimeKind.Local).AddTicks(5354), null, null, true, false, false, null, null, 1L, 0, "删除", "user/delete" },
-                    { 15322055260161026L, "editUser", null, new DateTime(2021, 6, 7, 21, 20, 37, 895, DateTimeKind.Local).AddTicks(5350), null, null, true, false, false, null, null, 1L, 0, "编辑", "user/put" },
-                    { 15322055260161025L, "addUser", null, new DateTime(2021, 6, 7, 21, 20, 37, 895, DateTimeKind.Local).AddTicks(5331), null, null, true, false, false, null, null, 1L, 0, "新增", "user/post" },
-                    { 15322055260161024L, "getUser", null, new DateTime(2021, 6, 7, 21, 20, 37, 895, DateTimeKind.Local).AddTicks(3408), null, null, true, false, false, null, null, 1L, 0, "查看", "user/get" },
-                    { 15322055260161033L, "getPermission", null, new DateTime(2021, 6, 7, 21, 20, 37, 895, DateTimeKind.Local).AddTicks(5391), null, null, true, false, false, null, null, 2L, 0, "查看权限", "role/getPermission/get" }
+                    { 1005L, "nested/menu1/menu1-2/menu1-2-1/index", null, new DateTime(2021, 6, 9, 21, 31, 43, 361, DateTimeKind.Local).AddTicks(9474), null, "lightning", false, false, false, null, null, 1004L, 2, "子级22", null },
+                    { 1004L, "nested/menu1/menu1-2/index", null, new DateTime(2021, 6, 9, 21, 31, 43, 361, DateTimeKind.Local).AddTicks(9472), null, "lightning", false, false, false, null, null, 1002L, 2, "子级22", null },
+                    { 1003L, "nested/menu2/index", null, new DateTime(2021, 6, 9, 21, 31, 43, 361, DateTimeKind.Local).AddTicks(9470), null, "lightning", false, false, false, null, null, 1001L, 2, "子级22", null },
+                    { 1002L, "nested/menu1/index", null, new DateTime(2021, 6, 9, 21, 31, 43, 361, DateTimeKind.Local).AddTicks(9468), null, "lightning", false, false, false, null, null, 1001L, 1, "子级11", null },
+                    { 1001L, "nested", null, new DateTime(2021, 6, 9, 21, 31, 43, 361, DateTimeKind.Local).AddTicks(9465), null, "nested", false, false, false, null, null, 0L, 3, "多级", null },
+                    { 15324897318355983L, "deleteMenu", null, new DateTime(2021, 6, 9, 21, 31, 43, 361, DateTimeKind.Local).AddTicks(9461), null, null, true, false, false, null, null, 6L, 0, "删除", "menu/delete" },
+                    { 15324897318355982L, "editMenu", null, new DateTime(2021, 6, 9, 21, 31, 43, 361, DateTimeKind.Local).AddTicks(9409), null, null, true, false, false, null, null, 6L, 0, "编辑", "menu/put" },
+                    { 15324897318355981L, "getMenu", null, new DateTime(2021, 6, 9, 21, 31, 43, 361, DateTimeKind.Local).AddTicks(9406), null, null, true, false, false, null, null, 6L, 0, "查看所有", "menu/get" },
+                    { 15324897318355980L, "addMenu", null, new DateTime(2021, 6, 9, 21, 31, 43, 361, DateTimeKind.Local).AddTicks(9402), null, null, true, false, false, null, null, 6L, 0, "新增", "menu/post" },
+                    { 15324897318355979L, "getMenu", null, new DateTime(2021, 6, 9, 21, 31, 43, 361, DateTimeKind.Local).AddTicks(9398), null, null, true, false, false, null, null, 6L, 0, "查看菜单树", "menu/getMenuTree/get" },
+                    { 6L, "menu/index", null, new DateTime(2021, 6, 9, 21, 31, 43, 361, DateTimeKind.Local).AddTicks(9396), null, "el-icon-heavy-rain", false, false, false, null, null, 0L, 2, "菜单管理", null },
+                    { 15324897318355978L, "getPermission", null, new DateTime(2021, 6, 9, 21, 31, 43, 361, DateTimeKind.Local).AddTicks(9393), null, null, true, false, false, null, null, 2L, 0, "查看权限", "role/getPermission/get" },
+                    { 15324897318355977L, "setPermission", null, new DateTime(2021, 6, 9, 21, 31, 43, 361, DateTimeKind.Local).AddTicks(9389), null, null, true, false, false, null, null, 2L, 0, "设置权限", "role/setPermission/post" },
+                    { 15324897318355976L, "deleteRole", null, new DateTime(2021, 6, 9, 21, 31, 43, 361, DateTimeKind.Local).AddTicks(9386), null, null, true, false, false, null, null, 2L, 0, "删除", "role/delete" },
+                    { 15324897318355975L, "editRole", null, new DateTime(2021, 6, 9, 21, 31, 43, 361, DateTimeKind.Local).AddTicks(9381), null, null, true, false, false, null, null, 2L, 0, "编辑", "role/put" },
+                    { 15324897318355974L, "addRole", null, new DateTime(2021, 6, 9, 21, 31, 43, 361, DateTimeKind.Local).AddTicks(9377), null, null, true, false, false, null, null, 2L, 0, "新增", "role/post" },
+                    { 15324897318355973L, "getRole", null, new DateTime(2021, 6, 9, 21, 31, 43, 361, DateTimeKind.Local).AddTicks(9372), null, null, true, false, false, null, null, 2L, 0, "查看", "role/get" },
+                    { 2L, "role/index", null, new DateTime(2021, 6, 9, 21, 31, 43, 361, DateTimeKind.Local).AddTicks(9370), null, "el-icon-heavy-rain", false, false, false, null, null, 0L, 2, "角色管理", null },
+                    { 15324897318355972L, "deleteUser", null, new DateTime(2021, 6, 9, 21, 31, 43, 361, DateTimeKind.Local).AddTicks(9356), null, null, true, false, false, null, null, 1L, 0, "删除", "user/delete" },
+                    { 15324897318355971L, "editUser", null, new DateTime(2021, 6, 9, 21, 31, 43, 361, DateTimeKind.Local).AddTicks(9350), null, null, true, false, false, null, null, 1L, 0, "编辑", "user/put" },
+                    { 15324897318355970L, "addUser", null, new DateTime(2021, 6, 9, 21, 31, 43, 361, DateTimeKind.Local).AddTicks(9335), null, null, true, false, false, null, null, 1L, 0, "新增", "user/post" },
+                    { 15324897318355969L, "getUser", null, new DateTime(2021, 6, 9, 21, 31, 43, 361, DateTimeKind.Local).AddTicks(7788), null, null, true, false, false, null, null, 1L, 0, "查看", "user/get" },
+                    { 1L, "user/index", null, new DateTime(2021, 6, 9, 21, 31, 43, 361, DateTimeKind.Local).AddTicks(5999), null, "el-icon-lightning", false, false, false, null, null, 0L, 1, "用户管理", null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Role",
                 columns: new[] { "Id", "CreateBy", "CreateTime", "DeleteTime", "IsDelete", "ModifyBy", "ModifyTime", "RoleName" },
-                values: new object[] { 999999999L, null, new DateTime(2021, 6, 7, 21, 20, 37, 894, DateTimeKind.Local).AddTicks(4201), null, false, null, null, "系统管理员" });
+                values: new object[] { 999999999L, null, new DateTime(2021, 6, 9, 21, 31, 43, 360, DateTimeKind.Local).AddTicks(4819), null, false, null, null, "系统管理员" });
 
             migrationBuilder.InsertData(
                 table: "User",
                 columns: new[] { "Id", "Avatar", "CreateBy", "CreateTime", "DeleteTime", "IsDelete", "IsEnable", "ModifyBy", "ModifyTime", "Name", "Password", "Sex", "UserName" },
-                values: new object[] { 999999999L, null, null, new DateTime(2021, 6, 7, 21, 20, 37, 891, DateTimeKind.Local).AddTicks(423), null, false, true, null, null, "系统管理员", "670b14728ad9902aecba32e22fa4f6bd", 1, "admin" });
+                values: new object[] { 999999999L, null, null, new DateTime(2021, 6, 9, 21, 31, 43, 356, DateTimeKind.Local).AddTicks(7049), null, false, true, null, null, "系统管理员", "670b14728ad9902aecba32e22fa4f6bd", 1, "admin" });
 
             migrationBuilder.InsertData(
                 table: "UserRole",
                 columns: new[] { "Id", "CreateBy", "CreateTime", "DeleteTime", "IsDelete", "ModifyBy", "ModifyTime", "RoleId", "UserId" },
-                values: new object[] { 15322055260144640L, null, new DateTime(2021, 6, 7, 21, 20, 37, 894, DateTimeKind.Local).AddTicks(5576), null, false, null, null, 999999999L, 999999999L });
+                values: new object[] { 15324897318355968L, null, new DateTime(2021, 6, 9, 21, 31, 43, 360, DateTimeKind.Local).AddTicks(8255), null, false, null, null, 999999999L, 999999999L });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Article_ClassId",
+                table: "Article",
+                column: "ClassId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_MenuRole_MenuId",
@@ -210,10 +266,16 @@ namespace WP.NetCore.Repository.EFCore.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Article");
+
+            migrationBuilder.DropTable(
                 name: "MenuRole");
 
             migrationBuilder.DropTable(
                 name: "UserRole");
+
+            migrationBuilder.DropTable(
+                name: "ArticleClass");
 
             migrationBuilder.DropTable(
                 name: "Menu");

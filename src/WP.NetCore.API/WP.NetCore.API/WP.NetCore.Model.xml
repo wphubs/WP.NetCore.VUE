@@ -4,6 +4,21 @@
         <name>WP.NetCore.Model</name>
     </assembly>
     <members>
+        <member name="P:WP.NetCore.Model.Dto.Article.AddArticleDto.Title">
+            <summary>
+            文章
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Dto.Article.AddArticleDto.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Dto.Article.AddArticleDto.ClassId">
+            <summary>
+            类别ID
+            </summary>
+        </member>
         <member name="P:WP.NetCore.Model.Dto.Menu.AddMenuDto.Component">
             <summary>
             页面路径
@@ -139,6 +154,16 @@
             实现接口IEntity,所有实体继承该这个基类
             </summary>
         </member>
+        <member name="P:WP.NetCore.Model.EntityModel.Article.Title">
+            <summary>
+            文章
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.EntityModel.Article.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
         <member name="P:WP.NetCore.Model.EntityModel.Menu.Title">
             <summary>
             标题
@@ -272,6 +297,16 @@
         <member name="P:WP.NetCore.Model.ResponseResult.Data">
             <summary>
             返回数据集合
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.ArticleViewModel.Title">
+            <summary>
+            文章
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.ArticleViewModel.Content">
+            <summary>
+            内容
             </summary>
         </member>
         <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.Title">

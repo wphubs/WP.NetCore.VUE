@@ -15,6 +15,24 @@ namespace WP.NetCore.Services
     {
         public IBaseRepository<TEntity> baseDal;
 
+
+        /// <summary>
+        /// 获取实体对象
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public async Task<TEntity> FirstAsync(long Id)
+        {
+            return await baseDal.FirstAsync(Id);
+        }
+
+        public async Task<TEntity> FirstNoTrackingAsync(long Id)
+        {
+            return await baseDal.FirstNoTrackingAsync(Id);
+        }
+
+
+
         /// <summary>
         /// 新增
         /// </summary>
@@ -48,6 +66,10 @@ namespace WP.NetCore.Services
             return new PageModel<TEntity>() {Data= list.Data.ToList(),PageIndex=pageIndex,PageSize=pageSize,Total=list.Total};
         }
 
+        /// <summary>
+        /// 获取全部
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
             return await baseDal.GetAllAsync();

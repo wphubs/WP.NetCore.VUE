@@ -59,6 +59,21 @@ namespace WP.NetCore.Repository.EFCore
         /// </summary>
         /// <param name="id">主键id</param>
         /// <returns>返回实体或空</returns>
+        Task<TEntity> FirstNoTrackingAsync(long id);
+        /// <summary>
+        /// 根据查询条件获取实体数据
+        /// </summary>
+        /// <param name="predicate">查询条件</param>
+        /// <returns>返回实体或空</returns>
+        Task<TEntity> FirstNoTrackingAsync(Expression<Func<TEntity, bool>> predicate);
+
+
+
+        /// <summary>
+        /// 根据主键id获取实体数据
+        /// </summary>
+        /// <param name="id">主键id</param>
+        /// <returns>返回实体或空</returns>
         Task<TEntity> FirstAsync(long id);
         /// <summary>
         /// 根据查询条件获取实体数据
@@ -66,12 +81,15 @@ namespace WP.NetCore.Repository.EFCore
         /// <param name="predicate">查询条件</param>
         /// <returns>返回实体或空</returns>
         Task<TEntity> FirstAsync(Expression<Func<TEntity, bool>> predicate);
+
+
+
         /// <summary>
         /// 根据条件判断数据是否存在
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
-        Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<bool> AnyNoTrackingAsync(Expression<Func<TEntity, bool>> predicate);
 
         /// <summary>
         /// 新增一条数据

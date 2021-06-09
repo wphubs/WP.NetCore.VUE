@@ -17,5 +17,7 @@ namespace WP.NetCore.IServices
         Task<TEntity> AddAsync(TEntity entity);
 
         Task<IEnumerable<TEntity>> GetAllAsync();
+
+        Task<TEntity> FirstAsync(long Id);
     }
 }

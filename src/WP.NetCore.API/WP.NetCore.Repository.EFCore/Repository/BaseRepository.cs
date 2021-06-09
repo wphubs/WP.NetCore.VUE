@@ -65,25 +65,33 @@ namespace WP.NetCore.Repository.EFCore
             var pageList =  orderList
                 .Skip((pageIndex - 1) * pageSize)
                 .Take(pageSize);
-
-            //return new PageModel<TEntity>() { Data = pageList, Total = count, PageIndex = pageIndex, PageSize = pageSize };
             return (count, pageList);
         }
 
 
 
+        public async Task<TEntity> FirstNoTrackingAsync(long id)
+        {
+            return await Query().Where(w => w.Id == id && w.IsDelete == false).FirstOrDefaultAsync();
+        }
+
         public async Task<TEntity> FirstAsync(long id)
         {
-            //return await _dbContext.Set<TEntity>().FindAsync(id);
-            return await Query().Where(w => w.Id == id).FirstOrDefaultAsync();
+            return await _dbContext.Set<TEntity>().Where(w => w.Id == id&&w.IsDelete==false).FirstOrDefaultAsync();
         }
 
         public async Task<TEntity> FirstAsync(Expression<Func<TEntity, bool>> predicate)
         {
+            return await _dbContext.Set<TEntity>().FirstOrDefaultAsync(predicate);
+        }
+
+
+        public async Task<TEntity> FirstNoTrackingAsync(Expression<Func<TEntity, bool>> predicate)
+        {
             return await Query().FirstOrDefaultAsync(predicate);
         }
 
-        public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate)
+        public async Task<bool> AnyNoTrackingAsync(Expression<Func<TEntity, bool>> predicate)
         {
             return await Query().AnyAsync(predicate);
         }

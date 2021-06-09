@@ -98,7 +98,7 @@ namespace WP.NetCore.Services
 
 
         /// <summary>
-        /// 新增用户
+        /// 修改用户
         /// </summary>
         /// <param name="userId"></param>
         /// <param name="listRoles"></param>
