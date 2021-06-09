@@ -41,7 +41,7 @@ namespace WP.NetCore.Services
         public async Task<PageModel<ArticleViewModel>> GetArticleListAsync(int pageIndex, int pageSize)
         {
             var article = await baseDal.GetPageAsync(x => x.IsDelete == false, x => x.CreateTime, pageIndex, pageSize);
-            var listArticle = article.Data.Select(x=>new { x.Class,x.CreateTime,x.Title,x.Id}).Include(x => x.Class);
+            var listArticle = article.Data.Include(x => x.Class);
             var listViewModel = mapper.Map<List<ArticleViewModel>>(listArticle.ToList());
             var objReturn = new PageModel<ArticleViewModel>()
             {
