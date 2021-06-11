@@ -88,7 +88,6 @@ function filterAsyncRouter(asyncRouterMap) { //遍历后台传来的路由字符
       }
     }
     if (route.children && route.children.length) {
-      console.log('1');
       route.children = filterAsyncRouter(route.children)
     }
     return true
@@ -110,11 +109,8 @@ const actions = {
       // commit('SET_ROUTES', accessedRoutes)
       // resolve(accessedRoutes)
       getMenuList().then((res) => {
-      
-          console.log("getMenuList:" + JSON.stringify(res));
           var accessedRoutes=res;
           accessedRoutes = filterAsyncRouter(accessedRoutes)
-          console.log("filterAsyncRouter:" + JSON.stringify(accessedRoutes));
           commit('SET_ROUTES', accessedRoutes)
           resolve(accessedRoutes)
         }

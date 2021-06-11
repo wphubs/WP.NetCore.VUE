@@ -53,9 +53,12 @@ namespace WP.NetCore.API.Controllers
         [Authorize("Permission")]
         public async Task<ResponseResult> Put([FromBody] UpdateMenuDto menuDto)
         {
+            if (await menuService.FirstNoTrackingAsync(menuDto.Id) == null)
+            {
+                return new ResponseResult().Error("ID不存在");
+            }
             var objMenu = mapper.Map<Menu>(menuDto);
             objMenu.ModifyBy = GetToken().Id;
-
             await menuService.UpdateAsync(objMenu);
             return new ResponseResult().Success();
         }
@@ -72,6 +75,10 @@ namespace WP.NetCore.API.Controllers
             if (default(long) == Id)
             {
                 return new ResponseResult().Error("ID不能为空");
+            }
+            if (await menuService.FirstNoTrackingAsync(Id) == null)
+            {
+                return new ResponseResult().Error("ID不存在");
             }
             await menuService.DeleteAsync(Id);
             return new ResponseResult().Success();

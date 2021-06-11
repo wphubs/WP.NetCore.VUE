@@ -2,20 +2,21 @@
   <div class="app-container">
     <el-card style="width: 100%; text-align: right">
       <span style="margin-left: 20px">
-        <el-button type="primary" @click="clickAddAricle()">新增</el-button>
+        <el-button type="primary" @click="clickAddAricle()"  v-has="'addArticle'">新增</el-button>
       </span>
     </el-card>
 
     <el-table :data="dataList" style="width: 100%; margin-top: 10px">
+      <el-table-column prop="Id" label="Id"></el-table-column>
       <el-table-column prop="Title" label="标题"></el-table-column>
       <el-table-column prop="ClassName" label="分类"></el-table-column>
       <el-table-column prop="CreateTime" label="创建时间"></el-table-column>
       <el-table-column label="操作" width="150">
         <template slot-scope="scope">
-          <el-button @click="clickEdit(scope.row)" size="small" type="warning"
+          <el-button @click="clickEdit(scope.row)" size="small" type="warning"  v-has="'editArticle'"
             >编辑</el-button
           >
-          <el-button size="small" type="danger" @click="clickDelete(scope.row)"
+          <el-button size="small" type="danger" @click="clickDelete(scope.row)"  v-has="'deleteArticle'"
             >删除</el-button
           >
         </template>
@@ -34,7 +35,13 @@
       </el-pagination>
     </div>
 
-    <el-dialog title="提示" :visible.sync="dialogVisible" width="80%" top="20px">
+    <el-dialog
+      title="提示"
+      :visible.sync="dialogVisible"
+      :before-close="handleClose"
+      width="80%"
+      top="20px"
+    >
       <el-form
         :model="articleForm"
         :rules="rules"
@@ -45,71 +52,66 @@
           <el-input style="width: 300px" v-model="articleForm.Title"></el-input>
         </el-form-item>
         <el-form-item label="分类" prop="ClassId">
-          <el-select   style="width: 300px" v-model="articleForm.ClassId" placeholder="请选择">
+          <el-select
+            style="width: 300px"
+            v-model="articleForm.ClassId"
+            placeholder="请选择"
+          >
             <el-option
               v-for="item in articleClass"
               :key="item.Id"
               :label="item.ClassName"
-              :value="item.Id">
+              :value="item.Id"
+            >
             </el-option>
           </el-select>
-
-
         </el-form-item>
 
-
-           <el-form-item label="内容" prop="Content">
-             <editor ref="toastuiEditor" style="z-index:99999" 
-                 @blur="onEditorBlur"
-                :initialValue="articleForm.Content"
-                :options="editorOptions"
-                height="450px"
-                initialEditType="wysiwyg"
-                previewStyle="vertical"
-              />
+        <el-form-item label="内容" prop="Content">
+          <editor
+            ref="toastuiEditor"
+            style="z-index: 99999"
+            @blur="onEditorBlur"
+            :initialValue="articleForm.Content"
+            :options="editorOptions"
+            height="450px"
+            initialEditType="wysiwyg"
+            previewStyle="vertical"
+          />
         </el-form-item>
-         
 
         <el-form-item>
-          <el-button
-            type="primary"
-            @click="submitForm('articleForm')"
+          <el-button type="primary" @click="submitForm('articleForm')"
             >保存</el-button
           >
           <el-button @click="dialogVisible = false">取消</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
-
-      
-         
-        
   </div>
 </template>
 <script>
-import { getArticleList,getArticleClass,addArticle } from "@/api/article";
+import { getArticleList, getArticleClass, addArticle,updateArticle,deleteArticle } from "@/api/article";
 import "codemirror/lib/codemirror.css";
 import "@toast-ui/editor/dist/toastui-editor.css";
 // import '@toast-ui/editor/dist/i18n/zh-cn';
-import '@toast-ui/editor/dist/i18n/zh-cn';
+import "@toast-ui/editor/dist/i18n/zh-cn";
 
 import { Editor } from "@toast-ui/vue-editor";
-
 export default {
   components: {
     editor: Editor,
   },
- mounted() {
-   
-  },
+  mounted() {},
   created() {
     this.refreshData();
+    this.getArticleClassList();
   },
   methods: {
- submitForm(formName) {
+    submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          console.log(JSON.stringify(this.articleForm))
+          console.log(JSON.stringify(this.articleForm));
           if (this.articleForm.Id == "") {
             addArticle(this.articleForm).then((res) => {
               this.$message({
@@ -120,14 +122,14 @@ export default {
               this.refreshData();
             });
           } else {
-            // updateRole(this.articleForm).then((res) => {
-            //   this.$message({
-            //     message: "修改成功",
-            //     type: "success",
-            //   });
-            //   this.dialogVisible = false;
-            //   this.refreshData();
-            // });
+            updateArticle(this.articleForm).then((res) => {
+              this.$message({
+                message: "修改成功",
+                type: "success",
+              });
+              this.dialogVisible = false;
+              this.refreshData();
+            });
           }
         } else {
           console.log("error submit!!");
@@ -135,9 +137,16 @@ export default {
         }
       });
     },
-      onEditorBlur() {
-         let markdown = this.$refs.toastuiEditor.invoke('getMarkdown');
-        this.articleForm.Content=markdown;
+    onEditorBlur() {
+      let markdown = this.$refs.toastuiEditor.invoke("getMarkdown");
+      this.articleForm.Content = markdown;
+    },
+     handleClose(done) {
+        this.$confirm('确认要关闭吗？')
+          .then(_ => {
+            done();
+          })
+          .catch(_ => {});
       },
     refreshData() {
       getArticleList({
@@ -145,20 +154,38 @@ export default {
         pageSize: this.pageSize,
       }).then((res) => {
         this.dataList = [];
+        console.log(JSON.stringify(res));
         this.dataList = res.Data;
         this.total = res.Total;
       });
     },
-    clickAddAricle(){
-       getArticleClass().then((res) => {
-         console.log(JSON.stringify(res))
-         this.articleClass=res;
-        this.dialogVisible=true;
+    getArticleClassList() {
+      getArticleClass().then((res) => {
+        this.articleClass = res;
       });
-        
     },
-    clickEdit(row) {},
-    clickDelete(row) {},
+    clickAddAricle() {
+      this.articleForm = {
+        Id: "",
+        Title: "",
+        Content: "",
+        ClassId: "",
+      },
+      this.dialogVisible = true;
+    },
+    clickEdit(row) {
+      this.articleForm = JSON.parse(JSON.stringify(row));
+      this.dialogVisible = true;
+    },
+    clickDelete(row) {
+       deleteArticle({ Id: row.Id }).then((res) => {
+        this.$message({
+          message: "删除成功",
+          type: "success",
+        });
+        this.refreshData();
+      });
+    },
     handleSizeChange(val) {
       this.pageSize = val;
       this.refreshData();
@@ -170,8 +197,8 @@ export default {
   },
   data() {
     return {
-      articleClass:[],
-      dialogVisible:false,
+      articleClass: [],
+      dialogVisible: false,
       articleForm: {
         Id: "",
         Title: "",
@@ -179,15 +206,11 @@ export default {
         ClassId: "",
       },
       rules: {
-        Title: [
-          { required: true, message: "请输入文章标题", trigger: "blur" },
-        ],
-         Content: [
+        Title: [{ required: true, message: "请输入文章标题", trigger: "blur" }],
+        Content: [
           { required: true, message: "请输入文章内容", trigger: "blur" },
         ],
-         ClassId: [
-          { required: true, message: "请选择分类", trigger: "blur" },
-        ],
+        ClassId: [{ required: true, message: "请选择分类", trigger: "blur" }],
       },
       dataList: [],
       currentPage: 1,
@@ -233,18 +256,18 @@ export default {
 
 <style >
 .tui-tooltip {
-    position: absolute;
-    background-color: #222;
-    z-index: 99999999;
-    opacity: 0.8;
-    color: #fff;
-    padding: 2px 5px;
-    font-size: 10px;
+  position: absolute;
+  background-color: #222;
+  z-index: 99999999;
+  opacity: 0.8;
+  color: #fff;
+  padding: 2px 5px;
+  font-size: 10px;
 }
 .tui-editor-defaultUI .te-mode-switch-section {
-    background-color: #f9f9f9;
-    border-top: 1px solid #e5e5e5;
-    height: 45px;
-    font-size: 10px;
+  background-color: #f9f9f9;
+  border-top: 1px solid #e5e5e5;
+  height: 45px;
+  font-size: 10px;
 }
 </style>

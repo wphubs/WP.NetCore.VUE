@@ -34,6 +34,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using WP.NetCore.Common.Helper;
 using Microsoft.AspNetCore.Authentication;
+using Serilog;
 //using WP.NetCore.IServices;
 //using WP.NetCore.Services;
 
@@ -245,6 +246,7 @@ namespace WP.NetCore.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -254,6 +256,24 @@ namespace WP.NetCore.API
                     c.SwaggerEndpoint($"/swagger/{version}/swagger.json", $"{APIName} {version}");
                 });
                 c.RoutePrefix = "";
+            });
+            app.UseSerilogRequestLogging(options =>
+            {
+                options.MessageTemplate = "Handled {RequestPath}";
+                options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
+                {
+                    var request = httpContext.Request;
+                    diagnosticContext.Set("RequestHost", request.Host.Value);
+                    diagnosticContext.Set("RequestScheme", request.Scheme);
+                    diagnosticContext.Set("Agent", request.Headers["User-Agent"].ToString());
+                    var client = request.Headers["X-Forwarded-For"].ToString();
+                    if (string.IsNullOrEmpty(client))
+                    {
+                        client = httpContext.Connection.RemoteIpAddress.ToString();
+                    }
+                    diagnosticContext.Set("IP", client);
+
+                };
             });
             // 使用静态文件
             app.UseStaticFiles();

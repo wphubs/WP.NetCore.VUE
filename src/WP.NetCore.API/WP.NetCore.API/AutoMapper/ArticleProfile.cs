@@ -17,9 +17,8 @@ namespace WP.NetCore.API.AutoMapper
             CreateMap<Article, ArticleViewModel>()
                 .ForMember(dest => dest.ClassName, opt => opt.MapFrom(s => s.Class.ClassName))
                 .ForMember(dest => dest.ClassId, opt => opt.MapFrom(s => s.Class.Id));
-
             CreateMap<AddArticleDto, Article>();
-
+            CreateMap<UpdateArticleDto, Article>();
         }
     }
 }

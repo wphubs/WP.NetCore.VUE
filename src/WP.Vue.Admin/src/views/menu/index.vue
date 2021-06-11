@@ -120,7 +120,6 @@
     watch: {},
     methods: {
       clickDelete(row){
-        console.log(JSON.stringify(row))
         this.$confirm('确认要删除吗?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -145,10 +144,7 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            console.log(JSON.stringify(this.ruleForm))
             if (this.ruleForm.Id==null){
-  
-                console.log('add')
                 addMenu(this.ruleForm).then((res) => {
                 this.$message({
                   message: '新增成功',
@@ -159,7 +155,6 @@
               });
               }
             else {
-              console.log('update')
               updateMenu(this.ruleForm).then((res) => {
                 this.$message({
                   message: '修改成功',
@@ -193,13 +188,11 @@
       },
       refreshData() {
         getMenuTree().then((res) => {
-          console.log("getList:" + JSON.stringify(res));
           this.dataList = res;
         });
       },
       getPageMenuList() {
         getList().then((res) => {
-          console.log("pageMenu:" + JSON.stringify(res));
           this.pageMenu = res;
         });
       },

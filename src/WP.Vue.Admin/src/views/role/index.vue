@@ -128,7 +128,6 @@ export default {
         RoleId: this.currentData.Id,
         MenuId: [...this.$refs.tree.getCheckedKeys(),...this.$refs.tree.getHalfCheckedKeys()],
       };
-      console.log(JSON.stringify(params));
       setPermission(params).then((res) => {
         this.$message({
           message: "保存成功",
@@ -141,9 +140,7 @@ export default {
     clickSetRole(row) {
       this.currentData = row;
       getPermission({roleId:row.Id}).then((res) => {
-        
         this.dataTree = res[0];
-        console.log(JSON.stringify(this.dataTree));
         this.currentRoleMenu=res[1];
         this.dialogRoleVisible = true;
       });
@@ -212,7 +209,6 @@ export default {
     },
     refreshData() {
       getRoleList().then((res) => {
-          console.log(JSON.stringify(res));
           this.dataList = res;
         }
       );

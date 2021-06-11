@@ -19,6 +19,21 @@
             类别ID
             </summary>
         </member>
+        <member name="P:WP.NetCore.Model.Dto.Article.UpdateArticleDto.Title">
+            <summary>
+            文章
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Dto.Article.UpdateArticleDto.Content">
+            <summary>
+            内容
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.Dto.Article.UpdateArticleDto.ClassId">
+            <summary>
+            类别ID
+            </summary>
+        </member>
         <member name="P:WP.NetCore.Model.Dto.Menu.AddMenuDto.Component">
             <summary>
             页面路径

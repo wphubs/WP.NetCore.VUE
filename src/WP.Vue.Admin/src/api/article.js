@@ -9,6 +9,23 @@ export function addArticle(data) {
   })
 }
 
+export function updateArticle(data) {
+  return request({
+    url: 'Article',
+    method: 'put',
+    data
+  })
+}
+
+
+
+export function deleteArticle(params) {
+  return request({
+    url: 'Article',
+    method: 'delete',
+    params
+  })
+}
 
 export function getArticleList(params) {
     return request({

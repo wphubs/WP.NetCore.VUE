@@ -135,13 +135,11 @@ export default {
   created() {
     this.refreshData();
     this.getRoleList();
-    console.log(JSON.stringify(this.$route.meta))
   },
   methods: {
     getRoleList() {
       getRoleList().then((res) => {
         this.roleList = res;
-        console.log('role:'+JSON.stringify(this.roleList));
       });
     },
     clickDelete(row) {

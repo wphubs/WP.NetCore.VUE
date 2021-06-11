@@ -57,8 +57,43 @@ namespace WP.NetCore.API.Controllers
             }
             var objArticle = mapper.Map<Article>(articleDto);
             objArticle.Class = objClass;
-            articleDto.CreateBy = GetToken().Id;
+            objArticle.CreateBy = GetToken().Id;
             await articleService.AddAsync(objArticle);
+            return new ResponseResult().Success();
+        }
+
+
+
+        [HttpPut]
+        public async Task<ResponseResult> Put([FromBody] UpdateArticleDto articleDto)
+        {
+            if (await articleClassService.FirstNoTrackingAsync(articleDto.ClassId) == null)
+            {
+                throw new Exception("ID不存在");
+            }
+            var objArticle = mapper.Map<Article>(articleDto);
+            objArticle.ModifyBy = GetToken().Id;
+            await articleService.UpdateAsync(objArticle);
+            return new ResponseResult().Success();
+        }
+
+        /// <summary>
+        /// 删除角色
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        public async Task<ResponseResult> Delete(long Id)
+        {
+            if (default(long) == Id)
+            {
+                return new ResponseResult().Error("ID不能为空");
+            }
+            if (await articleService.FirstNoTrackingAsync(Id) == null)
+            {
+                throw new Exception("ID不存在");
+            }
+            await articleService.DeleteAsync(Id);
             return new ResponseResult().Success();
         }
     }

@@ -33,6 +33,7 @@ namespace WP.NetCore.Repository.EFCore
         public DbSet<Article> Article { get; set; }
 
         public DbSet<ArticleClass> ArticleClass { get; set; }
+        public DbSet<RequestLog> RequestLog { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -117,7 +118,7 @@ namespace WP.NetCore.Repository.EFCore
 
                 new Menu()
                 {
-                    Id=6,Title="菜单管理",Component="menu/index",Icon="el-icon-heavy-rain",Sort=2,
+                    Id=6,Title="菜单管理",Component="menu/index",Icon="el-icon-cloudy-and-sunny",Sort=3,
                 },
 
                 new Menu()
@@ -142,7 +143,28 @@ namespace WP.NetCore.Repository.EFCore
                 },
                 new Menu()
                 {
-                    Id=1001,Title="多级",Component="nested",ParentId=0,Icon="nested",Sort=3,
+                    Id=7,Title="文章列表",Component="article/index",Icon="el-icon-cloudy",Sort=4,
+                },
+                new Menu()
+                {
+                    Id=idWork.NextId(),Title="新增",Url="article/post",Component="addArticle",ParentId=7,IsButton=true,
+                },
+                 new Menu()
+                {
+                    Id=idWork.NextId(),Title="编辑",Url="article/put",Component="editArticle",ParentId=7,IsButton=true,
+                },
+                new Menu()
+                {
+                    Id=idWork.NextId(),Title="删除",Url="article/delete",Component="deleteArticle",ParentId=7,IsButton=true,
+                },
+                new Menu()
+                {
+                    Id=8,Title="审计日志",Component="serverlog/request",Icon="el-icon-moon",Sort=5,
+                },
+
+                new Menu()
+                {
+                    Id=1001,Title="多级",Component="nested",ParentId=0,Icon="nested",Sort=999,
                 },
                 new Menu()
                 {
@@ -155,20 +177,30 @@ namespace WP.NetCore.Repository.EFCore
                 ,
                 new Menu()
                 {
-                    Id=1004,Title="子级22",Component="nested/menu1/menu1-2/index",Icon="lightning",ParentId=1002,Sort=2,
+                    Id=1004,Title="子级22",Component="nested/menu1/menu1-2/index",Icon="lightning",ParentId=1002,Sort=3,
                 },
                 new Menu()
                 {
-                    Id=1005,Title="子级22",Component="nested/menu1/menu1-2/menu1-2-1/index",Icon="lightning",ParentId=1004,Sort=2,
+                    Id=1005,Title="子级22",Component="nested/menu1/menu1-2/menu1-2-1/index",Icon="lightning",ParentId=1004,Sort=4,
                 }
             });
 
 
-            modelBuilder.Entity<ArticleClass>().HasData(new ArticleClass()
+            modelBuilder.Entity<ArticleClass>().HasData(new List<ArticleClass>() 
             {
-                Id = idWork.NextId(),
-                ClassName = ".NetCore",
+                    new ArticleClass()
+                    {
+                        Id = idWork.NextId(),
+                        ClassName = ".NetCore",
+                    },
+                     new ArticleClass()
+                    {
+                        Id = idWork.NextId(),
+                        ClassName = "Vue",
+                    }
             });
+
+
         }
 
 

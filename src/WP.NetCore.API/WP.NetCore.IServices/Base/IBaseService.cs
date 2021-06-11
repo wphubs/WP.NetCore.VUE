@@ -19,5 +19,7 @@ namespace WP.NetCore.IServices
         Task<IEnumerable<TEntity>> GetAllAsync();
 
         Task<TEntity> FirstAsync(long Id);
+
+        Task<TEntity> FirstNoTrackingAsync(long Id);
     }
 }

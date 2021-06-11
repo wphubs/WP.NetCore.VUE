@@ -9,7 +9,6 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     var exp=getExpTime();
-    console.log(exp)
     if(exp){
       if(new Date() >new Date(getExpTime())){
 
@@ -19,19 +18,10 @@ service.interceptors.request.use(
             type: 'warning'
           }).then(() => {
             location.reload()
-          })
-     
-
-          
+          })          
         })
-
-       
       }
     }
-
-   
-
-
     if (store.getters.token) {
       config.headers['Authorization'] = 'Bearer ' + getToken()
     }

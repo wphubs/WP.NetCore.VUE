@@ -104,6 +104,10 @@ namespace WP.NetCore.API.Controllers
         [HttpPut]
         public async Task<ResponseResult> Put([FromBody] UpdateRoleDto userDto)
         {
+            if (await roleService.FirstNoTrackingAsync(userDto.Id) == null)
+            {
+                return new ResponseResult().Error("ID不存在");
+            }
             var objUser = mapper.Map<Role>(userDto);
             objUser.ModifyBy = GetToken().Id;
             await roleService.UpdateAsync(objUser);
@@ -121,6 +125,10 @@ namespace WP.NetCore.API.Controllers
             if (default(long) == Id)
             {
                 return new ResponseResult().Error("ID不能为空");
+            }
+            if (await roleService.FirstNoTrackingAsync(Id) == null)
+            {
+                return new ResponseResult().Error("ID不存在");
             }
             await roleService.DeleteAsync(Id);
             return new ResponseResult().Success();

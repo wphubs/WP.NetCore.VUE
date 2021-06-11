@@ -99,6 +99,10 @@ namespace WP.NetCore.API.Controllers
             {
                 return new ResponseResult().Error("ID不能为空");
             }
+            if (await userService.FirstNoTrackingAsync(Id) == null)
+            {
+                return new ResponseResult().Error("ID不存在");
+            }
             await userService.DeleteAsync(Id);
             return new ResponseResult().Success();
         }
