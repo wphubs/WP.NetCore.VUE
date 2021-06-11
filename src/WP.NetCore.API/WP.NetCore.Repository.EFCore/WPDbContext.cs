@@ -145,6 +145,11 @@ namespace WP.NetCore.Repository.EFCore
                 {
                     Id=7,Title="文章列表",Component="article/index",Icon="el-icon-cloudy",Sort=4,
                 },
+
+                 new Menu()
+                {
+                    Id=idWork.NextId(),Title="查看",Url="article/get",Component="getArticle",ParentId=7,IsButton=true,
+                },
                 new Menu()
                 {
                     Id=idWork.NextId(),Title="新增",Url="article/post",Component="addArticle",ParentId=7,IsButton=true,
@@ -157,6 +162,8 @@ namespace WP.NetCore.Repository.EFCore
                 {
                     Id=idWork.NextId(),Title="删除",Url="article/delete",Component="deleteArticle",ParentId=7,IsButton=true,
                 },
+
+
                 new Menu()
                 {
                     Id=8,Title="审计日志",Component="serverlog/request",Icon="el-icon-moon",Sort=5,

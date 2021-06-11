@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,6 +14,7 @@ using WP.NetCore.Model.EntityModel;
 namespace WP.NetCore.API.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize("Permission")]
     [ApiController]
     public class ArticleController : BaseController
     {
@@ -26,6 +28,8 @@ namespace WP.NetCore.API.Controllers
             this.mapper = mapper;
             this.articleClassService = articleClassService;
         }
+
+
 
         /// <summary>
         /// 获取文章列表

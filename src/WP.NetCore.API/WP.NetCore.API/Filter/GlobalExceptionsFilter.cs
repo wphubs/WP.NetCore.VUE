@@ -26,9 +26,7 @@ namespace WP.NetCore.API.Filter
             //}
             //context.Result = new InternalServerErrorObjectResult(json);
 
-            ////采用log4net 进行错误日志记录
-            //_loggerHelper.Error(json.Message, WriteLog(json.Message, context.Exception));
-            //string aa = context.Exception.Message;
+            string aa = context.Exception.Message;
         }
 
         /// <summary>

@@ -3,12 +3,43 @@
   <div class="app-container">
     <el-card style="width: 100%; text-align: right">
       <span style="margin-left: 20px">
-        <el-button type="primary" @click="click()">刷新</el-button>
+        <el-button type="primary" @click="refreshData()">刷新</el-button>
       </span>
     </el-card>
 
     <el-table :data="dataList" style="width: 100%; margin-top: 10px">
-      <el-table-column prop="Id" label="Id"></el-table-column>
+      <el-table-column prop="ConnectionId" label="会话ID" width="200">
+        <template slot-scope="scope">
+          {{ scope.row.Properties.ConnectionId }}
+        </template>          
+      </el-table-column>
+      <el-table-column prop="IP" label="客户端" width="150">
+        <template slot-scope="scope">
+          {{ scope.row.Properties.IP }}
+        </template>
+      </el-table-column>
+      <el-table-column prop="RequestMethod" label="方式" width="100">
+        <template slot-scope="scope">
+  
+          <el-tag> {{ scope.row.Properties.RequestMethod}}</el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column prop="RequestPath" label="地址" width="500">
+        <template slot-scope="scope">
+          {{ scope.row.Properties.RequestPath }}
+        </template>
+      </el-table-column>
+      <el-table-column prop="StatusCode" label="状态" width="100">
+        <template slot-scope="scope">
+            <el-tag :type="scope.row.Properties.StatusCode ==200?'success':danger">   {{ scope.row.Properties.StatusCode }}</el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column prop="Elapsed" label="耗时" width="100">
+        <template slot-scope="scope">
+          {{ scope.row.Properties.Elapsed.toFixed(2) }}ms
+        </template>
+      </el-table-column>
+      <el-table-column prop="_ts" label="时间"></el-table-column>
     </el-table>
     <div class="el-page">
       <el-pagination
@@ -43,10 +74,13 @@ export default {
   watch: {},
   methods: {
     refreshData() {
-      getRequestLog().then((res) => {
-        console.log(JSON.stringify(res))
-   
-           this.dataList = res.Data;
+      getRequestLog({
+        pageIndex: this.currentPage,
+        pageSize: this.pageSize,
+      }).then((res) => {
+        console.log(JSON.stringify(res));
+
+        this.dataList = res.Data;
         this.total = res.Total;
       });
     },

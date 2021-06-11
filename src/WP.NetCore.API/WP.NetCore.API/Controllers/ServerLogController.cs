@@ -30,7 +30,7 @@ namespace WP.NetCore.API.Controllers
         [HttpGet("GetRequestLog")]
         public async Task<ResponseResult> GetRequestLog(int pageIndex,int pageSize) 
         {
-            var log = await requestLogService.GetPageListAsync(pageIndex,pageSize);
+            var log = await requestLogService.GetPageAsync(pageIndex,pageSize);
             return new ResponseResult().Success(log);
         }
     }
