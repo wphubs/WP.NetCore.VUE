@@ -38,6 +38,7 @@ using Serilog;
 using AspNetCoreRateLimit;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
+using StackExchange.Redis;
 //using WP.NetCore.IServices;
 //using WP.NetCore.Services;
 
@@ -64,15 +65,33 @@ namespace WP.NetCore.API
             services.AddSingleton(new Appsettings(Env.ContentRootPath));
             #endregion
 
+
+            #region Redis
+
+            services.AddTransient<IRedisCacheManager, RedisCacheManager>();
+
+            // 配置启动Redis服务，虽然可能影响项目启动速度，但是不能在运行的时候报错，所以是合理的
+            services.AddSingleton<ConnectionMultiplexer>(sp =>
+            {
+
+                var conn = Appsettings.app(new string[] { "RedisConnection" });
+                var configuration = ConfigurationOptions.Parse(conn, true);
+
+                configuration.ResolveDns = true;
+
+                return ConnectionMultiplexer.Connect(configuration);
+            });
+
+
+            #endregion
+
             services.AddOptions();
             services.AddMemoryCache();
             services.Configure<IpRateLimitOptions>(Configuration.GetSection("IpRateLimiting"));
             services.Configure<IpRateLimitPolicies>(Configuration.GetSection("IpRateLimitPolicies"));
             services.AddInMemoryRateLimiting();
 
-            #region Redis
-            services.AddSingleton<IRedisCacheManager, RedisCacheManager>();
-            #endregion
+   
 
             #region EFCORE
             var connection = Appsettings.app(new string[] { "DBConnection" });

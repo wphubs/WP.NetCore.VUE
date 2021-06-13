@@ -13,5 +13,7 @@ namespace WP.NetCore.Common
         //缓存绝对过期时间
         public int AbsoluteExpiration { get; set; } = 30;
 
+        public string PrefixKey { get; set; }
+
     }
 }

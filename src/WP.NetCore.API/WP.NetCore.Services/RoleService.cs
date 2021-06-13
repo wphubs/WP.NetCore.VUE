@@ -10,6 +10,7 @@ using WP.NetCore.Model.EntityModel;
 using WP.NetCore.Model.Dto.Menu;
 using WP.NetCore.Common.Helper;
 using Microsoft.EntityFrameworkCore;
+using WP.NetCore.Common;
 
 namespace WP.NetCore.Services
 {
@@ -21,10 +22,16 @@ namespace WP.NetCore.Services
         private readonly IBaseRepository<MenuRole> menuRoleRepository;
         private readonly IMapper mapper;
         private readonly IUnitOfWork uow;
-
-        public RoleService(IBaseRepository<Role> baseRepository, WPDbContext dbContext, IBaseRepository<Menu> menuRepository, IBaseRepository<MenuRole> menuRoleRepository, IMapper mapper, IUnitOfWork uow)
+        private readonly IRedisCacheManager cache;
+        public RoleService(IBaseRepository<Role> baseRepository,
+            WPDbContext dbContext,
+            IBaseRepository<Menu> menuRepository, 
+            IBaseRepository<MenuRole> menuRoleRepository,
+            IRedisCacheManager cache,
+            IMapper mapper,
+            IUnitOfWork uow)
         {
-
+            this.cache = cache;
             this.baseDal = baseRepository;
             this.baseRepository = baseRepository;
             this.dbContext = dbContext;
@@ -40,6 +47,7 @@ namespace WP.NetCore.Services
         /// </summary>
         /// <param name="roleId"></param>
         /// <returns></returns>
+        [Caching(AbsoluteExpiration = 10,PrefixKey ="Role")]
         public async Task<List<long>> GetRoleMenu(long roleId)
         {
             var objRole = await baseRepository.LoadAsync(x => x.Id == roleId && x.IsDelete == false);
@@ -58,6 +66,7 @@ namespace WP.NetCore.Services
         {
             try
             {
+                await cache.RemovePattern("Role");
                 await uow.BeginAsync();
                 var objRole = await baseRepository.LoadAsync(x => x.Id == dto.RoleId);
                 var role = await objRole.Include(x => x.MenuRoles).FirstAsync();
@@ -85,6 +94,7 @@ namespace WP.NetCore.Services
         /// </summary>
         /// <param name="roleId"></param>
         /// <returns></returns>
+        [Caching(AbsoluteExpiration = 10, PrefixKey = "Role")]
         public async Task<List<string>> GetRolePermission(long roleId)
         {
 

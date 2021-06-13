@@ -13,6 +13,7 @@ using WP.NetCore.Model;
 using Microsoft.EntityFrameworkCore;
 using WP.NetCore.Model.ViewModel;
 using WP.NetCore.Common.Helper;
+using WP.NetCore.Common;
 
 namespace WP.NetCore.Services
 {
@@ -50,7 +51,7 @@ namespace WP.NetCore.Services
         }
 
 
-
+        [Caching(AbsoluteExpiration = 10, PrefixKey = "Role")]
         public async Task<PageModel<UserViewModel>> GetUserListAsync(int pageIndex, int pageSize)
         {
             var users= await baseRepository.GetPageAsync(x => x.IsDelete == false, x => x.CreateTime, pageIndex, pageSize);

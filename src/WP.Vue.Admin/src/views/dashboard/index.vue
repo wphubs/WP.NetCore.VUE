@@ -27,7 +27,13 @@
             <el-divider direction="vertical"></el-divider> 某某某事业部
           </div>
         </div>
-        <div style="width: 200px"></div>
+        <div style="width: 200px">
+          <span>雨纷纷</span>
+          <el-divider direction="vertical"></el-divider>
+          <span>旧故里</span>
+          <el-divider direction="vertical"></el-divider>
+          <span>草木深</span>
+        </div>
       </div>
     </el-card>
     <el-row :gutter="40" class="panel-group">
@@ -98,7 +104,7 @@
     </el-row>
 
     <div style="display: flex">
-      <div style="width: 450px">
+      <div style="width: 450px;">
         <el-card class="box-card-component">
           <div slot="header" class="box-card-header">
             <!-- <img src="https://wpimg.wallstcn.com/e7d23d71-cf19-4b90-a1cc-f56af8c0903d.png"> -->
@@ -148,7 +154,7 @@
         </el-card>
       </div>
        <el-card style=" flex: 1;margin-left:20px">
-      <div id="main" style="width: 100%; height: 300px"></div>
+      <div id="main" style="width: 100%; height: 360px"></div>
     </el-card>
     </div>
    
