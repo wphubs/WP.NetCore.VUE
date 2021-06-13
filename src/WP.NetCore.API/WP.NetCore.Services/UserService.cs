@@ -27,6 +27,7 @@ namespace WP.NetCore.Services
         public UserService(IBaseRepository<User> baseRepository, 
             IBaseRepository<UserRole> userRoleRepository,
             IUnitOfWork uow,
+             IRedisCacheManager cache,
             IMapper mapper)
         {
             this.baseRepository = baseRepository;
@@ -108,6 +109,7 @@ namespace WP.NetCore.Services
         {
             try
             {
+                await cache.RemovePattern("Role");
                 await uow.BeginAsync();
                 List<UserRole> listAdd = new List<UserRole>();
                 listRoles.ForEach(item =>
