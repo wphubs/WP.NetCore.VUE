@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WP.NetCore.Model;
 
 namespace WP.NetCore.API.Filter
 {
@@ -20,13 +21,10 @@ namespace WP.NetCore.API.Filter
         {
             //var json = new JsonErrorResponse();
             //json.Message = context.Exception.Message;//错误信息
-            //if (_env.IsDevelopment())
-            //{
-            //    json.DevelopmentMessage = context.Exception.StackTrace;//堆栈信息
-            //}
-            //context.Result = new InternalServerErrorObjectResult(json);
+       
+            context.Result = new InternalServerErrorObjectResult(new ResponseResult().Error($"服务器异常:{context.Exception.Message}"));
 
-            string aa = context.Exception.Message;
+       
         }
 
         /// <summary>
@@ -45,7 +43,7 @@ namespace WP.NetCore.API.Filter
         {
             public InternalServerErrorObjectResult(object value) : base(value)
             {
-                StatusCode = StatusCodes.Status500InternalServerError;
+                StatusCode = StatusCodes.Status200OK;
             }
         }
   

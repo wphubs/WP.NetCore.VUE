@@ -16,6 +16,9 @@ namespace WP.NetCore.Model.EntityModel
         public string Message { get; set; }
         public string Properties { get; set; }
 
+
+        public string Exception { get; set; }
+
         public DateTime _ts { get; set; }
 
      

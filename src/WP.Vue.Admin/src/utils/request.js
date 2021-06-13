@@ -1,16 +1,22 @@
 import axios from 'axios'
-import { MessageBox, Message } from 'element-ui'
+import {
+  MessageBox,
+  Message
+} from 'element-ui'
 import store from '@/store'
-import { getToken,getExpTime } from '@/utils/auth'
+import {
+  getToken,
+  getExpTime
+} from '@/utils/auth'
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
-  timeout: 5000 
+  timeout: 5000
 })
 service.interceptors.request.use(
   config => {
-    var exp=getExpTime();
-    if(exp){
-      if(new Date() >new Date(getExpTime())){
+    var exp = getExpTime();
+    if (exp) {
+      if (new Date() > new Date(getExpTime())) {
 
         store.dispatch('user/resetToken').then(() => {
           MessageBox.confirm('验证信息已过期，请重新登录', '提示', {
@@ -18,7 +24,7 @@ service.interceptors.request.use(
             type: 'warning'
           }).then(() => {
             location.reload()
-          })          
+          })
         })
       }
     }
@@ -34,27 +40,45 @@ service.interceptors.request.use(
 )
 service.interceptors.response.use(
   response => {
+    console.log(JSON.stringify(response.status))
     const res = response.data
-    //  console.log('code:' + JSON.stringify(response))
-    if (!res.Result) {
+    if (response.status == 200) {
+      if (!res.Result) {
         Message({
           message: res.Msg,
           type: 'warning',
           duration: 5 * 1000
         })
-    
-      return Promise.reject(new Error(res.message || 'Error'))
+        return Promise.reject(new Error(res.message || 'Error'))
+      } else {
+        return res.Data
+      }
     } else {
-      return res.Data
+      Message({
+        message: res.Msg,
+        type: 'warning',
+        duration: 5 * 1000
+      })
+      return Promise.reject(new Error(res.message || 'Error'))
     }
+
   },
   error => {
-    // console.log('err1' + error) // for debug
-    Message({
-      message: error.message,
-      type: 'error',
-      duration: 5 * 1000
-    })
+    console.log('err1' + JSON.stringify(error.response.status)) // for debug
+    if(error.response.status==429){
+      Message({
+        message: '访问过于频繁，请稍后重试',
+        type: 'error',
+        duration: 5 * 1000
+      })
+    }else{
+      Message({
+        message: error.message,
+        type: 'error',
+        duration: 5 * 1000
+      })
+    }
+  
     return Promise.reject(error)
   }
 )

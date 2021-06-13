@@ -1,4 +1,3 @@
-<!--  -->
 <template>
   <div class="app-container">
     <el-card style="width: 100%; text-align: right">
@@ -31,7 +30,7 @@
       </el-table-column>
       <el-table-column prop="StatusCode" label="状态" width="100">
         <template slot-scope="scope">
-            <el-tag :type="scope.row.Properties.StatusCode ==200?'success':danger">   {{ scope.row.Properties.StatusCode }}</el-tag>
+            <el-tag :type="scope.row.Properties.StatusCode ==200?'success':'danger'">   {{ scope.row.Properties.StatusCode }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column prop="Elapsed" label="耗时" width="100">
@@ -78,10 +77,12 @@ export default {
         pageIndex: this.currentPage,
         pageSize: this.pageSize,
       }).then((res) => {
-        console.log(JSON.stringify(res));
-
+        // console.log(JSON.stringify(res));
         this.dataList = res.Data;
         this.total = res.Total;
+      })
+      .catch(err=>{
+        console.log(222+JSON.stringify(err));
       });
     },
     handleSizeChange(val) {

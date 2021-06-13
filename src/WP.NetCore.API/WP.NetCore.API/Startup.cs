@@ -35,6 +35,9 @@ using Microsoft.AspNetCore.Http;
 using WP.NetCore.Common.Helper;
 using Microsoft.AspNetCore.Authentication;
 using Serilog;
+using AspNetCoreRateLimit;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 //using WP.NetCore.IServices;
 //using WP.NetCore.Services;
 
@@ -60,6 +63,12 @@ namespace WP.NetCore.API
             #region Appsettings
             services.AddSingleton(new Appsettings(Env.ContentRootPath));
             #endregion
+
+            services.AddOptions();
+            services.AddMemoryCache();
+            services.Configure<IpRateLimitOptions>(Configuration.GetSection("IpRateLimiting"));
+            services.Configure<IpRateLimitPolicies>(Configuration.GetSection("IpRateLimitPolicies"));
+            services.AddInMemoryRateLimiting();
 
             #region Redis
             services.AddSingleton<IRedisCacheManager, RedisCacheManager>();
@@ -196,6 +205,7 @@ namespace WP.NetCore.API
             {
                 // 全局异常过滤
                 o.Filters.Add(typeof(GlobalExceptionsFilter));
+            
             })
             //全局配置Json序列化处理
             .AddNewtonsoftJson(options =>
@@ -205,14 +215,17 @@ namespace WP.NetCore.API
                   options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                   //不使用驼峰样式的key
                   //options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-
+ 
                   options.SerializerSettings.ContractResolver = new CustomContractResolver();
                   //设置时间格式
                   options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+                  options.SerializerSettings.StringEscapeHandling= StringEscapeHandling.EscapeNonAscii;
               });
             #endregion
 
+            services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
 
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         }
 
 
@@ -246,7 +259,7 @@ namespace WP.NetCore.API
             {
                 app.UseDeveloperExceptionPage();
             }
-
+    
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -275,6 +288,10 @@ namespace WP.NetCore.API
 
                 };
             });
+            //添加Cors跨域
+            app.UseCors("LimitRequests");
+            //限流
+            app.UseIpRateLimiting();
             // 使用静态文件
             app.UseStaticFiles();
             // 使用cookie
@@ -283,8 +300,6 @@ namespace WP.NetCore.API
             app.UseStatusCodePages();
             // Routing
             app.UseRouting();
-            //添加Cors跨域
-            app.UseCors("LimitRequests");
             // 开启认证
             app.UseAuthentication();
             // 开启授权中间件

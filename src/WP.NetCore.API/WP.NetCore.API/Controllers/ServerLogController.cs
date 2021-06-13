@@ -21,6 +21,14 @@ namespace WP.NetCore.API.Controllers
         }
 
 
+
+        [HttpGet]
+        public object test()
+        {
+            return "ok";
+        }
+
+
         /// <summary>
         /// 获取请求日志
         /// </summary>
