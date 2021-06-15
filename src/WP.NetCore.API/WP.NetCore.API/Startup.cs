@@ -85,13 +85,15 @@ namespace WP.NetCore.API
 
             #endregion
 
+            #region IpRateLimit限流
+
             services.AddOptions();
             services.AddMemoryCache();
             services.Configure<IpRateLimitOptions>(Configuration.GetSection("IpRateLimiting"));
             services.Configure<IpRateLimitPolicies>(Configuration.GetSection("IpRateLimitPolicies"));
             services.AddInMemoryRateLimiting();
 
-   
+            #endregion
 
             #region EFCORE
             var connection = Appsettings.app(new string[] { "DBConnection" });
@@ -219,6 +221,12 @@ namespace WP.NetCore.API
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             #endregion
 
+            #region HealthChecks
+
+            services.AddHealthChecks();
+
+            #endregion
+
             #region AddControllers
             services.AddControllers(o =>
             {
@@ -242,9 +250,12 @@ namespace WP.NetCore.API
               });
             #endregion
 
-            services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+            #region IpRateLimit限流
 
+            services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+            #endregion
         }
 
 
@@ -326,6 +337,8 @@ namespace WP.NetCore.API
 
             app.UseEndpoints(endpoints =>
             {
+
+                endpoints.MapHealthChecks("/health");
                 endpoints.MapControllers();
             });
         }

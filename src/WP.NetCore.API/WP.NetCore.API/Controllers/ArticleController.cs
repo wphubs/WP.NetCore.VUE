@@ -14,7 +14,7 @@ using WP.NetCore.Model.EntityModel;
 namespace WP.NetCore.API.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize("Permission")]
+
     [ApiController]
     public class ArticleController : BaseController
     {
@@ -52,6 +52,7 @@ namespace WP.NetCore.API.Controllers
         /// <param name="articleDto"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize("Permission")]
         public async Task<ResponseResult> Post([FromBody] AddArticleDto articleDto)
         {
             var objClass = await articleClassService.FirstAsync(articleDto.ClassId);
@@ -67,8 +68,13 @@ namespace WP.NetCore.API.Controllers
         }
 
 
-
+        /// <summary>
+        /// 修改文章
+        /// </summary>
+        /// <param name="articleDto"></param>
+        /// <returns></returns>
         [HttpPut]
+        [Authorize("Permission")]
         public async Task<ResponseResult> Put([FromBody] UpdateArticleDto articleDto)
         {
             if (await articleClassService.FirstNoTrackingAsync(articleDto.ClassId) == null)
@@ -82,7 +88,7 @@ namespace WP.NetCore.API.Controllers
         }
 
         /// <summary>
-        /// 删除角色
+        /// 删除文章
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>

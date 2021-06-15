@@ -35,9 +35,11 @@ router.beforeEach(async(to, from, next) => {
       } else {
         try {
           if (!getRouter) {
-            const accessRoutes = await store.dispatch('permission/generateRoutes')
+            var accessRoutes = await store.dispatch('permission/generateRoutes')
+            accessRoutes.push({ path: '*', redirect: '/404', hidden: true });
             getRouter=accessRoutes;
             router.addRoutes(accessRoutes)
+    
             next({ ...to, replace: true })
           }else{
             getRouter = getObjArr('router') //拿到路由

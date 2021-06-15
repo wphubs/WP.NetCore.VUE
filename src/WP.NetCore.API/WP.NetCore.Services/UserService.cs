@@ -22,6 +22,7 @@ namespace WP.NetCore.Services
         private readonly IBaseRepository<User> baseRepository;
         private readonly IBaseRepository<UserRole> userRoleRepository;
         private readonly IUnitOfWork uow;
+        private readonly IRedisCacheManager cache;
         private readonly IMapper mapper;
 
         public UserService(IBaseRepository<User> baseRepository, 
@@ -33,6 +34,7 @@ namespace WP.NetCore.Services
             this.baseRepository = baseRepository;
             this.userRoleRepository = userRoleRepository;
             this.uow = uow;
+            this.cache = cache;
             this.baseDal = baseRepository;
             this.mapper = mapper;
         }

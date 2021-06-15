@@ -20,15 +20,6 @@ namespace WP.NetCore.API.Controllers
             this.requestLogService = requestLogService;
         }
 
-
-
-        [HttpGet]
-        public object test()
-        {
-            return "ok";
-        }
-
-
         /// <summary>
         /// 获取请求日志
         /// </summary>
