@@ -93,6 +93,7 @@ namespace WP.NetCore.API.Controllers
         /// <param name="Id"></param>
         /// <returns></returns>
         [HttpDelete]
+        [Authorize("Permission")]
         public async Task<ResponseResult> Delete(long Id)
         {
             if (default(long) == Id)
