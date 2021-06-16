@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,15 +14,16 @@ namespace WP.NetCore.API.Filter
     public class GlobalExceptionsFilter : IExceptionFilter
     {
         private readonly IWebHostEnvironment _env;
-        public GlobalExceptionsFilter(IWebHostEnvironment env)
+        private readonly IDiagnosticContext diagnosticContext;
+
+        public GlobalExceptionsFilter(IWebHostEnvironment env, IDiagnosticContext diagnosticContext)
         {
             _env = env;
+            this.diagnosticContext = diagnosticContext;
         }
         public void OnException(ExceptionContext context)
         {
-            //var json = new JsonErrorResponse();
-            //json.Message = context.Exception.Message;//错误信息
-       
+            diagnosticContext.Set("ExceptionFilter", context.Exception.Message);
             context.Result = new InternalServerErrorObjectResult(new ResponseResult().Error($"服务器异常:{context.Exception.Message}"));
 
        

@@ -14,5 +14,7 @@ namespace WP.NetCore.IServices
     {
         Task<PageModel<ArticleViewModel>> GetArticleListAsync(int pageIndex, int pageSize);
 
+
+        Task<ArticleViewModel> GetArticleInfo(long articleId);
     }
 }

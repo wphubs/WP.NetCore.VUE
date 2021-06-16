@@ -19,7 +19,7 @@ namespace WP.NetCore.Model.EntityModel
 
         public string Exception { get; set; }
 
-        public DateTime _ts { get; set; }
+        public DateTime? _ts { get; set; }
 
      
     }

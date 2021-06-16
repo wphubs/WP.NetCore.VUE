@@ -32,6 +32,15 @@ namespace WP.NetCore.Services
 
 
 
+        public async Task<ArticleViewModel> GetArticleInfo(long articleId)
+        {
+            var article = await baseDal.LoadAsync(x => x.IsDelete == false&&x.Id==articleId );
+            var obj = await article.Include(x => x.Class).FirstOrDefaultAsync();
+            return mapper.Map<ArticleViewModel>(obj);
+        }
+
+
+
         /// <summary>
         /// 获取文章列表
         /// </summary>
