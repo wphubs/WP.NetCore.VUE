@@ -150,12 +150,11 @@ namespace WP.NetCore.API
             #region Cors
             services.AddCors(c =>
             {
-
                 // 配置策略
                 c.AddPolicy("LimitRequests", policy =>
                 {
                     policy
-                    .WithOrigins("http://127.0.0.1:9528", "http://localhost:9528")
+                    .WithOrigins(Appsettings.app(new string[] { "Cors"}).Split(','))
                     .AllowAnyHeader()//允许任意头
                     .AllowAnyMethod();//允许任意方法
                 });
@@ -295,8 +294,14 @@ namespace WP.NetCore.API
             {
                 typeof(ApiVersions).GetEnumNames().OrderByDescending(e => e).ToList().ForEach(version =>
                 {
-                    //c.SwaggerEndpoint($"/netcore/swagger/{version}/swagger.json", $"{APIName} {version}");
-                    c.SwaggerEndpoint($"/swagger/{version}/swagger.json", $"{APIName} {version}");
+                    if (env.IsDevelopment())
+                    {
+                        c.SwaggerEndpoint($"/swagger/{version}/swagger.json", $"{APIName} {version}");
+                    }
+                    else {
+                        c.SwaggerEndpoint($"/netcore/swagger/{version}/swagger.json", $"{APIName} {version}");
+                    }
+                    
                 });
                 c.RoutePrefix = "";
             });

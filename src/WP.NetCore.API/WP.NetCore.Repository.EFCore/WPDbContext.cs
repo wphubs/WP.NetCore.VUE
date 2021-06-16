@@ -166,7 +166,7 @@ namespace WP.NetCore.Repository.EFCore
 
                 new Menu()
                 {
-                    Id=8,Title="审计日志",Component="serverlog/request",Icon="el-icon-moon",Sort=5,
+                    Id=8,Title="接口日志",Component="serverlog/request",Icon="el-icon-moon",Sort=5,
                 },
 
                 new Menu()

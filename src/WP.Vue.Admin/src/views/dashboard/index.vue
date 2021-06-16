@@ -110,11 +110,12 @@
             <!-- <img src="https://wpimg.wallstcn.com/e7d23d71-cf19-4b90-a1cc-f56af8c0903d.png"> -->
             <mallki class-name="mallki-text" text="WP.NetCore.VUE" />
             <div class="server-info" >
-                 <div>
+              
+              <div><span class="title">服务器：</span><span>{{ serverInfo.Platform }}</span></div>
+              <div>
                 <span class="title">.NETCore版本：</span
                 ><span>{{ serverInfo.FrameworkDescription }}</span>
               </div>
-              <div><span class="title">服务器：</span><span>{{ serverInfo.Platform }}</span></div>
               <div>
                 <span class="title">环境变量：</span
                 ><span>{{ serverInfo.EnvironmentName }}</span>
