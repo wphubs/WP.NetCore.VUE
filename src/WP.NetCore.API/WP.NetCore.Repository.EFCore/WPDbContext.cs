@@ -37,6 +37,7 @@ namespace WP.NetCore.Repository.EFCore
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Ignore<RequestLog>();
             base.OnModelCreating(modelBuilder);
             var assembly = this.GetType().Assembly;
             modelBuilder.ApplyConfigurationsFromAssembly(assembly);

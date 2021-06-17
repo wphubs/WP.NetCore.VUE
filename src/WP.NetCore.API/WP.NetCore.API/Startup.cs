@@ -314,7 +314,7 @@ namespace WP.NetCore.API
                     diagnosticContext.Set("RequestHost", request.Host.Value);
                     diagnosticContext.Set("RequestScheme", request.Scheme);
                     diagnosticContext.Set("Agent", request.Headers["User-Agent"].ToString());
-                    var client = request.Headers["X-Forwarded-For"].ToString();
+                    var client = request.Headers["X-Forwarded-For"].FirstOrDefault();
                     if (string.IsNullOrEmpty(client))
                     {
                         client = httpContext.Connection.RemoteIpAddress.ToString();

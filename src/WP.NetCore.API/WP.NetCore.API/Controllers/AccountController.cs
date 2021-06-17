@@ -23,7 +23,16 @@ namespace WP.NetCore.API.Controllers
             this.userService = userService;
         }
 
-      
+        [HttpGet]
+        public string Get() 
+        {
+            int a = 1;
+            int b = 0;
+            var c = a/b;
+            return "";
+        }
+
+
         [HttpPost]
         public async Task<ResponseResult> Post(LoginDto objLogin)
         {

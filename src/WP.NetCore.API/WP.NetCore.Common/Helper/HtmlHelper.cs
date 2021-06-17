@@ -17,10 +17,10 @@ namespace WP.NetCore.Common
         {
             string strText = System.Text.RegularExpressions.Regex.Replace(html, "<[^>]+>", "");
             strText = System.Text.RegularExpressions.Regex.Replace(strText, "&[^;]+;", "");
-
+            strText = strText.Replace("\n", " ");
             if (length > 0 && strText.Length > length)
-                return strText.Substring(0, length);
-
+                return strText.Substring(0, length)+"......";
+   
             return strText;
         }
         #endregion
