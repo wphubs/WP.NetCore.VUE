@@ -16,7 +16,7 @@ namespace WP.NetCore.Model.ViewModel
         public string Message { get; set; }
         public RequestLogProperties Properties { get; set; }
 
-        public DateTime _ts { get; set; }
+        public DateTimeOffset _ts { get; set; }
     }
 
     public class RequestLogProperties

@@ -33,11 +33,12 @@ namespace WP.NetCore.Repository.EFCore
         public DbSet<Article> Article { get; set; }
 
         public DbSet<ArticleClass> ArticleClass { get; set; }
+
         public DbSet<RequestLog> RequestLog { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Ignore<RequestLog>();
+            //modelBuilder.Ignore<RequestLog>();
             base.OnModelCreating(modelBuilder);
             var assembly = this.GetType().Assembly;
             modelBuilder.ApplyConfigurationsFromAssembly(assembly);
@@ -205,6 +206,18 @@ namespace WP.NetCore.Repository.EFCore
                     {
                         Id = idWork.NextId(),
                         ClassName = "Vue",
+                    }
+                     ,
+                     new ArticleClass()
+                    {
+                        Id = idWork.NextId(),
+                        ClassName = "Docker",
+                    }
+                    ,
+                    new ArticleClass()
+                    {
+                        Id = idWork.NextId(),
+                        ClassName = "Other",
                     }
             });
 
