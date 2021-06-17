@@ -125,7 +125,7 @@ namespace WP.NetCore.API
 
                 var xmlPath = Path.Combine(basePath, "WP.NetCore.API.xml");
                 c.IncludeXmlComments(xmlPath, true);
-
+                Console.WriteLine(xmlPath);
                 var xmlModelPath = Path.Combine(basePath, "WP.NetCore.Model.xml");
                 c.IncludeXmlComments(xmlModelPath);
 

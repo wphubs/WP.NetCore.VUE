@@ -1,22 +1,27 @@
 <template>
-    <div style="width: 100%;background:#ededed;min-height: calc(100vh - 200px); ">
+    <div style="width: 100%;background:#ededed;min-height: calc(100vh - 200px);">
       <el-row :gutter="10">
         <el-col :xs="{span: 22, offset: 1}" :sm="{span: 22, offset: 1}" :md="{span: 10, offset: 7}"
             :lg="{span: 10, offset: 7}" :xl="{span: 10, offset:7}">
-           
+
             <div v-for="(item,indexArticle) in articleList" :key="indexArticle">
-               <!-- <el-link :underline="false" :href="'detail/'+item.Id" type="primary"  > 
-              </el-link> -->
+              <a :href="'article/detail/'+item.Id">
               <el-card class="box-card">
                 <div slot="header" class="clearfix">
-                  <span><el-tag type="success">{{item.ClassName}}</el-tag><text  class="title">{{item.Title}}</text> </span>
-                  <a style="float: right; font-size: 15px;" :href="'article/detail/'+item.Id+'?item='+item">【阅读全文】</a>
+                  <span><el-tag  >{{item.ClassName}}</el-tag>
+                    
+                  <text  class="title">{{item.Title}}</text>
+                  <text style="float: right;color:#409EFF;font-size: 15px;">  【阅读全文】</text>
+                  </span>
+                  
                 </div>
                 <div class="text item">
-                  <div class="article-content" v-html="item.ContentHtml"> </div> 
+                  <div class="article-content" v-html="item.Content"> </div> 
                 </div>
               </el-card>
+            </a>
             </div>
+          
    
         </el-col>
     </el-row>
@@ -32,31 +37,19 @@
     export default {
       data() {
         return {
-  
+          count: 0
         }
+      },
+      methods: {
+        load () {
+        this.count += 2
+      }
       },
       async asyncData({ params }) {
         var { id } = params;
-        var result = await axios.get(`http://localhost:8081/api/Article?pageIndex=1&pageSize=10`)
-        marked.setOptions({
-          renderer: new marked.Renderer(),
-          gfm: true,
-          tables: true,
-          breaks: false,
-          pedantic: false,
-          sanitize: false,
-          smartLists: true,
-          smartypants: false,
-          highlight: function(code, lang) {
-            return highlight.highlightAuto(code).value
-          }
-        })
-        var article=result.data.Data.Data;
-        article.forEach(item=>{
-          const markHtml = marked(item.Content)
-          item.ContentHtml=markHtml;
-        })  
-        return { articleList: article}
+        var result = await axios.get(`https://www.wptest.cn/netcore/api/Article/GetArticleList?pageIndex=1&pageSize=20`)
+     
+        return { articleList: result.data.Data.Data}
       },
       mounted() {
         //  this.$nextTick(() => {
@@ -80,7 +73,7 @@
     .article-content{
       display: -webkit-box;
           -webkit-box-orient: vertical;
-          -webkit-line-clamp: 3;
+          -webkit-line-clamp:4;
           overflow: hidden;
       max-height: 150px;
     }

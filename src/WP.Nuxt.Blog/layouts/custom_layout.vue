@@ -1,36 +1,14 @@
 <template>
-    <div>
-
-      <Nuxt />
+    <div >
+      <Nuxt/>
     </div>
   </template>
   <script>
     export default {
-        //注入组件
-        components: {
-        },
-        data() {
-            return {
-  
-            };
-        },
-        //监听属性
-        computed: {},
-        watch: {},
-        methods: {
-  
-        },
-        //生命周期 - 创建完成（可以访问当前this实例）
-        created() {
-  
-        },
-        //生命周期 - 挂载完成（可以访问DOM元素）
-        mounted() {
-  
-        },
     }
   </script>
   <style>
+  
     html {
       font-family:
         '微软雅黑',
@@ -48,6 +26,7 @@
       -moz-osx-font-smoothing: grayscale;
       -webkit-font-smoothing: antialiased;
       box-sizing: border-box;
+
     }
   
     a {

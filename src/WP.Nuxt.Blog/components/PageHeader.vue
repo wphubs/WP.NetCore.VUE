@@ -1,6 +1,7 @@
 <!--  -->
 <template>
-    <div>
+    <div >
+        
         <span class="span-tag  hvr-bounce-in"><a href="/">首页</a></span>
         <span class="span-tag  hvr-bounce-in"><a href="/article">文章</a></span>
         <span class="span-tag  hvr-bounce-in"><a href="https://www.wptest.cn/admin">进入后台</a></span>

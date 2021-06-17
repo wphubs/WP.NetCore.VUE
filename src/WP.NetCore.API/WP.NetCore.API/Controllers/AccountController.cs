@@ -23,14 +23,14 @@ namespace WP.NetCore.API.Controllers
             this.userService = userService;
         }
 
-        [HttpGet]
-        public string Get() 
-        {
-            int a = 1;
-            int b = 0;
-            var c = a/b;
-            return "";
-        }
+        //[HttpGet]
+        //public string Get() 
+        //{
+        //    int a = 1;
+        //    int b = 0;
+        //    var c = a/b;
+        //    return "";
+        //}
 
 
         [HttpPost]
@@ -45,7 +45,7 @@ namespace WP.NetCore.API.Controllers
                     Role = String.Join(',', objUserInfo.UserRoles.Select(x => x.RoleId).ToList()),
                     UserName = objUserInfo.UserName,
                     Name = objUserInfo.Name,
-                    Avatar = "https://github.githubassets.com/pinned-octocat.svg"
+                    Avatar = ""
 
                 };
                 var strJWT = JwtHelper.IssueJwt(tokenModel);

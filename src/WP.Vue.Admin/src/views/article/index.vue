@@ -77,6 +77,7 @@
             height="450px"
             initialEditType="wysiwyg"
             previewStyle="vertical"
+
           />
         </el-form-item>
 
@@ -94,13 +95,17 @@
 import { getArticleList, getArticleClass, addArticle,updateArticle,deleteArticle } from "@/api/article";
 import "codemirror/lib/codemirror.css";
 import "@toast-ui/editor/dist/toastui-editor.css";
-// import '@toast-ui/editor/dist/i18n/zh-cn';
 import "@toast-ui/editor/dist/i18n/zh-cn";
 
+import 'highlight.js/styles/github.css';
+ 
+import codeSyntaxHightlight from '@toast-ui/editor-plugin-code-syntax-highlight';
+import hljs from 'highlight.js';
 import { Editor } from "@toast-ui/vue-editor";
 export default {
   components: {
     editor: Editor,
+    
   },
   mounted() {},
   created() {
@@ -221,11 +226,13 @@ export default {
       editorOptions: {
         language: "zh-CN",
         hideModeSwitch: true,
+        plugins: [[codeSyntaxHightlight, { hljs }]],
         previewStyle: "vertical",
         useCommandShortcut: true,
         useDefaultHTMLSanitizer: true,
         usageStatistics: false,
         hideModeSwitch: false,
+
         toolbarItems: [
           "heading",
           "bold",

@@ -52,8 +52,7 @@
         background-color: #2d3236;
         padding: 20px;
         color: #FFF;
-
-       
+     
 
     }
     a {
