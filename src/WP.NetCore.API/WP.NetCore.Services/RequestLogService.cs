@@ -26,7 +26,7 @@ namespace WP.NetCore.Services
 
         public async Task<PageModel<RequestLogViewModel>> GetPageAsync(int pageIndex, int pageSize)
         {
-
+        
             var list = dbContext.Set<RequestLog>().AsNoTracking();
             int count = await list.CountAsync();
             var pageList = await list.OrderByDescending(x => x.Timestamp)

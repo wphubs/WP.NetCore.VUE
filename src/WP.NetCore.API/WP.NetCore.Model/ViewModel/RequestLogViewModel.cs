@@ -10,13 +10,13 @@ namespace WP.NetCore.Model.ViewModel
     {
         public int id { get; set; }
 
-        public string Timestamp { get; set; }
+        public DateTime Timestamp { get; set; }
 
         public string Level { get; set; }
         public string Message { get; set; }
         public RequestLogProperties Properties { get; set; }
 
-        public DateTimeOffset _ts { get; set; }
+        public DateTime? _ts { get; set; }
     }
 
     public class RequestLogProperties

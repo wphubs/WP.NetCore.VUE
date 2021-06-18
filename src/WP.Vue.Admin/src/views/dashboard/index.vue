@@ -28,11 +28,9 @@
           </div>
         </div>
         <div style="width: 200px">
-          <span>雨纷纷</span>
+          <span>好好学习</span>
           <el-divider direction="vertical"></el-divider>
-          <span>旧故里</span>
-          <el-divider direction="vertical"></el-divider>
-          <span>草木深</span>
+          <span>天天向上</span>
         </div>
       </div>
     </el-card>
@@ -169,6 +167,11 @@ import * as echarts from "echarts";
 import PanThumb from "@/components/PanThumb";
 import Mallki from "@/components/TextHoverEffect/Mallki";
 import { getServerInfo } from "@/api/home";
+import * as signalR from "@aspnet/signalr";
+import {
+  getToken,
+  getExpTime
+} from '@/utils/auth'
 export default {
   components: {
     CountTo,
@@ -178,7 +181,34 @@ export default {
   data() {
     return {
       serverInfo: {},
+      connection:{},
     };
+  },
+  created() {
+    let that = this;
+    that.connection= new signalR.HubConnectionBuilder().withUrl(`${process.env.VUE_APP_BASE_API.replace('/api/','')}/welcomehub`, {
+					accessTokenFactory: () =>getToken()
+				})
+				.build()
+        that.connection.on('ReceiveEventAsync', function (res) {
+        that.$notify({
+          title: '欢迎回来',
+          message: res.Content,
+          type: 'success',
+          duration: 0
+        });
+       
+      });
+      that.connection.start();
+      that.$notify({
+          title: '提示',
+          message: '为了演示使用，无权限按钮没有做隐藏处理，可打开自定义指令代码注释实现隐藏',
+          type: 'warning',
+          duration: 0
+        });
+  },
+  beforeDestroy() {
+            this.connection.stop();
   },
   mounted() {
     this.getServer();

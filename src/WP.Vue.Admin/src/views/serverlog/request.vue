@@ -23,7 +23,7 @@
           <el-tag> {{ scope.row.Properties.RequestMethod}}</el-tag>
         </template>
       </el-table-column>
-      <el-table-column prop="RequestPath" label="地址" width="500">
+      <el-table-column prop="RequestPath" label="地址" min-width	="400">
         <template slot-scope="scope">
           {{ scope.row.Properties.RequestPath }}
         </template>
@@ -38,7 +38,7 @@
           {{ scope.row.Properties.Elapsed.toFixed(2) }}ms
         </template>
       </el-table-column>
-      <el-table-column prop="_ts" label="时间"></el-table-column>
+      <el-table-column prop="Timestamp" label="时间"></el-table-column>
     </el-table>
     <div class="el-page">
       <el-pagination

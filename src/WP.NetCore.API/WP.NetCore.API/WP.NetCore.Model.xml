@@ -364,6 +364,16 @@
             页面路径
             </summary>
         </member>
+        <member name="P:WP.NetCore.Model.ViewModel.PushMessageViewModel.CreateTime">
+            <summary>
+            消息时间
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.PushMessageViewModel.Content">
+            <summary>
+            消息内容
+            </summary>
+        </member>
         <member name="P:WP.NetCore.Model.ViewModel.RouterViewModel.title">
             <summary>
             标题

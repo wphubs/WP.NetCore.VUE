@@ -39,6 +39,8 @@ using AspNetCoreRateLimit;
 using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using StackExchange.Redis;
+using Microsoft.AspNetCore.SignalR;
+using WP.NetCore.API.Hubs;
 //using WP.NetCore.IServices;
 //using WP.NetCore.Services;
 
@@ -65,7 +67,6 @@ namespace WP.NetCore.API
             services.AddSingleton(new Appsettings(Env.ContentRootPath));
             #endregion
 
-
             #region Redis
 
             services.AddTransient<IRedisCacheManager, RedisCacheManager>();
@@ -85,7 +86,7 @@ namespace WP.NetCore.API
 
             #endregion
 
-            #region IpRateLimit限流
+            #region IpRateLimit
 
             services.AddOptions();
             services.AddMemoryCache();
@@ -105,7 +106,7 @@ namespace WP.NetCore.API
             //});
             #endregion
 
-            #region AddAutoMapper
+            #region AutoMapper
             services.AddAutoMapper(typeof(Startup));
             #endregion
 
@@ -148,16 +149,24 @@ namespace WP.NetCore.API
             #endregion
 
             #region Cors
-            services.AddCors(c =>
+            services.AddCors(options =>
             {
                 // 配置策略
-                c.AddPolicy("LimitRequests", policy =>
+                options.AddPolicy("LimitRequests", policy =>
                 {
                     policy
-                    .WithOrigins(Appsettings.app(new string[] { "Cors"}).Split(','))
-                    .AllowAnyHeader()//允许任意头
-                    .AllowAnyMethod();//允许任意方法
+                    .WithOrigins(Appsettings.app(new string[] { "Cors" }).Split(','))
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowCredentials();
                 });
+
+                //无限制 所有客户端都能访问
+                //options.AddPolicy("LimitRequests", policy => 
+                //policy.SetIsOriginAllowed((host) => true).AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+
+
+
             });
             #endregion
 
@@ -182,25 +191,40 @@ namespace WP.NetCore.API
                 RequireExpirationTime = true,
             };
             PermissionRequirement permissionRequirement = new PermissionRequirement();
-
-            //listPermission.Add(n);
             services.AddAuthorization(option =>
             {
                 option.AddPolicy("Permission", policy => policy.AddRequirements(permissionRequirement));
             });
-
-            services.AddAuthentication(o =>
+            services.AddAuthentication(options =>
             {
-                o.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-                o.DefaultChallengeScheme = nameof(ResponseResultHandler);
-                o.DefaultForbidScheme = nameof(ResponseResultHandler);
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = nameof(ResponseResultHandler);
+                options.DefaultForbidScheme = nameof(ResponseResultHandler);
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+
             })
              // 添加JwtBearer服务
              .AddJwtBearer(o =>
              {
                  o.TokenValidationParameters = tokenValidationParameters;
+                 //o.Authority
                  o.Events = new JwtBearerEvents
                  {
+                     OnMessageReceived = context =>
+                     {
+                         var accessToken = context.Request.Query["access_token"];
+
+                         // If the request is for our hub...
+                         var path = context.HttpContext.Request.Path;
+                         if (!string.IsNullOrEmpty(accessToken) &&
+                             (path.StartsWithSegments("/welcomehub")))
+                         {
+                             // Read the token out of the query string
+                             context.Token = accessToken;
+                             //context.Request.Headers.Add("Authorization",  accessToken);
+                         }
+                         return Task.CompletedTask;
+                     },
                      OnAuthenticationFailed = context =>
                      {
                          // 如果过期，则把<是否过期>添加到，返回头信息中
@@ -211,6 +235,7 @@ namespace WP.NetCore.API
                          return Task.CompletedTask;
                      }
                  };
+
              })
              .AddScheme<AuthenticationSchemeOptions, ResponseResultHandler>(nameof(ResponseResultHandler), o => { }); ;
 
@@ -222,7 +247,26 @@ namespace WP.NetCore.API
 
             #region HealthChecks
 
-            services.AddHealthChecks();
+            services.AddHealthChecks().AddMySql(connection); ;
+
+            #endregion
+
+            #region SignalR
+
+            services.AddSignalR(options =>
+            {
+                options.EnableDetailedErrors = true;
+                options.MaximumReceiveMessageSize = Int64.MaxValue;
+                options.AddFilter<SignalRExceptionFilter>();
+
+            }).AddNewtonsoftJsonProtocol(configure =>
+            {
+                var setting = configure.PayloadSerializerSettings;
+                setting.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                setting.NullValueHandling = NullValueHandling.Ignore;
+                setting.ContractResolver = new DefaultContractResolver();
+                setting.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+            });
 
             #endregion
 
@@ -249,37 +293,39 @@ namespace WP.NetCore.API
               });
             #endregion
 
-            #region IpRateLimit限流
+
+
+            #region IpRateLimit
 
             services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
             #endregion
+
+
+
         }
 
 
         public void ConfigureContainer(ContainerBuilder builder)
         {
             //builder.RegisterType(typeof(UnitOfWork)).As(typeof(IUnitOfWork)).InstancePerLifetimeScope();
-
             builder.RegisterType<APICacheAOP>();
             //builder.RegisterType<APITranAOP>();
             //builder.RegisterType<APILogAOP>();
             builder.RegisterGeneric(typeof(BaseService<>)).As(typeof(IBaseService<>)).InstancePerDependency();//注册仓储
-
             builder.RegisterGeneric(typeof(BaseRepository<>)).As(typeof(IBaseRepository<>)).InstancePerDependency();//注册仓储
 
             var assemblysServices = Assembly.Load("WP.NetCore.Services");
             builder.RegisterAssemblyTypes(assemblysServices)
                       .AsImplementedInterfaces()
                       .InstancePerDependency()
-                      .EnableInterfaceInterceptors()//对目标类型启用接口拦截
+                      .EnableInterfaceInterceptors()
                       .InterceptedBy(typeof(APICacheAOP));// typeof(APICacheAOP),typeof(APILogAOP) typeof(APITranAOP), 
             var assemblyRepository = Assembly.Load("WP.NetCore.Repository.EFCore");
             builder.RegisterAssemblyTypes(assemblyRepository).AsImplementedInterfaces()
                       .InstancePerDependency()
                       .EnableInterfaceInterceptors();
-
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -288,7 +334,6 @@ namespace WP.NetCore.API
             {
                 app.UseDeveloperExceptionPage();
             }
-    
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -320,7 +365,6 @@ namespace WP.NetCore.API
                         client = httpContext.Connection.RemoteIpAddress.ToString();
                     }
                     diagnosticContext.Set("IP", client);
-
                 };
             });
             //添加Cors跨域
@@ -344,6 +388,7 @@ namespace WP.NetCore.API
             {
 
                 endpoints.MapHealthChecks("/health");
+                endpoints.MapHub<WelcomeHub>("/welcomehub");
                 endpoints.MapControllers();
             });
         }

@@ -18,7 +18,8 @@ namespace WP.NetCore.API.AutoMapper
         {
 
             CreateMap<RequestLog, RequestLogViewModel>()
-              .ForMember(dest => dest.Properties, opt => opt.MapFrom(s => JsonConvert.DeserializeObject<RequestLogProperties>(s.Properties)));
+              .ForMember(dest => dest.Properties, opt => opt.MapFrom(s => JsonConvert.DeserializeObject<RequestLogProperties>(s.Properties)))
+             .ForMember(dest => dest.Timestamp, opt => opt.MapFrom(s =>Convert.ToDateTime(s.Timestamp)));
         }
     }
 }

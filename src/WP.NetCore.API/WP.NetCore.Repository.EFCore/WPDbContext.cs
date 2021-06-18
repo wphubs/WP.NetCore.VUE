@@ -34,11 +34,16 @@ namespace WP.NetCore.Repository.EFCore
 
         public DbSet<ArticleClass> ArticleClass { get; set; }
 
-        public DbSet<RequestLog> RequestLog { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Ignore<RequestLog>();
+            modelBuilder.Entity<RequestLog>(eb =>
+             {
+                 eb.HasNoKey();
+                 eb.ToView("RequestLog");
+             });
+
             base.OnModelCreating(modelBuilder);
             var assembly = this.GetType().Assembly;
             modelBuilder.ApplyConfigurationsFromAssembly(assembly);
@@ -52,7 +57,7 @@ namespace WP.NetCore.Repository.EFCore
                 Name = "系统管理员",
                 Password = "670b14728ad9902aecba32e22fa4f6bd",
                 Sex = 1,
-                 
+
             });
             modelBuilder.Entity<Role>().HasData(new Role()
             {
@@ -63,8 +68,8 @@ namespace WP.NetCore.Repository.EFCore
             modelBuilder.Entity<UserRole>().HasData(new UserRole()
             {
                 Id = idWork.NextId(),
-                UserId= userId,
-                RoleId= roleId
+                UserId = userId,
+                RoleId = roleId
 
             });
             modelBuilder.Entity<Menu>().HasData(new List<Menu>()
@@ -195,7 +200,7 @@ namespace WP.NetCore.Repository.EFCore
             });
 
 
-            modelBuilder.Entity<ArticleClass>().HasData(new List<ArticleClass>() 
+            modelBuilder.Entity<ArticleClass>().HasData(new List<ArticleClass>()
             {
                     new ArticleClass()
                     {

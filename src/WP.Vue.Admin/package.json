@@ -14,6 +14,7 @@
     "test:ci": "npm run lint && npm run test:unit"
   },
   "dependencies": {
+    "@aspnet/signalr": "^1.0.27",
     "@toast-ui/editor-plugin-code-syntax-highlight": "^1.0.0",
     "@toast-ui/vue-editor": "^2.5.2",
     "axios": "0.18.1",

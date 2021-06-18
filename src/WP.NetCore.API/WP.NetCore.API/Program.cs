@@ -58,7 +58,7 @@ namespace WP.NetCore.API
                 
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>().UseUrls("http://*:8081");
+                    webBuilder.UseStartup<Startup>().UseUrls(Configuration.GetSection("UseUrls").Value);
                 });
     }
 }
