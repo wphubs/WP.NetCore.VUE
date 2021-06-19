@@ -8,12 +8,12 @@
         /// <summary>
         /// 状态码
         /// </summary>
-        public bool Result { get; set; }
-      
+        public int Code { get; set; } = 200;
+
         /// <summary>
         /// 返回信息
         /// </summary>
-        public string Msg { get; set; }
+        public string Msg { get; set; } = "成功";
         /// <summary>
         /// 返回数据集合
         /// </summary>
@@ -22,12 +22,12 @@
 
         public ResponseResult Success(object data=null)
         {
-            return new ResponseResult() { Result=true,Data= data,Msg="成功" };
+            return new ResponseResult() { Data= data };
         }
 
-        public ResponseResult Error(string msg)
+        public ResponseResult Error(string msg,int code=500)
         {
-            return new ResponseResult() { Result = false,Msg= msg };
+            return new ResponseResult() { Code = code, Msg= msg };
         }
     }
 }

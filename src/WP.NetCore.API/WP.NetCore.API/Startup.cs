@@ -207,22 +207,26 @@ namespace WP.NetCore.API
              .AddJwtBearer(o =>
              {
                  o.TokenValidationParameters = tokenValidationParameters;
-                 //o.Authority
                  o.Events = new JwtBearerEvents
                  {
                      OnMessageReceived = context =>
                      {
                          var accessToken = context.Request.Query["access_token"];
-
-                         // If the request is for our hub...
-                         var path = context.HttpContext.Request.Path;
-                         if (!string.IsNullOrEmpty(accessToken) &&
-                             (path.StartsWithSegments("/welcomehub")))
+                         if (!string.IsNullOrEmpty(accessToken) &&(context.HttpContext.Request.Path.StartsWithSegments("/welcomehub")))
                          {
-                             // Read the token out of the query string
                              context.Token = accessToken;
-                             //context.Request.Headers.Add("Authorization",  accessToken);
                          }
+                         return Task.CompletedTask;
+                     },
+                     OnTokenValidated = context =>
+                     {
+                         //var userContext = context.HttpContext.RequestServices.GetService<>();
+                         var claims = context.Principal.Claims;
+                         //userContext.Id = long.Parse(claims.First(x => x.Type == JwtRegisteredClaimNames.Sub).Value);
+                         //userContext.Account = claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
+                         //userContext.Name = claims.First(x => x.Type == ClaimTypes.Name).Value;
+                         //userContext.Email = claims.First(x => x.Type == JwtRegisteredClaimNames.Email).Value;
+                         //string[] roleIds = claims.First(x => x.Type == ClaimTypes.Role).Value.Split(",", StringSplitOptions.RemoveEmptyEntries);
                          return Task.CompletedTask;
                      },
                      OnAuthenticationFailed = context =>

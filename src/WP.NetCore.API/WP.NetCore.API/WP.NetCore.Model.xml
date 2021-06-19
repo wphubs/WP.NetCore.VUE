@@ -299,7 +299,7 @@
             通用返回信息类
             </summary>
         </member>
-        <member name="P:WP.NetCore.Model.ResponseResult.Result">
+        <member name="P:WP.NetCore.Model.ResponseResult.Code">
             <summary>
             状态码
             </summary>
