@@ -36,10 +36,11 @@ const actions = {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ UserName: username.trim(), PassWord: password }).then(response => {
-        const { token,exp } = response
-        console.log('token:' + exp)
+        console.log('token:' + response)
+        const { token } = response
+   
         commit('SET_TOKEN', token)
-        setExpTime(exp);
+        // setExpTime(exp);
         setToken(token)
         resolve()
       }).catch(error => {
@@ -65,7 +66,7 @@ const actions = {
   // user logout
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
-      
+      localStorage.removeItem('router')
       removeToken() // must remove  token  first
       resetRouter()
       commit('RESET_STATE')

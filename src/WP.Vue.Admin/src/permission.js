@@ -39,7 +39,7 @@ router.beforeEach(async(to, from, next) => {
             accessRoutes.push({ path: '*', redirect: '/404', hidden: true });
             getRouter=accessRoutes;
             router.addRoutes(accessRoutes)
-    
+            saveObjArr('router', getRouter) //存储路由到localStorage
             next({ ...to, replace: true })
           }else{
             getRouter = getObjArr('router') //拿到路由

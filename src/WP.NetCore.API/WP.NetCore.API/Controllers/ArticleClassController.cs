@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WP.NetCore.IServices;
 using WP.NetCore.Model;
+using WP.NetCore.Model.EntityModel;
 
 namespace WP.NetCore.API.Controllers
 {
@@ -28,10 +29,10 @@ namespace WP.NetCore.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<ResponseResult> Get()
+        public async Task<ActionResult<IEnumerable<ArticleClass>>> Get()
         {
             var listUser = await articleClassService.GetAllAsync();
-            return new ResponseResult().Success(listUser);
+            return Ok(listUser);
         }
 
     }

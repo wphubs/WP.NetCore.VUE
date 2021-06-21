@@ -23,7 +23,7 @@ namespace WP.NetCore.API.AuthHelper
             string iss = Appsettings.app(new string[] { "Audience", "Issuer" });
             string aud = Appsettings.app(new string[] { "Audience", "Audience" });
             string secret = AppSecretConfig.Audience_Secret_String;
-            var exp = DateTime.Now.AddHours(24);
+            var exp = DateTime.Now.AddDays(1);
             var claims = new List<Claim>
             {
              new Claim(JwtRegisteredClaimNames.Jti, tokenModel.Id.ToString()),

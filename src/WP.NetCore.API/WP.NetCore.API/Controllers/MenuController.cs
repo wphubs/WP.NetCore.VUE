@@ -11,6 +11,7 @@ using WP.NetCore.IServices;
 using WP.NetCore.Model;
 using WP.NetCore.Model.Dto.Menu;
 using WP.NetCore.Model.EntityModel;
+using WP.NetCore.Model.ViewModel;
 
 namespace WP.NetCore.API.Controllers
 {
@@ -35,13 +36,12 @@ namespace WP.NetCore.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Authorize("Permission")]
-        public async Task<ResponseResult> Post([FromBody] AddMenuDto menuDto)
+        public async Task<ActionResult> Post([FromBody] AddMenuDto menuDto)
         {
             var objMenu = mapper.Map<Menu>(menuDto);
             objMenu.CreateBy = GetToken().Id;
-
             await menuService.AddAsync(objMenu);
-            return new ResponseResult().Success();
+            return Ok();
         }
 
         /// <summary>
@@ -51,16 +51,16 @@ namespace WP.NetCore.API.Controllers
         /// <returns></returns>
         [HttpPut]
         [Authorize("Permission")]
-        public async Task<ResponseResult> Put([FromBody] UpdateMenuDto menuDto)
+        public async Task<ActionResult> Put([FromBody] UpdateMenuDto menuDto)
         {
             if (await menuService.FirstNoTrackingAsync(menuDto.Id) == null)
             {
-                return new ResponseResult().Error("ID不存在");
+                return NotFound("ID不存在");
             }
             var objMenu = mapper.Map<Menu>(menuDto);
             objMenu.ModifyBy = GetToken().Id;
             await menuService.UpdateAsync(objMenu);
-            return new ResponseResult().Success();
+            return NoContent();
         }
 
         /// <summary>
@@ -70,18 +70,18 @@ namespace WP.NetCore.API.Controllers
         /// <returns></returns>
         [HttpDelete]
         [Authorize("Permission")]
-        public async Task<ResponseResult> Delete(long Id)
+        public async Task<ActionResult> Delete([FromQuery] long Id)
         {
             if (default(long) == Id)
             {
-                return new ResponseResult().Error("ID不能为空");
+                return BadRequest("ID不能为空");
             }
             if (await menuService.FirstNoTrackingAsync(Id) == null)
             {
-                return new ResponseResult().Error("ID不存在");
+                return NotFound("ID不存在");
             }
             await menuService.DeleteAsync(Id);
-            return new ResponseResult().Success();
+            return NoContent();
         }
 
 
@@ -91,10 +91,10 @@ namespace WP.NetCore.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Authorize("Permission")]
-        public async Task<ResponseResult> Get()
+        public async Task<ActionResult<List<PageMenuViewModel>>> Get()
         {
             var list = await menuService.GetPageMenuListAsync();
-            return new ResponseResult().Success(list); ;
+            return Ok(list); ;
         }
 
 
@@ -104,10 +104,10 @@ namespace WP.NetCore.API.Controllers
         /// <returns></returns>
         [HttpGet("GetMenuTree")]
         [Authorize("Permission")]
-        public async Task<ResponseResult> GetMenuTree()
+        public async Task<ActionResult<List<MenuViewModel>>> GetMenuTree()
         {
             var list =await menuService.GetMenuListAsync();
-            return new ResponseResult().Success(list); ;
+            return Ok(list); ;
         }
 
 
@@ -119,11 +119,11 @@ namespace WP.NetCore.API.Controllers
         [HttpGet]
         [Route("GetRoleRouter")]
         [Authorize]
-        public async Task<ResponseResult> GetRoleRouter()
+        public async Task<ActionResult<List<RouterViewModel>>> GetRoleRouter()
         {
             var tokenInfo = JwtHelper.TokenInfo(User);
             var listMenu = await menuService.GetRoleMenuListAsync(tokenInfo.Role.Split(',').Select(x => Convert.ToInt64(x)).ToList());
-            return new ResponseResult().Success(listMenu);
+            return Ok(listMenu);
         }
 
 

@@ -13,10 +13,12 @@ namespace WP.NetCore.Repository.EFCore
     public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity : EntityBase, new()
     {
         private readonly WPDbContext _dbContext;
+        private readonly IUserContext userContext;
 
-        public BaseRepository(WPDbContext _DbContext)
+        public BaseRepository(WPDbContext _DbContext, IUserContext userContext)
         {
             _dbContext = _DbContext;
+            this.userContext = userContext;
         }
         public IQueryable<TEntity> Query()
         {
@@ -135,6 +137,9 @@ namespace WP.NetCore.Repository.EFCore
                             continue;
                         case nameof(info.Id):
                             continue;
+                        case nameof(info.ModifyBy):
+                            item.SetValue(info, userContext.Id);
+                            continue;
                         case nameof(info.ModifyTime):
                             item.SetValue(info, DateTime.Now);
                             continue;
@@ -180,6 +185,9 @@ namespace WP.NetCore.Repository.EFCore
                                     continue;
                                 case nameof(info.Id):
                                     continue;
+                                case nameof(info.ModifyBy):
+                                    item.SetValue(info, userContext.Id);
+                                    continue;
                                 case nameof(info.ModifyTime):
                                     item.SetValue(info, DateTime.Now);
                                     continue;
@@ -214,6 +222,7 @@ namespace WP.NetCore.Repository.EFCore
             {
                 info.IsDelete = true;
                 info.DeleteTime = DateTime.Now;
+                info.ModifyBy = userContext.Id;
                 await SaveAsync();
             }
         }
@@ -235,6 +244,7 @@ namespace WP.NetCore.Repository.EFCore
                     {
                         info.IsDelete = true;
                         info.DeleteTime = DateTime.Now;
+                        info.ModifyBy = userContext.Id;
 
                     }
                 }

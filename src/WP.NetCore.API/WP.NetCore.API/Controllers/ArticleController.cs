@@ -12,6 +12,7 @@ using WP.NetCore.IServices;
 using WP.NetCore.Model;
 using WP.NetCore.Model.Dto.Article;
 using WP.NetCore.Model.EntityModel;
+using WP.NetCore.Model.ViewModel;
 
 namespace WP.NetCore.API.Controllers
 {
@@ -38,14 +39,14 @@ namespace WP.NetCore.API.Controllers
         /// <param name="pageSize"></param>
         /// <returns></returns>
         [HttpGet("GetArticleList")]
-        public async Task<ResponseResult> GetArticleList(int pageIndex, int pageSize)
+        public async Task<ActionResult<PageModel<Article>>> GetArticleList([FromRoute] int pageIndex, [FromRoute] int pageSize)
         {
             var listArticle = await articleService.GetArticleListAsync(pageIndex, pageSize);
             listArticle.Data.ForEach(item => 
             {
                 item.Content = HtmlHelper.ReplaceHtmlTag(MarkdownHelper.MarkdownToHtml(item.Content));
             });
-            return new ResponseResult().Success(listArticle);
+            return Ok(listArticle);
         }
 
         /// <summary>
@@ -54,10 +55,10 @@ namespace WP.NetCore.API.Controllers
         /// <param name="articleId"></param>
         /// <returns></returns>
         [HttpGet("GetArticleInfo")]
-        public async Task<ResponseResult> GetArticleInfo(long articleId)
+        public async Task<ActionResult<ArticleViewModel>> GetArticleInfo([FromRoute]long articleId)
         {
             var objArticle = await articleService.GetArticleInfo(articleId);
-            return new ResponseResult().Success(objArticle);
+            return Ok(objArticle);
         }
 
 
@@ -70,10 +71,10 @@ namespace WP.NetCore.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Authorize("Permission")]
-        public async Task<ResponseResult> Get(int pageIndex, int pageSize)
+        public async Task<ActionResult<PageModel<ArticleViewModel>>> Get([FromQuery] int pageIndex, [FromQuery] int pageSize)
         {
             var listArticle = await articleService.GetArticleListAsync(pageIndex, pageSize);
-            return new ResponseResult().Success(listArticle);
+            return Ok(listArticle);
         }
 
 
@@ -85,18 +86,19 @@ namespace WP.NetCore.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Authorize("Permission")]
-        public async Task<ResponseResult> Post([FromBody] AddArticleDto articleDto)
+        public async Task<ActionResult> Post([FromBody] AddArticleDto articleDto)
         {
             var objClass = await articleClassService.FirstAsync(articleDto.ClassId);
             if (objClass == null)
             {
-                throw new Exception("ID不存在");
+                return NotFound("ID不存在");
             }
             var objArticle = mapper.Map<Article>(articleDto);
             objArticle.Class = objClass;
             objArticle.CreateBy = GetToken().Id;
             await articleService.AddAsync(objArticle);
-            return new ResponseResult().Success();
+            return Ok();
+
         }
 
 
@@ -107,16 +109,16 @@ namespace WP.NetCore.API.Controllers
         /// <returns></returns>
         [HttpPut]
         [Authorize("Permission")]
-        public async Task<ResponseResult> Put([FromBody] UpdateArticleDto articleDto)
+        public async Task<ActionResult> Put([FromBody] UpdateArticleDto articleDto)
         {
             if (await articleClassService.FirstNoTrackingAsync(articleDto.ClassId) == null)
             {
-                throw new Exception("ID不存在");
+                return NotFound("ID不存在");
             }
             var objArticle = mapper.Map<Article>(articleDto);
             objArticle.ModifyBy = GetToken().Id;
             await articleService.UpdateAsync(objArticle);
-            return new ResponseResult().Success();
+            return NoContent();
         }
 
         /// <summary>
@@ -126,18 +128,18 @@ namespace WP.NetCore.API.Controllers
         /// <returns></returns>
         [HttpDelete]
         [Authorize("Permission")]
-        public async Task<ResponseResult> Delete(long Id)
+        public async Task<ActionResult> Delete([FromQuery] long Id)
         {
             if (default(long) == Id)
             {
-                return new ResponseResult().Error("ID不能为空");
+                return BadRequest("ID不能为空");
             }
             if (await articleService.FirstNoTrackingAsync(Id) == null)
             {
-                throw new Exception("ID不存在");
+                return NotFound("ID不存在");
             }
             await articleService.DeleteAsync(Id);
-            return new ResponseResult().Success();
+            return NoContent();
         }
     }
 }

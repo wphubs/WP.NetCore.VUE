@@ -41,6 +41,9 @@ using System.Text.Unicode;
 using StackExchange.Redis;
 using Microsoft.AspNetCore.SignalR;
 using WP.NetCore.API.Hubs;
+using WP.NetCore.Model;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
 //using WP.NetCore.IServices;
 //using WP.NetCore.Services;
 
@@ -171,6 +174,7 @@ namespace WP.NetCore.API
             #endregion
 
             #region JWT
+            services.AddScoped<IUserContext, UserContext>();
             var symmetricKeyAsBase64 = AppSecretConfig.Audience_Secret_String;
             var keyByteArray = Encoding.ASCII.GetBytes(symmetricKeyAsBase64);
             var signingKey = new SymmetricSecurityKey(keyByteArray);
@@ -220,13 +224,10 @@ namespace WP.NetCore.API
                      },
                      OnTokenValidated = context =>
                      {
-                         //var userContext = context.HttpContext.RequestServices.GetService<>();
+                         var userContext = context.HttpContext.RequestServices.GetService<IUserContext>();
                          var claims = context.Principal.Claims;
-                         //userContext.Id = long.Parse(claims.First(x => x.Type == JwtRegisteredClaimNames.Sub).Value);
-                         //userContext.Account = claims.First(x => x.Type == ClaimTypes.NameIdentifier).Value;
-                         //userContext.Name = claims.First(x => x.Type == ClaimTypes.Name).Value;
-                         //userContext.Email = claims.First(x => x.Type == JwtRegisteredClaimNames.Email).Value;
-                         //string[] roleIds = claims.First(x => x.Type == ClaimTypes.Role).Value.Split(",", StringSplitOptions.RemoveEmptyEntries);
+                         userContext.Id = long.Parse(claims.First(x => x.Type == "Id").Value);
+                         userContext.Name = claims.First(x => x.Type == "Name").Value;
                          return Task.CompletedTask;
                      },
                      OnAuthenticationFailed = context =>

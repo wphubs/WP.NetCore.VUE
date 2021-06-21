@@ -26,7 +26,7 @@ namespace WP.NetCore.API.Controllers
         }
 
         [HttpGet("GetServerInfo")]
-        public ResponseResult GetServerInfo()
+        public ActionResult GetServerInfo()
         {
             var objSysData =new  {
                 Platform = RuntimeInformation.OSDescription.ToString(),
@@ -36,7 +36,7 @@ namespace WP.NetCore.API.Controllers
                 MemoryFootprint = (Process.GetCurrentProcess().WorkingSet64 / 1048576).ToString("N2") + " MB",
                 WorkingTime = DateHelper.TimeSubTract(DateTime.Now, Process.GetCurrentProcess().StartTime)
             };
-            return new ResponseResult().Success(objSysData);
+            return Ok(objSysData);
         }
 
     }

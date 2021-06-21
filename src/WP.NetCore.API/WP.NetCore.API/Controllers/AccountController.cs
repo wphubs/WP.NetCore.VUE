@@ -23,18 +23,13 @@ namespace WP.NetCore.API.Controllers
             this.userService = userService;
         }
 
-        //[HttpGet]
-        //public string Get() 
-        //{
-        //    int a = 1;
-        //    int b = 0;
-        //    var c = a/b;
-        //    return "";
-        //}
-
-
+        /// <summary>
+        /// 用户登录
+        /// </summary>
+        /// <param name="objLogin"></param>
+        /// <returns></returns>
         [HttpPost]
-        public async Task<ResponseResult> Post(LoginDto objLogin)
+        public async Task<ActionResult<string>> Post([FromBody] LoginDto objLogin)
         {
             var objUserInfo = await userService.CheckUserAsync(objLogin.UserName,objLogin.PassWord);
             if (objUserInfo != null)
@@ -46,14 +41,13 @@ namespace WP.NetCore.API.Controllers
                     UserName = objUserInfo.UserName,
                     Name = objUserInfo.Name,
                     Avatar = ""
-
                 };
                 var strJWT = JwtHelper.IssueJwt(tokenModel);
-                return new ResponseResult().Success(new { token = strJWT.token,exp=strJWT.expTime });
+                return Ok(new { token = strJWT.token });
             }
             else
             {
-                return new ResponseResult().Error("用户信息不存在");
+                return BadRequest("用户信息不存在");
             }
         }
     }

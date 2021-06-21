@@ -38,10 +38,10 @@ namespace WP.NetCore.API.Controllers
         /// <returns></returns>
         [Route("GetUserInfo")]
         [HttpGet]
-        public ResponseResult GetUserInfo() 
+        public ActionResult<TokenModelJwt> GetUserInfo() 
         {
             var tokenInfo = JwtHelper.TokenInfo(User);
-            return new ResponseResult().Success(tokenInfo);
+            return Ok(tokenInfo);
         }
 
         /// <summary>
@@ -51,11 +51,10 @@ namespace WP.NetCore.API.Controllers
         /// <param name="pageSize"></param>
         /// <returns></returns>        [Authorize("Permission")]
         [HttpGet]
-        public async Task<ResponseResult> Get(int pageIndex,int pageSize) 
+        public async Task<ActionResult<PageModel<UserViewModel>>> Get([FromQuery] int pageIndex, [FromQuery] int pageSize) 
         {
-            //var listUser = await userService.GetPageListAsync(pageIndex,pageSize);
             var listUser = await userService.GetUserListAsync(pageIndex, pageSize);
-            return new ResponseResult().Success(listUser);
+            return Ok(listUser);
         }
 
         /// <summary>
@@ -64,12 +63,12 @@ namespace WP.NetCore.API.Controllers
         /// <param name="userDto"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ResponseResult> Post([FromBody]AddUserDto userDto)
+        public async Task<ActionResult> Post([FromBody]AddUserDto userDto)
         {
             var objUser = mapper.Map<User>(userDto);
             objUser.CreateBy = GetToken().Id;
             await userService.AddUserAsync(objUser,userDto.Roles);
-            return new ResponseResult().Success();
+            return Ok();
         }
 
         /// <summary>
@@ -78,13 +77,12 @@ namespace WP.NetCore.API.Controllers
         /// <param name="userDto"></param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<ResponseResult> Put([FromBody] UpdateUserDto userDto)
+        public async Task<ActionResult> Put([FromBody] UpdateUserDto userDto)
         {
             var objUser = mapper.Map<User>(userDto);
-  
             objUser.ModifyBy = GetToken().Id;
             await userService.EditUserAsync(objUser, userDto.Roles);
-            return new ResponseResult().Success();
+            return NoContent();
         }
         
         /// <summary>
@@ -93,27 +91,20 @@ namespace WP.NetCore.API.Controllers
         /// <param name="Id"></param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<ResponseResult> Delete(long Id)
+        public async Task<ActionResult> Delete([FromQuery] long Id)
         {
             if (default(long)==Id)
             {
-                return new ResponseResult().Error("ID不能为空");
+                return BadRequest("ID不能为空");
             }
             if (await userService.FirstNoTrackingAsync(Id) == null)
             {
-                return new ResponseResult().Error("ID不存在");
+                return NotFound("ID不存在");
             }
             await userService.DeleteAsync(Id);
-            return new ResponseResult().Success();
+            return NoContent();
         }
 
-        //[HttpPost]
-        //[Route("SetUserRole")]
-        //public async Task<ResponseResult> SetUserRole(SetUserRoleDto userRoleDto)
-        //{
-        //    await userService.SetUserRoleAsync(userRoleDto.UserId, userRoleDto.RoleId);
-        //    return new ResponseResult().Success();
-        //}
 
     }
 }

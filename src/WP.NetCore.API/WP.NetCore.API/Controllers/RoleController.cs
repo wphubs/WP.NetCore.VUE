@@ -30,41 +30,26 @@ namespace WP.NetCore.API.Controllers
             this.menuService = menuService;
         }
 
-        /// <summary>
-        /// 获取角色列表
-        /// </summary>
-        /// <param name="pageIndex"></param>
-        /// <param name="pageSize"></param>
-        /// <returns></returns>
-        //[HttpGet]
-        //public async Task<ResponseResult> Get(int pageIndex, int pageSize)
-        //{
-        //    var listUser = await roleService.GetPageListAsync(pageIndex, pageSize);
-        //    var res= new ResponseResult().Success(listUser);
-        //    return res;
-        //}
-
-
 
         [HttpGet]
-        public async Task<ResponseResult> Get()
+        public async Task<ActionResult<IEnumerable<Role>>> Get()
         {
             var listUser = await roleService.GetAllAsync();
-            return new ResponseResult().Success(listUser);
+            return Ok(listUser);
         }
 
 
 
         [HttpGet]
         [Route("GetPermission")]
-        public async Task<ResponseResult> GetPermission(long roleId)
+        public async Task<ActionResult<List<object>>> GetPermission([FromQuery] long roleId)
         {
             var listMenu = await menuService.GetMenuListAsync();
             var listRoleMenu = await roleService.GetRoleMenu(roleId);
             List<object> list = new List<object>();
             list.Add(listMenu);
             list.Add(listRoleMenu);
-            return new ResponseResult().Success(list);
+            return Ok(list);
         }
 
 
@@ -74,13 +59,12 @@ namespace WP.NetCore.API.Controllers
         /// <param name="userDto"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ResponseResult> Post([FromBody] AddRoleDto userDto)
+        public async Task<ActionResult> Post([FromBody] AddRoleDto userDto)
         {
             var objUser = mapper.Map<Role>(userDto);
             objUser.CreateBy = GetToken().Id;
-          
             await roleService.AddAsync(objUser);
-            return new ResponseResult().Success();
+            return Ok();
         }
 
         /// <summary>
@@ -89,11 +73,11 @@ namespace WP.NetCore.API.Controllers
         /// <param name="userDto"></param>
         /// <returns></returns>
         [HttpPost("SetPermission")]
-        public async Task<ResponseResult> SetPermission([FromBody] AddRoleMenuDto userDto)
+        public async Task<ActionResult> SetPermission([FromBody] AddRoleMenuDto userDto)
         {
             userDto.CreateBy = GetToken().Id;
             await roleService.SetRoleMenu(userDto);
-            return new ResponseResult().Success();
+            return NoContent();
         }
 
         /// <summary>
@@ -102,16 +86,16 @@ namespace WP.NetCore.API.Controllers
         /// <param name="userDto"></param>
         /// <returns></returns>
         [HttpPut]
-        public async Task<ResponseResult> Put([FromBody] UpdateRoleDto userDto)
+        public async Task<ActionResult> Put([FromBody] UpdateRoleDto userDto)
         {
             if (await roleService.FirstNoTrackingAsync(userDto.Id) == null)
             {
-                return new ResponseResult().Error("ID不存在");
+                return NotFound("ID不存在");
             }
             var objUser = mapper.Map<Role>(userDto);
             objUser.ModifyBy = GetToken().Id;
             await roleService.UpdateAsync(objUser);
-            return new ResponseResult().Success();
+            return NoContent();
         }
 
         /// <summary>
@@ -120,18 +104,18 @@ namespace WP.NetCore.API.Controllers
         /// <param name="Id"></param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<ResponseResult> Delete(long Id)
+        public async Task<ActionResult> Delete([FromQuery] long Id)
         {
             if (default(long) == Id)
             {
-                return new ResponseResult().Error("ID不能为空");
+                return BadRequest("ID不能为空");
             }
             if (await roleService.FirstNoTrackingAsync(Id) == null)
             {
-                return new ResponseResult().Error("ID不存在");
+                return NotFound("ID不存在");
             }
             await roleService.DeleteAsync(Id);
-            return new ResponseResult().Success();
+            return NoContent(); ;
         }
     }
 }

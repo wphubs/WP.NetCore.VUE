@@ -25,15 +25,15 @@ namespace WP.NetCore.API.AuthHelper
         protected override async Task HandleChallengeAsync(AuthenticationProperties properties)
         {
             Response.ContentType = "application/json";
-            Response.StatusCode = 200;
-            await Response.WriteAsync(JsonConvert.SerializeObject(new ResponseResult().Error("很抱歉，您没有操作权限")));
+            Response.StatusCode = StatusCodes.Status401Unauthorized;
+            await Response.WriteAsync("很抱歉，您没有操作权限！");
         }
 
         protected override async Task HandleForbiddenAsync(AuthenticationProperties properties)
         {
             Response.ContentType = "application/json";
-            Response.StatusCode = 200;
-            await Response.WriteAsync(JsonConvert.SerializeObject(new ResponseResult().Error("很抱歉，您没有操作权限")));
+            Response.StatusCode = StatusCodes.Status403Forbidden;
+            await Response.WriteAsync("很抱歉，您没有操作权限！");
         }
     }
 }

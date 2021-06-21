@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WP.NetCore.IServices;
 using WP.NetCore.Model;
+using WP.NetCore.Model.ViewModel;
 
 namespace WP.NetCore.API.Controllers
 {
@@ -27,10 +28,11 @@ namespace WP.NetCore.API.Controllers
         /// <param name="pageSize"></param>
         /// <returns></returns>
         [HttpGet("GetRequestLog")]
-        public async Task<ResponseResult> GetRequestLog(int pageIndex,int pageSize) 
+        public async Task<ActionResult<PageModel<RequestLogViewModel>>> GetRequestLog(int pageIndex,int pageSize) 
         {
+            //TODO：改为本地文件方式
             var log = await requestLogService.GetPageAsync(pageIndex,pageSize);
-            return new ResponseResult().Success(log);
+            return Ok(log);
         }
     }
 }

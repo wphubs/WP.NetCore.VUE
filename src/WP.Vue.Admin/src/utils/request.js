@@ -14,20 +14,6 @@ const service = axios.create({
 })
 service.interceptors.request.use(
   config => {
-    var exp = getExpTime();
-    if (exp) {
-      if (new Date() > new Date(getExpTime())) {
-
-        store.dispatch('user/resetToken').then(() => {
-          MessageBox.confirm('验证信息已过期，请重新登录', '提示', {
-            confirmButtonText: '确定',
-            type: 'warning'
-          }).then(() => {
-            location.reload()
-          })
-        })
-      }
-    }
     if (store.getters.token) {
       config.headers['Authorization'] = 'Bearer ' + getToken()
     }
@@ -40,40 +26,30 @@ service.interceptors.request.use(
 )
 service.interceptors.response.use(
   response => {
-    console.log(JSON.stringify(response.status))
     const res = response.data
-    if (response.status == 200) {
-      if (!res.Result) {
-        Message({
-          message: res.Msg,
-          type: 'warning',
-          duration: 5 * 1000
-        })
-        return Promise.reject(new Error(res.message || 'Error'))
-      } else {
-        return res.Data
-      }
-    } else {
-      Message({
-        message: res.Msg,
-        type: 'warning',
-        duration: 5 * 1000
-      })
-      return Promise.reject(new Error(res.message || 'Error'))
-    }
-
+    return res
   },
   error => {
-    console.log('err1' + JSON.stringify(error.response.status)) // for debug
+    console.log('err1' + JSON.stringify(error.response.data)) // for debug
     if(error.response.status==429){
       Message({
-        message: '访问过于频繁，请稍后重试',
+        message: '访问过于频繁,歇会吧',
         type: 'error',
         duration: 5 * 1000
       })
-    }else{
+    }else if(error.response.status==401){
+      store.dispatch('user/resetToken').then(() => {
+        MessageBox.confirm('验证信息已过期，请重新登录', '提示', {
+          confirmButtonText: '确定',
+          type: 'warning'
+        }).then(() => {
+          location.reload()
+        })
+      })
+    }
+    else{
       Message({
-        message: error.message,
+        message: error.response.data,
         type: 'error',
         duration: 5 * 1000
       })
