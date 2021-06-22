@@ -4,9 +4,8 @@
         <div class="container">
             <div class="content has-text-centered">
 
-                <p>The MIT License (MIT) Copyright 2021</p>
-                <a target="_blank" href="http:
-                    //www.beian.gov.cn/portal/registerSystemInfo?recordcode=11011502004518"
+                <p>The MIT License (MIT) Copyright 2021-2021</p>
+                <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11011502004518"
                                 style="display:inline-block;text-decoration:none;height:20px;line-height:20px;"><img
                                       src="../static/images/beian.png"  style="float:left;"   />
                                 <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px;">
