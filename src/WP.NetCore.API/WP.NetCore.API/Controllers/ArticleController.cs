@@ -39,7 +39,7 @@ namespace WP.NetCore.API.Controllers
         /// <param name="pageSize"></param>
         /// <returns></returns>
         [HttpGet("GetArticleList")]
-        public async Task<ActionResult<PageModel<Article>>> GetArticleList([FromRoute] int pageIndex, [FromRoute] int pageSize)
+        public async Task<ActionResult<PageModel<Article>>> GetArticleList([FromQuery] int pageIndex, [FromQuery] int pageSize)
         {
             var listArticle = await articleService.GetArticleListAsync(pageIndex, pageSize);
             listArticle.Data.ForEach(item => 
@@ -55,7 +55,7 @@ namespace WP.NetCore.API.Controllers
         /// <param name="articleId"></param>
         /// <returns></returns>
         [HttpGet("GetArticleInfo")]
-        public async Task<ActionResult<ArticleViewModel>> GetArticleInfo([FromRoute]long articleId)
+        public async Task<ActionResult<ArticleViewModel>> GetArticleInfo([FromQuery] long articleId)
         {
             var objArticle = await articleService.GetArticleInfo(articleId);
             return Ok(objArticle);

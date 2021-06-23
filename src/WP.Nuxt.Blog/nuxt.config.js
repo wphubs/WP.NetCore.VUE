@@ -24,29 +24,25 @@ export default {
     'element-ui/lib/theme-chalk/index.css', 'animate.css/animate.css','bulma/css/bulma.css','hover.css/css/hover.css',
     '@/assets/iconfont.css',
   ],
-
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/element-ui','@/plugins/vue-headroom','@/plugins/vue-scrollactive', '@/plugins/vue-markdown.js',
     { src: '@/assets/iconfont.js', ssr: false },    { src: '@/plugins/cnzz.js', ssr: false }
   ],
-
-  // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
   ],
-
-  // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
   ],
-
-  // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: [/^element-ui/],
   },
   loading: '~/components/loading.vue',
+  publicRuntimeConfig: {
+    baseURL:  'http://localhost:8081/api/'
+  },
+  privateRuntimeConfig: {
+    apiSecret: 'www.baidu.com'
+  }
 }

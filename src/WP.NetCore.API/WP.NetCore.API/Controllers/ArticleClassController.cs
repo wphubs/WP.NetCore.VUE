@@ -13,7 +13,6 @@ namespace WP.NetCore.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class ArticleClassController :  BaseController
     {
   
