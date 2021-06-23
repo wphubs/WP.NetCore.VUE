@@ -2,9 +2,9 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'WP.Nuxt.Blog',
-    htmlAttrs: {
-      lang: 'en'
-    },
+    // htmlAttrs: {
+    //   lang: 'en'
+    // },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -12,6 +12,7 @@ export default {
     ],
     script: [
       { src: 'https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js' },
+      // { src: 'https://s9.cnzz.com/z_stat.php?id=1280044313&web_id=1280044313', ssr: false }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -27,7 +28,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/element-ui','@/plugins/vue-headroom','@/plugins/vue-scrollactive', '@/plugins/vue-markdown.js',
-    { src: '@/assets/iconfont.js', ssr: false }
+    { src: '@/assets/iconfont.js', ssr: false },    { src: '@/plugins/cnzz.js', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -47,5 +48,5 @@ export default {
   build: {
     transpile: [/^element-ui/],
   },
-  loading: '~/components/loading.vue'
+  loading: '~/components/loading.vue',
 }
