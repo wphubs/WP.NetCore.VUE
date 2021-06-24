@@ -4,8 +4,8 @@
       <PageHeader  style="z-index: 999; font-size: 16px;padding-right: 10px;background: #000;display: flex;
       position: fixed; top: 0px;width: 100%;right: 0px;
        justify-content: flex-end;height: 70px;align-items: center;"/>
-     <div style="position: fixed; top: 10px;left: 10px;z-index: 9999;">
-      <img src="https://www.wptest.cn/images/logo.png" width="50px" height="50px" />
+     <div style="position: fixed; top: 0px;left: 10px;z-index: 9999;">
+      <img src="https://www.wptest.cn/images/logo.png" width="70px" height="70px" />
      </div>
     <Nuxt style="padding-bottom: 60px;margin-top: 70px; " />
     <PageFooter  />

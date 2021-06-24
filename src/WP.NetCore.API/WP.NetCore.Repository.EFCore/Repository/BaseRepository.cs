@@ -39,7 +39,7 @@ namespace WP.NetCore.Repository.EFCore
             return await list.Where(predicate).ToListAsync();
         }
 
-        public async Task<IQueryable<TEntity>> LoadAsync(Expression<Func<TEntity, bool>> predicate = null)
+        public async Task<IQueryable<TEntity>> LoadNoTrackingAsync(Expression<Func<TEntity, bool>> predicate = null)
         {
             if (predicate == null)
             {
@@ -47,14 +47,18 @@ namespace WP.NetCore.Repository.EFCore
             }
             return await Task.Run(() =>  Query().Where(predicate));
         }
-        public IQueryable<TEntity> Load(Expression<Func<TEntity, bool>> predicate = null)
+      
+
+        public async Task<IQueryable<TEntity>> LoadAsync(Expression<Func<TEntity, bool>> predicate = null)
         {
             if (predicate == null)
             {
                 predicate = c => true;
             }
-            return Query().Where(predicate);
+            return await Task.Run(()=> _dbContext.Set<TEntity>().Where(predicate));
         }
+
+
 
 
         public async Task<(int Total,IQueryable<TEntity> Data)> GetPageAsync<TProperty>(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, TProperty>> order, int pageIndex, int pageSize, bool isAsc = false)
@@ -86,7 +90,6 @@ namespace WP.NetCore.Repository.EFCore
         {
             return await _dbContext.Set<TEntity>().FirstOrDefaultAsync(predicate);
         }
-
 
         public async Task<TEntity> FirstNoTrackingAsync(Expression<Func<TEntity, bool>> predicate)
         {

@@ -6,48 +6,40 @@
                     <div class="options" id="optnCard">
                       <p class="options-text disabled">分类</p>
                       <div v-for="(itemClass,index) in classList" :key="index">
-                            <a href="#GettingStarted" class="option options-title active">#{{itemClass.ClassName}}</a>
+                            <a @click.prevent="clickClass(itemClass)" class="option options-title active">#{{itemClass.ClassName}}</a>
                       </div>
                      
                     </div>
                   </div>
             </el-col>
-            <el-col :span="10" style="padding-top: 50px;" >
+            <el-col :span="10" style="padding-top: 70px;" >
               <div  v-for="(item,indexArticle) in articleList" :key="indexArticle">
                 <section class="section" >
                   <div style="display: flex;align-items: center;width: 100%;">
-                    <div style="flex: 1;">
+                    <div style="flex: 1;display: flex;align-items: center;">
                       <span class="tag is-primary is-medium">{{item.ClassName}}</span>
-                      <span style="font-size: 30px;font-weight: bolder;margin-left: 10px;">{{item.Title}}</span></div>
+                      <span style="font-size: 25px;font-weight: bolder;margin-left: 10px;"><a :href="'/article/detail/'+item.Id" style="color: #000;">{{item.Title}}</a></span></div>
                     <div style="width: 200px;font-size: 18px;color: #8d8d8d;">{{item.CreateTime}}</div>
                   </div>
-                <div class="article-content" v-html="item.Content"> </div> 
+                <div class="article-content" v-html="item.Content"></div> 
              </section>
              <el-divider></el-divider>
               </div>
                            
 
             </el-col>
-            <el-col :span="5"  :offset="2" style="padding-top: 80px;">
+            <el-col :span="5"  :offset="2" style="padding-top: 100px;">
 
               <div class="card">
                 <div class="card-image">
                   <figure class="image is-5by3">
-                    <img src="https://images.pexels.com/photos/973231/pexels-photo-973231.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="Placeholder image">
+                    <img src="https://www.wptest.cn/images/1597825271636.jpg" alt="Placeholder image">
                   </figure>
                 </div>
                 <div class="card-content">
                   <div class="media">
-                    <div class="media-left">
-                      <figure class="image is-32x32">
-                        <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-                      </figure>
-                    </div>
-                    <div class="media-left">
-                      <p class="is-3">今日微语</p>
-                    </div>
+                      <p>今日微语-</p>
                   </div>
-              
                   <div class="content">
                     没有太晚的开始，不如就从今天行动。总有一天，那个一点一点可见的未来，会在你心里，也在你的脚下慢慢清透。生活，从不亏待每一个努力向上的人。
                     <br> <br>
@@ -66,18 +58,22 @@
                     <span class="panel-icon">
                       <i class="fas fa-book" aria-hidden="true"></i>
                     </span>
-                   WP.Nuxt.Blog是基于Nuxt.js框架开发的个人博客，通过SSR服务器端渲染生成静态页面，更利于SEO搜索引擎。并采用.NetCore+Vue前后端分离方式开发了一套搭配使用的后台管理系统。
-           
+                    <div>
+                      <p>WP.Nuxt.Blog是基于Nuxt.js框架开发的个人博客，通过SSR服务器端渲染生成静态页面，更利于SEO搜索引擎。并采用.NetCore+Vue前后端分离方式开发了一套搭配使用的后台管理系统。</p>
+                      <br>
+                      <p>Github源码地址：<a style="color: #409eff;" href="https://github.com/wphubs/WP.NetCore.VUE">https://github.com/wphubs/WP.NetCore.VUE</a></p>
+              
+                    </div>
                     </div>
                 </nav>
               </div>
 
               <div>
-                <nav class="panel" style="margin-top: 100px;">
+                <nav class="panel" style="margin-top: 50px;">
                   <p class="panel-heading">
                     热门文章
                   </p>
-                  <a class="panel-block is-active"  v-for="(item,indexArticle) in articleList" :key="indexArticle">
+                  <a class="panel-block is-active"  :href="'/article/detail/'+item.Id" style="color: #409eff;" v-for="(item,indexArticle) in hotArticleList" :key="indexArticle">
                     <span class="panel-icon">
                       <i class="fas fa-book" aria-hidden="true"></i>
                     </span>
@@ -102,7 +98,10 @@ export default {
     };
   },
   methods: {
-  
+    async clickClass(item){
+        var {data} = await axios.get(`${this.baseURL}Article/GetArticleList?classId=${item.Id}&pageIndex=1&pageSize=20`);
+        this.articleList=data.Data; 
+    },
   },
   async asyncData({ params, $config }) {
     var { data: articleClass } = await axios.get(
@@ -111,7 +110,10 @@ export default {
     var { data: article } = await axios.get(
       `${$config.baseURL}Article/GetArticleList?pageIndex=1&pageSize=20`
     );
-    return { articleList: article.Data, classList: articleClass };
+    var { data: hotArticle } = await axios.get(
+      `${$config.baseURL}Article/GetHotArticleList`
+    );
+    return {baseURL:$config.baseURL, articleList: article.Data, classList: articleClass,hotArticleList:hotArticle.Data };
   },
     mounted() {
       //  this.$nextTick(() => {
@@ -126,6 +128,7 @@ export default {
 </script>
   
   <style scoped>
+    
     .article-content{
       display: -webkit-box;
           -webkit-box-orient: vertical;
@@ -177,7 +180,7 @@ export default {
 }
 
 .option:hover {
-  color: #00f1c9;
+  color:#409eff;
 }
 
 </style>

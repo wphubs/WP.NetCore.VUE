@@ -26,6 +26,16 @@ namespace WP.NetCore.Model.ViewModel
 
         public long ClassId { get; set; }
 
+        /// <summary>
+        /// 浏览量
+        /// </summary>
+        public int Browse { get; set; }
+
+        /// <summary>
+        /// 评论数量（暂时没用，预留字段）
+        /// </summary>
+        public int Comment { get; set; }
+
         public DateTime CreateTime { get; set; }
     }
 }

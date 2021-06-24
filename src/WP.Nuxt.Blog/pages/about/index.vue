@@ -12,14 +12,31 @@
               <div class="center content">
                 C#/.NetCore/Vue/SQL/Uniapp/JS/HTML/CSS/WinForm
               </div>
+              <div class="center content" style="font-size: 15px;">
+                #足球、#F1、#海贼王、#DOTA
+              </div>
               <div class="center content">
                 <i class="iconfont icon-zuobiao" style="font-size: 20px;">&nbsp;Beijing「北京」</i>&nbsp;&nbsp;&nbsp;
                 <i class="iconfont icon-youxiang" style="font-size: 20px;">&nbsp;648779619@qq.com</i>&nbsp;&nbsp;&nbsp;
                 <i class="iconfont icon-GitHub1" style="font-size: 20px;">&nbsp;<a href="https://github.com/wphubs/WP.NetCore.VUE" target="_blank" onmouseover="this.style.color='black';" >Github</a></i>
               </div>
-              
           </el-col>
       </el-row>
+      <el-row  type="flex" class="row-bg" justify="space-around" style="margin-top: 100px;">
+        <el-col :xs="22" :sm="22" :md="5" :lg="5" :xl="5">
+          <img  src="https://www.wptest.cn/images/barca.jpg" style="height: 200px;width: 100%;" mode='cover'>
+        </el-col>
+        <el-col :xs="22" :sm="22" :md="5" :lg="5" :xl="5">
+          <img  src="https://www.wptest.cn/images/f1.jpg"  style="height: 200px;width: 100%;" mode='cover'>
+        </el-col>
+        <el-col :xs="22" :sm="22" :md="5" :lg="5" :xl="5">
+          <img  src="https://www.wptest.cn/images/hz.jpg" style="height: 200px;width: 100%;" mode='cover'>
+        </el-col>
+        <el-col :xs="22" :sm="22" :md="5" :lg="5" :xl="5">
+          <img  src="https://www.wptest.cn/images/dota2.jpeg" style="height: 200px;width: 100%;" >
+        </el-col>
+      </el-row>
+
       </div>
   </template>
   

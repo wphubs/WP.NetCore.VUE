@@ -21,7 +21,8 @@
     "mavon-editor": "^2.6.17",
     "nuxt": "^2.15.3",
     "rellax": "^1.12.1",
-    "vue-scrollactive": "^0.9.3"
+    "vue-scrollactive": "^0.9.3",
+    "vue-uweb": "^0.2.2"
   },
   "devDependencies": {
     "@nuxt/types": "^2.15.3",

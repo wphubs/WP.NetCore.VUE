@@ -50,7 +50,7 @@ namespace WP.NetCore.Services
         [Caching(AbsoluteExpiration = 10,PrefixKey ="Role")]
         public async Task<List<long>> GetRoleMenu(long roleId)
         {
-            var objRole = await baseRepository.LoadAsync(x => x.Id == roleId && x.IsDelete == false);
+            var objRole = await baseRepository.LoadNoTrackingAsync(x => x.Id == roleId && x.IsDelete == false);
             var role = await objRole.Include(x => x.MenuRoles).FirstAsync();
             var listUserMenu = role.MenuRoles.Where(x => x.IsDelete == false);
             var listMenu = from menu in listUserMenu select menu.MenuId;
@@ -68,7 +68,7 @@ namespace WP.NetCore.Services
             {
                 await cache.RemovePattern("Role");
                 await uow.BeginAsync();
-                var objRole = await baseRepository.LoadAsync(x => x.Id == dto.RoleId);
+                var objRole = await baseRepository.LoadNoTrackingAsync(x => x.Id == dto.RoleId);
                 var role = await objRole.Include(x => x.MenuRoles).FirstAsync();
                 List<MenuRole> listAdd = new List<MenuRole>();
                 var idwork = new Snowflake();

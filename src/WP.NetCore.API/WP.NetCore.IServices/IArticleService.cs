@@ -12,9 +12,12 @@ namespace WP.NetCore.IServices
 {
     public interface IArticleService : IBaseService<Article>
     {
-        Task<PageModel<ArticleViewModel>> GetArticleListAsync(int pageIndex, int pageSize);
+        Task<PageModel<ArticleViewModel>> GetArticleListAsync(long? classId,int pageIndex, int pageSize);
 
 
         Task<ArticleViewModel> GetArticleInfo(long articleId);
+
+
+        Task<PageModel<ArticleViewModel>> GetHotArticleListAsync();
     }
 }

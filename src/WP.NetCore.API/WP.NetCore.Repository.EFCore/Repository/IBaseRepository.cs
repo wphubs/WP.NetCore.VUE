@@ -39,8 +39,11 @@ namespace WP.NetCore.Repository.EFCore
         Task<List<TEntity>> GetAllAsync<TProperty>(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, TProperty>> order, bool isAsc = false);
 
 
-        IQueryable<TEntity> Load(Expression<Func<TEntity, bool>> predicate);
-        Task<IQueryable<TEntity>> LoadAsync(Expression<Func<TEntity, bool>> predicate);
+
+        Task<IQueryable<TEntity>> LoadNoTrackingAsync(Expression<Func<TEntity, bool>> predicate);
+
+        Task<IQueryable<TEntity>> LoadAsync(Expression<Func<TEntity, bool>> predicate = null);
+
 
 
         /// <summary>

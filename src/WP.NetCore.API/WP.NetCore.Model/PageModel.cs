@@ -20,7 +20,7 @@ namespace WP.NetCore.Model
         /// <summary>
         /// 每页大小
         /// </summary>
-        public int PageSize { set; get; }
+        public int PageSize { set; get; } = 10;
         /// <summary>
         /// 返回数据
         /// </summary>

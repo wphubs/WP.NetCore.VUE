@@ -23,6 +23,16 @@ namespace WP.NetCore.Model.EntityModel
         /// </summary>
         public string Content { get; set; }
 
+        /// <summary>
+        /// 浏览量
+        /// </summary>
+        public int Browse { get; set; } = 0;
+
+        /// <summary>
+        /// 评论数量（暂时没用，预留字段）
+        /// </summary>
+        public int Comment { get; set; } = 0;
+
 
     }
 

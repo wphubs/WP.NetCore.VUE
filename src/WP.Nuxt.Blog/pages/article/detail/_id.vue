@@ -3,6 +3,10 @@
       <el-row :gutter="10">
         <el-col :xs="{span: 22, offset: 1}" :sm="{span: 22, offset: 1}" :md="{span: 14, offset: 5}"
             :lg="{span: 14, offset: 5}" :xl="{span: 14, offset:5}">
+          <div style="padding: 20px 0px;">
+            <el-page-header @back="goBack" content="详情">
+            </el-page-header>
+          </div>
           <el-card style="margin-top: 20px;" >
             <div slot="header" >
               <div class="title">【{{articleData.ClassName}}】{{articleData.Title}} </div>
@@ -41,9 +45,15 @@ highlight.registerLanguage('bash', bash)
 
         }
       },
-      async asyncData({ params }) {
+      methods: {
+        goBack() {
+          history.go(-1)
+      }
+      },
+      async asyncData({ params,$config}) {
         var { id } = params;
-        var result = await axios.get(`https://www.wptest.cn/netcore/api/Article/GetArticleInfo?articleId=`+id)
+        console.log($config.baseURL);
+        var {data} = await axios.get(`${$config.baseURL}Article/GetArticleInfo?articleId=`+id)
         marked.setOptions({
         renderer: new marked.Renderer(),
         gfm: true,
@@ -57,8 +67,8 @@ highlight.registerLanguage('bash', bash)
           return highlight.highlightAuto(code).value
         }
       })
-        const markHtml = marked(result.data.Data.Content)
-        return { articleData: result.data.Data,markData:markHtml}
+        const markHtml = marked(data.Content)
+        return { articleData: data,markData:markHtml}
       },
       mounted() {
       

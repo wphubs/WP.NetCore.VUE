@@ -179,6 +179,16 @@
             内容
             </summary>
         </member>
+        <member name="P:WP.NetCore.Model.EntityModel.Article.Browse">
+            <summary>
+            浏览量
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.EntityModel.Article.Comment">
+            <summary>
+            评论数量（暂时没用，预留字段）
+            </summary>
+        </member>
         <member name="P:WP.NetCore.Model.EntityModel.Menu.Title">
             <summary>
             标题
@@ -322,6 +332,16 @@
         <member name="P:WP.NetCore.Model.ViewModel.ArticleViewModel.Content">
             <summary>
             内容
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.ArticleViewModel.Browse">
+            <summary>
+            浏览量
+            </summary>
+        </member>
+        <member name="P:WP.NetCore.Model.ViewModel.ArticleViewModel.Comment">
+            <summary>
+            评论数量（暂时没用，预留字段）
             </summary>
         </member>
         <member name="P:WP.NetCore.Model.ViewModel.MenuViewModel.Title">

@@ -39,13 +39,25 @@ namespace WP.NetCore.API.Controllers
         /// <param name="pageSize"></param>
         /// <returns></returns>
         [HttpGet("GetArticleList")]
-        public async Task<ActionResult<PageModel<Article>>> GetArticleList([FromQuery] int pageIndex, [FromQuery] int pageSize)
+        public async Task<ActionResult<PageModel<Article>>> GetArticleList([FromQuery] long? classId, [FromQuery] int pageIndex, [FromQuery] int pageSize)
         {
-            var listArticle = await articleService.GetArticleListAsync(pageIndex, pageSize);
+            var listArticle = await articleService.GetArticleListAsync(classId,pageIndex, pageSize);
             listArticle.Data.ForEach(item => 
             {
                 item.Content = HtmlHelper.ReplaceHtmlTag(MarkdownHelper.MarkdownToHtml(item.Content));
             });
+            return Ok(listArticle);
+        }
+
+
+        /// <summary>
+        /// 获取热门文章（无权限）
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetHotArticleList")]
+        public async Task<ActionResult<PageModel<Article>>> GetHotArticleList()
+        {
+            var listArticle = await articleService.GetHotArticleListAsync();
             return Ok(listArticle);
         }
 
@@ -73,7 +85,7 @@ namespace WP.NetCore.API.Controllers
         [Authorize("Permission")]
         public async Task<ActionResult<PageModel<ArticleViewModel>>> Get([FromQuery] int pageIndex, [FromQuery] int pageSize)
         {
-            var listArticle = await articleService.GetArticleListAsync(pageIndex, pageSize);
+            var listArticle = await articleService.GetArticleListAsync(null,pageIndex, pageSize);
             return Ok(listArticle);
         }
 

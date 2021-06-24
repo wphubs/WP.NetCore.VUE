@@ -12,7 +12,8 @@ export default {
     ],
     script: [
       { src: 'https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js' },
-      // { src: 'https://s9.cnzz.com/z_stat.php?id=1280044313&web_id=1280044313', ssr: false }
+      { src: 'https://zz.bdstatic.com/linksubmit/push.js' },
+      { src: 'https://hm.baidu.com/hm.js?0c5af6448f81440980cfbc5e2771c5a0' },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -26,7 +27,7 @@ export default {
   ],
   plugins: [
     '@/plugins/element-ui','@/plugins/vue-headroom','@/plugins/vue-scrollactive', '@/plugins/vue-markdown.js',
-    { src: '@/assets/iconfont.js', ssr: false },    { src: '@/plugins/cnzz.js', ssr: false }
+    { src: '@/assets/iconfont.js', ssr: false },       { src: '@plugins/uweb.js', ssr: false },
   ],
   components: true,
 
@@ -40,9 +41,7 @@ export default {
   },
   loading: '~/components/loading.vue',
   publicRuntimeConfig: {
-    baseURL:  'http://localhost:8081/api/'
+     baseURL:  'http://localhost:8081/api/'
+    //baseURL:  'https://www.wptest.cn/netcore/api/'
   },
-  privateRuntimeConfig: {
-    apiSecret: 'www.baidu.com'
-  }
 }
