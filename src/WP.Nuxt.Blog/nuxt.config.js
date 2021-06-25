@@ -2,9 +2,9 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'WP.Nuxt.Blog',
-    // htmlAttrs: {
-    //   lang: 'en'
-    // },
+    htmlAttrs: {
+      lang: 'zh'
+    },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -35,10 +35,22 @@ export default {
   buildModules: [
     '@nuxt/typescript-build',
   ],
-  modules: [
-  ],
+  modules: [  '@nuxtjs/axios','@nuxtjs/proxy'],
+  axios: {
+    proxy: true
+  },
+  proxy: {
+    '/api/': {
+      target: 'http://www.moji.com/',
+      changeOrigin: true, // 表示是否跨域
+      pathRewrite: {
+        '^/api/': '/'
+      }
+    }
+  },
   build: {
     transpile: [/^element-ui/],
+    vendor: ["axios"]
   },
   loading: '~/components/loading.vue',
   publicRuntimeConfig: {

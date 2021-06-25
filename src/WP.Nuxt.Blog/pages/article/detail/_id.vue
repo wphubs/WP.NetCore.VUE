@@ -20,8 +20,8 @@
     </el-row>
     </div>
   </template>
-  
-  <script>
+   
+  <script> 
     import axios from 'axios'
     import marked from 'marked'
     import highlight from 'highlight.js/lib/highlight'
@@ -31,7 +31,7 @@ import php from 'highlight.js/lib/languages/php'
 import python from 'highlight.js/lib/languages/python'
 import sql from 'highlight.js/lib/languages/sql'
 import bash from 'highlight.js/lib/languages/bash'
-
+    
 highlight.registerLanguage('javascript', javascript)
 highlight.registerLanguage('css', css)
 highlight.registerLanguage('php', php)
@@ -42,7 +42,7 @@ highlight.registerLanguage('bash', bash)
     export default {
       data() {
         return {
-
+  
         }
       },
       methods: {
@@ -52,7 +52,6 @@ highlight.registerLanguage('bash', bash)
       },
       async asyncData({ params,$config}) {
         var { id } = params;
-        console.log($config.baseURL);
         var {data} = await axios.get(`${$config.baseURL}Article/GetArticleInfo?articleId=`+id)
         marked.setOptions({
         renderer: new marked.Renderer(),

@@ -30,7 +30,13 @@
           </div>           
 
             </el-col>
-            <el-col :span="5"  :offset="2" style="padding-top: 100px;">
+            <el-col :span="5"  :offset="1" style="padding-top: 100px;padding-right: 70px;">
+
+<div>
+  {{ currentCity}}
+  {{currentData}}
+  {{currentWeather.Fcondition_day}}  {{currentWeather.Fwind_dir_day}}  {{currentWeather.Ftemp_high}}°
+</div>
 
               <div class="card">
                 <div class="card-image">
@@ -91,12 +97,13 @@
   
   <script>
 import Rellax from "rellax";
-
-import axios from "axios";
+// import axios from "axios";
 export default {
   data() {
     return {
-      value: new Date()
+      currentData:'',
+      currentWeather:'',
+      currentCity:'',
     };
   },
   methods: {
@@ -105,16 +112,18 @@ export default {
         this.articleList=data.Data; 
     },
   },
-  async asyncData({ params, $config }) {
-    var { data: articleClass } = await axios.get(
+  async asyncData({ params, $config, $axios }) {
+    var { data: articleClass } = await $axios.get(
       `${$config.baseURL}ArticleClass`
     );
-    var { data: article } = await axios.get(
+    articleClass.unshift({"ClassName":"全部","Id":''})
+    var { data: article } = await $axios.get(
       `${$config.baseURL}Article/GetArticleList?pageIndex=1&pageSize=20`
     );
-    var { data: hotArticle } = await axios.get(
+    var { data: hotArticle } = await $axios.get(
       `${$config.baseURL}Article/GetHotArticleList`
     );
+
     return {baseURL:$config.baseURL, articleList: article.Data, classList: articleClass,hotArticleList:hotArticle.Data };
   },
   head() {
@@ -132,20 +141,26 @@ export default {
     }
   },
   mounted() {
-      //  this.$nextTick(() => {
+    //  this.$nextTick(() => {
     //           this.$nuxt.$loading.start()
     //           setTimeout(() => this.$nuxt.$loading.finish(), 700)
     //       })
-    
-   
      if (process.browser) {
       $("#myscoll").nekoScroll({
         top:'70px',
-        zoom:0.8, //绳子长度的缩放值
+        zoom:0.7, 
         blog_body:".blog-body",
-							});
+			});
+ 
     } 
-
+    this.$axios.get(`/api/mojiweather/forecast.php`)
+    .then(res=>{
+      var result=res.data.data;
+      this.currentData=result.time.monthG
+      this.currentWeather=result.forecastDayList[1]
+      this.currentCity=result.city.pname+' '+result.city.name
+    })
+  
 
     var rellax = new Rellax('.rellax', {
      breakpoints:[576, 768, 1201]

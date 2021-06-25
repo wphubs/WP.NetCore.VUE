@@ -11,7 +11,7 @@
 
     export default {
       data() {
-        return {
+        return {  
           count: 0
         }
       },
