@@ -11,7 +11,8 @@ export default {
       { hid: 'description', name: 'description', content: '' }
     ],
     script: [
-      { src: 'https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js' },
+      // { src: 'https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js' },
+      { src: 'https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js' },
       { src: 'https://zz.bdstatic.com/linksubmit/push.js' },
       { src: 'https://hm.baidu.com/hm.js?0c5af6448f81440980cfbc5e2771c5a0' },
     ],
@@ -19,7 +20,7 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-
+ 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     'element-ui/lib/theme-chalk/index.css', 'animate.css/animate.css','bulma/css/bulma.css','hover.css/css/hover.css',

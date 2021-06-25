@@ -13,7 +13,9 @@
                   </div>
             </el-col>
             <el-col :span="10" style="padding-top: 70px;" >
-              <div  v-for="(item,indexArticle) in articleList" :key="indexArticle">
+              <div id="myscoll"></div>
+              <div class="blog-body">
+              <div  id="articleScoll" v-for="(item,indexArticle) in articleList" :key="indexArticle">
                 <section class="section" >
                   <div style="display: flex;align-items: center;width: 100%;">
                     <div style="flex: 1;display: flex;align-items: center;">
@@ -22,10 +24,10 @@
                     <div style="width: 200px;font-size: 18px;color: #8d8d8d;">{{item.CreateTime}}</div>
                   </div>
                 <div class="article-content" v-html="item.Content"></div> 
-             </section>
-             <el-divider></el-divider>
-              </div>
-                           
+              </section>
+              <el-divider></el-divider>
+            </div>
+          </div>           
 
             </el-col>
             <el-col :span="5"  :offset="2" style="padding-top: 100px;">
@@ -48,7 +50,7 @@
                 </div>
               </div>
 
-
+   
               <div >
                 <nav class="panel" style="margin-top: 50px;min-height: 300px;">
                   <p class="panel-heading">
@@ -59,7 +61,7 @@
                       <i class="fas fa-book" aria-hidden="true"></i>
                     </span>
                     <div>
-                      <p>WP.Nuxt.Blog是基于Nuxt.js框架开发的个人博客，通过SSR服务器端渲染生成静态页面，更利于SEO搜索引擎。并采用.NetCore+Vue前后端分离方式开发了一套搭配使用的后台管理系统。</p>
+                      <p>WP.Nuxt.Blog是基于Nuxt.js框架开发的个人博客，通过SSR服务器端渲染生成静态页面。并使用.NetCore+Vue前后端分离方式开发了一套搭配使用的后台管理系统，实现了相关的基础功能，如：用户角色管理、动态路由、策略授权、实时通信、以及基于AOP的缓存、事务等。</p>
                       <br>
                       <p>Github源码地址：<a style="color: #409eff;" href="https://github.com/wphubs/WP.NetCore.VUE">https://github.com/wphubs/WP.NetCore.VUE</a></p>
               
@@ -115,15 +117,40 @@ export default {
     );
     return {baseURL:$config.baseURL, articleList: article.Data, classList: articleClass,hotArticleList:hotArticle.Data };
   },
-    mounted() {
+  head() {
+    return {
+      link: [
+        { rel: 'stylesheet', href:'nekoscroll.css'},
+     ],
+      script: [
+        {
+          charset: 'utf-8',
+          src:  'nekoscroll.min.js',
+          body: true
+        },
+      ]
+    }
+  },
+  mounted() {
       //  this.$nextTick(() => {
     //           this.$nuxt.$loading.start()
     //           setTimeout(() => this.$nuxt.$loading.finish(), 700)
     //       })
-        var rellax = new Rellax('.rellax', {
-         breakpoints:[576, 768, 1201]
-        });
-      },
+    
+   
+     if (process.browser) {
+      $("#myscoll").nekoScroll({
+        top:'70px',
+        zoom:0.8, //绳子长度的缩放值
+        blog_body:".blog-body",
+							});
+    } 
+
+
+    var rellax = new Rellax('.rellax', {
+     breakpoints:[576, 768, 1201]
+    });
+  },
 };
 </script>
   

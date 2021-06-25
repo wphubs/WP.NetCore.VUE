@@ -13,7 +13,7 @@
                 C#/.NetCore/Vue/SQL/Uniapp/JS/HTML/CSS/WinForm
               </div>
               <div class="center content" style="font-size: 15px;">
-                #足球、#F1、#海贼王、#DOTA
+                #足球&nbsp;&nbsp;&nbsp;#F1&nbsp;&nbsp;&nbsp;#海贼王&nbsp;&nbsp;&nbsp;#DOTA
               </div>
               <div class="center content">
                 <i class="iconfont icon-zuobiao" style="font-size: 20px;">&nbsp;Beijing「北京」</i>&nbsp;&nbsp;&nbsp;
@@ -22,18 +22,18 @@
               </div>
           </el-col>
       </el-row>
-      <el-row  type="flex" class="row-bg" justify="space-around" style="margin-top: 100px;">
+      <el-row  type="flex" class="row-bg" justify="space-around" style="margin-top: 100px;text-align: center;">
         <el-col :xs="22" :sm="22" :md="5" :lg="5" :xl="5">
-          <img  src="https://www.wptest.cn/images/barca.jpg" style="height: 200px;width: 100%;" mode='cover'>
+          <img  src="https://www.wptest.cn/images/barca.jpg" style="height: 200px;width: 350px;">
         </el-col>
         <el-col :xs="22" :sm="22" :md="5" :lg="5" :xl="5">
-          <img  src="https://www.wptest.cn/images/f1.jpg"  style="height: 200px;width: 100%;" mode='cover'>
+          <img  src="https://www.wptest.cn/images/f1.jpg"  style="height: 200px;width: 350px;" >
         </el-col>
         <el-col :xs="22" :sm="22" :md="5" :lg="5" :xl="5">
-          <img  src="https://www.wptest.cn/images/hz.jpg" style="height: 200px;width: 100%;" mode='cover'>
+          <img  src="https://www.wptest.cn/images/hz.jpg" style="height: 200px;width: 350px;" >
         </el-col>
         <el-col :xs="22" :sm="22" :md="5" :lg="5" :xl="5">
-          <img  src="https://www.wptest.cn/images/dota2.jpeg" style="height: 200px;width: 100%;" >
+          <img  src="https://www.wptest.cn/images/dota2.jpeg" style="height: 200px;width: 350px;" >
         </el-col>
       </el-row>
 
