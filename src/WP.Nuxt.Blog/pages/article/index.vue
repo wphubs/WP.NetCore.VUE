@@ -32,10 +32,20 @@
             </el-col>
             <el-col :span="5"  :offset="1" style="padding-top: 100px;padding-right: 70px;">
 
-<div>
+<div style=" height: 80px;display: flex;align-items: center;width: 100%;
+justify-content: center;
+border-radius: 10px;
+color: #fff;
+font-size: 16px;margin-bottom: 50px;
+padding: 20px;
+background: rgba(0, 0, 0, .2)">
+  <img v-if="currentWeather.Fcondition_day=='多云'" src="../../static/images/dy.png" style="width: 50px;height: 50px;margin-right: 10px;" >
+  <img v-else-if="currentWeather.Fcondition_day=='晴'" src="../../static/images/q.png" style="width: 50px;height: 50px;margin-right: 10px;" >
+  <img v-else-if="currentWeather.Fcondition_day=='小雨'" src="../../static/images/xy.png" style="width: 50px;height: 50px;margin-right: 10px;" >
+  <img v-else src="../../static/images/lzy.png" style="width: 50px;height: 50px;margin-right: 10px;" >
   {{ currentCity}}
   {{currentData}}
-  {{currentWeather.Fcondition_day}}  {{currentWeather.Fwind_dir_day}}  {{currentWeather.Ftemp_high}}°
+  {{currentWeather.Fcondition_day}} {{currentWeather.Ftemp_high}}°  {{currentWeather.Fwind_dir_day}} 
 </div>
 
               <div class="card">
