@@ -24,7 +24,7 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     'element-ui/lib/theme-chalk/index.css', 'animate.css/animate.css','bulma/css/bulma.css','hover.css/css/hover.css',
-    '@/assets/iconfont.css',
+    '@/assets/iconfont.css','element-ui/lib/theme-chalk/display.css'
   ],
   plugins: [
     '@/plugins/element-ui','@/plugins/vue-headroom','@/plugins/vue-scrollactive', '@/plugins/vue-markdown.js',
@@ -54,7 +54,7 @@ export default {
   },
   loading: '~/components/loading.vue',
   publicRuntimeConfig: {
-     //baseURL:  'http://localhost:8081/api/'
-    baseURL:  'https://www.wptest.cn/netcore/api/'
+    baseURL:  'http://localhost:8081/api/'
+    //baseURL:  'https://www.wptest.cn/netcore/api/'
   },
 }
