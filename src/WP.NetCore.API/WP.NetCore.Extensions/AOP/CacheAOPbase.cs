@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using WP.NetCore.Common;
 
-namespace WP.NetCore.API.AOP
+namespace WP.NetCore.Extensions
 {
     public abstract class CacheAOPbase : IInterceptor
     {

@@ -6,7 +6,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WP.NetCore.API.AuthHelper;
+using WP.NetCore.Extensions;
 
 namespace WP.NetCore.API.Controllers
 {

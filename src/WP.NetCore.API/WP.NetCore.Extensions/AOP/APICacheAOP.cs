@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WP.NetCore.Common;
 
-namespace WP.NetCore.API.AOP
+namespace WP.NetCore.Extensions
 {
     public class APICacheAOP : CacheAOPbase
     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using WP.NetCore.Model.Dto.Role;
 using WP.NetCore.Model.EntityModel;
 
-namespace WP.NetCore.API.AutoMapper
+namespace WP.NetCore.Extensions.AutoMapper
 {
     public class RoleProfile : Profile
     {

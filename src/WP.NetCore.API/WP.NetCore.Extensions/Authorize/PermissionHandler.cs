@@ -7,7 +7,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using WP.NetCore.IServices;
 
-namespace WP.NetCore.API.AuthHelper
+namespace WP.NetCore.Extensions
 {
     public class PermissionHandler : AuthorizationHandler<PermissionRequirement>
     {

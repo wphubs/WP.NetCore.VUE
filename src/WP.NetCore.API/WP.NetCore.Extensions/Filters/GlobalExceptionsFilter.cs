@@ -9,7 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WP.NetCore.Model;
 
-namespace WP.NetCore.API.Filter
+namespace WP.NetCore.Extensions
 {
     public class GlobalExceptionsFilter : IExceptionFilter
     {

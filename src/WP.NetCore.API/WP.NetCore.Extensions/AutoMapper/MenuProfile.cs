@@ -7,7 +7,7 @@ using WP.NetCore.Model.Dto.Menu;
 using WP.NetCore.Model.EntityModel;
 using WP.NetCore.Model.ViewModel;
 
-namespace WP.NetCore.API.AutoMapper
+namespace WP.NetCore.Extensions.AutoMapper
 {
 
     public class MenuProfile : Profile

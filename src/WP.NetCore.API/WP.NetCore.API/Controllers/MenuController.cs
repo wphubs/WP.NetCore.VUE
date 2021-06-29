@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WP.NetCore.API.AuthHelper;
+using WP.NetCore.Extensions;
 using WP.NetCore.IServices;
 using WP.NetCore.Model;
 using WP.NetCore.Model.Dto.Menu;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using WP.NetCore.Common;
 using WP.NetCore.Repository.EFCore;
 
-namespace WP.NetCore.API.AOP
+namespace WP.NetCore.Extensions
 {
     /// <summary>
     /// 事务拦截器BlogTranAOP 继承IInterceptor接口

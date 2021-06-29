@@ -10,7 +10,7 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using WP.NetCore.Model;
 
-namespace WP.NetCore.API.AuthHelper
+namespace WP.NetCore.Extensions
 {
     public class ResponseResultHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {

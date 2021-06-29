@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WP.NetCore.Common;
 
-namespace WP.NetCore.API.AuthHelper
+namespace WP.NetCore.Extensions
 {
     public class JwtHelper
     {
