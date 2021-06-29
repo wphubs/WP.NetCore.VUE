@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WP.NetCore.Model;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace WP.NetCore.Extensions.Middleware
 {
@@ -12,6 +14,7 @@ namespace WP.NetCore.Extensions.Middleware
     {
         public static void UseRequestLogMiddleware(this IApplicationBuilder app)
         {
+            
             app.UseSerilogRequestLogging(options =>
             {
                 options.MessageTemplate = "Handled {RequestPath}";
@@ -27,6 +30,9 @@ namespace WP.NetCore.Extensions.Middleware
                         client = httpContext.Connection.RemoteIpAddress.ToString();
                     }
                     diagnosticContext.Set("IP", client);
+                    var userContext = httpContext.Request.HttpContext.RequestServices.GetService<IUserContext>();
+                    diagnosticContext.Set("UserId", userContext.Id);
+                    diagnosticContext.Set("UserName", userContext.Name);
                 };
             });
         }

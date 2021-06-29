@@ -18,7 +18,6 @@ namespace WP.NetCore.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize("Permission")]
     public class UserController : BaseController
     {
         private readonly IUserService userService;
@@ -37,6 +36,7 @@ namespace WP.NetCore.API.Controllers
         /// <returns></returns>
         [Route("GetUserInfo")]
         [HttpGet]
+        [Authorize]
         public ActionResult<TokenModelJwt> GetUserInfo() 
         {
             var tokenInfo = JwtHelper.TokenInfo(User);
@@ -49,9 +49,13 @@ namespace WP.NetCore.API.Controllers
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>        [Authorize("Permission")]
+        [Authorize("Permission")]
         [HttpGet]
         public async Task<ActionResult<PageModel<UserViewModel>>> Get([FromQuery] int pageIndex, [FromQuery] int pageSize) 
         {
+            int a = 5;
+            int b = 0;
+            var c = a / b;
             var listUser = await userService.GetUserListAsync(pageIndex, pageSize);
             return Ok(listUser);
         }
@@ -62,6 +66,7 @@ namespace WP.NetCore.API.Controllers
         /// <param name="userDto"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize("Permission")]
         public async Task<ActionResult> Post([FromBody]AddUserDto userDto)
         {
             var objUser = mapper.Map<User>(userDto);
@@ -76,6 +81,7 @@ namespace WP.NetCore.API.Controllers
         /// <param name="userDto"></param>
         /// <returns></returns>
         [HttpPut]
+        [Authorize("Permission")]
         public async Task<ActionResult> Put([FromBody] UpdateUserDto userDto)
         {
             var objUser = mapper.Map<User>(userDto);
@@ -90,6 +96,7 @@ namespace WP.NetCore.API.Controllers
         /// <param name="Id"></param>
         /// <returns></returns>
         [HttpDelete]
+        [Authorize("Permission")]
         public async Task<ActionResult> Delete([FromQuery] long Id)
         {
             if (default(long)==Id)

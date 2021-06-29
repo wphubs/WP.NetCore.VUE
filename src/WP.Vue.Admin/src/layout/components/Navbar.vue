@@ -6,7 +6,7 @@
 
     <div class="right-menu">
       <template v-if="device!=='mobile'">
-        <search id="header-search" class="right-menu-item" />
+        <!-- <search id="header-search" class="right-menu-item" />
 
         <error-log class="errLog-container right-menu-item hover-effect" />
 
@@ -14,12 +14,14 @@
 
         <el-tooltip content="Global Size" effect="dark" placement="bottom">
           <size-select id="size-select" class="right-menu-item hover-effect" />
-        </el-tooltip>
-
+        </el-tooltip> -->
+       
       </template>
 
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
+
         <div class="avatar-wrapper">
+          {{name}}
           <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" class="user-avatar">
           <i class="el-icon-caret-bottom" />
         </div>
@@ -61,7 +63,8 @@ export default {
     ...mapGetters([
       'sidebar',
       'avatar',
-      'device'
+      'device',
+      'name'
     ])
   },
   methods: {
@@ -137,10 +140,12 @@ export default {
       margin-right: 30px;
 
       .avatar-wrapper {
+        display:flex;
         margin-top: 5px;
         position: relative;
-
+        font-size:15px;
         .user-avatar {
+          margin-left: 20px;
           cursor: pointer;
           width: 40px;
           height: 40px;

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -13,33 +14,32 @@ namespace WP.NetCore.Extensions
 {
     public class GlobalExceptionsFilter : IExceptionFilter
     {
-        private readonly IWebHostEnvironment _env;
+        private readonly IWebHostEnvironment env;
         private readonly IDiagnosticContext diagnosticContext;
 
         public GlobalExceptionsFilter(IWebHostEnvironment env, IDiagnosticContext diagnosticContext)
         {
-            _env = env;
+            this.env = env;
             this.diagnosticContext = diagnosticContext;
         }
         public void OnException(ExceptionContext context)
         {
-            diagnosticContext.Set("ExceptionFilter", context.Exception.Message);
-            context.Result = new InternalServerErrorObjectResult(new ResponseResult().Error($"服务器异常:{context.Exception.Message}"));
+            diagnosticContext.Set("ExceptionFilter", $"【异常类型】：{context.Exception.GetType().Name}<br/>【异常信息】：{context.Exception.Message} <br/>【堆栈调用】：{context.Exception.StackTrace }");
+            if (env.IsDevelopment())
+            {
+                context.Result = new InternalServerErrorObjectResult($"{context.Exception.Message}");
+            }
+            else 
+            {
+                context.Result = new InternalServerErrorObjectResult($"服务器异常");
+            }
 
-       
         }
-
-        public string WriteLog(string throwMsg, Exception ex)
-        {
-            return string.Format("\r\n【自定义错误】：{0} \r\n【异常类型】：{1} \r\n【异常信息】：{2} \r\n【堆栈调用】：{3}", new object[] { throwMsg,
-                ex.GetType().Name, ex.Message, ex.StackTrace });
-        }
-
         public class InternalServerErrorObjectResult : ObjectResult
         {
             public InternalServerErrorObjectResult(object value) : base(value)
             {
-                StatusCode = StatusCodes.Status200OK;
+                StatusCode = StatusCodes.Status500InternalServerError;
             }
         }
   

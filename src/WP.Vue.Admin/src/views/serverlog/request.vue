@@ -17,6 +17,17 @@
           {{ scope.row.Properties.IP }}
         </template>
       </el-table-column>
+     <el-table-column prop="UserId" label="用户ID" width="150">
+        <template slot-scope="scope">
+          {{ scope.row.Properties.UserId }}
+        </template>
+      </el-table-column>
+           <el-table-column prop="UserName" label="用户名" width="150">
+        <template slot-scope="scope">
+          {{ scope.row.Properties.UserName }}
+        </template>
+      </el-table-column>
+
       <el-table-column prop="RequestMethod" label="方式" width="100">
         <template slot-scope="scope">
   
@@ -30,7 +41,19 @@
       </el-table-column>
       <el-table-column prop="StatusCode" label="状态" width="100">
         <template slot-scope="scope">
-            <el-tag :type="scope.row.Properties.StatusCode ==200?'success':'danger'">   {{ scope.row.Properties.StatusCode }}</el-tag>
+            <el-tag v-if="scope.row.Properties.StatusCode ==200" type="success">   {{ scope.row.Properties.StatusCode }}</el-tag>
+
+          <el-popover  v-else
+            placement="top-start"
+            title="异常信息"
+            width="500"
+            trigger="hover"
+            >
+            <div v-html="scope.row.Properties.ExceptionFilter"></div>
+           <el-tag slot="reference" type="danger">   {{ scope.row.Properties.StatusCode }}</el-tag>
+          </el-popover>
+
+            <!-- <el-ta type="danger">   {{ scope.row.Properties.StatusCode }}</el-ta> -->
         </template>
       </el-table-column>
       <el-table-column prop="Elapsed" label="耗时" width="100">

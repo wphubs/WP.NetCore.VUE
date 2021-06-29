@@ -36,9 +36,7 @@ const actions = {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ UserName: username.trim(), PassWord: password }).then(response => {
-        console.log('token:' + response)
         const { token } = response
-   
         commit('SET_TOKEN', token)
         // setExpTime(exp);
         setToken(token)
@@ -55,7 +53,7 @@ const actions = {
       getInfo(state.token).then(response => {
         const { Name, Avatar } = response
         commit('SET_NAME', Name)
-        commit('SET_AVATAR', Avatar)
+        commit('SET_AVATAR',Avatar)
         resolve(response)
       }).catch(error => {
         reject(error)

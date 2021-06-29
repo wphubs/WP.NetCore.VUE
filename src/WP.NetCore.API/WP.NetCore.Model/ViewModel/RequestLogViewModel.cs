@@ -32,7 +32,14 @@ namespace WP.NetCore.Model.ViewModel
             public string SourceContext { get; set; }
             public string RequestId { get; set; }
             public string ConnectionId { get; set; }
-  
+
+        public string UserId { get; set; }
+
+
+        public string UserName { get; set; }
+
+        public string ExceptionFilter { get; set; }
+
     }
 
 }
