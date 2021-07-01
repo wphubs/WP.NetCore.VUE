@@ -9,6 +9,7 @@ using System.Text;
 using WP.NetCore.Common;
 using WP.NetCore.Common.Helper;
 using WP.NetCore.Extensions.ServicesRegistration;
+using WP.NetCore.SchedulerJob.HostedService;
 
 namespace WP.NetCore.Extensions
 {
@@ -24,16 +25,15 @@ namespace WP.NetCore.Extensions
             services.AddEFCore();
             services.AddAutoMapper(typeof(ServiceInfo));
             services.AddSwagger();
+            services.AddScheduleJob();
             services.AddCorsPolicy();
             services.AddJwtAuthentication();
             services.AddHealthChecks().AddMySql(Appsettings.app(new string[] { "DBConnection" })); ;
             services.AddSignalRService();
             services.AddControllers(o =>
             {
-                // 全局异常过滤
                 o.Filters.Add(typeof(GlobalExceptionsFilter));
             })
-            //全局配置Json序列化处理
             .AddNewtonsoftJson(options =>
             {
                 //忽略循环引用
@@ -45,6 +45,7 @@ namespace WP.NetCore.Extensions
                 options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
                 options.SerializerSettings.StringEscapeHandling = StringEscapeHandling.EscapeNonAscii;
             });
+            services.AddHostedService<TestHostedService>();
             services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 

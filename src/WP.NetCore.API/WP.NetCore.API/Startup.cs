@@ -5,7 +5,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WP.NetCore.API.Hubs;
 using WP.NetCore.Extensions;
+using WP.NetCore.Extensions.Middleware;
 using WP.NetCore.Extensions.ModuleRegistration;
+using WP.NetCore.IServices;
+using WP.NetCore.SchedulerJob;
 
 namespace WP.NetCore.API
 {
@@ -29,7 +32,7 @@ namespace WP.NetCore.API
             builder.RegisterModule(new AutofacModule());
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IScheduleJobService scheduleJobService, ISchedulerCenter schedulerCenter)
         {
             app.UseConfigureMiddleware(env);
             app.UseEndpoints(endpoints =>
@@ -38,6 +41,7 @@ namespace WP.NetCore.API
                 endpoints.MapHub<WelcomeHub>("/welcomehub");
                 endpoints.MapControllers();
             });
+            app.UseScheduleJob(scheduleJobService, schedulerCenter);
         }
     }
 }

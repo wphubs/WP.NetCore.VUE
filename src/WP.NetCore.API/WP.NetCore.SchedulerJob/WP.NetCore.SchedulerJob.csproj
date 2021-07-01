@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="Quartz" Version="3.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WP.NetCore.Common\WP.NetCore.Common.csproj" />
+    <ProjectReference Include="..\WP.NetCore.IServices\WP.NetCore.IServices.csproj" />
+    <ProjectReference Include="..\WP.NetCore.Model\WP.NetCore.Model.csproj" />
+  </ItemGroup>
+
+</Project>

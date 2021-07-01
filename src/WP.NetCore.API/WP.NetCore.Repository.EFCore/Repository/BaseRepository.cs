@@ -22,7 +22,7 @@ namespace WP.NetCore.Repository.EFCore
         }
         public IQueryable<TEntity> Query()
         {
-            return _dbContext.Set<TEntity>().AsNoTracking();
+            return _dbContext.Set<TEntity>().Where(x => x.IsDelete == false).AsNoTracking();
         }
 
         public async Task<List<TEntity>> GetAllAsync()
@@ -104,6 +104,7 @@ namespace WP.NetCore.Repository.EFCore
 
         public async Task<TEntity> AddAsync(TEntity entity)
         {
+            entity.CreateBy = userContext.Id;
             var addEntitiy = await _dbContext.AddAsync(entity);
             await SaveAsync();
             return addEntitiy.Entity;

@@ -27,6 +27,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WP.NetCore.IServices\WP.NetCore.IServices.csproj" />
+    <ProjectReference Include="..\WP.NetCore.SchedulerJob\WP.NetCore.SchedulerJob.csproj" />
     <ProjectReference Include="..\WP.NetCore.Services\WP.NetCore.Services.csproj" />
   </ItemGroup>
 </Project>

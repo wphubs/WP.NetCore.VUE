@@ -33,6 +33,8 @@ namespace WP.NetCore.Repository.EFCore
         public DbSet<Article> Article { get; set; }
 
         public DbSet<ArticleClass> ArticleClass { get; set; }
+        public DbSet<ScheduleJob> ScheduleJob { get; set; }
+
 
 
 

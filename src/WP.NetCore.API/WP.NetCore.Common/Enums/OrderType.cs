@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WP.NetCore.Common.Enums
 {
-    public enum OrderType
+    public enum OrderTypeEnum
     {
         /// <summary>
         /// 升序

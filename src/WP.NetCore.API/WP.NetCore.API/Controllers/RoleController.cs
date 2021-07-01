@@ -40,6 +40,11 @@ namespace WP.NetCore.API.Controllers
 
 
 
+        /// <summary>
+        /// 获取角色权限
+        /// </summary>
+        /// <param name="roleId"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetPermission")]
         public async Task<ActionResult<List<object>>> GetPermission([FromQuery] long roleId)
@@ -68,7 +73,7 @@ namespace WP.NetCore.API.Controllers
         }
 
         /// <summary>
-        /// 设置角色菜单
+        /// 设置角色权限
         /// </summary>
         /// <param name="userDto"></param>
         /// <returns></returns>

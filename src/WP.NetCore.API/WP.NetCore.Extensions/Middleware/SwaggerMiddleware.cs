@@ -18,7 +18,7 @@ namespace WP.NetCore.Extensions.Middleware
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                typeof(ApiVersions).GetEnumNames().OrderByDescending(e => e).ToList().ForEach(version =>
+                typeof(ApiVersions).GetEnumNames().OrderBy(e => e).ToList().ForEach(version =>
                 {
                     if (env.IsDevelopment())
                     {

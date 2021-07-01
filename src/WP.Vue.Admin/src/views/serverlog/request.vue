@@ -41,10 +41,10 @@
       </el-table-column>
       <el-table-column prop="StatusCode" label="状态" width="100">
         <template slot-scope="scope">
-            <el-tag v-if="scope.row.Properties.StatusCode ==200" type="success">   {{ scope.row.Properties.StatusCode }}</el-tag>
+            <el-tag v-if="scope.row.Properties.StatusCode < 300" type="success">   {{ scope.row.Properties.StatusCode }}</el-tag>
 
           <el-popover  v-else
-            placement="top-start"
+            placement="left-start"
             title="异常信息"
             width="500"
             trigger="hover"

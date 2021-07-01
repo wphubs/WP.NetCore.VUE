@@ -53,9 +53,6 @@ namespace WP.NetCore.API.Controllers
         [HttpGet]
         public async Task<ActionResult<PageModel<UserViewModel>>> Get([FromQuery] int pageIndex, [FromQuery] int pageSize) 
         {
-            int a = 5;
-            int b = 0;
-            var c = a / b;
             var listUser = await userService.GetUserListAsync(pageIndex, pageSize);
             return Ok(listUser);
         }
