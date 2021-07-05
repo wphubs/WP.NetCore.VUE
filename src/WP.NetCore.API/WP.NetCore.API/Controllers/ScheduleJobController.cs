@@ -78,9 +78,28 @@ namespace WP.NetCore.API.Controllers
         /// <param name="scheduleJob"></param>
         /// <returns></returns>
         [HttpPut]
-        public ActionResult Put([FromBody] ScheduleJob scheduleJob)
+        public async Task<ActionResult> Put([FromBody] UpdateScheduleJobDto scheduleJob)
         {
-            return Ok();
+            try
+            {
+                var objJob = await scheduleJobService.FirstNoTrackingAsync(scheduleJob.Id);
+                if (objJob == null)
+                {
+                    return BadRequest("任务不存在");
+                }
+                var objScheduleJob = mapper.Map<ScheduleJob>(scheduleJob);
+                await uow.BeginAsync();
+                await scheduleJobService.UpdateAsync(objScheduleJob);
+                await schedulerCenter.PauseJobAsync(objJob.JobGroup, objJob.JobName);
+                await schedulerCenter.AddScheduleJobAsync(objScheduleJob);
+                await uow.CommitAsync();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                await uow.RollbackAsync();
+                throw;
+            }
         }
 
         /// <summary>
@@ -117,7 +136,7 @@ namespace WP.NetCore.API.Controllers
         /// </summary>
         /// <param name="jobId"></param>
         /// <returns></returns>
-        [HttpPost("ResumeJob")]
+        [HttpGet("ResumeJob")]
         public async Task<ActionResult> ResumeJob(long jobId)
         {
 
@@ -151,8 +170,8 @@ namespace WP.NetCore.API.Controllers
         /// </summary>
         /// <param name="jobId"></param>
         /// <returns></returns>
-        [HttpPost("PauseJo")]
-        public async Task<ActionResult> PauseJo(long jobId)
+        [HttpGet("PauseJob")]
+        public async Task<ActionResult> PauseJob(long jobId)
         {
             var objJob = await scheduleJobService.FirstAsync(jobId);
             if (objJob == null)

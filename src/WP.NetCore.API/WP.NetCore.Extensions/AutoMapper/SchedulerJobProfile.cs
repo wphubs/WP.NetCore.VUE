@@ -15,6 +15,7 @@ namespace WP.NetCore.Extensions.AutoMapper
         public SchedulerJobProfile()
         {
             CreateMap<AddScheduleJobDto, ScheduleJob>();
+            CreateMap<UpdateScheduleJobDto, ScheduleJob>();
         }
 
     }

@@ -15,5 +15,7 @@ namespace WP.NetCore.Services
         {
             this.baseDal = baseRepository;
         }
+
+
     }
 }

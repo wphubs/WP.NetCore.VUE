@@ -97,17 +97,18 @@ namespace WP.NetCore.SchedulerJob
             }
             var httpDir = new Dictionary<string, string>()
                 {
-                    { Constant.EndAt, scheduleJob.EndTime.ToString()},
+                    { Constant.JobId,scheduleJob.Id.ToString()},
+                    { Constant.EndTime, scheduleJob.EndTime.ToString()},
                     { Constant.JobTypeEnum, ((int)scheduleJob.JobType).ToString()},
                 };
             IJobConfigurator jobConfigurator = null;
-            if (scheduleJob.JobType == JobTypeEnum.Url)
+            if (scheduleJob.JobType == JobTypeEnum.Http)
             {
                 jobConfigurator = JobBuilder.Create<HttpJob>();
-                httpDir.Add(Constant.REQUESTURL, scheduleJob.RequestUrl);
-                httpDir.Add(Constant.HEADERS, scheduleJob.Headers);
-                httpDir.Add(Constant.REQUESTPARAMETERS, scheduleJob.RequestParameters);
-                httpDir.Add(Constant.REQUESTTYPE, ((int)scheduleJob.RequestType).ToString());
+                httpDir.Add(Constant.RequestUrl, scheduleJob.RequestUrl);
+                httpDir.Add(Constant.Headers, scheduleJob.Headers);
+                httpDir.Add(Constant.RequestParameters, scheduleJob.RequestParameters);
+                httpDir.Add(Constant.RequestType, ((int)scheduleJob.RequestType).ToString());
             }
             IJobDetail job = jobConfigurator
                 .SetJobData(new JobDataMap(httpDir))

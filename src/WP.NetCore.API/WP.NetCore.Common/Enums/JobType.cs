@@ -8,7 +8,7 @@ namespace WP.NetCore.Common.Enums
 {
     public enum JobTypeEnum
     {
-        Url =1,
+        Http =1,
         Assembly=2,
         RabbitMQ = 3,
     }

@@ -21,6 +21,7 @@ namespace WP.NetCore.Extensions
             var basePath = AppContext.BaseDirectory;
             services.AddSingleton(new Appsettings(Env.ContentRootPath));
             services.AddRedisCache();
+            services.AddSingleton<HttpHelper>();
             services.AddIpRateLimit(Configuration);
             services.AddEFCore();
             services.AddAutoMapper(typeof(ServiceInfo));
