@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Events;
 using Serilog.Filters;
+using WP.NetCore.SchedulerJob.Job;
 
 namespace WP.NetCore.API
 {
@@ -20,10 +21,8 @@ namespace WP.NetCore.API
         public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
       .SetBasePath(Directory.GetCurrentDirectory())
       .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-      //.AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", optional: true)
       .AddEnvironmentVariables()
       .Build();
-
 
         public static int Main(string[] args)
         {
@@ -31,8 +30,12 @@ namespace WP.NetCore.API
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext()
                 .WriteTo.Logger(lc => lc.Filter.ByIncludingOnly(Matching.FromSource("Serilog.AspNetCore.RequestLoggingMiddleware"))
-                .Filter.ByIncludingOnly(Matching.WithProperty<string>("RequestMethod",x=>x!= "OPTIONS"))
+                .Filter.ByIncludingOnly(Matching.WithProperty<string>("RequestMethod", x => x != "OPTIONS"))
                     .WriteTo.MySQL(Configuration.GetSection("DBConnection").Value, "RequestLog"))
+                .WriteTo.Logger(lc => lc.Filter.ByIncludingOnly(Matching.FromSource<JobBase>())
+                     .WriteTo.MySQL(Configuration.GetSection("DBConnection").Value, "JobLog"))
+
+
                 .CreateLogger();
 
             try
@@ -55,7 +58,7 @@ namespace WP.NetCore.API
             Host.CreateDefaultBuilder(args)
             .UseSerilog()
              .UseServiceProviderFactory(new AutofacServiceProviderFactory())
-                
+
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>().UseUrls(Configuration.GetSection("UseUrls").Value);

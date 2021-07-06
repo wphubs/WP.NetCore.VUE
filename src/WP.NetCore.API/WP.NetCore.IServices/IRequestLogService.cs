@@ -9,8 +9,10 @@ using WP.NetCore.Model.ViewModel;
 
 namespace WP.NetCore.IServices
 {
-    public interface IRequestLogService
+    public interface IServerLogService
     {
-         Task<PageModel<RequestLogViewModel>> GetPageAsync(int pageIndex, int pageSize);
+         Task<PageModel<RequestLogViewModel>> GetRequestLogPageAsync(int pageIndex, int pageSize);
+
+        Task<PageModel<JobLogViewModel>> GetJobLogPageAsync(int pageIndex, int pageSize);
     }
 }

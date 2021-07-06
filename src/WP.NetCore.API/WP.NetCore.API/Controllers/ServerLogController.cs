@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,12 @@ namespace WP.NetCore.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ServerLogController : BaseController
     {
-        private readonly IRequestLogService requestLogService;
+        private readonly IServerLogService requestLogService;
 
-        public ServerLogController(IRequestLogService requestLogService)
+        public ServerLogController(IServerLogService requestLogService)
         {
             this.requestLogService = requestLogService;
         }
@@ -30,9 +32,19 @@ namespace WP.NetCore.API.Controllers
         [HttpGet("GetRequestLog")]
         public async Task<ActionResult<PageModel<RequestLogViewModel>>> GetRequestLog(int pageIndex,int pageSize) 
         {
-            //TODO：改为本地文件方式
-            var log = await requestLogService.GetPageAsync(pageIndex,pageSize);
+            ;   //TODO：改为本地文件方式
+            var log = await requestLogService.GetRequestLogPageAsync(pageIndex,pageSize);
             return Ok(log);
         }
+
+
+        [HttpGet("GetJobLog")]
+        public async Task<ActionResult<PageModel<JobLogViewModel>>> GetJobLog(int pageIndex, int pageSize)
+        {
+            //TODO：改为本地文件方式
+            var log = await requestLogService.GetJobLogPageAsync(pageIndex, pageSize);
+            return Ok(log);
+        }
+
     }
 }

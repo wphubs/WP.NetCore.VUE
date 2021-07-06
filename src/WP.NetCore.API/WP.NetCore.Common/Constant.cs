@@ -35,14 +35,14 @@ namespace WP.NetCore.Common
         /// 异常 Exception
         /// </summary>
         public const string Exception = "Exception";
-        /// <summary>
-        /// 执行次数
-        /// </summary>
-        //public const string RunNumber = "RunNumber";
+   
+     
+        public const string EndTime = "EndTime";//任务结束时间
 
-        public const string EndTime = "EndTime";
+        public const string JobTypeEnum = "JobTypeEnum";//任务类型
 
-        public const string JobTypeEnum = "JobTypeEnum";
+        public const string RoleKey = "Role";
 
+        public const string ArticleKey = "Article";
     }
 }

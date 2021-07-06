@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Quartz;
@@ -17,6 +18,7 @@ namespace WP.NetCore.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize("Permission")]
     public class ScheduleJobController : BaseController
     {
         private readonly IScheduleJobService scheduleJobService;

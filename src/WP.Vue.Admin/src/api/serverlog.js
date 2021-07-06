@@ -10,3 +10,11 @@ export function getRequestLog(params) {
     })
   }
   
+
+  export function getJobLog(params) {
+    return request({
+      url: 'ServerLog/GetJobLog',
+      method: 'get',
+      params
+    })
+  }

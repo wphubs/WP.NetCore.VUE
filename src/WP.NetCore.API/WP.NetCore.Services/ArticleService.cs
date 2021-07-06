@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using WP.NetCore.Common;
 using WP.NetCore.IServices;
 using WP.NetCore.Model;
 using WP.NetCore.Model.Dto.Article;
@@ -42,6 +43,7 @@ namespace WP.NetCore.Services
         /// </summary>
         /// <param name="articleId"></param>
         /// <returns></returns>
+        [Caching(AbsoluteExpiration = 10, PrefixKey = Constant.ArticleKey)]
         public async Task<ArticleViewModel> GetArticleInfo(long articleId)
         {
             var article = await baseDal.LoadAsync(x => x.IsDelete == false&&x.Id==articleId );
@@ -56,6 +58,7 @@ namespace WP.NetCore.Services
         /// 获取热门文章（目前按浏览量排序）
         /// </summary>
         /// <returns></returns>
+        [Caching(AbsoluteExpiration = 10, PrefixKey = Constant.ArticleKey)]
         public async Task<PageModel<ArticleViewModel>> GetHotArticleListAsync()
         {
             var article = await baseDal.GetPageAsync(x => x.IsDelete == false, x => x.Browse, 1, 10);
@@ -80,6 +83,7 @@ namespace WP.NetCore.Services
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
+        [Caching(AbsoluteExpiration = 10, PrefixKey = Constant.ArticleKey)]
         public async Task<PageModel<ArticleViewModel>> GetArticleListAsync(long? classId,int pageIndex, int pageSize)
         {
             Expression<Func<Article, bool>> expression = x => x.IsDelete==false;

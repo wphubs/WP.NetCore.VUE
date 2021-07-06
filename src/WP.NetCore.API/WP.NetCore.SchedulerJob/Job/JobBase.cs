@@ -40,13 +40,13 @@ namespace WP.NetCore.SchedulerJob.Job
                     objJob.ExecTimes++;
                     await scheduleJobService.UpdateAsync(objJob);
                     stopwatch.Stop();
-                    Log.Information(template, jobId, jobGroup, jobName, stopwatch.Elapsed.TotalSeconds, result.Result, result.Msg);
+                    Log.ForContext<JobBase>().Information(template, jobId, jobGroup, jobName, stopwatch.Elapsed.TotalMilliseconds.ToString("0.00"), result.Result, result.Msg);
                 }
             }
             catch (Exception ex)
             {
                 stopwatch.Stop();
-                Log.Error(ex,template, jobId, jobGroup, jobName, stopwatch.Elapsed.TotalSeconds,false, ex.Message);
+                Log.ForContext<JobBase>().Error(ex,template, jobId, jobGroup, jobName, stopwatch.Elapsed.TotalMilliseconds.ToString("0.00"), false, ex.Message);
             }
     
         }

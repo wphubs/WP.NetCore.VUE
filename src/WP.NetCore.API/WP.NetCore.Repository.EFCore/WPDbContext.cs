@@ -35,7 +35,9 @@ namespace WP.NetCore.Repository.EFCore
         public DbSet<ArticleClass> ArticleClass { get; set; }
         public DbSet<ScheduleJob> ScheduleJob { get; set; }
 
+        public DbSet<JobLog> JobLog { get; set; }
 
+        public DbSet<RequestLog> RequestLog { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -45,6 +47,13 @@ namespace WP.NetCore.Repository.EFCore
                  eb.HasNoKey();
                  eb.ToView("RequestLog");
              });
+
+            modelBuilder.Entity<JobLog>(eb =>
+            {
+                eb.HasNoKey();
+                eb.ToView("JobLog");
+            });
+
 
             base.OnModelCreating(modelBuilder);
             var assembly = this.GetType().Assembly;
@@ -76,6 +85,8 @@ namespace WP.NetCore.Repository.EFCore
             });
             modelBuilder.Entity<Menu>().HasData(new List<Menu>()
             {
+
+                #region 用户
                 new Menu()
                 {
                     Id=1,Title="用户管理",Component="user/index",Icon="el-icon-lightning",Sort=1,
@@ -96,6 +107,9 @@ namespace WP.NetCore.Repository.EFCore
                 {
                     Id=idWork.NextId(),Title="删除",Url="user/delete",Component="deleteUser",ParentId=1,IsButton=true,
                 },
+                #endregion
+
+                #region 角色
                 new Menu()
                 {
                     Id=2,Title="角色管理",Component="role/index",Icon="el-icon-heavy-rain",Sort=2,
@@ -124,7 +138,9 @@ namespace WP.NetCore.Repository.EFCore
                 {
                     Id=idWork.NextId(),Title="查看权限",Url="role/getPermission/get",Component="getPermission",ParentId=2,IsButton=true,
                 },
+                #endregion
 
+                #region 菜单
                 new Menu()
                 {
                     Id=6,Title="菜单管理",Component="menu/index",Icon="el-icon-cloudy-and-sunny",Sort=3,
@@ -150,12 +166,15 @@ namespace WP.NetCore.Repository.EFCore
                 {
                     Id=idWork.NextId(),Title="删除",Url="menu/delete",Component="deleteMenu",ParentId=6,IsButton=true,
                 },
+                #endregion
+
+                #region 文章
                 new Menu()
                 {
                     Id=7,Title="文章列表",Component="article/index",Icon="el-icon-cloudy",Sort=4,
                 },
 
-                 new Menu()
+                new Menu()
                 {
                     Id=idWork.NextId(),Title="查看",Url="article/get",Component="getArticle",ParentId=7,IsButton=true,
                 },
@@ -171,12 +190,50 @@ namespace WP.NetCore.Repository.EFCore
                 {
                     Id=idWork.NextId(),Title="删除",Url="article/delete",Component="deleteArticle",ParentId=7,IsButton=true,
                 },
+                #endregion
+
+                new Menu()
+                {
+                    Id=9,Title="任务计划",Component="job/index",Icon="el-icon-partly-cloudy",Sort=5,
+                },
 
 
                 new Menu()
                 {
-                    Id=8,Title="接口日志",Component="serverlog/request",Icon="el-icon-moon",Sort=5,
+                    Id=idWork.NextId(),Title="查看",Url="ScheduleJob/get",Component="getJobList",ParentId=9,IsButton=true,
                 },
+                 new Menu()
+                {
+                    Id=idWork.NextId(),Title="新增",Url="ScheduleJob/post",Component="addJob",ParentId=9,IsButton=true,
+                },
+                  new Menu()
+                {
+                    Id=idWork.NextId(),Title="恢复",Url="ScheduleJob/ResumeJob",Component="resumeJob",ParentId=9,IsButton=true,
+                },
+                new Menu()
+                {
+                    Id=idWork.NextId(),Title="停止",Url="ScheduleJob/PauseJob",Component="pauseJob",ParentId=9,IsButton=true,
+                },
+                new Menu()
+                {
+                    Id=idWork.NextId(),Title="删除",Url="ScheduleJob/Delete",Component="deleteJob",ParentId=9,IsButton=true,
+                },
+                new Menu()
+                {
+                    Id=idWork.NextId(),Title="修改",Url="ScheduleJob/put",Component="editJob",ParentId=9,IsButton=true,
+                },
+
+
+                new Menu()
+                {
+                    Id=8,Title="接口日志",Component="serverlog/request",Icon="el-icon-moon",Sort=6,
+                },
+
+                new Menu()
+                {
+                    Id=10,Title="任务日志",Component="serverlog/job",Icon="el-icon-moon-night",Sort=7,
+                },
+
 
                 new Menu()
                 {

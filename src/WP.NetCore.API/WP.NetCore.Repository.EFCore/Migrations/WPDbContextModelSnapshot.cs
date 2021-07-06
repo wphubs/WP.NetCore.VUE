@@ -98,30 +98,30 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 15355850707551252L,
+                            Id = 15362543018492953L,
                             ClassName = ".NetCore",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(7782),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(2712),
                             IsDelete = false
                         },
                         new
                         {
-                            Id = 15355850707551253L,
+                            Id = 15362543018492954L,
                             ClassName = "Vue",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(8021),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(2943),
                             IsDelete = false
                         },
                         new
                         {
-                            Id = 15355850707551254L,
+                            Id = 15362543018492955L,
                             ClassName = "Docker",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(8028),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(2948),
                             IsDelete = false
                         },
                         new
                         {
-                            Id = 15355850707551255L,
+                            Id = 15362543018492956L,
                             ClassName = "Other",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(8028),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(2951),
                             IsDelete = false
                         });
                 });
@@ -183,7 +183,7 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         {
                             Id = 1L,
                             Component = "user/index",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(5173),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(232),
                             Icon = "el-icon-lightning",
                             IsButton = false,
                             IsDelete = false,
@@ -194,9 +194,9 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         },
                         new
                         {
-                            Id = 15355850707551233L,
+                            Id = 15362543018492928L,
                             Component = "getUser",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6000),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1051),
                             IsButton = true,
                             IsDelete = false,
                             IsHidden = false,
@@ -207,9 +207,9 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         },
                         new
                         {
-                            Id = 15355850707551234L,
+                            Id = 15362543018492929L,
                             Component = "addUser",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6626),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1666),
                             IsButton = true,
                             IsDelete = false,
                             IsHidden = false,
@@ -220,9 +220,9 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         },
                         new
                         {
-                            Id = 15355850707551235L,
+                            Id = 15362543018492930L,
                             Component = "editUser",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6634),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1673),
                             IsButton = true,
                             IsDelete = false,
                             IsHidden = false,
@@ -233,9 +233,9 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         },
                         new
                         {
-                            Id = 15355850707551236L,
+                            Id = 15362543018492931L,
                             Component = "deleteUser",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6636),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1676),
                             IsButton = true,
                             IsDelete = false,
                             IsHidden = false,
@@ -248,7 +248,7 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         {
                             Id = 2L,
                             Component = "role/index",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6643),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1683),
                             Icon = "el-icon-heavy-rain",
                             IsButton = false,
                             IsDelete = false,
@@ -259,9 +259,9 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         },
                         new
                         {
-                            Id = 15355850707551237L,
+                            Id = 15362543018492932L,
                             Component = "getRole",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6646),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1683),
                             IsButton = true,
                             IsDelete = false,
                             IsHidden = false,
@@ -272,9 +272,9 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         },
                         new
                         {
-                            Id = 15355850707551238L,
+                            Id = 15362543018492933L,
                             Component = "addRole",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6646),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1685),
                             IsButton = true,
                             IsDelete = false,
                             IsHidden = false,
@@ -285,9 +285,9 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         },
                         new
                         {
-                            Id = 15355850707551239L,
+                            Id = 15362543018492934L,
                             Component = "editRole",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6648),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1688),
                             IsButton = true,
                             IsDelete = false,
                             IsHidden = false,
@@ -298,9 +298,9 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         },
                         new
                         {
-                            Id = 15355850707551240L,
+                            Id = 15362543018492935L,
                             Component = "deleteRole",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6651),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1690),
                             IsButton = true,
                             IsDelete = false,
                             IsHidden = false,
@@ -311,9 +311,9 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         },
                         new
                         {
-                            Id = 15355850707551241L,
+                            Id = 15362543018492936L,
                             Component = "setPermission",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6653),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1693),
                             IsButton = true,
                             IsDelete = false,
                             IsHidden = false,
@@ -324,9 +324,9 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         },
                         new
                         {
-                            Id = 15355850707551242L,
+                            Id = 15362543018492937L,
                             Component = "getPermission",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6653),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1693),
                             IsButton = true,
                             IsDelete = false,
                             IsHidden = false,
@@ -339,7 +339,7 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         {
                             Id = 6L,
                             Component = "menu/index",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6656),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1695),
                             Icon = "el-icon-cloudy-and-sunny",
                             IsButton = false,
                             IsDelete = false,
@@ -350,9 +350,9 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         },
                         new
                         {
-                            Id = 15355850707551243L,
+                            Id = 15362543018492938L,
                             Component = "getMenu",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6658),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1695),
                             IsButton = true,
                             IsDelete = false,
                             IsHidden = false,
@@ -363,9 +363,9 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         },
                         new
                         {
-                            Id = 15355850707551244L,
+                            Id = 15362543018492939L,
                             Component = "addMenu",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6660),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1732),
                             IsButton = true,
                             IsDelete = false,
                             IsHidden = false,
@@ -376,9 +376,9 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         },
                         new
                         {
-                            Id = 15355850707551245L,
+                            Id = 15362543018492940L,
                             Component = "getMenu",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6663),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1734),
                             IsButton = true,
                             IsDelete = false,
                             IsHidden = false,
@@ -389,9 +389,9 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         },
                         new
                         {
-                            Id = 15355850707551246L,
+                            Id = 15362543018492941L,
                             Component = "editMenu",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6663),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1737),
                             IsButton = true,
                             IsDelete = false,
                             IsHidden = false,
@@ -402,9 +402,9 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         },
                         new
                         {
-                            Id = 15355850707551247L,
+                            Id = 15362543018492942L,
                             Component = "deleteMenu",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6665),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1739),
                             IsButton = true,
                             IsDelete = false,
                             IsHidden = false,
@@ -417,7 +417,7 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         {
                             Id = 7L,
                             Component = "article/index",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6668),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1739),
                             Icon = "el-icon-cloudy",
                             IsButton = false,
                             IsDelete = false,
@@ -428,9 +428,9 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         },
                         new
                         {
-                            Id = 15355850707551248L,
+                            Id = 15362543018492943L,
                             Component = "getArticle",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6668),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1741),
                             IsButton = true,
                             IsDelete = false,
                             IsHidden = false,
@@ -441,9 +441,9 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         },
                         new
                         {
-                            Id = 15355850707551249L,
+                            Id = 15362543018492944L,
                             Component = "addArticle",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6670),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1741),
                             IsButton = true,
                             IsDelete = false,
                             IsHidden = false,
@@ -454,9 +454,9 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         },
                         new
                         {
-                            Id = 15355850707551250L,
+                            Id = 15362543018492945L,
                             Component = "editArticle",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6670),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1744),
                             IsButton = true,
                             IsDelete = false,
                             IsHidden = false,
@@ -467,9 +467,9 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         },
                         new
                         {
-                            Id = 15355850707551251L,
+                            Id = 15362543018492946L,
                             Component = "deleteArticle",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6673),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1746),
                             IsButton = true,
                             IsDelete = false,
                             IsHidden = false,
@@ -480,22 +480,126 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         },
                         new
                         {
-                            Id = 8L,
-                            Component = "serverlog/request",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6712),
-                            Icon = "el-icon-moon",
+                            Id = 9L,
+                            Component = "job/index",
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1746),
+                            Icon = "el-icon-partly-cloudy",
                             IsButton = false,
                             IsDelete = false,
                             IsHidden = false,
                             ParentId = 0L,
                             Sort = 5,
+                            Title = "任务计划"
+                        },
+                        new
+                        {
+                            Id = 15362543018492947L,
+                            Component = "getJobList",
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1746),
+                            IsButton = true,
+                            IsDelete = false,
+                            IsHidden = false,
+                            ParentId = 9L,
+                            Sort = 0,
+                            Title = "查看",
+                            Url = "ScheduleJob/get"
+                        },
+                        new
+                        {
+                            Id = 15362543018492948L,
+                            Component = "addJob",
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1749),
+                            IsButton = true,
+                            IsDelete = false,
+                            IsHidden = false,
+                            ParentId = 9L,
+                            Sort = 0,
+                            Title = "新增",
+                            Url = "ScheduleJob/post"
+                        },
+                        new
+                        {
+                            Id = 15362543018492949L,
+                            Component = "resumeJob",
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1751),
+                            IsButton = true,
+                            IsDelete = false,
+                            IsHidden = false,
+                            ParentId = 9L,
+                            Sort = 0,
+                            Title = "恢复",
+                            Url = "ScheduleJob/ResumeJob"
+                        },
+                        new
+                        {
+                            Id = 15362543018492950L,
+                            Component = "pauseJob",
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1754),
+                            IsButton = true,
+                            IsDelete = false,
+                            IsHidden = false,
+                            ParentId = 9L,
+                            Sort = 0,
+                            Title = "停止",
+                            Url = "ScheduleJob/PauseJob"
+                        },
+                        new
+                        {
+                            Id = 15362543018492951L,
+                            Component = "deleteJob",
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1754),
+                            IsButton = true,
+                            IsDelete = false,
+                            IsHidden = false,
+                            ParentId = 9L,
+                            Sort = 0,
+                            Title = "删除",
+                            Url = "ScheduleJob/Delete"
+                        },
+                        new
+                        {
+                            Id = 15362543018492952L,
+                            Component = "editJob",
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1756),
+                            IsButton = true,
+                            IsDelete = false,
+                            IsHidden = false,
+                            ParentId = 9L,
+                            Sort = 0,
+                            Title = "修改",
+                            Url = "ScheduleJob/put"
+                        },
+                        new
+                        {
+                            Id = 8L,
+                            Component = "serverlog/request",
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1756),
+                            Icon = "el-icon-moon",
+                            IsButton = false,
+                            IsDelete = false,
+                            IsHidden = false,
+                            ParentId = 0L,
+                            Sort = 6,
                             Title = "接口日志"
+                        },
+                        new
+                        {
+                            Id = 10L,
+                            Component = "serverlog/job",
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1759),
+                            Icon = "el-icon-moon-night",
+                            IsButton = false,
+                            IsDelete = false,
+                            IsHidden = false,
+                            ParentId = 0L,
+                            Sort = 7,
+                            Title = "任务日志"
                         },
                         new
                         {
                             Id = 1001L,
                             Component = "nested",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6714),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1759),
                             Icon = "nested",
                             IsButton = false,
                             IsDelete = false,
@@ -508,7 +612,7 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         {
                             Id = 1002L,
                             Component = "nested/menu1/index",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6714),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1761),
                             Icon = "lightning",
                             IsButton = false,
                             IsDelete = false,
@@ -521,7 +625,7 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         {
                             Id = 1003L,
                             Component = "nested/menu2/index",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6717),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1761),
                             Icon = "lightning",
                             IsButton = false,
                             IsDelete = false,
@@ -534,7 +638,7 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         {
                             Id = 1004L,
                             Component = "nested/menu1/menu1-2/index",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6717),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1763),
                             Icon = "lightning",
                             IsButton = false,
                             IsDelete = false,
@@ -547,7 +651,7 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         {
                             Id = 1005L,
                             Component = "nested/menu1/menu1-2/menu1-2-1/index",
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(6717),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 551, DateTimeKind.Local).AddTicks(1763),
                             Icon = "lightning",
                             IsButton = false,
                             IsDelete = false,
@@ -632,7 +736,7 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         new
                         {
                             Id = 999999999L,
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(887),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 550, DateTimeKind.Local).AddTicks(6063),
                             IsDelete = false,
                             RoleName = "系统管理员"
                         });
@@ -665,7 +769,7 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                     b.Property<DateTime?>("EndTime")
                         .HasColumnType("datetime");
 
-                    b.Property<int?>("ExecTimes")
+                    b.Property<int>("ExecTimes")
                         .HasColumnType("int");
 
                     b.Property<string>("Headers")
@@ -770,7 +874,7 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                         new
                         {
                             Id = 999999999L,
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 305, DateTimeKind.Local).AddTicks(1746),
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 549, DateTimeKind.Local).AddTicks(578),
                             IsDelete = false,
                             IsEnable = true,
                             Name = "系统管理员",
@@ -821,8 +925,8 @@ namespace WP.NetCore.Repository.EFCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 15355850707551232L,
-                            CreateTime = new DateTime(2021, 7, 1, 18, 19, 8, 307, DateTimeKind.Local).AddTicks(1606),
+                            Id = 15362543018476544L,
+                            CreateTime = new DateTime(2021, 7, 6, 11, 46, 54, 550, DateTimeKind.Local).AddTicks(6760),
                             IsDelete = false,
                             RoleId = 999999999L,
                             UserId = 999999999L

@@ -2,11 +2,11 @@
   <div class="app-container">
     <el-card style="width: 100%; text-align: right">
       <span style="margin-left: 20px">
-        <el-button type="primary" size="medium" @click="clickAddJob()">新增任务</el-button>
-        <el-button type="success" size="medium" @click="clickResumeJob()">开始/恢复</el-button>
-        <el-button type="warning" size="medium" @click="clickPauseJob()">停止任务</el-button>
-        <el-button type="danger" size="medium" @click="clickDeleteJob()">删除任务</el-button>
-        <el-button type="info" size="medium" @click="clickUpdateJob()">修改任务</el-button>
+        <el-button type="primary" size="medium"  v-has="'addJob'" @click="clickAddJob()">新增任务</el-button>
+        <el-button type="success" size="medium"  v-has="'resumeJob'" @click="clickResumeJob()">开始/恢复</el-button>
+        <el-button type="warning" size="medium"  v-has="'pauseJob'" @click="clickPauseJob()">停止任务</el-button>
+        <el-button type="danger" size="medium"  v-has="'deleteJob'" @click="clickDeleteJob()">删除任务</el-button>
+        <el-button type="info" size="medium"  v-has="'editJob'" @click="clickUpdateJob()">修改任务</el-button>
         <el-button type="primary" size="medium" @click="refreshData()">刷新</el-button>
       </span>
     </el-card>
@@ -26,7 +26,7 @@
       <el-table-column prop="BeginTime" label="开始时间"></el-table-column>
       <el-table-column prop="EndTime" label="结束时间"></el-table-column>
       <el-table-column prop="Cron" label="表达式"></el-table-column>
-      <el-table-column prop="SimpleTimes" label="循环次数"></el-table-column>
+      <!-- <el-table-column prop="SimpleTimes" label="循环次数"></el-table-column> -->
       <el-table-column prop="ExecTimes" label="执行次数"></el-table-column>
       <el-table-column prop="TriggerType" label="触发器类型">
         <template slot-scope="scope">
@@ -48,8 +48,16 @@
         </template>
       </el-table-column>
       <el-table-column prop="RequestUrl" label="请求地址"></el-table-column>
-      <el-table-column prop="RequestParameters" label="请求参数"></el-table-column>
-      <el-table-column prop="RequestType" label="请求类型"></el-table-column>
+
+      <el-table-column prop="RequestType" label="请求类型">
+        <template slot-scope="scope">
+            <template v-if="scope.row.RequestType==1">Get</template>
+            <template v-else-if="scope.row.RequestType==2">Post</template>
+            <template v-else-if="scope.row.RequestType==3">Put</template>
+            <template v-else>Delete</template>
+        </template>
+      </el-table-column>
+      <!-- <el-table-column prop="RequestParameters" label="请求参数"></el-table-column> -->
     </el-table>
 
 
@@ -64,7 +72,7 @@
         <el-form-item class="form-inline" label="触发器类型" prop="TriggerType">
           <el-radio-group v-model="jobForm.TriggerType" size="medium">
             <el-radio :label="1">Cron</el-radio>
-            <el-radio :label="2">Simple</el-radio>
+            <el-radio :label="2" disabled>Simple</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="表达式" prop="Cron">

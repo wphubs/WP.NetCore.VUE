@@ -24,12 +24,14 @@ namespace WP.NetCore.API.Controllers
         private readonly IArticleService articleService;
         private readonly IMapper mapper;
         private readonly IArticleClassService articleClassService;
+        private readonly IRedisCacheManager cache;
 
-        public ArticleController(IArticleService articleService, IMapper mapper, IArticleClassService articleClassService)
+        public ArticleController(IArticleService articleService, IMapper mapper, IArticleClassService articleClassService, IRedisCacheManager cache)
         {
             this.articleService = articleService;
             this.mapper = mapper;
             this.articleClassService = articleClassService;
+            this.cache = cache;
         }
 
         /// <summary>
@@ -109,6 +111,7 @@ namespace WP.NetCore.API.Controllers
             objArticle.Class = objClass;
             objArticle.CreateBy = GetToken().Id;
             await articleService.AddAsync(objArticle);
+            await cache.RemovePattern(Constant.ArticleKey);
             return Ok();
 
         }
@@ -130,6 +133,7 @@ namespace WP.NetCore.API.Controllers
             var objArticle = mapper.Map<Article>(articleDto);
             objArticle.ModifyBy = GetToken().Id;
             await articleService.UpdateAsync(objArticle);
+            await cache.RemovePattern(Constant.ArticleKey);
             return NoContent();
         }
 
@@ -151,6 +155,7 @@ namespace WP.NetCore.API.Controllers
                 return NotFound("ID不存在");
             }
             await articleService.DeleteAsync(Id);
+            await cache.RemovePattern(Constant.ArticleKey);
             return NoContent();
         }
     }

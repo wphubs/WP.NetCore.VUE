@@ -50,15 +50,15 @@ namespace WP.NetCore.SchedulerJob.Job
                     break;
             }
             var result = HttpUtility.HtmlEncode(await response.Content.ReadAsStringAsync());
-            if (!response.IsSuccessStatusCode)
+            if (response.IsSuccessStatusCode)
             {
                 result = result.Length > 50 ? result.Substring(0, 50) + "..." : result;
                 await Task.Run(() => Console.WriteLine($"{DateTime.Now}：{requestType}  {requestUrl}  {requestParameters}"));
-                return (true, "请求成功");
+                return (true, result);
             }
             else 
             {
-                return (false, "请求失败"+ response.StatusCode);
+                return (false, "请求失败,"+ result);
             }
             
           
