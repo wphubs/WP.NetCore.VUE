@@ -32,7 +32,7 @@ namespace WP.NetCore.Services
         /// 获取所有页面菜单
         /// </summary>
         /// <returns></returns>
-        [Caching(AbsoluteExpiration = 10, PrefixKey = Constant.RoleKey)]
+        [Caching(AbsoluteExpiration = 10, PrefixKey = JobConstant.RoleKey)]
         public async Task<List<PageMenuViewModel>> GetPageMenuListAsync()
         {
             var list = await baseRepository.GetAllAsync(x => !x.IsButton, x => x.Sort, true);
@@ -44,7 +44,7 @@ namespace WP.NetCore.Services
         /// 获取菜单列表
         /// </summary>
         /// <returns></returns>
-        [Caching(AbsoluteExpiration = 10, PrefixKey = Constant.RoleKey)]
+        [Caching(AbsoluteExpiration = 10, PrefixKey = JobConstant.RoleKey)]
         public async Task<List<MenuViewModel>> GetMenuListAsync()
         {
             var list = await baseRepository.GetAllAsync(x => x.IsDelete == false, x => x.Sort, true);
@@ -90,7 +90,7 @@ namespace WP.NetCore.Services
         /// 根据角色获取菜单
         /// </summary>
         /// <returns></returns>
-        [Caching(AbsoluteExpiration = 10,PrefixKey = Constant.RoleKey)]
+        [Caching(AbsoluteExpiration = 10,PrefixKey = JobConstant.RoleKey)]
         public async Task<List<RouterViewModel>> GetRoleMenuListAsync(List<long> listRole)
         {
             List<Menu> listMenu = new List<Menu>();

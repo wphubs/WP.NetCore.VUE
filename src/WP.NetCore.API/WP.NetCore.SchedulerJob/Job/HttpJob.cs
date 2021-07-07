@@ -28,11 +28,11 @@ namespace WP.NetCore.SchedulerJob.Job
 
         public override async Task<(bool Result,string Msg)> ExecuteJob(IJobExecutionContext context)
         {
-            var requestUrl = context.JobDetail.JobDataMap.GetString(Constant.RequestUrl)?.Trim();
-            var requestParameters = context.JobDetail.JobDataMap.GetString(Constant.RequestParameters);
-            var headersString = context.JobDetail.JobDataMap.GetString(Constant.Headers);
+            var requestUrl = context.JobDetail.JobDataMap.GetString(JobConstant.RequestUrl)?.Trim();
+            var requestParameters = context.JobDetail.JobDataMap.GetString(JobConstant.RequestParameters);
+            var headersString = context.JobDetail.JobDataMap.GetString(JobConstant.Headers);
             var headers = headersString != null ? JsonConvert.DeserializeObject<Dictionary<string, string>>(headersString?.Trim()) : null;
-            var requestType = (RequestTypeEnum)int.Parse(context.JobDetail.JobDataMap.GetString(Constant.RequestType));
+            var requestType = (RequestTypeEnum)int.Parse(context.JobDetail.JobDataMap.GetString(JobConstant.RequestType));
             HttpResponseMessage response = new HttpResponseMessage();
             switch (requestType)
             {

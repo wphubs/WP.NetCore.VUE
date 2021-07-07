@@ -30,7 +30,7 @@ namespace WP.NetCore.SchedulerJob.Job
             try
             {
                 stopwatch.Start();
-                jobId = context.JobDetail.JobDataMap.GetString(Constant.JobId);
+                jobId = context.JobDetail.JobDataMap.GetString(JobConstant.JobId);
                 jobName = context.JobDetail.Key.Name;
                 jobGroup = context.JobDetail.Key.Group;
                 var objJob = await scheduleJobService.FirstNoTrackingAsync(Convert.ToInt64(jobId));

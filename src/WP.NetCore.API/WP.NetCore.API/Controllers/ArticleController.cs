@@ -111,7 +111,7 @@ namespace WP.NetCore.API.Controllers
             objArticle.Class = objClass;
             objArticle.CreateBy = GetToken().Id;
             await articleService.AddAsync(objArticle);
-            await cache.RemovePattern(Constant.ArticleKey);
+            await cache.RemovePattern(JobConstant.ArticleKey);
             return Ok();
 
         }
@@ -133,7 +133,7 @@ namespace WP.NetCore.API.Controllers
             var objArticle = mapper.Map<Article>(articleDto);
             objArticle.ModifyBy = GetToken().Id;
             await articleService.UpdateAsync(objArticle);
-            await cache.RemovePattern(Constant.ArticleKey);
+            await cache.RemovePattern(JobConstant.ArticleKey);
             return NoContent();
         }
 
@@ -155,7 +155,7 @@ namespace WP.NetCore.API.Controllers
                 return NotFound("ID不存在");
             }
             await articleService.DeleteAsync(Id);
-            await cache.RemovePattern(Constant.ArticleKey);
+            await cache.RemovePattern(JobConstant.ArticleKey);
             return NoContent();
         }
     }

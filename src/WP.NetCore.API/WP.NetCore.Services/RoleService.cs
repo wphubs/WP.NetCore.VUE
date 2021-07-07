@@ -47,7 +47,7 @@ namespace WP.NetCore.Services
         /// </summary>
         /// <param name="roleId"></param>
         /// <returns></returns>
-        [Caching(AbsoluteExpiration = 10,PrefixKey =Constant.RoleKey)]
+        [Caching(AbsoluteExpiration = 10,PrefixKey =JobConstant.RoleKey)]
         public async Task<List<long>> GetRoleMenu(long roleId)
         {
             var objRole = await baseRepository.LoadNoTrackingAsync(x => x.Id == roleId && x.IsDelete == false);
@@ -66,7 +66,7 @@ namespace WP.NetCore.Services
         {
             try
             {
-                await cache.RemovePattern(Constant.RoleKey);
+                await cache.RemovePattern(JobConstant.RoleKey);
                 await uow.BeginAsync();
                 var objRole = await baseRepository.LoadNoTrackingAsync(x => x.Id == dto.RoleId);
                 var role = await objRole.Include(x => x.MenuRoles).FirstAsync();
@@ -94,7 +94,7 @@ namespace WP.NetCore.Services
         /// </summary>
         /// <param name="roleId"></param>
         /// <returns></returns>
-        [Caching(AbsoluteExpiration = 10, PrefixKey = Constant.RoleKey)]
+        [Caching(AbsoluteExpiration = 10, PrefixKey = JobConstant.RoleKey)]
         public async Task<List<string>> GetRolePermission(long roleId)
         {
 

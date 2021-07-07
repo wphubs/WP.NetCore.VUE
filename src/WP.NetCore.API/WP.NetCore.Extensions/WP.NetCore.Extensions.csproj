@@ -26,6 +26,7 @@
 	  <PackageReference Include="StackExchange.Redis" Version="2.2.4" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WP.NetCore.EventBus\WP.NetCore.EventBus.csproj" />
     <ProjectReference Include="..\WP.NetCore.IServices\WP.NetCore.IServices.csproj" />
     <ProjectReference Include="..\WP.NetCore.SchedulerJob\WP.NetCore.SchedulerJob.csproj" />
     <ProjectReference Include="..\WP.NetCore.Services\WP.NetCore.Services.csproj" />

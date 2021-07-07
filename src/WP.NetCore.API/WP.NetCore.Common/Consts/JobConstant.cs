@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WP.NetCore.Common
 {
-    public class Constant
+    public class JobConstant
     {
         public const string JobId = "JobId";
 

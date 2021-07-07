@@ -43,7 +43,7 @@ namespace WP.NetCore.Services
         /// </summary>
         /// <param name="articleId"></param>
         /// <returns></returns>
-        [Caching(AbsoluteExpiration = 10, PrefixKey = Constant.ArticleKey)]
+        [Caching(AbsoluteExpiration = 10, PrefixKey = JobConstant.ArticleKey)]
         public async Task<ArticleViewModel> GetArticleInfo(long articleId)
         {
             var article = await baseDal.LoadAsync(x => x.IsDelete == false&&x.Id==articleId );
@@ -58,7 +58,7 @@ namespace WP.NetCore.Services
         /// 获取热门文章（目前按浏览量排序）
         /// </summary>
         /// <returns></returns>
-        [Caching(AbsoluteExpiration = 10, PrefixKey = Constant.ArticleKey)]
+        [Caching(AbsoluteExpiration = 10, PrefixKey = JobConstant.ArticleKey)]
         public async Task<PageModel<ArticleViewModel>> GetHotArticleListAsync()
         {
             var article = await baseDal.GetPageAsync(x => x.IsDelete == false, x => x.Browse, 1, 10);
@@ -83,7 +83,7 @@ namespace WP.NetCore.Services
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        [Caching(AbsoluteExpiration = 10, PrefixKey = Constant.ArticleKey)]
+        [Caching(AbsoluteExpiration = 10, PrefixKey = JobConstant.ArticleKey)]
         public async Task<PageModel<ArticleViewModel>> GetArticleListAsync(long? classId,int pageIndex, int pageSize)
         {
             Expression<Func<Article, bool>> expression = x => x.IsDelete==false;

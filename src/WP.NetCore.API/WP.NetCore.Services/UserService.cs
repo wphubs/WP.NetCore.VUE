@@ -110,7 +110,7 @@ namespace WP.NetCore.Services
         {
             try
             {
-                await cache.RemovePattern(Constant.RoleKey);
+                await cache.RemovePattern(JobConstant.RoleKey);
                 await uow.BeginAsync();
                 List<UserRole> listAdd = new List<UserRole>();
                 listRoles.ForEach(item =>
