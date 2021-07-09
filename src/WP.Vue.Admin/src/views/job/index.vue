@@ -14,7 +14,7 @@
       <el-table-column prop="Id" label="Id"></el-table-column>
       <el-table-column prop="JobName" label="任务名"></el-table-column>
       <el-table-column prop="JobGroup" label="任务组"></el-table-column>
-      <el-table-column prop="JobType" label="触发器类型">
+      <el-table-column prop="JobType" label="任务类型">
         <template slot-scope="scope">
           <el-tag>
             <template v-if="scope.row.JobType==1">Http</template>
@@ -23,11 +23,17 @@
           </el-tag>
         </template> 
       </el-table-column>
+      <el-table-column prop="RequestType" label="任务详情">
+        <template slot-scope="scope">
+            <template v-if="scope.row.RequestType==1">Get</template>
+            <template v-else-if="scope.row.RequestType==2">Post</template>
+            <template v-else-if="scope.row.RequestType==3">Put</template>
+            <template v-else>Delete</template>
+             &nbsp;&nbsp;{{scope.row.RequestUrl}}
+        </template>
+      </el-table-column>
       <el-table-column prop="BeginTime" label="开始时间"></el-table-column>
       <el-table-column prop="EndTime" label="结束时间"></el-table-column>
-      <el-table-column prop="Cron" label="表达式"></el-table-column>
-      <!-- <el-table-column prop="SimpleTimes" label="循环次数"></el-table-column> -->
-      <el-table-column prop="ExecTimes" label="执行次数"></el-table-column>
       <el-table-column prop="TriggerType" label="触发器类型">
         <template slot-scope="scope">
         <el-tag  >
@@ -36,6 +42,13 @@
         </el-tag>
       </template>
       </el-table-column>
+      <el-table-column prop="Cron" label="表达式/间隔">
+        <template slot-scope="scope">
+            <template v-if="scope.row.TriggerType==1">{{scope.row.Cron}}</template>
+            <template v-else>{{scope.row.IntervalSecond}}(秒)</template>
+        </template>
+      </el-table-column>
+      <el-table-column prop="ExecTimes" label="执行次数"></el-table-column>
       <el-table-column prop="Description" label="描述"></el-table-column>
       <el-table-column prop="IsStart" label="是否运行">
         <template slot-scope="scope">
@@ -45,16 +58,6 @@
             <template v-else>
               <el-tag type="danger">否</el-tag>
             </template>
-        </template>
-      </el-table-column>
-      <el-table-column prop="RequestUrl" label="请求地址"></el-table-column>
-
-      <el-table-column prop="RequestType" label="请求类型">
-        <template slot-scope="scope">
-            <template v-if="scope.row.RequestType==1">Get</template>
-            <template v-else-if="scope.row.RequestType==2">Post</template>
-            <template v-else-if="scope.row.RequestType==3">Put</template>
-            <template v-else>Delete</template>
         </template>
       </el-table-column>
       <!-- <el-table-column prop="RequestParameters" label="请求参数"></el-table-column> -->
@@ -70,13 +73,18 @@
           <el-input class="form-input" v-model="jobForm.JobGroup"></el-input>
         </el-form-item>
         <el-form-item class="form-inline" label="触发器类型" prop="TriggerType">
-          <el-radio-group v-model="jobForm.TriggerType" size="medium">
+          <el-radio-group @change="formRadioChange" v-model="jobForm.TriggerType" size="medium">
             <el-radio :label="1">Cron</el-radio>
-            <el-radio :label="2" disabled>Simple</el-radio>
+            <el-radio :label="2" >Simple</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="表达式" prop="Cron">
+        <el-form-item label="表达式" v-if="jobForm.TriggerType==1" prop="Cron" :rules="{
+          required: true, message: '请填写表达式', trigger: 'blur'}">
           <el-input class="form-input" v-model="jobForm.Cron"></el-input>
+        </el-form-item>
+        <el-form-item label="间隔(秒)" v-if="jobForm.TriggerType==2" prop="IntervalSecond" :rules="{
+          required: true, message: '请填写循环间隔', trigger: 'blur'}">
+          <el-input class="form-input" v-model="jobForm.IntervalSecond"></el-input>
         </el-form-item>
         <el-form-item class="form-inline" label="开始时间" prop="BeginTime">
           <el-date-picker class="form-input" type="datetime" placeholder="开始时间" v-model="jobForm.BeginTime">
@@ -143,7 +151,7 @@
           BeginTime: "",
           EndTime: "",
           Cron: "",
-          SimpleTimes: 0,
+          SimpleTimes: null,
           ExecTimes: null,
           IntervalSecond: 0,
           TriggerType: 1,
@@ -168,9 +176,12 @@
           TriggerType: [
             { required: true, message: "请选择触发器类型", trigger: "blur" },
           ],
-          Cron: [
-            { required: true, message: "请填写表达式", trigger: "blur" },
-          ],
+          // Cron: [
+          //   { required: true, message: "请填写表达式", trigger: "blur" },
+          // ],
+          // SimpleTimes: [
+          //   { required: true, message: "请填写间隔", trigger: "blur" },
+          // ],
           BeginTime: [
             { required: true, message: "请选择开始时间", trigger: "blur" },
           ],
@@ -194,6 +205,9 @@
       this.refreshData();
     },
     methods: {
+      formRadioChange(e){
+        console.log(JSON.stringify(e))
+      },
       clickUpdateJob(){
         this.jobForm=JSON.parse(JSON.stringify(this.currentRow))
         this.dialogVisible = true;

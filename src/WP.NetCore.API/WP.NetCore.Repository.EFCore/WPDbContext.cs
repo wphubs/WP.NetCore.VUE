@@ -192,11 +192,12 @@ namespace WP.NetCore.Repository.EFCore
                 },
                 #endregion
 
+                #region 任务
+
                 new Menu()
                 {
                     Id=9,Title="任务计划",Component="job/index",Icon="el-icon-partly-cloudy",Sort=5,
                 },
-
 
                 new Menu()
                 {
@@ -223,21 +224,24 @@ namespace WP.NetCore.Repository.EFCore
                     Id=idWork.NextId(),Title="修改",Url="ScheduleJob/put",Component="editJob",ParentId=9,IsButton=true,
                 },
 
+                #endregion
 
+                #region 日志
                 new Menu()
                 {
-                    Id=8,Title="接口日志",Component="serverlog/request",Icon="el-icon-moon",Sort=6,
+                    Id=8,Title="审计日志",Component="serverlog/request",Icon="el-icon-moon",Sort=7,
                 },
 
                 new Menu()
                 {
-                    Id=10,Title="任务日志",Component="serverlog/job",Icon="el-icon-moon-night",Sort=7,
+                    Id=10,Title="任务日志",Component="serverlog/job",Icon="el-icon-moon-night",Sort=6,
                 },
+                #endregion
 
-
+                #region 多级菜单
                 new Menu()
                 {
-                    Id=1001,Title="多级",Component="nested",ParentId=0,Icon="nested",Sort=999,
+                    Id=1001,Title="多级测试",Component="nested",ParentId=0,Icon="nested",Sort=999,
                 },
                 new Menu()
                 {
@@ -255,7 +259,8 @@ namespace WP.NetCore.Repository.EFCore
                 new Menu()
                 {
                     Id=1005,Title="子级22",Component="nested/menu1/menu1-2/menu1-2-1/index",Icon="lightning",ParentId=1004,Sort=4,
-                }
+                } 
+	            #endregion
             });
 
 

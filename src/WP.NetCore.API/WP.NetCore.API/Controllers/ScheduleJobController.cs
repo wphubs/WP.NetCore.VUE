@@ -62,6 +62,8 @@ namespace WP.NetCore.API.Controllers
             {
                 var objScheduleJob = mapper.Map<ScheduleJob>(scheduleJob);
                 await uow.BeginAsync();
+                if (objScheduleJob.TriggerType == Common.Enums.TriggerTypeEnum.Cron) objScheduleJob.IntervalSecond = null;
+                if (objScheduleJob.TriggerType == Common.Enums.TriggerTypeEnum.Simple) objScheduleJob.Cron = null;
                 await scheduleJobService.AddAsync(objScheduleJob);
                 await schedulerCenter.AddScheduleJobAsync(objScheduleJob);
                 await uow.CommitAsync();

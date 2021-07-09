@@ -27,56 +27,6 @@ const mutations = {
     state.routes = constantRoutes.concat(routes)
   }
 }
-const routerTest=[  
-  {
-    path: '/nested',
-    component: Layout,
-    name: 'Nested',
-    meta: {
-      title: 'Nested',
-      icon: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), 
-        name: 'Menu1',
-        meta: { title: 'Menu1', icon: 'el-icon-lightning'  },
-      },
-      {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        name: 'Menu2',
-        meta: { title: 'menu2', icon: 'el-icon-lightning'  }
-      }
-    ]
-  },
-  {
-  path: '/user',
-  component: Layout,
-  children: [
-    {
-      path: '/user',
-      name: 'user',
-      component: () => import('@/views/user/index'),
-      meta: { title: '用户管理', icon: 'el-icon-lightning' }
-    }
-  ]
-},
-
-{
-  path: '/role',
-  component: Layout,
-  children: [
-    {
-      path: '/role',
-      name: 'role',
-      component: () => import('@/views/role/index'),
-      meta: { title: '角色管理', icon: 'el-icon-heavy-rain' }
-    }
-  ]
-}];
-
 function filterAsyncRouter(asyncRouterMap) { //遍历后台传来的路由字符串，转换为组件对象
   const accessedRouters = asyncRouterMap.filter(route => {
     if (route.component) {
@@ -111,6 +61,36 @@ const actions = {
       getMenuList().then((res) => {
           var accessedRoutes=res;
           accessedRoutes = filterAsyncRouter(accessedRoutes)
+          accessedRoutes.push( {
+            path: 'apidoc',
+            component: Layout,
+            children: [
+              {
+                path: 'https://www.wptest.cn/netcore/index.html',
+                meta: { title: '接口文档', icon: 'el-icon-link' }
+              }
+            ]
+          })
+          accessedRoutes.push( {
+            path: 'bloghome',
+            component: Layout,
+            children: [
+              {
+                path: 'https://www.wptest.cn',
+                meta: { title: '博客首页', icon: 'el-icon-link' }
+              }
+            ]
+          })
+          accessedRoutes.push( {
+            path: 'Github',
+            component: Layout,
+            children: [
+              {
+                path: 'https://github.com/wphubs/WP.NetCore.VUE',
+                meta: { title: 'Github源码', icon: 'el-icon-link' }
+              }
+            ]
+          })
           commit('SET_ROUTES', accessedRoutes)
           resolve(accessedRoutes)
         }
