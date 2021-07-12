@@ -11,6 +11,7 @@ using WP.NetCore.Common.Helper;
 using WP.NetCore.EventBus;
 using WP.NetCore.Extensions.ServicesRegistration;
 using WP.NetCore.SchedulerJob.HostedService;
+using WP.NetCore.Services.EventSubscribers;
 
 namespace WP.NetCore.Extensions
 {
@@ -33,6 +34,9 @@ namespace WP.NetCore.Extensions
             services.AddHealthChecks().AddMySql(Appsettings.app(new string[] { "DBConnection" })); ;
             services.AddSignalRService();
             services.Configure<RabbitMQConfig>(Configuration.GetSection("RabbitMq"));
+
+            services.AddEventBus(Configuration);
+       
             services.AddControllers(o =>
             {
                 o.Filters.Add(typeof(GlobalExceptionsFilter));

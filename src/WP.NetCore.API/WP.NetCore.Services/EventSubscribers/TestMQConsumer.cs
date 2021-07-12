@@ -10,7 +10,7 @@ using WP.NetCore.Common.Consts;
 using WP.NetCore.EventBus;
 using WP.NetCore.Model.EntityModel;
 
-namespace WP.NetCore.Services.Subscriber
+namespace WP.NetCore.Services.EventSubscribers
 {
     public sealed class TestMQConsumer:BaseRabbitMQConsumer
     {
@@ -87,7 +87,7 @@ namespace WP.NetCore.Services.Subscriber
         {
             var config = GetCommonQueueConfig();
 
-            config.Name = "q-adnc-maint-loginlog";
+            config.Name = "rbmq-test-loginlog";
             config.AutoAck = false;
             config.PrefetchCount = 5;
             config.Arguments = new Dictionary<string, object>()
@@ -96,7 +96,7 @@ namespace WP.NetCore.Services.Subscriber
                     { "x-dead-letter-exchange",MQExchange.Dead} 
                     //设置DLX的路由key，DLX会根据该值去找到死信消息存放的队列
                     ,{ "x-dead-letter-routing-key",MQRoutingKeys.Logs}
-                    //设置消息的存活时间，即过期时间(毫秒)
+                    //设置消息的过期时间(毫秒)
                     ,{ "x-message-ttl",1000*60}
                   };
             return config;

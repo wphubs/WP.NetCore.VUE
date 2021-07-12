@@ -94,7 +94,7 @@ namespace WP.NetCore.API.Controllers
                 var objScheduleJob = mapper.Map<ScheduleJob>(scheduleJob);
                 await uow.BeginAsync();
                 await scheduleJobService.UpdateAsync(objScheduleJob);
-                await schedulerCenter.PauseJobAsync(objJob.JobGroup, objJob.JobName);
+                await schedulerCenter.DeleteJobAsync(objJob.JobGroup, objJob.JobName);
                 await schedulerCenter.AddScheduleJobAsync(objScheduleJob);
                 await uow.CommitAsync();
                 return Ok();

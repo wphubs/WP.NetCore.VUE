@@ -13,6 +13,8 @@ using WP.NetCore.Common.Helper;
 using WP.NetCore.EventBus;
 using WP.NetCore.Model;
 using WP.NetCore.Model.EntityModel;
+using WP.NetCore.Services.Events;
+using WP.NetCore.Services.EventSubscribers;
 
 namespace WP.NetCore.API.Controllers
 {
@@ -23,18 +25,28 @@ namespace WP.NetCore.API.Controllers
     {
         private readonly IWebHostEnvironment env;
         private readonly RabbitMQProducer rabbitMQProducer;
+        private readonly IEventPublisher eventPublisher;
 
-        public HomeController(IWebHostEnvironment env, RabbitMQProducer rabbitMQProducer)
+        public HomeController(IWebHostEnvironment env, 
+            RabbitMQProducer rabbitMQProducer, 
+            IEventPublisher eventPublisher
+         )
         {
             this.env = env;
             this.rabbitMQProducer = rabbitMQProducer;
+            this.eventPublisher = eventPublisher;
         }
 
 
         [HttpGet]
-        public void Get()
+        public async Task Get()
         {
-            rabbitMQProducer.BasicPublish(MQExchange.Logs, MQRoutingKeys.Logs, new User() { UserName="测试测试",Id=11111111});
+            var id = new Snowflake().NextId();
+            var tData = new TestCapEvent.EventData() {UserId=11111,UserName="管理员" };
+            var source = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName;
+            await eventPublisher.PublishAsync(new TestCapEvent(id, tData, source));
+
+            //rabbitMQProducer.BasicPublish(MQExchange.Logs, MQRoutingKeys.Logs, new User() { UserName="测试测试",Id=11111111});
         }
 
         [Authorize]

@@ -8,6 +8,7 @@ using WP.NetCore.Model;
 using WP.NetCore.Model.EntityModel;
 using System.Linq;
 using WP.NetCore.Common.Helper;
+using System.Linq.Expressions;
 
 namespace WP.NetCore.Services
 {
@@ -74,6 +75,12 @@ namespace WP.NetCore.Services
         {
             return await baseDal.GetAllAsync();
         }
+
+        public async Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await baseDal.GetAllAsync(predicate);
+        }
+
 
         /// <summary>
         /// 更新

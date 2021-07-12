@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using WP.NetCore.EventBus;
+using WP.NetCore.EventBus.Cap;
 using WP.NetCore.IServices;
 using WP.NetCore.Repository.EFCore;
 using WP.NetCore.Services;
@@ -34,6 +35,12 @@ namespace WP.NetCore.Extensions.ModuleRegistration
             builder.RegisterAssemblyTypes(assemblyRepository).AsImplementedInterfaces()
                       .InstancePerDependency()
                       .EnableInterfaceInterceptors();
+
+            //注册事件发布者
+            builder.RegisterType<CapPublisher>()
+                   .As<IEventPublisher>()
+                   .SingleInstance();
+
 
             //注册Rabbitmq生产者
             builder.RegisterType<RabbitMQProducer>()

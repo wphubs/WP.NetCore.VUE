@@ -15,7 +15,7 @@ namespace WP.NetCore.Extensions.ServicesRegistration
         public static void AddScheduleJob(this IServiceCollection services)
         {
             services.AddSingleton<IJobFactory, SchedulerJobFactory>();
-            services.AddTransient<HttpJob>();//Job使用瞬时依赖注入
+            services.AddTransient<HttpJob>();//使用瞬时注入
             services.AddSingleton<ISchedulerCenter, SchedulerCenter>();
         }
     }

@@ -11,10 +11,10 @@
       </span>
     </el-card>
     <el-table :data="dataList"  @current-change="handleCurrentChange" highlight-current-row style="width: 100%; margin-top: 10px">
-      <el-table-column prop="Id" label="Id"></el-table-column>
+      <!-- <el-table-column prop="Id" label="Id"></el-table-column> -->
       <el-table-column prop="JobName" label="任务名"></el-table-column>
       <el-table-column prop="JobGroup" label="任务组"></el-table-column>
-      <el-table-column prop="JobType" label="任务类型">
+      <el-table-column prop="JobType" label="任务类型"  width="100">
         <template slot-scope="scope">
           <el-tag>
             <template v-if="scope.row.JobType==1">Http</template>
@@ -34,7 +34,7 @@
       </el-table-column>
       <el-table-column prop="BeginTime" label="开始时间"></el-table-column>
       <el-table-column prop="EndTime" label="结束时间"></el-table-column>
-      <el-table-column prop="TriggerType" label="触发器类型">
+      <el-table-column prop="TriggerType" label="触发器类型" width="100">
         <template slot-scope="scope">
         <el-tag  >
           <template v-if="scope.row.TriggerType==1">Cron</template>
@@ -48,7 +48,7 @@
             <template v-else>{{scope.row.IntervalSecond}}(秒)</template>
         </template>
       </el-table-column>
-      <el-table-column prop="ExecTimes" label="执行次数"></el-table-column>
+      <el-table-column prop="ExecTimes" label="执行次数" width="100"></el-table-column>
       <el-table-column prop="Description" label="描述"></el-table-column>
       <el-table-column prop="IsStart" label="是否运行">
         <template slot-scope="scope">

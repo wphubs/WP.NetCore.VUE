@@ -34,7 +34,6 @@ namespace WP.NetCore.EventBus
         }
         private RabbitMQConnection(RabbitMQConfig mqOption)
         {
-
             var factory = new ConnectionFactory()
             {
                 HostName = mqOption.HostName,

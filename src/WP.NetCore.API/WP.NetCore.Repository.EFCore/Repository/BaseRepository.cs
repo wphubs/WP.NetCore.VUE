@@ -29,6 +29,8 @@ namespace WP.NetCore.Repository.EFCore
         {
             return await Query().ToListAsync();
         }
+  
+
         public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate)
         {
             return await Query().Where(predicate).ToListAsync();

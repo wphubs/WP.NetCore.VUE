@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using WP.NetCore.Model;
@@ -17,6 +18,8 @@ namespace WP.NetCore.IServices
         Task<TEntity> AddAsync(TEntity entity);
 
         Task<IEnumerable<TEntity>> GetAllAsync();
+
+        Task<IEnumerable<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate);
 
         Task<TEntity> FirstAsync(long Id);
 

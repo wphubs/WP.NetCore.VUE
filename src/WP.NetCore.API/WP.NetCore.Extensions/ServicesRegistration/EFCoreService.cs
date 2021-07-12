@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
+using Pomelo.EntityFrameworkCore.MySql.Storage;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +17,9 @@ namespace WP.NetCore.Extensions.ServicesRegistration
         public static void AddEFCore(this IServiceCollection services)
         {
             var connection = Appsettings.app(new string[] { "DBConnection" });
-            services.AddDbContext<WPDbContext>(options => options.UseMySQL(connection));
+            
+            services.AddDbContext<WPDbContext>(options => 
+            options.UseMySql(connection,ServerVersion.Parse("5.7.28-mysql")));
         }
     }
 }
