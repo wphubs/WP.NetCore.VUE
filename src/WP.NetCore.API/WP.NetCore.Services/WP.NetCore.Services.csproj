@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="DotNetCore.CAP" Version="5.1.1" />
   </ItemGroup>
 
   <ItemGroup>

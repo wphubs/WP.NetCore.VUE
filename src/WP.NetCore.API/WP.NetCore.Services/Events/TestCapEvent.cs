@@ -8,9 +8,9 @@ using WP.NetCore.EventBus;
 namespace WP.NetCore.Services.Events
 {
 
-    public sealed class TestCapEvent : BaseEvent<TestCapEvent.EventData>
+    public sealed class TestUserCapEvent : BaseEvent<TestUserCapEvent.EventData>
     {
-        public TestCapEvent(long id, EventData eventData, string source)
+        public TestUserCapEvent(long id, EventData eventData, string source)
             : base(id, eventData, source)
         {
         }

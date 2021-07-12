@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using DotNetCore.CAP;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,28 +27,40 @@ namespace WP.NetCore.API.Controllers
         private readonly IWebHostEnvironment env;
         private readonly RabbitMQProducer rabbitMQProducer;
         private readonly IEventPublisher eventPublisher;
+        private readonly ICapPublisher capPublisher;
 
         public HomeController(IWebHostEnvironment env, 
             RabbitMQProducer rabbitMQProducer, 
-            IEventPublisher eventPublisher
+            IEventPublisher eventPublisher,
+            ICapPublisher capPublisher
          )
         {
             this.env = env;
             this.rabbitMQProducer = rabbitMQProducer;
             this.eventPublisher = eventPublisher;
+            this.capPublisher = capPublisher;
         }
 
 
         [HttpGet]
         public async Task Get()
         {
-            var id = new Snowflake().NextId();
-            var tData = new TestCapEvent.EventData() {UserId=11111,UserName="管理员" };
-            var source = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName;
-            await eventPublisher.PublishAsync(new TestCapEvent(id, tData, source));
+            //await capPublisher.PublishAsync("xxx.services.show.time", new TestCapEvent(id, tData, source));
+            capPublisher.Publish("WP.NetCore.Services.Events.TestUserCapEvent", DateTime.Now);
 
             //rabbitMQProducer.BasicPublish(MQExchange.Logs, MQRoutingKeys.Logs, new User() { UserName="测试测试",Id=11111111});
         }
+
+
+        [NonAction]
+        [CapSubscribe("WP.NetCore.Services.Events.TestUserCapEvent")]
+        public void CheckReceivedMessage(DateTime dt)
+        {
+            var a =string.Empty;
+        }
+
+
+
 
         [Authorize]
         [HttpGet("GetServerInfo")]

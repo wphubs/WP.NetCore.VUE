@@ -24,6 +24,7 @@ namespace WP.NetCore.API
 
         public void ConfigureServices(IServiceCollection services)
         {
+           
             services.AddConfigureServices(Configuration, Env);
         }
 
