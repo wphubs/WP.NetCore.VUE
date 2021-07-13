@@ -42,24 +42,15 @@ namespace WP.NetCore.API.Controllers
         }
 
 
-        [HttpGet]
-        public async Task Get()
-        {
-            //await capPublisher.PublishAsync("xxx.services.show.time", new TestCapEvent(id, tData, source));
-            capPublisher.Publish("WP.NetCore.Services.Events.TestUserCapEvent", DateTime.Now);
-
-            //rabbitMQProducer.BasicPublish(MQExchange.Logs, MQRoutingKeys.Logs, new User() { UserName="测试测试",Id=11111111});
-        }
-
-
-        [NonAction]
-        [CapSubscribe("WP.NetCore.Services.Events.TestUserCapEvent")]
-        public void CheckReceivedMessage(DateTime dt)
-        {
-            var a =string.Empty;
-        }
-
-
+        //[HttpGet]
+        //public async Task Get()
+        //{
+        //    var id = new Snowflake().NextId();
+        //    var tData = new TestCapEvent.EventData() { UserId = 11111, UserName = "管理员" };
+        //    var source = System.Reflection.MethodBase.GetCurrentMethod().DeclaringType.FullName;
+        //    await eventPublisher.PublishAsync(new TestCapEvent(id, tData, source));
+        //    //rabbitMQProducer.BasicPublish(MQExchange.Logs, MQRoutingKeys.Logs, new User() { UserName="测试测试",Id=11111111});
+        //}
 
 
         [Authorize]

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -20,7 +21,7 @@ namespace WP.NetCore.EventBus.Cap
         public virtual async Task PublishAsync<T>(T eventObj, string callbackName = null, CancellationToken cancellationToken = default(CancellationToken))
             where T : IEvent
         {
-            await _eventBus.PublishAsync(typeof(T).Name, eventObj, callbackName, cancellationToken);
+            await _eventBus.PublishAsync(typeof(T).FullName, JsonSerializer.Serialize(eventObj), callbackName, cancellationToken);
         }
 
         public virtual async Task PublishAsync<T>(T eventObj, IDictionary<string, string> headers, CancellationToken cancellationToken = default(CancellationToken))
