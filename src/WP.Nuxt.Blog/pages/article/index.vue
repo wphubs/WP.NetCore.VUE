@@ -1,6 +1,7 @@
 <template>
   <div>
-    <el-row >
+    <el-row type="flex"
+    >
       <el-col  :xs="24" :sm="24" :md="24" :lg=" {span:4, offset: 2}" :xl=" {span:4, offset: 2}"   style="text-align: center;" class="hidden-md-and-down">
         <div class="sticky" style="width: 200px;padding-top: 50px;text-align: center;">
           <div class="options" id="optnCard">
@@ -59,11 +60,13 @@
             </div>
             <div class="card-content">
               <div class="media">
-                <p>今日微语-</p>
+                <p>今日微语</p>
               </div>
               <div class="content">
-                没有太晚的开始，不如就从今天行动。总有一天，那个一点一点可见的未来，会在你心里，也在你的脚下慢慢清透。生活，从不亏待每一个努力向上的人。
-                <br> <br>
+                问题的出现不是让你止步不前，而是为你指明方向
+                <br>
+                <div style="font-size: 14px;margin-top: 5px;margin-bottom: 20px;">——罗伯特•舒勒</div>
+         
                 <time datetime="2016-1-1">11:09 PM - 1 Jan 2021</time>
               </div>
             </div>
@@ -74,7 +77,7 @@
           <div>
             <nav class="panel" style="margin-top: 50px;">
               <p class="panel-heading">
-                博客简介
+                简介
               </p>
               <span class="panel-icon">
                   <i class="fas fa-book" aria-hidden="true"></i>

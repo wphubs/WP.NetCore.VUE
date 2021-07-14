@@ -10,13 +10,12 @@ namespace WP.NetCore.Common
 {
     public class RedisCacheManager : IRedisCacheManager
     {
-        private readonly ILogger<RedisCacheManager> _logger;
         private readonly ConnectionMultiplexer _redis;
         private readonly IDatabase _database;
 
-        public RedisCacheManager(ILogger<RedisCacheManager> logger, ConnectionMultiplexer redis)
+        public RedisCacheManager( ConnectionMultiplexer redis)
         {
-            _logger = logger;
+         
             _redis = redis;
             _database = redis.GetDatabase();
         }

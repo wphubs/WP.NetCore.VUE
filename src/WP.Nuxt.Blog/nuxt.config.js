@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'WP.Nuxt.Blog',
+    title: 'i tell you',
     htmlAttrs: {
       lang: 'zh'
     },
@@ -54,7 +54,7 @@ export default {
   },
   loading: '~/components/loading.vue',
   publicRuntimeConfig: {
-    baseURL:  'http://localhost:8081/api/'
-    //baseURL:  'https://www.wptest.cn/netcore/api/'
+    //baseURL:  'http://localhost:8081/api/'
+    baseURL:  'https://www.wptest.cn/netcore/api/'
   },
 }
