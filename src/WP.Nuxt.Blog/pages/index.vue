@@ -120,6 +120,9 @@
 </script>
 
 <style>
+    body::-webkit-scrollbar {
+	width: 0 !important;
+}
     .code-bg-color {
         background-color: #2d3236;
     }

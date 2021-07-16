@@ -99,7 +99,7 @@
           <div>
             <nav class="panel" style="margin-top: 50px;">
               <p class="panel-heading">
-                热门文章
+                推荐文章
               </p>
               <a class="panel-block is-active" :href="'/article/detail/'+item.Id" style="color: #409eff;"
                 v-for="(item,indexArticle) in hotArticleList" :key="indexArticle">
