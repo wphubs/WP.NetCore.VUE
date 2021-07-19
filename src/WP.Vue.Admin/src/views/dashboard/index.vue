@@ -135,19 +135,19 @@
           <div>
             <div style="padding-top: 10px" class="progress-item">
               <span>C#</span>
-              <el-progress :percentage="55" />
+              <el-progress :percentage="60" />
             </div>
             <div class="progress-item">
               <span>Vue</span>
-              <el-progress :percentage="25" />
+              <el-progress :percentage="26" />
             </div>
             <div class="progress-item">
               <span>JavaScript</span>
-              <el-progress :percentage="18" />
+              <el-progress :percentage="9" />
             </div>
             <div class="progress-item">
               <span>SCSS</span>
-              <el-progress :percentage="4" />
+              <el-progress :percentage="2" />
             </div>
           </div>
         </el-card>
