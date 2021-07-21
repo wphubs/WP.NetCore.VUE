@@ -3,12 +3,18 @@
 
 #### WP.NetCore.VUE是采用前后端分离方式开发的一套开源的后台管理系统
 
-#### 后端.NetCore+EFCore、前端Vue+Element 、网站Nuxt.js
-包括了常用功能如：用户角色管理、动态路由、策略授权、Quartz任务调度、RBMQ事件总线、SignalR实时通讯/Docker容器化部署
+------------
+
+
+#### 后端： .NetCore+EFCore
+#### 前端：基于vue-element-admin的二次发开
+#### 网站：Nuxt.js
+
+包括了常用功能：用户角色管理、动态路由、策略授权、Quartz任务调度、RBMQ事件总线、SignalR实时通讯、Docker容器化部署、日志
 
 ### 预览地址：[https://www.wptest.cn](https://www.wptest.cn)
 
-#### 用户名：test密码：test
+#### 用户名：test &nbsp;&nbsp;&nbsp;&nbsp;密码：test
 
 可通过菜单进入管理后台
 
