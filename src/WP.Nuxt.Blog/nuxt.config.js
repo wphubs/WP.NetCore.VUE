@@ -35,7 +35,7 @@ export default {
   buildModules: [
     '@nuxt/typescript-build',
   ],
-  modules: [  '@nuxtjs/axios','@nuxtjs/proxy'],
+  modules: [  '@nuxtjs/axios','@nuxtjs/proxy','@nuxtjs/sitemap', '@nuxtjs/robots'],
   axios: {
     proxy: true
   },
