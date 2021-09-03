@@ -10,8 +10,8 @@
       "Percentage": -1.0
     },
     "Logging": {
-      "Level": "Debug",
-      "FilePath": "logs/skyapm-{Date}.log"
+      "Level": "Information",
+      "FilePath": "logs\\skyapm-{Date}.log"
     },
     "Transport": {
       "Interval": 3000,
@@ -19,10 +19,11 @@
       "QueueSize": 30000,
       "BatchSize": 3000,
       "gRPC": {
-        "Servers": "localhost:11800",
+        "Servers": "172.18.0.8:11800",
         "Timeout": 10000,
         "ConnectTimeout": 10000,
-        "ReportTimeout": 600000
+        "ReportTimeout": 600000,
+        "Authentication": ""
       }
     }
   }
