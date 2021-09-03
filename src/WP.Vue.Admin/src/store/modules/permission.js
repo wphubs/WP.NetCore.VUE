@@ -62,6 +62,16 @@ const actions = {
           var accessedRoutes=res;
           accessedRoutes = filterAsyncRouter(accessedRoutes)
           accessedRoutes.push( {
+            path: 'trace',
+            component: Layout,
+            children: [
+              {
+                path: 'http://www.wptest.cn:8080/trace',
+                meta: { title: '链路追踪', icon: 'el-icon-link' }
+              }
+            ]
+          })
+          accessedRoutes.push( {
             path: 'apidoc',
             component: Layout,
             children: [
