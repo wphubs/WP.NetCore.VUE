@@ -21,9 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WP.NetCore.Repository.SqlSu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WP.NetCore.SchedulerJob", "WP.NetCore.SchedulerJob\WP.NetCore.SchedulerJob.csproj", "{41ABE53D-4873-40CF-88D7-E73C891FC12A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WP.NetCore.EventBus", "WP.NetCore.EventBus\WP.NetCore.EventBus.csproj", "{A54F1B90-B69F-43DD-8A3C-1A408349533C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WP.NetCore.EventBus", "WP.NetCore.EventBus\WP.NetCore.EventBus.csproj", "{A54F1B90-B69F-43DD-8A3C-1A408349533C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WP.NetCore.xUnitTest", "WP.NetCore.xUnitTest\WP.NetCore.xUnitTest.csproj", "{E497EE99-4549-4FDF-83AB-44127D31303A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WP.NetCore.xUnitTest", "WP.NetCore.xUnitTest\WP.NetCore.xUnitTest.csproj", "{E497EE99-4549-4FDF-83AB-44127D31303A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WP.NetCore.Gateway", "WP.NetCore.Gateway\WP.NetCore.Gateway.csproj", "{15FA147A-D405-4E65-B357-0B9B3D678918}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +77,10 @@ Global
 		{E497EE99-4549-4FDF-83AB-44127D31303A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E497EE99-4549-4FDF-83AB-44127D31303A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E497EE99-4549-4FDF-83AB-44127D31303A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15FA147A-D405-4E65-B357-0B9B3D678918}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15FA147A-D405-4E65-B357-0B9B3D678918}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15FA147A-D405-4E65-B357-0B9B3D678918}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15FA147A-D405-4E65-B357-0B9B3D678918}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
