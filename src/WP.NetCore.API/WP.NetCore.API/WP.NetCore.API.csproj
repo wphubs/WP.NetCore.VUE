@@ -21,6 +21,7 @@
     <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks" Version="5.0.7" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+    <PackageReference Include="SkyAPM.Agent.AspNetCore" Version="1.3.0" />
 
 
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.5.0" />
@@ -31,6 +32,11 @@
     <ProjectReference Include="..\WP.NetCore.IServices\WP.NetCore.IServices.csproj" />
     <ProjectReference Include="..\WP.NetCore.Repository.EFCore\WP.NetCore.Repository.EFCore.csproj" />
     <ProjectReference Include="..\WP.NetCore.Services\WP.NetCore.Services.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="skyapm.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Update="Dockerfile">

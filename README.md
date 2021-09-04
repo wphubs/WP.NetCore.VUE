@@ -1,44 +1,47 @@
 # WP.NetCore.VUE
 
 
-#### WP.NetCore.VUEÊÇ²ÉÓÃÇ°ºó¶Ë·ÖÀë·½Ê½¿ª·¢µÄÒ»Ì×¿ªÔ´µÄºóÌ¨¹ÜÀíÏµÍ³
+#### WP.NetCore.VUEæ˜¯é‡‡ç”¨å‰åç«¯åˆ†ç¦»æ–¹å¼å¼€å‘çš„ä¸€å¥—å¼€æºçš„åå°ç®¡ç†ç³»ç»Ÿ
 
 ------------
 
 
-#### ºó¶Ë£º .NetCore+EFCore
-#### Ç°¶Ë£º»ùÓÚvue-element-adminµÄ¶ş´Î·¢¿ª
-#### ÍøÕ¾£ºNuxt.js
+#### åç«¯ï¼š .NetCore+EFCore
+#### å‰ç«¯ï¼šåŸºäºvue-element-adminçš„äºŒæ¬¡å‘å¼€
+#### ç½‘ç«™ï¼šNuxt.js
 
-°üÀ¨ÁË³£ÓÃ¹¦ÄÜ£ºÓÃ»§½ÇÉ«¹ÜÀí¡¢¶¯Ì¬Â·ÓÉ¡¢²ßÂÔÊÚÈ¨¡¢QuartzÈÎÎñµ÷¶È¡¢RBMQÊÂ¼ş×ÜÏß¡¢SignalRÊµÊ±Í¨Ñ¶¡¢DockerÈİÆ÷»¯²¿Êğ¡¢ÈÕÖ¾
+åŒ…æ‹¬äº†å¸¸ç”¨åŠŸèƒ½ï¼šç”¨æˆ·è§’è‰²ç®¡ç†ã€ç­–ç•¥æˆæƒã€åŠ¨æ€è·¯ç”±ã€æ•°æ®åº“è¯»å†™åˆ†ç¦»ã€é“¾è·¯è¿½è¸ªã€Quartzä»»åŠ¡è°ƒåº¦ã€RBMQäº‹ä»¶æ€»çº¿ã€SignalRå®æ—¶é€šè®¯ã€Dockerå®¹å™¨åŒ–éƒ¨ç½²ã€æ—¥å¿—
 
-### Ô¤ÀÀµØÖ·£º[https://www.wptest.cn](https://www.wptest.cn)
+### é¢„è§ˆåœ°å€ï¼š[https://www.wptest.cn](https://www.wptest.cn)
 
-#### ÓÃ»§Ãû£ºtest &nbsp;&nbsp;&nbsp;&nbsp;ÃÜÂë£ºtest
+#### ç”¨æˆ·åï¼štest &nbsp;&nbsp;&nbsp;&nbsp;å¯†ç ï¼štest
 
-¿ÉÍ¨¹ı²Ëµ¥½øÈë¹ÜÀíºóÌ¨
+å¯é€šè¿‡èœå•è¿›å…¥ç®¡ç†åå°
 
 ------------
 
 
 
-| Ãû³Æ  |  ËµÃ÷ |
+| åç§°  |  è¯´æ˜ |
 | :------------ | :------------ |
-|  EFCore  | Î¢ÈíORM  |
-|  AutoFac  | ÒÀÀµ×¢Èë  |
-|  AutoFac.DynamicProxy  | ¶¯Ì¬´úÀí  |
-|  Quartz.net  |  ÈÎÎñµ÷¶È |
-|  Cap  | ÊÂ¼ş×ÜÏß  |
-|  RabbitMQ  | ÏûÏ¢¶ÓÁĞ  |
-|  Polly  | ÖØÊÔ¡¢ÈÛ¶Ï¡¢³¬Ê±  |
-|  CORS   | ¿çÔ´×ÊÔ´¹²Ïí  |
-|  JWT   | Éí·İÈÏÖ¤  |
-|  Serilog  | ½á¹¹»¯ÈÕÖ¾  |
-|  SignalR   | ÊµÊ±Í¨Ñ¶  |
-|  IpRateLimiting   |  ½Ó¿ÚÏŞÁ÷ |
-|  StackExchange.Redis  | Redis»º´æ  |
-|  Swagger  | ½Ó¿ÚÎÄµµ  |
-|  Automapper  |  ¶ÔÏóÓ³Éä |
+|  EFCore  | å¾®è½¯ORM  |
+|  AutoFac  | ä¾èµ–æ³¨å…¥  |
+|  AutoFac.DynamicProxy  | åŠ¨æ€ä»£ç†  |
+|  maxscale  |  æ•°æ®åº“ä¸­é—´ä»¶ |
+|  skywalking  |  é“¾è·¯è¿½è¸ª |
+|  Quartz.net  |  ä»»åŠ¡è°ƒåº¦ |
+|  Cap  | äº‹ä»¶æ€»çº¿  |
+|  RabbitMQ  | æ¶ˆæ¯é˜Ÿåˆ—  |
+|  Polly  | é‡è¯•ã€ç†”æ–­ã€è¶…æ—¶  |
+|  CORS   | è·¨æºèµ„æºå…±äº«  |
+|  JWT   | èº«ä»½è®¤è¯  |
+|  Serilog  | ç»“æ„åŒ–æ—¥å¿—  |
+|  SignalR   | å®æ—¶é€šè®¯  |
+|  IpRateLimiting   |  æ¥å£é™æµ |
+|  StackExchange.Redis  | Redisç¼“å­˜  |
+|  Swagger  | æ¥å£æ–‡æ¡£  |
+|  Automapper  |  å¯¹è±¡æ˜ å°„ |
+
 
 ![image](doc/1.png)
 
