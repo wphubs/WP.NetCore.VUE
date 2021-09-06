@@ -72,6 +72,16 @@ const actions = {
             ]
           })
           accessedRoutes.push( {
+            path: 'maxscale',
+            component: Layout,
+            children: [
+              {
+                path: 'http://www.wptest.cn:8989/#/login',
+                meta: { title: '集群配置', icon: 'el-icon-link' }
+              }
+            ]
+          })
+          accessedRoutes.push( {
             path: 'apidoc',
             component: Layout,
             children: [

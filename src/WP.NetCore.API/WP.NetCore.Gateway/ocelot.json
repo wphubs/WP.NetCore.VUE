@@ -1,8 +1,13 @@
 {
   "Routes": [
     {
-      "UpstreamPathTemplate": "/api{everything}",
-      "UpstreamHttpMethod": [ "Get" ],
+      "UpstreamPathTemplate": "/Gateway{everything}",
+      "UpstreamHttpMethod": [
+        "Get",
+        "Put",
+        "Post",
+        "Delete"
+      ],
       "DownstreamPathTemplate": "/api{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
