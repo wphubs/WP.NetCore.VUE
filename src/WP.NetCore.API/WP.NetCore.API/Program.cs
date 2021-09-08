@@ -34,10 +34,7 @@ namespace WP.NetCore.API
                     .WriteTo.MySQL(Configuration.GetSection("DBConnection").Value, "RequestLog"))
                 .WriteTo.Logger(lc => lc.Filter.ByIncludingOnly(Matching.FromSource<JobBase>())
                      .WriteTo.MySQL(Configuration.GetSection("DBConnection").Value, "JobLog"))
-
-
                 .CreateLogger();
-
             try
             {
                 Log.Information("Starting web host");

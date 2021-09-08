@@ -24,7 +24,6 @@ namespace WP.NetCore.Extensions
             services.AddSingleton(new Appsettings(Env.ContentRootPath));
             services.AddRedisCache();
             services.AddSingleton<HttpHelper>();
-     
             services.AddIpRateLimit(Configuration);
             services.AddEFCore();
             services.AddAutoMapper(typeof(ServiceInfo));
@@ -35,7 +34,6 @@ namespace WP.NetCore.Extensions
             services.AddHealthChecks().AddMySql(Appsettings.app(new string[] { "DBConnection" })); ;
             services.AddSignalRService();
             services.Configure<RabbitMQConfig>(Configuration.GetSection("RabbitMq"));
-
             services.AddEventBus(Configuration);
        
             services.AddControllers(o =>

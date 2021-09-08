@@ -25,7 +25,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WP.NetCore.EventBus", "WP.N
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WP.NetCore.xUnitTest", "WP.NetCore.xUnitTest\WP.NetCore.xUnitTest.csproj", "{E497EE99-4549-4FDF-83AB-44127D31303A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WP.NetCore.Gateway", "WP.NetCore.Gateway\WP.NetCore.Gateway.csproj", "{15FA147A-D405-4E65-B357-0B9B3D678918}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WP.NetCore.Gateway", "WP.NetCore.Gateway\WP.NetCore.Gateway.csproj", "{15FA147A-D405-4E65-B357-0B9B3D678918}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{A0E48A26-5198-462A-8829-11AB57ACC633}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{BBF14E3F-1EEA-45F3-9702-A0019320A7A6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructures", "Infrastructures", "{9DCB8116-62A8-4B75-87BA-D2A5BBE28277}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -84,6 +90,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{41ABE53D-4873-40CF-88D7-E73C891FC12A} = {9DCB8116-62A8-4B75-87BA-D2A5BBE28277}
+		{A54F1B90-B69F-43DD-8A3C-1A408349533C} = {9DCB8116-62A8-4B75-87BA-D2A5BBE28277}
+		{E497EE99-4549-4FDF-83AB-44127D31303A} = {A0E48A26-5198-462A-8829-11AB57ACC633}
+		{15FA147A-D405-4E65-B357-0B9B3D678918} = {BBF14E3F-1EEA-45F3-9702-A0019320A7A6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {06383F7F-CE63-40F5-ACBB-90DD9C44CF42}

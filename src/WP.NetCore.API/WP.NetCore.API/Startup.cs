@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using WP.NetCore.API.Hubs;
 using WP.NetCore.Extensions;
 using WP.NetCore.Extensions.Middleware;
@@ -33,7 +34,7 @@ namespace WP.NetCore.API
             builder.RegisterModule(new AutofacModule());
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IScheduleJobService scheduleJobService, ISchedulerCenter schedulerCenter)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IScheduleJobService scheduleJobService, ISchedulerCenter schedulerCenter,IHostApplicationLifetime lifetime)
         {
             app.UseConfigureMiddleware(env);
             app.UseEndpoints(endpoints =>
@@ -43,6 +44,7 @@ namespace WP.NetCore.API
                 endpoints.MapControllers();
             });
             app.UseScheduleJob(scheduleJobService, schedulerCenter);
+            app.UseConsulMiddleware(Configuration, lifetime);
         }
     }
 }
