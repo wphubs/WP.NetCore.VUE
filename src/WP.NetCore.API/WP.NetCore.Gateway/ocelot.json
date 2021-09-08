@@ -20,6 +20,19 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:5001"
+    "BaseUrl": "http://localhost:5001",
+    "UpstreamHeaderTransform": {
+      "From": "gateway",
+      "X-Forwarded-For": "{RemoteIpAddress}"
+    },
+    "DownstreamHeaderTransform": {
+      "X-Forwarded-For": "{RemoteIpAddress}"
+    },
+    "ServiceDiscoveryProvider": {
+      "Scheme": "http",
+      "Host": "172.18.0.10",
+      "Port": 8500,
+      "Type": "Consul"
+    }
   }
 }

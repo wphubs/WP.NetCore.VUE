@@ -22,7 +22,7 @@ namespace WP.NetCore.Extensions.Middleware
             var registration = new AgentServiceRegistration
             {
                 ID = Guid.NewGuid().ToString(), // 唯一Id
-                Name = configuration["APIName"], // 服务名
+                Name = configuration["ConsulSetting:ServiceName"], // 服务名
                 Address = configuration["ConsulSetting:ServiceIP"], // 服务绑定IP
                 Port = Convert.ToInt32(configuration["ConsulSetting:ServicePort"]), // 服务绑定端口
                 Check = new AgentServiceCheck
