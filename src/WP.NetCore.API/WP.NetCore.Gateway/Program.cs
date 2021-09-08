@@ -12,6 +12,12 @@ namespace WP.NetCore.Gateway
 {
     public class Program
     {
+        public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
+  .SetBasePath(Directory.GetCurrentDirectory())
+  .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+  .AddEnvironmentVariables()
+  .Build();
+
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
@@ -24,13 +30,12 @@ namespace WP.NetCore.Gateway
              {
                  config
                      .SetBasePath(hostingContext.HostingEnvironment.ContentRootPath)
-                     .AddJsonFile("appsettings.json", true, true)
                      .AddJsonFile($"ocelot.json", true, true)
                      .AddEnvironmentVariables();
              })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseStartup<Startup>().UseUrls(Configuration.GetSection("UseUrls").Value); ;
                 });
     }
 }

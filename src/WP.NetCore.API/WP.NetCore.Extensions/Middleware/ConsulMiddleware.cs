@@ -19,6 +19,8 @@ namespace WP.NetCore.Extensions.Middleware
             {
                 c.Address = new Uri(configuration["ConsulSetting:Address"]);
             });
+            var healthUrl = $"http://{configuration["ConsulSetting:ServiceIP"]}:{configuration["ConsulSetting:ServicePort"]}{configuration["ConsulSetting:ServiceHealth"]}";
+            Console.WriteLine("ServiceHealth:" + healthUrl);
             var registration = new AgentServiceRegistration
             {
                 ID = Guid.NewGuid().ToString(), // 唯一Id
@@ -29,7 +31,7 @@ namespace WP.NetCore.Extensions.Middleware
                 {
                     DeregisterCriticalServiceAfter = TimeSpan.FromSeconds(5), // 服务启动多久后注册
                     Interval = TimeSpan.FromSeconds(10), // 健康检查时间间隔
-                    HTTP = $"http://{configuration["ConsulSetting:ServiceIP"]}:{configuration["ConsulSetting:ServicePort"]}{configuration["ConsulSetting:ServiceHealth"]}", // 健康检查地址
+                    HTTP = healthUrl, // 健康检查地址
                     Timeout = TimeSpan.FromSeconds(5) // 超时时间
                 }
             };

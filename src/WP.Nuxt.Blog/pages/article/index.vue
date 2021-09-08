@@ -136,16 +136,20 @@
       },
     },
     async asyncData({ params, $config, $axios }) {
+      console.log('1')
       var { data: articleClass } = await $axios.get(
         `${$config.baseURL}ArticleClass`
       );
+            console.log('2')
       articleClass.unshift({ "ClassName": "全部", "Id": '' })
       var { data: article } = await $axios.get(
         `${$config.baseURL}Article/GetArticleList?pageIndex=1&pageSize=20`
       );
+            console.log('3')
       var { data: hotArticle } = await $axios.get(
         `${$config.baseURL}Article/GetHotArticleList`
       );
+            console.log('4')
 
       return { baseURL: $config.baseURL, articleList: article.Data, classList: articleClass, hotArticleList: hotArticle.Data };
     },
