@@ -14,6 +14,7 @@
     <ProjectReference Include="..\WP.NetCore.EventBus\WP.NetCore.EventBus.csproj" />
     <ProjectReference Include="..\WP.NetCore.IServices\WP.NetCore.IServices.csproj" />
     <ProjectReference Include="..\WP.NetCore.Repository.EFCore\WP.NetCore.Repository.EFCore.csproj" />
+    <ProjectReference Include="..\WP.NetCore.Repository.SqlSugar\WP.NetCore.Repository.SqlSugar.csproj" />
   </ItemGroup>
 
 </Project>

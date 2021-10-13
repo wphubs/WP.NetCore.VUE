@@ -36,14 +36,14 @@ namespace WP.NetCore.Extensions.Middleware
                 }
             };
 
-            // 注册服务
-            client.Agent.ServiceRegister(registration).Wait();
+            //// 注册服务
+            //client.Agent.ServiceRegister(registration).Wait();
 
-            // 应用程序终止时，取消服务注册
-            lifetime.ApplicationStopping.Register(() =>
-            {
-                client.Agent.ServiceDeregister(registration.ID).Wait();
-            });
+            //// 应用程序终止时，取消服务注册
+            //lifetime.ApplicationStopping.Register(() =>
+            //{
+            //    client.Agent.ServiceDeregister(registration.ID).Wait();
+            //});
 
             return app;
 
