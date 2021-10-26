@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using SqlSugar;
 using System;
 using System.Text;
 using WP.NetCore.Common;
@@ -26,6 +27,7 @@ namespace WP.NetCore.Extensions
             services.AddSingleton<HttpHelper>();
             services.AddIpRateLimit(Configuration);
             services.AddEFCore();
+            services.AddSqlSugar();
             services.AddAutoMapper(typeof(ServiceInfo));
             services.AddSwagger();
             services.AddScheduleJob();

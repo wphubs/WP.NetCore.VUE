@@ -16,9 +16,9 @@ namespace WP.NetCore.Repository.SqlSugar.Uow
         void Rollback();
 
    
-        Task BeginAsync();
-        Task CommitAsync();
-        Task RollbackAsync();
+        //Task BeginAsync();
+        //Task CommitAsync();
+        //Task RollbackAsync();
 
     
     }

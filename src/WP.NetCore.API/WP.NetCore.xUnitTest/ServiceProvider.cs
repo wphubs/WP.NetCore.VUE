@@ -45,6 +45,7 @@ namespace WP.NetCore.xUnitTest
             services.AddSingleton<HttpHelper>();
 
             services.AddEFCore();
+            services.AddSqlSugar();
             services.AddAutoMapper(typeof(ServiceInfo));
             services.AddSwagger();
             services.AddScheduleJob();

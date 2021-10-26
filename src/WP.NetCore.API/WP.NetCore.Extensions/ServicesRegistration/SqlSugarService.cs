@@ -5,12 +5,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WP.NetCore.Common;
 using WP.NetCore.Repository.SqlSugar.Repository;
 
 namespace WP.NetCore.Extensions.ServicesRegistration
 {
     public static class SqlSugarService
     {
+
+
+
+        /// <summary>
+        /// 添加 SqlSugar 拓展
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="config"></param>
+        /// <param name="buildAction"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddSqlSugar(this IServiceCollection services, Action<ISqlSugarClient> buildAction = default)
+        {
+            var connection = Appsettings.app(new string[] { "DBConnection" });
+
+            ConnectionConfig config = new ConnectionConfig
+            {
+                ConnectionString = connection,//连接符字串
+                DbType = DbType.MySql,
+                IsAutoCloseConnection = true,
+                InitKeyType = InitKeyType.Attribute//从特性读取主键自增信息
+            };
+            return services.AddSqlSugar(new ConnectionConfig[] { config }, buildAction);
+        }
+
         /// <summary>
         /// 添加 SqlSugar 拓展
         /// </summary>
