@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using WP.NetCore.Common.Enums;
 
 namespace WP.NetCore.Common
 {
@@ -11,6 +14,24 @@ namespace WP.NetCore.Common
     /// </summary>
     public static class ConversionHelper
     {
+
+        public static string GetRequestTypeEnumDesc(this RequestTypeEnum e)
+        {
+            FieldInfo EnumInfo = e.GetType().GetField(e.ToString());
+            if (EnumInfo == null)
+            {
+                return "";
+            }
+            DescriptionAttribute[] EnumAttributes
+                = (DescriptionAttribute[])EnumInfo.GetCustomAttributes(typeof(DescriptionAttribute), false);
+            if (EnumAttributes.Length > 0)
+            {
+                return EnumAttributes[0].Description;
+            }
+            return e.ToString();
+        }
+
+
         #region 数据格式转换
         /// <summary>
         ///  转换成Int

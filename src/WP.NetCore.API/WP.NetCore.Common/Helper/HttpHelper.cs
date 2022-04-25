@@ -22,7 +22,9 @@ namespace WP.NetCore.Common.Helper
             var uri = new Uri(url);
             var key = uri.Scheme + uri.Host;
             //if (!dictionary.Keys.Contains(key))
-            return dictionary.GetOrAdd(key, new HttpClient());
+            var http = new HttpClient();
+            http.Timeout = TimeSpan.FromSeconds(10);
+            return dictionary.GetOrAdd(key, http);
             //return dictionary[key];
         }
 
@@ -90,6 +92,7 @@ namespace WP.NetCore.Common.Helper
                         http.DefaultRequestHeaders.Remove(item.Key);
                         http.DefaultRequestHeaders.TryAddWithoutValidation(item.Key, item.Value);
                     }
+                   
                     return await http.GetAsync(url);
                 }
             }

@@ -58,7 +58,12 @@ namespace WP.NetCore.SchedulerJob.Job
             }
             else 
             {
-                return (false, "请求失败,"+ result);
+                var detail = new StringBuilder();
+                detail.AppendFormat("<p style=\"font-weight:bold; color: red\"> 任务类型： {0}  </p>", nameof(HttpJob));
+                detail.AppendFormat("<p style=\"font-weight:bold; color: red\"> 请求方式： {0}  </p>", requestType.GetRequestTypeEnumDesc());
+                detail.AppendFormat("<p style=\"font-weight:bold; color: red\"> 请求地址： {0}  </p>", requestUrl);
+                detail.AppendFormat("<p style=\"font-weight:bold; color: red\"> 请求结果： {0}  </p>", result);
+                return (false, detail.ToString());
             }
             
           

@@ -16,7 +16,7 @@ namespace WP.NetCore.Extensions.ServicesRegistration
     {
         public static void AddEFCore(this IServiceCollection services)
         {
-            var connection = Appsettings.app(new string[] { "DBConnection" });
+            var connection = Appsettings.app("DBConnection");
             
             services.AddDbContext<WPDbContext>(options => 
             options.UseMySql(connection,ServerVersion.Parse("5.7.28-mysql")));

@@ -63,9 +63,12 @@
                 <p>今日微语</p>
               </div>
               <div class="content">
-                问题的出现不是让你止步不前，而是为你指明方向
+                {{todaySentence.Content}}
                 <br>
-                <div style="font-size: 14px;margin-top: 5px;margin-bottom: 20px;">——罗伯特•舒勒</div>
+                <div style="font-size: 14px;margin-top: 5px;margin-bottom: 20px;">——
+                  <span v-if="todaySentence.Source">《{{todaySentence.Source}}》</span>{{todaySentence.Author}}
+
+                </div>
          
                 <time datetime="2016-1-1">11:09 PM - 1 Jan 2021</time>
               </div>
@@ -130,28 +133,32 @@
       };
     },
     methods: {
+    
       async clickClass(item) {
         var { data } = await this.$axios.get(`${this.baseURL}Article/GetArticleList?classId=${item.Id}&pageIndex=1&pageSize=20`);
         this.articleList = data.Data;
       },
     },
     async asyncData({ params, $config, $axios }) {
-      console.log('1')
+
       var { data: articleClass } = await $axios.get(
         `${$config.baseURL}ArticleClass`
       );
-            console.log('2')
+        
       articleClass.unshift({ "ClassName": "全部", "Id": '' })
       var { data: article } = await $axios.get(
         `${$config.baseURL}Article/GetArticleList?pageIndex=1&pageSize=20`
       );
-            console.log('3')
+           
       var { data: hotArticle } = await $axios.get(
         `${$config.baseURL}Article/GetHotArticleList`
       );
-            console.log('4')
-
-      return { baseURL: $config.baseURL, articleList: article.Data, classList: articleClass, hotArticleList: hotArticle.Data };
+      
+         var { data: nothingData } = await $axios.get(
+        `${$config.baseURL}Nothing`
+      );
+        
+      return { baseURL: $config.baseURL, articleList: article.Data, classList: articleClass, hotArticleList: hotArticle.Data,todaySentence:nothingData };
     },
     head() {
       return {

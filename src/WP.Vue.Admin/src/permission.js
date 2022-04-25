@@ -36,9 +36,9 @@ router.beforeEach(async(to, from, next) => {
         try {
           if (!getRouter) {
             await store.dispatch('user/getInfo')
-
+            console.log('1')
             var accessRoutes = await store.dispatch('permission/generateRoutes')
-
+            console.log('2:'+JSON.stringify(accessRoutes))
             accessRoutes.push({ path: '*', redirect: '/404', hidden: true });
             getRouter=accessRoutes;
             router.addRoutes(accessRoutes)

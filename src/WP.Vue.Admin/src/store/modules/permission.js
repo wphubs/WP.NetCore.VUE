@@ -48,6 +48,7 @@ function filterAsyncRouter(asyncRouterMap) { //遍历后台传来的路由字符
 
 const actions = {
   generateRoutes({ commit }) {
+    console.log('generateRoutes1')
     return new Promise(resolve => {
       //let accessedRoutes=routerTest;
       //console.log('generateRoutes'+JSON.stringify(accessedRoutes))
@@ -58,6 +59,7 @@ const actions = {
       // }
       // commit('SET_ROUTES', accessedRoutes)
       // resolve(accessedRoutes)
+      console.log('generateRoutes2')
       getMenuList().then((res) => {
           var accessedRoutes=res;
           accessedRoutes = filterAsyncRouter(accessedRoutes)
