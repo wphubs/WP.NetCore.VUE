@@ -70,7 +70,10 @@
 
                 </div>
          
-                <time datetime="2016-1-1">11:09 PM - 1 Jan 2021</time>
+                <time datetime="2016-1-1">
+                  <!-- 11:09 PM - 1 Jan 2021 -->{{getTime()}}
+
+                </time>
               </div>
             </div>
           </div>
@@ -133,7 +136,22 @@
       };
     },
     methods: {
-    
+      getTime(){
+          let date = new Date(); 
+          let chinaDate = date.toDateString(); 
+          let globalDate = date.toUTCString(); 
+          let chinaDateArray = chinaDate.split(' '); 
+          let displayDate = `${chinaDateArray[1]} ${chinaDateArray[2]}, ${chinaDateArray[3]}`; //"Jan 02, 2019"
+          var hours=date.getHours();
+          var mins=date.getMinutes();
+          if(hours>12){
+            hours=(hours-12)+`:${mins}  PM`;
+          }else{
+             hours+=`:${mins}  AM`;
+          }
+          return hours+' - '+displayDate;
+      },
+
       async clickClass(item) {
         var { data } = await this.$axios.get(`${this.baseURL}Article/GetArticleList?classId=${item.Id}&pageIndex=1&pageSize=20`);
         this.articleList = data.Data;
