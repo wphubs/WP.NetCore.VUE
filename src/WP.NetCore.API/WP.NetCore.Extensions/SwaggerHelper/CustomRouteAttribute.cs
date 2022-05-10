@@ -10,27 +10,21 @@ namespace WP.NetCore.Extensions
 {
 
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-    public class CustomRouteAttribute : RouteAttribute, IApiDescriptionGroupNameProvider
+    public class VersionRouteAttribute : RouteAttribute, IApiDescriptionGroupNameProvider
     {
-        /// <summary>
-        /// 自定义路由构造函数，继承基类路由
-        /// </summary>
-        /// <param name="actionName"></param>
-        public CustomRouteAttribute(string actionName = "[action]") : base("/api/{version}/[controller]/" + actionName)
+        public VersionRouteAttribute(string actionName = "[action]") : base("/api/{version}/[controller]/" + actionName)
         {
         }
 
-        /// <summary>
-        /// 分组名称
-        /// </summary>
         public string GroupName { get; set; }
 
-        /// <summary>
-        /// 自定义版本+路由构造函数，继承基类路由
-        /// </summary>
-        /// <param name="actionName"></param>
-        /// <param name="version"></param>
-        public CustomRouteAttribute(ApiVersions version, string actionName = "[action]") : base($"/api/{version.ToString()}/[controller]/{actionName}")
+     
+        public VersionRouteAttribute(ApiVersions version, string actionName = "[action]") : base($"/api/{version.ToString()}/[controller]/{actionName}")
+        {
+            GroupName = version.ToString();
+        }
+
+        public VersionRouteAttribute(ApiVersions version) : base($"/api/{version.ToString()}/[controller]")
         {
             GroupName = version.ToString();
         }
